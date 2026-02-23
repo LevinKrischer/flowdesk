@@ -16,70 +16,27 @@
   height: auto;
 }
 
-.initialism {
-  position: absolute;
-  bottom: -60px;
-  right: 50%;
-  transform: translateX(50%);
-  width: 120px;
-  height: 120px;
-  background-color: $grey-light;
-  border: 3px solid $white;
+.contact-avatar {
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
+  color: #ffffff;
+  background-color: $grey;
+  font-weight: 700;
+  font-size: 3rem;
+  text-align: center;
+  flex-shrink: 0;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.4);
 }
 
-.iconWrapper {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  display: inline-block;
-
-  .icon {
+@media (max-width: 992px) {
+  .contact-avatar {
     position: absolute;
-    inset: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .hoverIcon {
-    opacity: 0;
-  }
-}
-
-.closeBtn {
-  background-color: transparent;
-  color: $blue-darker;
-  border: 1px solid $blue-darker;
-  padding: 0.5rem 1rem;
-  transition: $trans-default;
-
-  &:hover {
-    color: $blue-light;
-    border-color: $blue-light;
-
-    .hoverIcon {
-      opacity: 1;
-    }
-
-    .defaultIcon {
-      opacity: 0;
-    }
-  }
-}
-
-.addBtn {
-  background-color: $blue-darker;
-  color: white;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border: none;
-  transition: $trans-default;
-
-  &:hover {
-    background-color: $blue-light;
-  }
-
-  &:disabled {
-    background-color: $blue-dark;
-    font-weight: normal;
-    cursor: not-allowed;
+    top: -50px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 100px;
+    height: 100px;
+    border: 2px solid $white;
   }
 }

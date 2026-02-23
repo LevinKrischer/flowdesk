@@ -17,7 +17,6 @@ export class ContactDetails {
 
   isContactModalOpen = false;
 
-  // NEU: eigener State für den Kontakt, der editiert wird
   selectedContact: ContactWithInitials | null = null;
 
   openModal() {
