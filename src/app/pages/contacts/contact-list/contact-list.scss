@@ -181,3 +181,9 @@ ui-button {
   max-width: 11rem;
 }
 
+// hide contact-initials Edge-Case because email-adresse won't fit the width
+@media screen and (max-width: 375px) {
+  .initialism{
+    display: none !important;
+  }
+}
