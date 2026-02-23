@@ -11,10 +11,9 @@ import { Button } from '../../shared/ui/button/button';
   standalone: true,
   imports: [FormsModule, InputFieldComponent, ModalWrapper, Button],
   templateUrl: './contact-edit-form.html',
-  styleUrls: ['./contact-edit-form.scss']
+  styleUrls: ['./contact-edit-form.scss'],
 })
 export class ContactEditFormComponent {
-
   db = inject(ContactsDb);
   cdr = inject(ChangeDetectorRef);
 
@@ -31,19 +30,19 @@ export class ContactEditFormComponent {
   form: Partial<Contact> = {
     name: '',
     email: '',
-    phone: ''
+    phone: '',
   };
 
   errors = {
     name: '',
     email: '',
-    phone: ''
+    phone: '',
   };
 
   dirty = {
     name: false,
     email: false,
-    phone: false
+    phone: false,
   };
 
   ngOnChanges() {
@@ -52,7 +51,7 @@ export class ContactEditFormComponent {
     this.form = {
       name: this.contact.name,
       email: this.contact.email,
-      phone: this.contact.phone
+      phone: this.contact.phone,
     };
   }
 
@@ -75,15 +74,11 @@ export class ContactEditFormComponent {
 
     switch (field) {
       case 'name':
-        this.errors.name = isValidName(value)
-          ? ''
-          : 'Name may only contain letters.';
+        this.errors.name = isValidName(value) ? '' : 'Name may only contain letters.';
         break;
 
       case 'email':
-        this.errors.email = isValidEmail(value)
-          ? ''
-          : 'Please enter a valid email address.';
+        this.errors.email = isValidEmail(value) ? '' : 'Please enter a valid email address.';
         break;
 
       case 'phone':
@@ -119,7 +114,7 @@ export class ContactEditFormComponent {
       await this.db.updateContact(this.contact.id, {
         name: String(this.form.name),
         email: String(this.form.email),
-        phone: String(this.form.phone)
+        phone: String(this.form.phone),
       });
 
       this.saved.emit();
