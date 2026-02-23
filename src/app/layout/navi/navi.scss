@@ -1,78 +1,94 @@
 @use 'styles/variables' as *;
+@use 'styles/mixins' as *;
 
-#sideNav{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 14.5rem;
-  background:$blue-dark;
-  height: 100vh;
-  padding: 4rem 0;
+#sideNav {
+  background: $blue-dark;
+  z-index: 1050;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  bottom: 0;
+  min-height: 5rem;
+
+  @include for-size(lg) {
+    position: relative;
+    width: 14.5rem;
+    height: 100vh;
+    padding: 4rem 0;
+  }
 }
 
 #main-nav{
-  width: 100%;
-  ul{
-    width: 100%;
-    display: flex;
-    gap: 1rem;
+  img.active {
+    display: none;
   }
-  li{
-    img{
-        &.active{
-          display: none;
-        }
-        &.default{
-          display: flex;
-        }
-      }
-    &.active{
-      background: $blue-darker;
-      a{
-        color: $white;
-        transition: $trans-default;
-        &:hover{
-          background: $blue-darker;
-        }
-      }
-      img{
-        &.active{
-          display: flex;
-        }
-        &.default{
-          display: none;
-        }
-      }
+  img.default {
+    display: flex;
+  }
+
+
+  a{
+    padding: 2px 0;
+    @include for-size(lg) {
+      padding: 0;
     }
   }
-  a{
-    display:flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    cursor: pointer;
+
+  li.active {
+    background: $blue-darker;
+    border-radius: $base-border-radius;
+    @include for-size(lg) {
+      border-radius: 0;
+    }
+    a {
+      color: $white;
+      img.active { display: flex; }
+      img.default { display: none; }
+    }
+  }
+
+  a {
     color: $grey-light2;
-    padding: $space-sm 3rem $space-sm 3rem;
     transition: $trans-default;
-    &:hover{
+    text-decoration: none;
+
+    &:hover {
       background: $blue-dark-hover;
+      border-radius: $base-border-radius;
+      color: $white;
+      @include for-size(lg) {
+        border-radius: 0;
+      }
+    }
+
+    @include for-size(sm) {
+      padding: $space-sm 0.5rem;
+    }
+
+    @include for-size(md) {
+      padding: $space-sm 3rem;
+    }
+
+    @include for-size(lg) {
+      padding: $space-sm 1.5rem;
     }
   }
 }
 
-#footer-nav{
-  ul{
-    display: flex;
-    flex-direction: column;
-    gap: $space-md;
+
+#footer-nav {
+  li{
+    padding: $space-sm 0;
   }
-  a{
+  a {
     color: $grey;
     transition: $trans-default;
-    &:hover{
-      color: $blue-light;
-      font-weight: 700;
+    text-decoration: none;
+  }
+  li.active {
+    background: $blue-darker;
+    a {
+      color: $white;
     }
   }
 }

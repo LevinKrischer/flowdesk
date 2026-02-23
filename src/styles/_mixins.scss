@@ -13,17 +13,19 @@
   border: 0 !important;
 }
 
-// Media Queries
+// Bootstrap 6 - Media Queries
 @mixin for-size($size) {
-  @if $size == phone {
-    @media (max-width: 37.43rem) { @content; } // 598.88px
-  } @else if $size == tablet-portrait {
-    @media (min-width: 37.5rem) { @content; } // 600px
-  } @else if $size == tablet-landscape {
-    @media (min-width: 56.25rem) { @content; } // 900px
-  } @else if $size == desktop {
-    @media (min-width: 75rem) { @content; } // 1200px
-  } @else if $size == big-desktop {
-    @media (min-width: 90rem) { @content; } // 1440px
+  @if $size == xs {
+    @media (max-width: 575.98px) { @content; }
+  } @else if $size == sm {
+    @media (min-width: 576px) { @content; }
+  } @else if $size == md {
+    @media (min-width: 768px) { @content; }
+  } @else if $size == lg {
+    @media (min-width: 992px) { @content; }
+  } @else if $size == xl {
+    @media (min-width: 1200px) { @content; }
+  } @else if $size == xxl {
+    @media (min-width: 1400px) { @content; }
   }
 }

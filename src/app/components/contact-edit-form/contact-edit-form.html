@@ -1,34 +1,67 @@
 <ui-modal-wrapper (close)="onCancel()" id="contact-add-form">
   <div class="modal-inner d-flex flex-column h-100 w-100">
     <div class="row g-0 flex-grow-1 h-100">
-
       <!-- Linke Spalte -->
       <div
-        class="col-12 col-md-5 d-flex flex-column justify-content-center align-items-start modal-title-area p-3 py-5 p-md-5 pt-5 gap-0">
+        class="col-12 col-md-5 d-flex flex-column justify-content-center align-items-start modal-title-area p-3 py-5 p-md-5 pt-5 gap-0"
+      >
         <img src="/assets/icons/logo-join-default-100px.svg" alt="Join Logo" />
         <h2 class="mt-4">Edit contact</h2>
         <div class="blue-divider mt-0 mt-md-1"></div>
-        <div class="initialism d-flex d-inline-flex align-items-center justify-content-center rounded-circle d-md-none">
-          <img src="/assets/icons/person-white-64px.svg" alt="Initialism">
+        <div
+          class="initialism d-flex d-inline-flex align-items-center justify-content-center rounded-circle d-md-none"
+        >
+          <img src="/assets/icons/person-white-64px.svg" alt="Initialism" />
         </div>
       </div>
 
       <!-- Rechte Spalte -->
       <div class="col-12 col-md-7 d-flex flex-column justify-content-center py-4 py-md-0 h-100">
-        <form (ngSubmit)="save()" class="p-3 mt-5 mt-md-0 p-md-5 d-flex flex-column gap-2 modal-content-area">
+        <form
+          (ngSubmit)="save()"
+          class="p-3 mt-5 mt-md-0 p-md-5 d-flex flex-column gap-2 modal-content-area"
+        >
+          <app-input-field
+            type="text"
+            label="Name"
+            placeholder="Name"
+            icon="assets/icons/form-person-24px.svg"
+            [(model)]="form.name"
+            [error]="errors.name"
+            (blur)="markDirty('name')"
+            (input)="liveValidate('name')"
+          />
 
-          <app-input-field type="text" label="Name" placeholder="Name" icon="assets/icons/form-person-24px.svg"
-            [(model)]="form.name" [error]="errors.name" (blur)="markDirty('name')" (input)="liveValidate('name')" />
+          <app-input-field
+            type="email"
+            label="Email"
+            placeholder="Email"
+            icon="assets/icons/form-mail-24px.svg"
+            [(model)]="form.email"
+            [error]="errors.email"
+            (blur)="markDirty('email')"
+            (input)="liveValidate('email')"
+          />
 
-          <app-input-field type="email" label="Email" placeholder="Email" icon="assets/icons/form-mail-24px.svg"
-            [(model)]="form.email" [error]="errors.email" (blur)="markDirty('email')" (input)="liveValidate('email')" />
-
-          <app-input-field type="tel" label="Phone" placeholder="Phone" icon="assets/icons/form-phone-24px.svg"
-            [(model)]="form.phone" [error]="errors.phone" (blur)="markDirty('phone')" (input)="liveValidate('phone')" />
+          <app-input-field
+            type="tel"
+            label="Phone"
+            placeholder="Phone"
+            icon="assets/icons/form-phone-24px.svg"
+            [(model)]="form.phone"
+            [error]="errors.phone"
+            (blur)="markDirty('phone')"
+            (input)="liveValidate('phone')"
+          />
 
           <div class="d-flex gap-4 mt-2 justify-content-center justify-content-md-start">
-            <ui-button type="button" variant="secondary" icon="cancel" class="d-none d-md-inline-flex"
-              (click)="delete()">
+            <ui-button
+              type="button"
+              variant="secondary"
+              icon="cancel"
+              class="d-none d-md-inline-flex"
+              (click)="delete()"
+            >
               Delete
             </ui-button>
             <ui-button type="submit" variant="primary" icon="create" [disabled]="!isFormValid()">

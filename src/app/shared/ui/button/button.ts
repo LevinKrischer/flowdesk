@@ -11,5 +11,4 @@ export class Button {
   @Input() variant: 'primary' | 'secondary' | 'urgent' | 'medium' | 'low' = 'primary';
   @Input() icon: 'without' | 'add' | 'create' | 'cancel' | 'urgent' | 'medium' | 'low' = 'without';
   @Input() disabled = false;
-
 }
