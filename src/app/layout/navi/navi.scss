@@ -68,7 +68,7 @@
   }
 
   .navigation {
-    gap: min(0.25em);
+    gap: min(0.5em);
 
     @include for-size(sm) {
       gap: min(1.5em);
