@@ -1,6 +1,6 @@
 <!-- contact-list.html -->
 
-<main class="contact-list">
+<main class="contact-list px-3">
   @if (isContactModalOpen) {
     <app-contact-add-form (added)="onAdded()" (closed)="closeModal()"></app-contact-add-form>
   }
