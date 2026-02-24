@@ -8,7 +8,7 @@
   </aside>
 
   <!-- Right: contact detail view -->
-  <section class="right p-3 px-md-5 py-md-3" [ngClass]="isMobileDetailOpen ? '' : 'd-none d-lg-block'">
+  <section class="right p-2 p-sm-3 px-md-5 py-md-3" [ngClass]="isMobileDetailOpen ? '' : 'd-none d-lg-block'">
     <app-contact-header [contact]="selected" (back)="backToList()" />
     <app-contact-details [contact]="selected" (edit)="editSelected()" (remove)="deleteSelected()" (back)="backToList()" />
   </section>
