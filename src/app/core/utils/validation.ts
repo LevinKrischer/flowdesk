@@ -1,12 +1,20 @@
 /**
- * Validates whether the given name contains only alphabetic characters and spaces.
+ * Validates whether the given name consists of at least two words
+ * (first name and last name), each containing only alphabetic characters.
  * Supports German umlauts and ß.
- * @param input - The name string to validate.
- * @returns True if the name is valid, otherwise false.
+ *
+ * @param input - The full name string to validate.
+ * @returns True if the name contains at least two valid alphabetic words, otherwise false.
  */
 export function isValidName(input: string): boolean {
   if (!input) return false;
-  return /^[A-Za-zÄÖÜäöüß\s]+$/.test(input.trim());
+
+  const trimmed = input.trim();
+
+  // Mindestens zwei Wörter, jeweils nur Buchstaben (inkl. Umlaute) und mindestens 1 Zeichen lang
+  const regex = /^[A-Za-zÄÖÜäöüß]+(?:\s+[A-Za-zÄÖÜäöüß]+)+$/;
+
+  return regex.test(trimmed);
 }
 
 /**
