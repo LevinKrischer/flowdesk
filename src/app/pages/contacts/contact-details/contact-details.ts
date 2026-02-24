@@ -1,10 +1,11 @@
 import { Component, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 import { ContactWithInitials } from '../../../core/db/contacts.db';
 import { ContactEditFormComponent } from '../../../components/contact-edit-form/contact-edit-form';
+import { TruncatePipe } from '../../../services/truncate.pipe';
 
 @Component({
   selector: 'app-contact-details',
-  imports: [ContactEditFormComponent],
+  imports: [ContactEditFormComponent, TruncatePipe],
   templateUrl: './contact-details.html',
   styleUrl: './contact-details.scss',
 })

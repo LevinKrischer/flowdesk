@@ -3,10 +3,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { GroupedContacts, ContactWithInitials } from '../../../core/db/contacts.db';
 import { ContactAddFormComponent } from '../../../components/contact-add-form/contact-add-form';
 import { Button } from '../../../shared/ui/button/button';
+import { TruncatePipe } from '../../../services/truncate.pipe';
 
 @Component({
   selector: 'app-contact-list',
-  imports: [ContactAddFormComponent, CommonModule, Button],
+  imports: [ContactAddFormComponent, CommonModule, Button, TruncatePipe],
   templateUrl: './contact-list.html',
   styleUrl: './contact-list.scss',
 })

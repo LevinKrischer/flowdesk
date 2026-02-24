@@ -31,8 +31,8 @@
               {{ c.initials }}
             </abbr>
             <dl>
-              <dt class="contacts__name">{{ c.name }}</dt>
-              <dd class="contacts__email fs-6">{{ c.email }}</dd>
+              <dt class="contacts__name">{{ c.name | truncate: 25}}</dt>
+              <dd class="contacts__email fs-6">{{ c.email | truncate: 25}}</dd>
             </dl>
           </li>
         }

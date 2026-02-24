@@ -154,12 +154,10 @@ ui-button {
 
   &__name {
     font-size: 1.1rem;
-    @include mixins.text-overflow;
   }
 
   &__email {
     color: $blue-link;
-    @include mixins.text-overflow;
   }
 
 }
