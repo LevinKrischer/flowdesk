@@ -70,15 +70,15 @@
 
   // FAB variants (shared base)
   &[class*="btn--fab"] {
-    width: 2.8rem;
-    height: 2.8rem;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 50%;
     padding: 0;
     overflow: hidden;
 
     ::ng-deep img {
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 2rem;
+      height: 2rem;
     }
   }
 

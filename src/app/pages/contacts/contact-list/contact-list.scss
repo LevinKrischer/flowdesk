@@ -10,6 +10,7 @@
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  filter: $sh-contact-bg;
 
   @media (max-width: 992px) {
     max-width: none;
