@@ -1,0 +1,120 @@
+.task-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .category {
+        align-self: flex-start;
+        padding: 0.2rem 0.6rem;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 0.3rem;
+    }
+
+    .task-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h5 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .priority {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+
+            &.urgent {
+                background: #f44336;
+                color: #fff;
+            }
+
+            &.medium {
+                background: #ff9800;
+                color: #fff;
+            }
+
+            &.low {
+                background: #4caf50;
+                color: #fff;
+            }
+        }
+    }
+
+    p {
+        margin: 0;
+        font-size: 14px;
+        color: #444;
+    }
+
+    .progress-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        .progress-bar {
+            flex: 1;
+            background: #e0e0e0;
+            border-radius: 4px;
+            height: 6px;
+            overflow: hidden;
+
+            .progress {
+                background: #4caf50;
+                height: 100%;
+                width: 0;
+                transition: width 0.3s ease;
+            }
+        }
+
+        small {
+            font-size: 12px;
+            color: #555;
+            white-space: nowrap;
+        }
+    }
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+
+    .avatars {
+        display: flex;
+        gap: 0.3rem;
+
+        .avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+    }
+
+    .task-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #555;
+    }
+
+    /* legacy styles removed since they are now handled by new selectors */
+}

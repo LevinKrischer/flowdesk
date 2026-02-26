@@ -1,0 +1,21 @@
+<div class="task-card p-3 border rounded" (click)="onClick()">
+    <div class="task-header d-flex justify-content-between align-items-center">
+        <h5>{{ task.title }}</h5>
+        <span class="priority" [ngClass]="task.priority.toLowerCase()">{{ task.priority }}</span>
+    </div>
+
+    <p *ngIf="task.description">{{ task.description }}</p>
+
+    <div class="task-meta d-flex justify-content-between">
+        <span class="due-date">Due: {{ task.due_date }}</span>
+        <span class="category">{{ task.category }}</span>
+    </div>
+
+    <div class="assigned" *ngIf="task.contacts.length">
+        <strong>Assigned:</strong> {{ task.contacts.map(c => c.name).join(', ') }}
+    </div>
+
+    <div class="subtasks" *ngIf="task.subtasks.length">
+        <small>{{ task.subtasks.filter(s => s.done).length }}/{{ task.subtasks.length }} subtasks completed</small>
+    </div>
+</div>
