@@ -12,27 +12,21 @@ import { Task } from '../../../core/db/tasks.db';
 })
 export class TaskCardComponent {
     @Input() task!: Task;
-    @Output() openTask = new EventEmitter<Task>(); // Event für Klick
+    @Output() openTask = new EventEmitter<Task>();
 
     onClick() {
-        this.openTask.emit(this.task); // Task nach oben zum Board senden
+        this.openTask.emit(this.task);
     }
-    /**
-     * Emitted when the card is clicked. Passing the task allows the caller to
-     * open a detail view.
-     */
+
+
     @Output() open = new EventEmitter<Task>();
 
-    /**
-     * Comma-separated list of assigned contact names used for accessibility / screen readers.
-     */
+
     get assignedNames(): string {
         return this.task?.contacts?.map(c => c.name).join(', ') || '';
     }
 
-    /**
-     * Human readable subtasks string like "1/3 Subtasks".
-     */
+
     get completedSubtasks(): string {
         const total = this.task?.subtasks?.length || 0;
         if (total === 0) {
@@ -42,9 +36,7 @@ export class TaskCardComponent {
         return `${done}/${total} Subtasks`;
     }
 
-    /**
-     * Percentage completion of subtasks used to style progress bar.
-     */
+
     get subtaskPercent(): number {
         const total = this.task?.subtasks?.length || 0;
         if (total === 0) {
@@ -54,9 +46,7 @@ export class TaskCardComponent {
         return Math.round((done / total) * 100);
     }
 
-    /**
-     * Short two‑letter initials derived from a contact name.
-     */
+
     initials(name: string): string {
         if (!name) {
             return '';
@@ -68,10 +58,13 @@ export class TaskCardComponent {
             .slice(0, 2)
             .toUpperCase();
     }
+    getCategoryClass(): string {
+        if (!this.task?.category) {
+            return '';
+        }
+        return this.task.category.toLowerCase().replace(/\s+/g, '-');
+    }
 
-    /**
-     * Color used for the category badge; fallback to gray when unknown.
-     */
     get categoryColor(): string {
         const cat = this.task?.category?.toLowerCase() || '';
         switch (cat) {

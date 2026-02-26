@@ -1,24 +1,15 @@
-<div class="task-card p-3 border rounded">
+<div class="task-card ">
+  <span class="category" [ngClass]="getCategoryClass()" *ngIf="task.category">{{ task.category }}</span>
+
   <div class="task-header d-flex justify-content-between align-items-center">
     <h5>{{ task.title }}</h5>
-    <span class="priority" [ngClass]="task.priority.toLowerCase()">{{ task.priority }}</span>
   </div>
 
   <p *ngIf="task.description">{{ task.description }}</p>
 
-  <div class="task-meta d-flex justify-content-between">
-    <span class="due-date">Due: {{ task.due_date }}</span>
-    <span class="category">{{ task.category }}</span>
-  </div>
-
-  <!-- place avatars at end of row -->
-  <div class="avatars" *ngIf="task.contacts.length">
-    <span *ngFor="let c of task.contacts" class="avatar" [style.background]="c.color">
-      {{ initials(c.name) }}
-    </span>
-  </div>
 
   <div class="info-row" *ngIf="task.subtasks.length || task.contacts.length">
+    <!-- top row: progress info -->
     <div class="progress-container" *ngIf="task.subtasks.length">
       <div class="progress-bar">
         <div class="progress" [style.width.%]="subtaskPercent"></div>
@@ -26,6 +17,19 @@
       <small>{{ completedSubtasks }}</small>
     </div>
 
-
+    <div class="bottom-row">
+      <div class="avatars" *ngIf="task.contacts.length">
+        <span *ngFor="let c of task.contacts" class="avatar" [style.background]="c.color">
+          {{ initials(c.name) }}
+        </span>
+      </div>
+      <div class="priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()">
+        <img *ngIf="task.priority.toLowerCase() === 'urgent'" src="assets/icons/prio-urgent-red-20px.svg"
+          alt="Urgent Priority" />
+        <img *ngIf="task.priority.toLowerCase() === 'medium'" src="assets/icons/prio-medium-20px.svg"
+          alt="Medium Priority" />
+        <img *ngIf="task.priority.toLowerCase() === 'low'" src="assets/icons/prio-low-20px.svg" alt="Low Priority" />
+      </div>
+    </div>
   </div>
 </div>
