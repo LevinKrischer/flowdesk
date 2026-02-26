@@ -2,7 +2,7 @@
 @use 'styles/mixins' as mixins;
 
 input {
-height: 3rem;
+  height: 3rem;
 }
 
 .inputRow {
@@ -27,8 +27,8 @@ height: 3rem;
     padding-right: 0;
 
     &:focus {
-        box-shadow: none;
-      }
+      box-shadow: none;
+    }
 
     &::placeholder {
       color: $grey-light;
