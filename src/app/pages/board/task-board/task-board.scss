@@ -1,4 +1,5 @@
 @use 'styles/mixins' as *;
+@use 'styles/variables' as *;
 
 .container {
   max-width: 100%;
@@ -68,4 +69,31 @@ h2 {
   @include for-size(lg) {
     font-size: 1.25rem;
   }
+
 }
+=======
+}
+
+.board-list-add-button {
+  transition: $trans-default;
+  width: 1.875rem;
+    height: 1.875rem;
+
+  img {
+    transition: $trans-default;
+  }
+
+  &:hover {
+    border-color: $blue-light!important;
+
+    img {
+      filter: invert(66%) sepia(55%) saturate(3372%) hue-rotate(165deg) brightness(95%) contrast(86%);
+    }
+  }
+
+  @include for-size(lg) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
