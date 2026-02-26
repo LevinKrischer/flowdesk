@@ -1,6 +1,10 @@
 @use 'styles/variables' as *;
 @use 'styles/mixins' as mixins;
 
+input {
+height: 3rem;
+}
+
 .inputRow {
   display: flex;
   flex-direction: column;
