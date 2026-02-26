@@ -33,6 +33,11 @@
     &:hover {
       background: linear-gradient(to bottom, #f9f9f9, #f0f0f0);
     }
+
+    &:active {
+      background: $blue-dark;
+      color: $white;
+    }
   }
 
   &__label {

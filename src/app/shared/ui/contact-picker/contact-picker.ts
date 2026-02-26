@@ -12,17 +12,18 @@ import { Contact } from '../../../core/db/contacts.db';
 export class ContactPicker {
   @Input() contacts: Contact[] = [];
   @Output() selectedIdsChange = new EventEmitter<number[]>();
-
   isOpen = signal(false);
   searchTerm = signal('');
   selectedIds = signal<number[]>([]);
 
+  /** Contacts filtered by the current search term. */
   filteredContacts = computed(() => {
     const term = this.searchTerm().toLowerCase();
     if (!term) return this.contacts;
     return this.contacts.filter(c => c.name.toLowerCase().includes(term));
   });
 
+  /** The full contact objects for all currently selected IDs. */
   selectedContacts = computed(() => {
     const ids = this.selectedIds();
     return this.contacts.filter(c => ids.includes(c.id));
@@ -30,6 +31,10 @@ export class ContactPicker {
 
   constructor(private elRef: ElementRef) {}
 
+  /**
+   * Closes the dropdown when a click occurs outside the component.
+   * @param event - The document click event.
+   */
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     if (!this.elRef.nativeElement.contains(event.target)) {
@@ -37,17 +42,16 @@ export class ContactPicker {
     }
   }
 
+  /** Opens the dropdown. */
   open() {
     this.isOpen.set(true);
   }
 
-  onSearch(event: Event) {
-    const value = (event.target as HTMLInputElement).value;
-    this.searchTerm.set(value);
-    this.isOpen.set(true);
-  }
-
-  // if cklicked on li
+  /**
+   * Toggles a contact's selection state.
+   * Adds the contact if not selected, removes it if already selected.
+   * @param contactId - The ID of the contact to toggle.
+   */
   toggleContact(contactId: number) {
     const current = this.selectedIds();
     const updated = current.includes(contactId)
@@ -57,10 +61,21 @@ export class ContactPicker {
     this.selectedIdsChange.emit(updated);
   }
 
+  /**
+   * Checks whether a contact is currently selected.
+   * @param contactId - The ID of the contact to check.
+   * @returns True if the contact is selected.
+   */
   isSelected(contactId: number): boolean {
     return this.selectedIds().includes(contactId);
   }
 
+  /**
+   * Computes initials from a contact name.
+   * Takes the first letter of the first and last name parts.
+   * @param name - The full name of the contact.
+   * @returns The uppercase initials (e.g. "JD" for "John Doe").
+   */
   getInitials(name: string): string {
     const parts = name.split(' ');
     return ((parts[0]?.[0] ?? '') + (parts.at(-1)?.[0] ?? '')).toUpperCase();
