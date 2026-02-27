@@ -21,18 +21,9 @@
   }
 
   &__header {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
+    gap: 2.5rem;
     nav {
       gap: 2rem;
-    }
-
-    @include for-size(lg) {
-      flex-direction: row;
-      justify-content: space-between;
     }
   }
 }
