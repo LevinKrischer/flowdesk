@@ -9,6 +9,8 @@ import { Component, Input, ChangeDetectorRef } from '@angular/core';
 export class UserFeedbackComponent {
 
   @Input() message = '';
+  @Input() animation: 'slide-right' | 'slide-up' = 'slide-right';
+  @Input() icon = '';
   visible = false;
 
   private timeoutId: any;

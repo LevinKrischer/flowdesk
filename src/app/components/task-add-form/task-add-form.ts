@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -14,6 +14,7 @@ import { ContactPicker } from '../../shared/ui/forms/contact-picker/contact-pick
 import { Button } from '../../shared/ui/button/button';
 import { ModalWrapper } from '../../shared/ui/modal-wrapper/modal-wrapper';
 import { Textarea } from '../../shared/ui/forms/textarea/textarea';
+import { UserFeedbackComponent } from '../../shared/ui/user-feedback/user-feedback';
 
 @Component({
   selector: 'app-task-add-form',
@@ -26,6 +27,7 @@ import { Textarea } from '../../shared/ui/forms/textarea/textarea';
     Button,
     ModalWrapper,
     Textarea,
+    UserFeedbackComponent,
   ],
   templateUrl: 'task-add-form.html',
   styleUrls: ['task-add-form.scss'],
@@ -35,14 +37,14 @@ export class TaskAddFormComponent {
   contactsDb = inject(ContactsDb);
   cdr = inject(ChangeDetectorRef);
 
+  @ViewChild('feedback') feedback!: UserFeedbackComponent;
+
   @Input() useModal = false;
 
   @Output() created = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
 
   isSaving = false;
-  errorMessage = '';
-  successMessage = '';
 
   form: Omit<Task, 'id' | 'contacts' | 'created_at' | 'modified_at' | 'order'> = {
     title: '',
@@ -167,7 +169,7 @@ export class TaskAddFormComponent {
 
     try {
       await this.saveTask();
-      this.successMessage = 'Task created successfully.';
+      this.feedback.show('Task added to board.');
       this.created.emit();
       this.resetForm();
     } catch (err) {
@@ -189,8 +191,6 @@ export class TaskAddFormComponent {
 
   private startSaving() {
     this.isSaving = true;
-    this.errorMessage = '';
-    this.successMessage = '';
   }
 
   private async saveTask() {
@@ -199,8 +199,7 @@ export class TaskAddFormComponent {
 
   private handleSaveError(err: unknown) {
     console.error('Failed to create task:', err);
-    this.errorMessage = 'Saving failed. Please check your connection or try again later.';
-    this.cdr.detectChanges();
+    this.feedback.show('Saving failed. Please check your connection or try again later.');
   }
 
   private finishSaving() {
@@ -220,8 +219,6 @@ export class TaskAddFormComponent {
     };
     this.selectedContactIds = [];
     this.newSubtaskTitle = '';
-    this.errorMessage = '';
-    this.successMessage = '';
     for (const key of Object.keys(this.dirty)) {
       this.dirty[key] = false;
       this.errors[key] = '';

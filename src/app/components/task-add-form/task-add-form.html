@@ -164,11 +164,6 @@
       </div>
     </div>
 
-    @if (errorMessage) {
-      <div class="text-danger fw-bold mt-2">{{ errorMessage }}</div>
-    }
-    @if (successMessage) {
-      <div class="text-success fw-bold mt-2">{{ successMessage }}</div>
-    }
+    <app-user-feedback #feedback animation="slide-up" icon="/assets/icons/nav-board-white-30px.svg" />
   </form>
 </ng-template>
