@@ -150,14 +150,15 @@
     </div>
 
     <div class="row mt-4">
-      <div class="col-12 d-flex justify-content-center justify-content-lg-end gap-3">
+      <div class="col-12 d-flex justify-content-center justify-content-lg-end align-items-center gap-3">
+        <span class="me-auto"><span class="text-danger">*</span>This field is required</span>
         <ui-button
           type="button"
           variant="secondary"
           class="d-none d-lg-inline-flex"
           (click)="onCancel()"
         >
-          Cancel
+          Clear
         </ui-button>
         <ui-button type="submit" variant="primary" [disabled]="isSaving"> Create Task </ui-button>
       </div>
