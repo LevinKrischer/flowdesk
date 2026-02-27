@@ -10,13 +10,14 @@ import { isValidName, isValidEmail, isValidPhone } from '../../../../core/utils/
   styleUrls: ['./input-field.scss'],
 })
 export class InputFieldComponent {
-  @Input() type = 'text';
+  @Input() type: 'text' | 'date' | 'email' | 'tel' = 'text';
   @Input() label = '';
   @Input() placeholder = '';
   @Input() value = '';
   @Input() icon: string | null = null;
   @Input() error: string | null = null;
   @Input() maxlength: number | null = null;
+  @Input() minDate: string | null = null;
 
   @Input() model: any;
   @Output() modelChange = new EventEmitter<any>();
@@ -28,5 +29,13 @@ export class InputFieldComponent {
     const value = (event.target as HTMLInputElement).value;
     this.modelChange.emit(value);
     this.inputChange.emit(event);
+  }
+
+  ngOnInit() {
+    if (this.type === 'date' && !this.minDate) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      this.minDate = today.toISOString().split('T')[0];
+    }
   }
 }

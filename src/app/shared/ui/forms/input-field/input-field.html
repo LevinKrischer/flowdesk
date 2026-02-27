@@ -1,19 +1,31 @@
 <div class="inputRow">
-  <label [for]="label" class="visually-hidden">{{ label }}</label>
+  @if (label) {
+    <label [for]="label" class="form-label">{{ label }}</label>
+  }
 
   <div class="inputWrapper" [class.hasError]="error">
-    <input [id]="label" class="form-control" [type]="type" [placeholder]="placeholder" [value]="model ?? ''"
-      (input)="onInput($event)" (blur)="blur.emit()" aria-invalid="{{ !!error }}" [attr.aria-describedby]="label + 'Error'"
-      [attr.maxlength]="maxlength" />
+    <input
+      [id]="label"
+      class="form-control"
+      [type]="type"
+      [placeholder]="placeholder"
+      [value]="model ?? ''"
+      (input)="onInput($event)"
+      (blur)="blur.emit()"
+      aria-invalid="{{ !!error }}"
+      [attr.aria-describedby]="label + 'Error'"
+      [attr.maxlength]="maxlength"
+      [attr.min]="minDate"
+    />
 
     @if (icon) {
-    <img class="inputIcon" [src]="icon" width="24" height="24" aria-hidden="true" />
+      <img class="inputIcon" [src]="icon" width="24" height="24" aria-hidden="true" />
     }
   </div>
 
   @if (error) {
-  <div class="text-danger small ps-2 errorMessage" [id]="label + 'Error'" role="alert">
-    {{ error }}
-  </div>
+    <div class="text-danger small ps-2 errorMessage" [id]="label + 'Error'" role="alert">
+      {{ error }}
+    </div>
   }
 </div>

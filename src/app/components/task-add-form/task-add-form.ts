@@ -7,11 +7,20 @@ import { InputFieldComponent } from '../../shared/ui/forms/input-field/input-fie
 import { ContactPicker } from '../../shared/ui/forms/contact-picker/contact-picker';
 import { Button } from '../../shared/ui/button/button';
 import { ModalWrapper } from '../../shared/ui/modal-wrapper/modal-wrapper';
+import { Textarea } from '../../shared/ui/forms/textarea/textarea';
 
 @Component({
   selector: 'app-task-add-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, InputFieldComponent, ContactPicker, Button, ModalWrapper],
+  imports: [
+    CommonModule,
+    FormsModule,
+    InputFieldComponent,
+    ContactPicker,
+    Button,
+    ModalWrapper,
+    Textarea,
+  ],
   templateUrl: 'task-add-form.html',
   styleUrls: ['task-add-form.scss'],
 })
@@ -37,7 +46,7 @@ export class TaskAddFormComponent {
     category: '',
     subtasks: [],
     status: 'todo',
-    user: null
+    user: null,
   };
 
   errors: Record<string, string> = {
@@ -87,7 +96,7 @@ export class TaskAddFormComponent {
       this.form.title.trim() !== '' &&
       this.form.due_date.trim() !== '' &&
       this.form.category.trim() !== '' &&
-      !Object.values(this.errors).some(e => e !== '')
+      !Object.values(this.errors).some((e) => e !== '')
     );
   }
 
@@ -180,7 +189,7 @@ export class TaskAddFormComponent {
       category: '',
       subtasks: [],
       status: 'todo',
-      user: null
+      user: null,
     };
     this.selectedContactIds = [];
     this.newSubtaskTitle = '';
