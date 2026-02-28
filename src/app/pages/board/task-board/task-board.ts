@@ -1,4 +1,4 @@
-import { Component, computed, signal, OnInit, inject, Output, EventEmitter } from '@angular/core';
+import { Component, computed, signal, OnInit, inject, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule } from '@angular/cdk/drag-drop';
 import { TasksDb, Task } from '../../../core/db/tasks.db';
@@ -17,7 +17,7 @@ import { HorizontalScrollDirective } from "../../../services/horizontal-scroll.d
 export class TaskBoard implements OnInit {
   private tasksDb = inject(TasksDb);
 
-  @Output() open = new EventEmitter<Task>();
+  open = output<Task>();
 
   tasks = signal<Task[]>([]);
   selectedTask = signal<Task | null>(null);
@@ -34,18 +34,22 @@ export class TaskBoard implements OnInit {
     this.tasksDb.subscribeToTaskChanges();
   }
 
+  /** Emits the selected task to open its detail view. */
   openTaskDetail(task: Task) {
     this.open.emit(task);
   }
 
+  /** Shows the add-task form overlay. */
   openAddTask() {
     this.showAddTaskForm.set(true);
   }
 
+  /** Hides the add-task form overlay. */
   closeAddTask() {
     this.showAddTaskForm.set(false);
   }
 
+  /** Closes the add-task form and refreshes the task list after creation. */
   async onTaskCreated() {
     this.showAddTaskForm.set(false);
     await this.tasksDb.getTasks();
@@ -53,8 +57,10 @@ export class TaskBoard implements OnInit {
   }
 
   /**
-   * Handles drag & drop events for tasks
-   * Updates both local state and database with new status and order
+   * Handles drag & drop events for tasks.
+   * Updates both local state and database with new status and order.
+   * @param event - The CDK drag & drop event containing source/target container data.
+   * @param targetStatus - The status of the column the task was dropped into.
    */
   async onTaskDrop(event: CdkDragDrop<Task[]>, targetStatus: Task['status']) {
     const task = event.item.data || event.previousContainer.data[event.previousIndex];
@@ -117,7 +123,8 @@ export class TaskBoard implements OnInit {
   }
 
   /**
-   * Updates local tasks signal with new task data
+   * Updates local tasks signal with new task data.
+   * @param updatedTasks - Array of tasks with updated order and/or status values.
    */
   private updateLocalTasks(updatedTasks: Task[]) {
     const currentTasks = this.tasks();
