@@ -11,6 +11,7 @@ import { TasksDb, Task } from '../../core/db/tasks.db';
 import { ContactsDb } from '../../core/db/contacts.db';
 import { InputFieldComponent } from '../../shared/ui/forms/input-field/input-field';
 import { ContactPicker } from '../../shared/ui/forms/contact-picker/contact-picker';
+import { SubtaskInputGroup } from '../../shared/ui/forms/subtask-input-group/subtask-input-group';
 import { Button } from '../../shared/ui/button/button';
 import { ModalWrapper } from '../../shared/ui/modal-wrapper/modal-wrapper';
 import { Textarea } from '../../shared/ui/forms/textarea/textarea';
@@ -24,6 +25,7 @@ import { UserFeedbackComponent } from '../../shared/ui/user-feedback/user-feedba
     FormsModule,
     InputFieldComponent,
     ContactPicker,
+    SubtaskInputGroup,
     Button,
     ModalWrapper,
     Textarea,
@@ -72,9 +74,6 @@ export class TaskAddFormComponent {
   };
 
   selectedContactIds: number[] = [];
-  newSubtaskTitle = '';
-  editingSubtaskIndex: number | null = null;
-  editingSubtaskTitle = '';
 
   async ngOnInit() {
     await this.contactsDb.getContacts();
@@ -141,42 +140,6 @@ export class TaskAddFormComponent {
 
   onPrioritySelected(priority: Task['priority']) {
     this.form.priority = priority;
-  }
-
-  addSubtask() {
-    const title = this.newSubtaskTitle.trim();
-    if (!title) return;
-    this.form.subtasks.push({ title, done: false });
-    this.newSubtaskTitle = '';
-  }
-
-  removeSubtask(index: number) {
-    this.form.subtasks.splice(index, 1);
-  }
-
-  /** Activates inline editing for a subtask. */
-  editSubtask(index: number) {
-    this.editingSubtaskIndex = index;
-    this.editingSubtaskTitle = this.form.subtasks[index].title;
-  }
-
-  /** Confirms the inline edit. Removes the subtask if the title is empty. */
-  confirmEditSubtask() {
-    const title = this.editingSubtaskTitle.trim();
-    if (this.editingSubtaskIndex !== null) {
-      if (title) {
-        this.form.subtasks[this.editingSubtaskIndex].title = title;
-      } else {
-        this.form.subtasks.splice(this.editingSubtaskIndex, 1);
-      }
-    }
-    this.cancelEditSubtask();
-  }
-
-  /** Cancels inline editing without saving. */
-  cancelEditSubtask() {
-    this.editingSubtaskIndex = null;
-    this.editingSubtaskTitle = '';
   }
 
   onCancel() {
@@ -248,7 +211,6 @@ export class TaskAddFormComponent {
       user: null,
     };
     this.selectedContactIds = [];
-    this.newSubtaskTitle = '';
     for (const key of Object.keys(this.dirty)) {
       this.dirty[key] = false;
       this.errors[key] = '';
