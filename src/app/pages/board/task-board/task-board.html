@@ -1,5 +1,5 @@
 <section class="taskboard">
-  <div class="taskboard-inner d-flex flex-column flex-lg-row gap-md-2 gap-lg-3 gap-xl-4">
+  <div class="taskboard-inner d-flex flex-column flex-lg-row gap-md-2 gap-lg-3 gap-xl-4" cdkDropListGroup>
 
     <!-- To Do Column -->
     <section class="flex-lg-1 d-flex flex-column min-h-0 w-25">
@@ -9,9 +9,14 @@
           <img src="assets/icons/add-plus-dark24px.svg" alt="Add task">
         </button>
       </header>
-      <div class="taskboard-scroll d-flex flex-row flex-lg-column overflow-x-auto overflow-lg-x-hidden overflow-lg-y-auto" horizontalScroll>
+      <div
+        class="taskboard-scroll d-flex flex-row flex-lg-column overflow-x-auto overflow-lg-x-hidden overflow-lg-y-auto gap-lg-3"
+        horizontalScroll
+        cdkDropList
+        [cdkDropListData]="todoTasks()"
+        (cdkDropListDropped)="onTaskDrop($event, 'todo')">
         @for (task of todoTasks(); track task.id) {
-          <app-task-card class="task-item" [task]="task" (openTask)="openTaskDetail($event)"></app-task-card>
+          <app-task-card class="task-item" [task]="task" (openTask)="openTaskDetail($event)" cdkDrag [cdkDragData]="task" cdkDragPreviewClass="custom-drag-preview"></app-task-card>
         } @empty {
           <div class="no-tasks-card p-3 text-center text-muted">
             No tasks to do
@@ -28,9 +33,14 @@
           <img src="assets/icons/add-plus-dark24px.svg" alt="Add task">
         </button>
       </header>
-      <div class="taskboard-scroll d-flex flex-row flex-lg-column overflow-x-auto overflow-lg-x-hidden overflow-lg-y-auto" horizontalScroll>
+      <div
+        class="taskboard-scroll d-flex flex-row flex-lg-column overflow-x-auto overflow-lg-x-hidden overflow-lg-y-auto gap-lg-3"
+        horizontalScroll
+        cdkDropList
+        [cdkDropListData]="inProgressTasks()"
+        (cdkDropListDropped)="onTaskDrop($event, 'in-progress')">
         @for (task of inProgressTasks(); track task.id) {
-          <app-task-card class="task-item" [task]="task" (openTask)="openTaskDetail($event)"></app-task-card>
+          <app-task-card class="task-item" [task]="task" (openTask)="openTaskDetail($event)" cdkDrag [cdkDragData]="task" cdkDragPreviewClass="custom-drag-preview"></app-task-card>
         } @empty {
           <div class="no-tasks-card p-3 text-center text-muted">
             No tasks in progress
@@ -47,9 +57,14 @@
           <img src="assets/icons/add-plus-dark24px.svg" alt="Add task">
         </button>
       </header>
-      <div class="taskboard-scroll d-flex flex-row flex-lg-column overflow-x-auto overflow-lg-x-hidden overflow-lg-y-auto" horizontalScroll>
+      <div
+        class="taskboard-scroll d-flex flex-row flex-lg-column overflow-x-auto overflow-lg-x-hidden overflow-lg-y-auto gap-lg-3"
+        horizontalScroll
+        cdkDropList
+        [cdkDropListData]="reviewTasks()"
+        (cdkDropListDropped)="onTaskDrop($event, 'await-feedback')">
         @for (task of reviewTasks(); track task.id) {
-          <app-task-card class="task-item" [task]="task" (openTask)="openTaskDetail($event)"></app-task-card>
+          <app-task-card class="task-item" [task]="task" (openTask)="openTaskDetail($event)" cdkDrag [cdkDragData]="task" cdkDragPreviewClass="custom-drag-preview"></app-task-card>
         } @empty {
           <div class="no-tasks-card py-1 px-2 text-center">
             No tasks awaiting feedback
@@ -63,9 +78,14 @@
       <header class="d-flex align-items-center justify-content-between mb-3 flex-shrink-0">
         <h2 class="h5 m-0">Done</h2>
       </header>
-      <div class="taskboard-scroll d-flex flex-row flex-lg-column overflow-x-auto overflow-lg-x-hidden overflow-lg-y-auto" horizontalScroll>
+      <div
+        class="taskboard-scroll d-flex flex-row flex-lg-column overflow-x-auto overflow-lg-x-hidden overflow-lg-y-auto gap-lg-3"
+        horizontalScroll
+        cdkDropList
+        [cdkDropListData]="doneTasks()"
+        (cdkDropListDropped)="onTaskDrop($event, 'done')">
         @for (task of doneTasks(); track task.id) {
-          <app-task-card class="task-item" [task]="task" (openTask)="openTaskDetail($event)"></app-task-card>
+          <app-task-card class="task-item" [task]="task" (openTask)="openTaskDetail($event)" cdkDrag [cdkDragData]="task" cdkDragPreviewClass="custom-drag-preview"></app-task-card>
         } @empty {
           <div class="no-tasks-card py-1 px-2 text-center text-muted">
             No tasks done

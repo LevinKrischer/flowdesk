@@ -45,6 +45,7 @@
   min-width: 16rem;
   max-width: 16rem;
   flex-shrink: 0;
+  border-radius: 1.5em;
 
   @include for-size(lg) {
     width: 100%;
@@ -88,4 +89,19 @@ h2 {
   border: 1px dashed $grey;
   border-radius: 0.625rem;
   background-color: #e7e7e7;
+}
+
+// Ghost element, das sich gerade bewegt
+.cdk-drag-preview {
+  opacity: 1 !important; // < Opacity & box-shadow sind die einzigen Dinge, die hier wirklich funktionieren, da die anderen Stile von Angular CDK überschrieben werden
+  pointer-events: none !important;
+}
+
+// Originale Karte während des Draggens
+.task-item.cdk-drag-placeholder {
+  opacity: 0.5;
+  border: 2px dotted var(--bs-primary, #007bff);
+  border-radius: 1.5rem;
+  background-color: rgba(0, 123, 255, 0.05);
+  transition: all 250ms ease;
 }

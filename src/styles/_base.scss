@@ -29,3 +29,17 @@ div.container{
     padding: 5rem 6rem;
   }
 }
+
+
+.cdk-drag-preview {
+    overflow: visible !important;
+    box-shadow: none !important;
+
+}
+
+.cdk-drag-preview > div {
+  transform: rotate(5deg) scale(1.02) !important;
+  transform-origin: center !important;
+  overflow:visible !important;
+}
+
