@@ -1,16 +1,26 @@
-import { Component, computed, signal, inject, output } from '@angular/core';
+import { Component, computed, signal, inject, output, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+  DragDropModule,
+} from '@angular/cdk/drag-drop';
 import { TasksDb, Task } from '../../../core/db/tasks.db';
 import { TaskCardComponent } from '../task-card/task-card';
 import { TaskAddFormComponent } from '../../../components/task-add-form/task-add-form';
-import { HorizontalScrollDirective } from "../../../services/horizontal-scroll.directive";
-
+import { HorizontalScrollDirective } from '../../../services/horizontal-scroll.directive';
 
 @Component({
   selector: 'app-task-board',
   standalone: true,
-  imports: [CommonModule, DragDropModule, TaskCardComponent, TaskAddFormComponent, HorizontalScrollDirective],
+  imports: [
+    CommonModule,
+    DragDropModule,
+    TaskCardComponent,
+    TaskAddFormComponent,
+    HorizontalScrollDirective,
+  ],
   templateUrl: './task-board.html',
   styleUrls: ['./task-board.scss'],
 })
@@ -19,12 +29,23 @@ export class TaskBoard {
 
   open = output<Task>();
 
+  // Keep the input as a signal so computed columns re-evaluate when the
+  // parent passes a new array (e.g. filteredTasks()).
+  private _tasks = signal<Task[]>([]);
+
+  @Input() set tasks(v: Task[] | null | undefined) {
+    this._tasks.set(v ?? []);
+  }
+  get tasks() {
+    return this._tasks();
+  }
+
   showAddTaskForm = signal(false);
 
-  todoTasks = computed(() => this.tasksDb.tasks().filter(t => t.status === 'todo'));
-  inProgressTasks = computed(() => this.tasksDb.tasks().filter(t => t.status === 'in-progress'));
-  reviewTasks = computed(() => this.tasksDb.tasks().filter(t => t.status === 'await-feedback'));
-  doneTasks = computed(() => this.tasksDb.tasks().filter(t => t.status === 'done'));
+  todoTasks = computed(() => this._tasks().filter((t) => t.status === 'todo'));
+  inProgressTasks = computed(() => this._tasks().filter((t) => t.status === 'in-progress'));
+  reviewTasks = computed(() => this._tasks().filter((t) => t.status === 'await-feedback'));
+  doneTasks = computed(() => this._tasks().filter((t) => t.status === 'done'));
 
   /** Emits the selected task to open its detail view. */
   openTaskDetail(task: Task) {
@@ -64,23 +85,17 @@ export class TaskBoard {
       // Update order numbers for all tasks in this column
       const tasksToUpdate = columnTasks.map((t, index) => ({
         ...t,
-        order: index
+        order: index,
       }));
 
       await this.tasksDb.updateTaskOrder(tasksToUpdate);
-
     }
     // Case 2: Moving to a different column
     else {
       const sourceTasks = [...event.previousContainer.data];
       const targetTasks = [...event.container.data];
 
-      transferArrayItem(
-        sourceTasks,
-        targetTasks,
-        event.previousIndex,
-        event.currentIndex
-      );
+      transferArrayItem(sourceTasks, targetTasks, event.previousIndex, event.currentIndex);
 
       // Update status and order for moved task
       const movedTask = targetTasks[event.currentIndex];
@@ -89,12 +104,12 @@ export class TaskBoard {
       // Recalculate order numbers for both columns
       const sourceTasksUpdated = sourceTasks.map((t, index) => ({
         ...t,
-        order: index
+        order: index,
       }));
 
       const targetTasksUpdated = targetTasks.map((t, index) => ({
         ...t,
-        order: index
+        order: index,
       }));
 
       await this.tasksDb.updateTaskOrder([...sourceTasksUpdated, ...targetTasksUpdated]);
