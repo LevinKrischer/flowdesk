@@ -2,25 +2,31 @@
 @use 'styles/variables' as *;
 
 .board {
-  padding: 3rem 1rem;
-  overflow: auto;
-  max-height: calc(100dvh - 6rem);
+  padding: 3rem 1rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 7rem);
+  max-height: calc(100dvh - 7rem);
   max-width: 90rem;
+  overflow: auto;
 
   @include for-size(sm) {
-    padding: 3rem 3rem;
+    padding: 3rem 3rem 0 3rem;
   }
 
   @include for-size(md) {
-    padding: 4rem 4rem;
+    padding: 4rem 4rem 0 4rem;
   }
 
   @include for-size(lg) {
     padding: 5rem 6rem;
-    overflow: hidden;
+    overflow: auto;
+    height: 100%;
+    max-height: calc(100dvh - 5rem);
   }
 
   &__header {
+    flex-shrink: 0;
     gap: 2.5rem;
     nav {
       gap: 2rem;
@@ -35,5 +41,7 @@
 }
 
 .task-board {
+  flex: 1;
+  min-height: 0;
   width: 100%;
 }
