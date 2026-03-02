@@ -30,10 +30,13 @@
 
       @if (task.contacts.length) {
       <div class="avatars">
-        @for (c of task.contacts; track c.id) {
-        <span class="avatar" [style.background]="c.color">
-          {{ initials(c.name) }}
+        @for (contact of task.contacts.slice(0, 5); track contact.id) {
+        <span class="avatar" [style.background]="contact.color">
+          {{ initials(contact.name) }}
         </span>
+        }
+        @if (task.contacts.length > 5) {
+        <span class="avatar avatar-more">+{{ task.contacts.length - 5 }}</span>
         }
 
       </div>
