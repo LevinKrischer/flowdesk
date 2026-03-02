@@ -1,4 +1,4 @@
-import { Component, computed, signal, OnInit, inject, output } from '@angular/core';
+import { Component, computed, signal, inject, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule } from '@angular/cdk/drag-drop';
 import { TasksDb, Task } from '../../../core/db/tasks.db';
@@ -14,25 +14,17 @@ import { HorizontalScrollDirective } from "../../../services/horizontal-scroll.d
   templateUrl: './task-board.html',
   styleUrls: ['./task-board.scss'],
 })
-export class TaskBoard implements OnInit {
+export class TaskBoard {
   private tasksDb = inject(TasksDb);
 
   open = output<Task>();
 
-  tasks = signal<Task[]>([]);
-  selectedTask = signal<Task | null>(null);
   showAddTaskForm = signal(false);
 
-  todoTasks = computed(() => this.tasks().filter(t => t.status === 'todo'));
-  inProgressTasks = computed(() => this.tasks().filter(t => t.status === 'in-progress'));
-  reviewTasks = computed(() => this.tasks().filter(t => t.status === 'await-feedback'));
-  doneTasks = computed(() => this.tasks().filter(t => t.status === 'done'));
-
-  async ngOnInit() {
-    await this.tasksDb.getTasks();
-    this.tasks.set(this.tasksDb.tasks());
-    this.tasksDb.subscribeToTaskChanges();
-  }
+  todoTasks = computed(() => this.tasksDb.tasks().filter(t => t.status === 'todo'));
+  inProgressTasks = computed(() => this.tasksDb.tasks().filter(t => t.status === 'in-progress'));
+  reviewTasks = computed(() => this.tasksDb.tasks().filter(t => t.status === 'await-feedback'));
+  doneTasks = computed(() => this.tasksDb.tasks().filter(t => t.status === 'done'));
 
   /** Emits the selected task to open its detail view. */
   openTaskDetail(task: Task) {
@@ -53,7 +45,6 @@ export class TaskBoard implements OnInit {
   async onTaskCreated() {
     this.showAddTaskForm.set(false);
     await this.tasksDb.getTasks();
-    this.tasks.set(this.tasksDb.tasks());
   }
 
   /**
@@ -76,10 +67,6 @@ export class TaskBoard implements OnInit {
         order: index
       }));
 
-      // Update local state
-      this.updateLocalTasks(tasksToUpdate);
-
-      // Update database
       await this.tasksDb.updateTaskOrder(tasksToUpdate);
 
     }
@@ -110,30 +97,10 @@ export class TaskBoard implements OnInit {
         order: index
       }));
 
-      // Update local state
-      this.updateLocalTasks([...sourceTasksUpdated, ...targetTasksUpdated]);
-
-      // Update database
       await this.tasksDb.updateTaskOrder([...sourceTasksUpdated, ...targetTasksUpdated]);
     }
 
     // Refresh tasks from database
     await this.tasksDb.getTasks();
-    this.tasks.set(this.tasksDb.tasks());
-  }
-
-  /**
-   * Updates local tasks signal with new task data.
-   * @param updatedTasks - Array of tasks with updated order and/or status values.
-   */
-  private updateLocalTasks(updatedTasks: Task[]) {
-    const currentTasks = this.tasks();
-    const updatedTasksMap = new Map(updatedTasks.map(t => [t.id, t]));
-
-    const newTasks = currentTasks.map(t =>
-      updatedTasksMap.has(t.id) ? updatedTasksMap.get(t.id)! : t
-    );
-
-    this.tasks.set(newTasks);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, computed, inject, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TasksDb, Task } from '../../core/db/tasks.db';
 import { Button } from '../../shared/ui/button/button';
@@ -23,14 +23,6 @@ import { TaskAddFormComponent } from '../../components/task-add-form/task-add-fo
 })
 export class Board implements OnInit, OnDestroy {
   private tasksDb = inject(TasksDb);
-
-  tasks = this.tasksDb.tasks;
-
-  todoTasks = computed(() => this.tasks().filter((t) => t.status === 'todo'));
-  inProgressTasks = computed(() => this.tasks().filter((t) => t.status === 'in-progress'));
-  awaitFeedbackTasks = computed(() => this.tasks().filter((t) => t.status === 'await-feedback'));
-  doneTasks = computed(() => this.tasks().filter((t) => t.status === 'done'));
-
 
   isModalOpen = signal(false);
   modalMode: 'add' | 'detail' = 'add';
@@ -59,6 +51,6 @@ export class Board implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.tasksDb.unsubscribeFromTaskChanges();
-    this.tasksDb.subscribeToTaskChanges();
+    //this.tasksDb.subscribeToTaskChanges();
   }
 }

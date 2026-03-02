@@ -257,6 +257,7 @@ export class TasksDb {
   unsubscribeFromTaskChanges() {
     if (this.channels) {
       this.supa.supabase.removeChannel(this.channels);
+      this.channels = null;
     }
   }
 
