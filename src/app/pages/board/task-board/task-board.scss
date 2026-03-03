@@ -16,7 +16,7 @@
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-  gap: 1.625rem;
+  gap: 1rem;
 
   @include for-size(lg) {
     height: 100%;
@@ -26,9 +26,19 @@
 
 .board-column {
 
+  @include for-size(lg) {
+    width: calc(25% - calc(0.5rem *3 / 4));
+  }
+}
+
+.board-column-header {
 
   @include for-size(lg) {
-    width: calc(25% - calc(1rem *3 / 4));
+    height: 60px;
+  }
+
+  @include for-size(xl) {
+    height: unset;
   }
 }
 
