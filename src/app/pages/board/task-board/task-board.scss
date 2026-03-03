@@ -25,7 +25,11 @@
 }
 
 .board-column {
-  width: calc(25% - calc(1rem *3 / 4));
+
+
+  @include for-size(lg) {
+    width: calc(25% - calc(1rem *3 / 4));
+  }
 }
 
 .taskboard-scroll {
