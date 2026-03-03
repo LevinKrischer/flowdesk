@@ -24,6 +24,10 @@
   }
 }
 
+.board-column {
+  width: calc(25% - calc(1rem *3 / 4));
+}
+
 .taskboard-scroll {
   flex: 1;
   gap: 1rem;
