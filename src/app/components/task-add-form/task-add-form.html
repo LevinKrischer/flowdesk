@@ -1,29 +1,49 @@
 <app-user-feedback #feedback animation="slide-up" icon="/assets/icons/nav-board-white-30px.svg" />
 
 @if (useModal()) {
-<ui-modal-wrapper (close)="onCancel()">
-  <ng-container *ngTemplateOutlet="formTemplate" />
-</ui-modal-wrapper>
+  <ui-modal-wrapper (close)="onCancel()">
+    <ng-container *ngTemplateOutlet="formTemplate" />
+  </ui-modal-wrapper>
 } @else {
-<ng-container *ngTemplateOutlet="formTemplate" />
+  <ng-container *ngTemplateOutlet="formTemplate" />
 }
 
 <ng-template #formTemplate>
   <form (ngSubmit)="submit()">
-    <h3>Add Task</h3>
     <div class="row">
       <div class="col-12 col-lg-5">
         <div class="mb-3">
           <label for="Title" class="form-label">Title<span class="text-danger">*</span></label>
-          <app-input-field type="text" id="Title" placeholder="Enter title" [maxlength]="30" [(model)]="form.title"
-            [error]="errors['title']" (blur)="markDirty('title')" (inputChange)="liveValidate('title')" />
+          <app-input-field
+            type="text"
+            id="Title"
+            placeholder="Enter title"
+            [maxlength]="30"
+            [(model)]="form.title"
+            [error]="errors['title']"
+            (blur)="markDirty('title')"
+            (inputChange)="liveValidate('title')"
+          />
         </div>
 
-        <ui-textarea id="Description" label="Description" placeholder="Description" [rows]="5" [maxlength]="200"
-          [(model)]="form.description"></ui-textarea>
+        <ui-textarea
+          id="Description"
+          label="Description"
+          placeholder="Description"
+          [rows]="5"
+          [maxlength]="200"
+          [(model)]="form.description"
+        ></ui-textarea>
 
-        <app-input-field type="date" label="Due Date" id="Due-Date" [(model)]="form.due_date"
-          [error]="errors['due_date']" (blur)="markDirty('due_date')" (inputChange)="liveValidate('due_date')" />
+        <app-input-field
+          type="date"
+          label="Due Date"
+          id="Due-Date"
+          [(model)]="form.due_date"
+          [error]="errors['due_date']"
+          (blur)="markDirty('due_date')"
+          (inputChange)="liveValidate('due_date')"
+        />
       </div>
 
       <div class="col-lg-1 d-none d-lg-flex justify-content-center">
@@ -34,48 +54,85 @@
         <div class="mb-3">
           <label class="form-label d-block">Priority</label>
           <div class="d-flex gap-2">
-            <ui-button type="button" variant="urgent" icon="urgent" [active]="form.priority === 'urgent'"
-              (click)="onPrioritySelected('urgent')">Urgent</ui-button>
-            <ui-button type="button" variant="medium" icon="medium" [active]="form.priority === 'medium'"
-              (click)="onPrioritySelected('medium')">Medium</ui-button>
-            <ui-button type="button" variant="low" icon="low" [active]="form.priority === 'low'"
-              (click)="onPrioritySelected('low')">Low</ui-button>
+            <ui-button
+              type="button"
+              variant="urgent"
+              icon="urgent"
+              [active]="form.priority === 'urgent'"
+              (click)="onPrioritySelected('urgent')"
+              >Urgent</ui-button
+            >
+            <ui-button
+              type="button"
+              variant="medium"
+              icon="medium"
+              [active]="form.priority === 'medium'"
+              (click)="onPrioritySelected('medium')"
+              >Medium</ui-button
+            >
+            <ui-button
+              type="button"
+              variant="low"
+              icon="low"
+              [active]="form.priority === 'low'"
+              (click)="onPrioritySelected('low')"
+              >Low</ui-button
+            >
           </div>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Assigned To</label>
-          <app-contact-picker [contacts]="contactsDb.contacts()" (selectedIdsChange)="onContactsSelected($event)" />
+          <app-contact-picker
+            [contacts]="contactsDb.contacts()"
+            (selectedIdsChange)="onContactsSelected($event)"
+          />
         </div>
 
         <div class="mb-3">
-          <label for="Category" class="form-label">Category<span class="text-danger">*</span></label>
-          <select class="form-select" id="Category" [(ngModel)]="form.category" name="category"
-            [class.is-invalid]="errors['category']" (blur)="markDirty('category')">
+          <label for="Category" class="form-label"
+            >Category<span class="text-danger">*</span></label
+          >
+          <select
+            class="form-select"
+            id="Category"
+            [(ngModel)]="form.category"
+            name="category"
+            [class.is-invalid]="errors['category']"
+            (blur)="markDirty('category')"
+          >
             <option value="" selected disabled>Select task category</option>
             <option value="Technical Task">Technical Task</option>
             <option value="User Story">User Story</option>
           </select>
           @if (errors['category']) {
-          <div class="invalid-feedback d-block">{{ errors['category'] }}</div>
+            <div class="invalid-feedback d-block">{{ errors['category'] }}</div>
           }
         </div>
 
         <div class="mb-3">
-          <app-subtask-input-group [subtasks]="form.subtasks" (subtasksChange)="form.subtasks = $event" />
+          <app-subtask-input-group
+            [subtasks]="form.subtasks"
+            (subtasksChange)="form.subtasks = $event"
+          />
         </div>
       </div>
     </div>
 
     <div class="row mt-4">
-      <div class="col-12 d-flex justify-content-center justify-content-lg-start align-items-center gap-3">
+      <div
+        class="col-12 d-flex justify-content-center justify-content-lg-start align-items-center gap-3"
+      >
         <span class="me-auto"><span class="text-danger">*</span>This field is required</span>
-        <ui-button type="button" variant="secondary" class="d-none d-lg-inline-flex" (click)="onCancel()">
+        <ui-button
+          type="button"
+          variant="secondary"
+          class="d-none d-lg-inline-flex"
+          (click)="onCancel()"
+        >
           Clear
         </ui-button>
-        <ui-button type="submit" variant="primary" [disabled]="isSaving">
-          Create Task
-        </ui-button>
+        <ui-button type="submit" variant="primary" [disabled]="isSaving"> Create Task </ui-button>
       </div>
     </div>
   </form>
