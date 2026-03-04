@@ -160,6 +160,14 @@ strong {
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      transition: background-color 0.2s ease, transform 0.15s ease, border-radius 0.2s ease;
+
+      &:hover {
+        background-color: #f0f2f5;
+        transform: translateX(4px) scale(1.01);
+        border-radius: 0.75rem;
+        cursor: pointer;
+      }
 
       .subtask-checkbox-icon {
         width: 18px;
