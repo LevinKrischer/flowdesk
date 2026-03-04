@@ -2,6 +2,7 @@
 
 @if (useModal()) {
   <ui-modal-wrapper (close)="onCancel()">
+    <h3 class="mb-4">Add Task</h3>
     <ng-container *ngTemplateOutlet="formTemplate" />
   </ui-modal-wrapper>
 } @else {

@@ -1,21 +1,16 @@
-<aside class="modal-backdrop" (click)="close.emit()"></aside>
-
-<dialog class="modal-container" open>
-  <article class="modal" (click)="$event.stopPropagation()">
-    <section class="modal-body">
-      <div class="task-detail">
+<ui-modal-wrapper (close)="close.emit()" modalSize="small" [contentPadding]="true">
+  <div class="task-detail">
 
         @if (task().category) {
         <div class="badge-row">
           <div class="category-badge" [style.background]="categoryColor">
             {{ task().category }}
           </div>
-          <button class="modal-close" (click)="close.emit()">&times;</button>
         </div>
         }
 
         <header class="modal-header">
-          <h2>{{ task().title }}</h2>
+          <h2 class="mb-0">{{ task().title }}</h2>
         </header>
 
 
@@ -76,9 +71,7 @@
             Edit
           </button>
         </div>
-      </div>
-    </section>
-  </article>
-</dialog>
+  </div>
+</ui-modal-wrapper>
 
 <app-user-feedback #feedback animation="slide-up" icon="/assets/icons/nav-board-white-30px.svg" />

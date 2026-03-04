@@ -2,11 +2,12 @@ import { Component, input, output, inject, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TasksDb, Task } from '../../../core/db/tasks.db';
 import { UserFeedbackComponent } from '../../../shared/ui/user-feedback/user-feedback';
+import { ModalWrapper } from '../../../shared/ui/modal-wrapper/modal-wrapper';
 
 @Component({
   selector: 'app-task-detail',
   standalone: true,
-  imports: [CommonModule, UserFeedbackComponent],
+  imports: [CommonModule, UserFeedbackComponent, ModalWrapper],
   templateUrl: './task-detail.html',
   styleUrls: ['./task-detail.scss'],
 })
