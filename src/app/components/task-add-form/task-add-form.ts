@@ -1,4 +1,12 @@
-import { Component, viewChild, inject, ChangeDetectorRef, input, output, effect } from '@angular/core';
+import {
+  Component,
+  viewChild,
+  inject,
+  ChangeDetectorRef,
+  input,
+  output,
+  effect,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -43,13 +51,17 @@ export class TaskAddFormComponent {
 
   useModal = input(false);
   initialStatus = input<Task['status']>('todo');
+  editTask = input<Task | null>(null);
 
   created = output<void>();
+  updated = output<void>();
   closed = output<void>();
 
   isSaving = false;
 
-  form: Omit<Task, 'id' | 'contacts' | 'created_at' | 'modified_at' | 'order' | 'category'> & { category: Task['category'] | '' } = {
+  form: Omit<Task, 'id' | 'contacts' | 'created_at' | 'modified_at' | 'order' | 'category'> & {
+    category: Task['category'] | '';
+  } = {
     title: '',
     description: '',
     due_date: '',
@@ -64,7 +76,7 @@ export class TaskAddFormComponent {
     title: '',
     description: '',
     due_date: '',
-    category: ''
+    category: '',
   };
 
   dirty: Record<string, boolean> = {
@@ -78,7 +90,19 @@ export class TaskAddFormComponent {
 
   constructor() {
     effect(() => {
-      this.form.status = this.initialStatus();
+      const task = this.editTask();
+      if (task) {
+        this.form.title = task.title;
+        this.form.description = task.description;
+        this.form.due_date = task.due_date;
+        this.form.priority = task.priority;
+        this.form.category = task.category;
+        this.form.subtasks = task.subtasks;
+        this.form.status = task.status;
+        this.selectedContactIds = task.contacts.map(c => c.id);
+      } else {
+        this.form.status = this.initialStatus();
+      }
     });
   }
 
@@ -112,7 +136,9 @@ export class TaskAddFormComponent {
 
     switch (field) {
       case 'title':
-        this.errors['title'] = isValidTitle(value) ? '' : 'Please enter title with max. 30 letters.';
+        this.errors['title'] = isValidTitle(value)
+          ? ''
+          : 'Please enter title with max. 30 letters.';
         break;
 
       case 'description':
@@ -161,15 +187,21 @@ export class TaskAddFormComponent {
   async submit() {
     this.markAllDirty();
     if (!this.isFormValid()) return;
-
     this.startSaving();
 
     try {
       await this.saveTask();
-      this.feedback().show('Task added to board.');
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      this.created.emit();
-      this.resetForm();
+
+      if (!!this.editTask()) {
+        this.feedback().show('Task updated.');
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+        this.updated.emit(); // back to detail view
+      } else {
+        this.feedback().show('Task added to board.');
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+        this.created.emit();
+        this.resetForm();
+      }
     } catch (err) {
       this.handleSaveError(err);
     } finally {
@@ -192,10 +224,16 @@ export class TaskAddFormComponent {
   }
 
   private async saveTask() {
-    return this.tasksDb.createTask(
-      this.form as Omit<Task, 'id' | 'contacts' | 'created_at' | 'modified_at' | 'order'>,
-      this.selectedContactIds,
-    );
+    const formData = this.form as Omit<
+      Task,
+      'id' | 'contacts' | 'created_at' | 'modified_at' | 'order'
+    >;
+
+    if (!!this.editTask()) {
+      return this.tasksDb.updateTask(this.editTask()!.id, formData, this.selectedContactIds);
+    } else {
+      return this.tasksDb.createTask(formData, this.selectedContactIds);
+    }
   }
 
   private handleSaveError(err: unknown) {

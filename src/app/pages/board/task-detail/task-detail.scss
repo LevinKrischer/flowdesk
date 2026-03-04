@@ -86,7 +86,7 @@
   flex-direction: column;
   padding: 2rem 1.5rem;
   padding-bottom: 1rem;
-  overflow: hidden;
+  overflow-y: auto;
   flex: 1;
   min-height: 0;
   scrollbar-width: none;
@@ -133,6 +133,18 @@
   z-index: 5;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.08);
 
+}
+
+.edit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+  }
 }
 
 .task-detail {
