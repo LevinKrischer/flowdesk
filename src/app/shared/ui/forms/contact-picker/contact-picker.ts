@@ -41,9 +41,8 @@ export class ContactPicker {
   constructor(private elRef: ElementRef) {
     effect(() => {
       const ids = this.initialSelectedIds();
-      if (ids.length) {
-        this.selectedIds.set(ids);
-      }
+      this.selectedIds.set(ids);
+      this.searchTerm.set('');
     });
   }
 
