@@ -97,19 +97,6 @@
         </div>
 
         <div class="mb-3">
-          <select
-            class="form-select"
-            id="Category"
-            [(ngModel)]="form.category"
-            name="category"
-            [class.is-invalid]="errors['category']"
-            (blur)="markDirty('category')"
-          >
-            <option value="" selected disabled>Select task category</option>
-            <option value="Technical Task">Technical Task</option>
-            <option value="User Story">User Story</option>
-          </select>
-
           <ui-select
             label="Category"
             id="Category"
@@ -147,7 +134,7 @@
                      (click)="onCancel()">Clear
           </ui-button>
         }
-        <ui-button type="submit" variant="primary" [disabled]="isSaving">
+        <ui-button type="submit" variant="primary" [disabled]="isSaving" [icon]="editTask() ? 'create' : 'add'">
           {{ editTask() ? 'Ok' : 'Create Task' }}
         </ui-button>
 
