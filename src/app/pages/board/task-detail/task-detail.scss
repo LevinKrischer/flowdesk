@@ -45,9 +45,9 @@ strong {
 
 .scrollable-content {
   display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    flex: 1;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
 }
 
 .task-detail {
@@ -186,7 +186,7 @@ strong {
         background-color: #f0f2f5;
         border-radius: 0.75rem;
         cursor: pointer;
-        padding-left: 0.75rem;
+        padding-left: 0.05rem;
       }
     }
   }
