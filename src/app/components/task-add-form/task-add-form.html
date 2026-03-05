@@ -34,9 +34,9 @@
       }
 
       <div [class]="editTask() ? 'col-12' : 'col-12 col-lg-6'">
-        <div class="mb-3">
+        <div class="my-3">
           <label class="form-label d-block">Priority</label>
-          <div class="d-flex gap-2">
+          <div class="d-flex flex-wrap gap-2 priority-picker">
             <ui-button type="button" variant="urgent" icon="urgent" [active]="form.priority === 'urgent'"
               (click)="onPrioritySelected('urgent')">Urgent</ui-button>
             <ui-button type="button" variant="medium" icon="medium" [active]="form.priority === 'medium'"
@@ -85,11 +85,11 @@
     </div>
 
     <div class="row mt-4">
-      <div class="col-12 d-flex justify-content-center justify-content-lg-start align-items-center gap-3">
-        <span class="me-auto"><span class="text-danger">*</span>This field is required</span>
+      <div class="col-12 d-flex justify-content-end justify-content-lg-start align-items-center gap-3">
+        <span class="me-auto d-none d-sm-inline-block"><span class="text-danger">*</span>This field is required</span>
 
         @if (!editTask()) {
-        <ui-button type="button" variant="secondary" class="d-none d-lg-inline-flex" (click)="onCancel()">Clear
+        <ui-button type="button" variant="secondary" (click)="onCancel()">Clear
         </ui-button>
         }
         <ui-button type="submit" variant="primary" [disabled]="isSaving" [icon]="editTask() ? 'create' : 'add'">

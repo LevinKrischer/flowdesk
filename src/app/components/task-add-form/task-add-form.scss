@@ -5,6 +5,20 @@
   background-color: $grey-light;
 }
 
+.priority-picker {
+  ::ng-deep ui-button .btn {
+    font-size: 1rem !important;
+  }
+}
+
+.me-auto {
+  font-size: 0.875rem;
+
+  @include mixins.for-size(sm) {
+    font-size: 1rem;
+  }
+}
+
 .category-picker {
   position: relative;
   display: flex;

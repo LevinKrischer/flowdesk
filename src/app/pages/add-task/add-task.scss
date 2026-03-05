@@ -1,4 +1,30 @@
+@use 'styles/mixins' as *;
+@use 'styles/variables' as *;
+
 .container {
-  padding: 5rem 6rem;
-  margin: 0;
+  padding: 3rem 1rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 5.5rem);
+  max-width: 90rem;
+  overflow-x: hidden;
+
+  @include for-size(sm) {
+    padding: 3rem 3rem 2rem 3rem;
+  }
+
+  @include for-size(md) {
+    padding: 4rem 4rem 2rem 4rem;
+  }
+
+  @include for-size(lg) {
+    padding: 4rem 4rem;
+    overflow: auto;
+    height: 100%;
+    max-height: calc(100dvh - 5rem);
+  }
+
+  @include for-size(xl) {
+    padding: 5rem 5rem;
+  }
 }
