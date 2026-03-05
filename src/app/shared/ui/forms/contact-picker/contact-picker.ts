@@ -10,11 +10,13 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Contact } from '../../../../core/db/contacts.db';
+import { InputFieldComponent } from '../input-field/input-field';
+
 
 @Component({
   selector: 'app-contact-picker',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, InputFieldComponent],
   templateUrl: './contact-picker.html',
   styleUrl: './contact-picker.scss',
 })
@@ -60,6 +62,19 @@ export class ContactPicker {
   /** Opens the dropdown. */
   open() {
     this.isOpen.set(true);
+  }
+
+  searchContact() {
+    console.log("Blur listener works!");
+    /*
+    computed(() => {
+    const term = this.searchTerm().toLowerCase();
+    return this.tasks().filter(
+      (t) =>
+        term === '' ||
+        t.title.toLowerCase().includes(term) ||
+        t.description.toLowerCase().includes(term),
+    );*/
   }
 
   /**

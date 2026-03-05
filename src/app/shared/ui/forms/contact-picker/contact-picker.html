@@ -1,11 +1,13 @@
-<main class="contact-picker">
-  <input
+<section class="contact-picker">
+  <app-input-field>
+
+  </app-input-field>
+  <!-- <input
     type="text"
-    class="form-select"
+    class="form-input"
     placeholder="Select contacts to assign"
-    readonly
-    (click)="open()"
-  />
+    (blur)="searchContact()"
+  /> -->
 
   @if (isOpen()) {
     <ul class="contact-picker__dropdown">
@@ -40,4 +42,4 @@
       }
     </ul>
   }
-</main>
+</section>
