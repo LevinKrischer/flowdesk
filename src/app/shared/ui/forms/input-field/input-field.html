@@ -30,9 +30,15 @@
   </div>
 
   @if (reserveErrorSpace || error) {
-    <div class="text-danger small ps-2 errorMessage" [class.no-space]="!reserveErrorSpace" [id]="label + 'Error'" role="alert">
+    <div
+      class="text-danger small ps-2 errorMessage"
+      [class.no-space]="!reserveErrorSpace"
+      [id]="label + 'Error'"
+      role="alert"
+    >
       @if (error) {
         {{ error }}
       }
     </div>
   }
+</div>
