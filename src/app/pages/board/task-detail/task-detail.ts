@@ -69,13 +69,10 @@ export class TaskDetailComponent {
 
   async deleteTask() {
     try {
-      await this.taskDbSingleton.deleteTask(this.task().id);
-      this.userFeedback().show('Task has been deleted.');
-      await new Promise((resolve) => setTimeout(resolve, 3000));
       this.close.emit();
+      await this.taskDbSingleton.deleteTask(this.task().id);
     } catch (err) {
       console.error('Failed to delete task:', err);
-      this.userFeedback().show('Delete failed. Please try again.');
     }
   }
 
