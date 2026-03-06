@@ -1,6 +1,10 @@
 @use 'styles/mixins' as *;
 @use 'styles/variables' as *;
 
+* {
+  transition: padding 0.125s ease;
+}
+
 .board {
   padding: 3rem 1rem 0 1rem;
   display: flex;
@@ -18,7 +22,7 @@
   }
 
   @include for-size(lg) {
-    padding: 4rem 4rem;
+    padding: 3rem 3rem;
     overflow: auto;
     height: 100%;
     max-height: calc(100dvh - 5rem);
