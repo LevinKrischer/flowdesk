@@ -63,6 +63,7 @@
     justify-content: space-between;
     gap: 0.5rem;
     padding: 0.4rem 0.8rem;
+    margin-bottom: 2px;
     cursor: pointer;
     border-radius: $base-border-radius;
     transition: $trans-default;
@@ -74,6 +75,15 @@
     &:active {
       background: $blue-dark;
       color: $white;
+    }
+
+    &--selected {
+      background: $blue-dark;
+      color: $white;
+
+      &:hover {
+        background: $blue-dark;
+      }
     }
   }
 
