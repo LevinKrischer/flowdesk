@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, computed, inject, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, computed, inject, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TasksDb, Task } from '../../core/db/tasks.db';
 import { Button } from '../../shared/ui/button/button';
@@ -6,11 +6,12 @@ import { InputFieldComponent } from '../../shared/ui/forms/input-field/input-fie
 import { TaskBoard } from './task-board/task-board';
 import { TaskAddFormComponent } from '../../components/task-add-form/task-add-form';
 import { TaskDetailComponent } from './task-detail/task-detail';
+import { UserFeedbackComponent } from '../../shared/ui/user-feedback/user-feedback';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, InputFieldComponent, Button, TaskBoard, TaskAddFormComponent, TaskDetailComponent],
+  imports: [CommonModule, InputFieldComponent, Button, TaskBoard, TaskAddFormComponent, TaskDetailComponent, UserFeedbackComponent],
 
   templateUrl: './board.html',
   styleUrl: './board.scss',
@@ -53,6 +54,12 @@ export class Board implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.tasksDb.unsubscribeFromTaskChanges();
     this.tasksDb.subscribeToTaskChanges();
+  }
+
+  feedbackRef = viewChild.required<UserFeedbackComponent>('feedback');
+
+  onTaskDeleted() {
+    this.feedbackRef().show('Task successfully deleted');
   }
 
   /* Search Task Input */

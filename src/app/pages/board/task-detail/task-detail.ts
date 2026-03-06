@@ -21,6 +21,7 @@ export class TaskDetailComponent {
 
   // Outputs
   close = output<void>();
+  deleted = output<void>();
 
   // Using child comps
   userFeedback = viewChild.required<UserFeedbackComponent>('feedback');
@@ -69,6 +70,7 @@ export class TaskDetailComponent {
 
   async deleteTask() {
     try {
+      this.deleted.emit();
       this.close.emit();
       await this.taskDbSingleton.deleteTask(this.task().id);
     } catch (err) {

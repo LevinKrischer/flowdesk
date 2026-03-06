@@ -238,6 +238,7 @@ export class TaskAddFormComponent {
         await new Promise((resolve) => setTimeout(resolve, 3000));
         this.created.emit();
         this.resetForm();
+        this.closed.emit();
       }
     } catch (err) {
       this.handleSaveError(err);

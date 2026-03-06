@@ -26,8 +26,9 @@
   }
 
   @if (isModalOpen() && modalMode === 'detail') {
-  <app-task-detail [task]="selectedTask()!" (close)="closeModal()" />
+  <app-task-detail [task]="selectedTask()!" (close)="closeModal()" (deleted)="onTaskDeleted()" />
   }
 
 
+  <app-user-feedback #feedback animation="slide-up" />
 </main>
