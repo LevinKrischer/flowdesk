@@ -9,7 +9,7 @@ import { Contacts } from './pages/contacts/contacts';
 import { TestComponent } from './pages/test-component/test-component';
 import { Help } from './pages/help/help';
 import { Login } from './pages/login/login';
-import { Register } from './pages/register/register';
+import { Signup } from './pages/signup/signup';
 
 export const routes: Routes = [
   {
@@ -18,7 +18,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'summary', pathMatch: 'full' },
       { path: 'login', component: Login },
-      { path: 'register', component: Register },
+      { path: 'signup', component: Signup },
       { path: 'summary', component: Summary },
       { path: 'add-task', component: AddTask },
       { path: 'board', component: Board },

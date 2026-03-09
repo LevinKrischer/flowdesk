@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { ModalWrapper } from '../../shared/ui/modal-wrapper/modal-wrapper';
 
 @Component({
-  selector: 'app-register-form',
+  selector: 'app-signup-form',
   imports: [ModalWrapper],
-  templateUrl: './register-form.html',
-  styleUrl: './register-form.scss',
+  templateUrl: './signup-form.html',
+  styleUrl: './signup-form.scss',
 })
-export class RegisterForm {}
+export class SignupForm {}
