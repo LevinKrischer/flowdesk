@@ -41,15 +41,15 @@
               <img src="./assets/icons/summary-urgent-60px.svg" alt="">
             </div>
             <div class="card-content d-flex align-items-center justify-content-center flex-column">
-              <h3 class="mb-0 text-center">1</h3>
+              <h3 class="mb-0 text-center">{{ urgentCount() }}</h3>
               <p class="mb-0 text-center">Urgent</p>
             </div>
           </div>
           <div class="divider"></div>
           <div class="d-flex flex-row align-items-center gap-3 px-2 py-2 p-sm-4  border-0">
-            <div class="card-content d-flex align-items-center justify-content-center flex-column w-100">
-              <p class="fw-bold mb-2 text-center text-danger">*November 30, 2026</p>
-              <p class="mb-0 text-center">Upcoming deadline</p>
+            <div class="card-content d-flex align-items-start justify-content-center flex-column w-100">
+              <p class="fw-bold mb-2">{{ earliestOpenDueDate() }}</p>
+              <p class="mb-0">Upcoming deadline</p>
             </div>
           </div>
         </div>
@@ -82,8 +82,8 @@
     </section>
 
     <section class="d-none d-lg-flex col-lg-6 flex-column align-items-center">
-      <p class="user-greet mb-0 w-100">Good morning,</p>
-      <p class="user-name w-100">Volker Derksen</p>
+      <p class="user-greet mb-0 w-100">{{ getGreetingMessage() }}</p>
+      <p class="user-name w-100">Max Mustermann</p>
     </section>
 
   </section>
