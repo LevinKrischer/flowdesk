@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { SupabaseClientService } from './supabase.client';
+import { SupabaseService } from '../../services/supabase';
 import { RealtimeChannel } from '@supabase/supabase-js';
 import { Contact } from './contacts.db';
 
@@ -29,14 +29,14 @@ export class TasksDb {
   tasks = signal<Task[]>([]);
   channels: RealtimeChannel | null = null;
 
-  constructor(private supa: SupabaseClientService) {}
+  constructor(private supa: SupabaseService) {}
 
   /**
    * Loads all tasks with their assigned contacts via the junction table.
    * The Supabase query joins: tasks → tasks_contacts → contacts
    */
   async getTasks() {
-    const { data, error } = await this.supa.supabase
+    const { data, error } = await this.supa.client
       .from('tasks')
       .select(
         `
@@ -68,7 +68,7 @@ export class TasksDb {
    * Loads a single task by ID with assigned contacts.
    */
   async getTaskById(id: number): Promise<Task | null> {
-    const { data, error } = await this.supa.supabase
+    const { data, error } = await this.supa.client
       .from('tasks')
       .select(
         `
@@ -103,7 +103,7 @@ export class TasksDb {
   ) {
     const nextOrder = await this.getNextOrderForStatus(task.status);
 
-    const { data, error } = await this.supa.supabase
+    const { data, error } = await this.supa.client
       .from('tasks')
       .insert([{ ...task, order: nextOrder }]) // <-- hier wird die nächste Order-Nummer gesetzt
       .select()
@@ -127,7 +127,7 @@ export class TasksDb {
   async updateTask(id: number, update: Partial<Task>, contactIds?: number[]) {
     const { contacts, tasks_contacts, ...cleanUpdate } = update as any;
 
-    const { data, error } = await this.supa.supabase
+    const { data, error } = await this.supa.client
       .from('tasks')
       .update({ ...cleanUpdate, modified_at: new Date().toISOString() })
       .eq('id', id)
@@ -150,7 +150,7 @@ export class TasksDb {
    * and cascades it to tbl tasks.
    */
   async deleteTask(id: number) {
-    const { error } = await this.supa.supabase
+    const { error } = await this.supa.client
       .from('tasks')
       .delete()
       .eq('id', id);
@@ -170,7 +170,7 @@ export class TasksDb {
       contact_id: cId,
     }));
 
-    const { error } = await this.supa.supabase.from('tasks_contacts').insert(rows);
+    const { error } = await this.supa.client.from('tasks_contacts').insert(rows);
 
     if (error) {
       console.error('[Supabase] Error assigning contacts:', error.message);
@@ -183,7 +183,7 @@ export class TasksDb {
    * Deletes old assignments, then inserts new ones.
    */
   private async replaceContacts(taskId: number, contactIds: number[]) {
-    await this.supa.supabase.from('tasks_contacts').delete().eq('task_id', taskId);
+    await this.supa.client.from('tasks_contacts').delete().eq('task_id', taskId);
 
     if (contactIds.length > 0) {
       await this.assignContacts(taskId, contactIds);
@@ -194,7 +194,7 @@ export class TasksDb {
    * Updates only the status of a task (for drag & drop on kanban).
    */
   async updateTaskStatus(id: number, status: Task['status']) {
-    const { error } = await this.supa.supabase
+    const { error } = await this.supa.client
       .from('tasks')
       .update({ status, modified_at: new Date().toISOString() })
       .eq('id', id);
@@ -213,7 +213,7 @@ export class TasksDb {
       modified_at: new Date().toISOString(),
     }));
 
-    const { error } = await this.supa.supabase.from('tasks').upsert(updates);
+    const { error } = await this.supa.client.from('tasks').upsert(updates);
 
     if (error) {
       console.error('[Supabase] Error updating order:', error.message);
@@ -225,7 +225,7 @@ export class TasksDb {
    * NEU: Get next order number for a status column
    */
   async getNextOrderForStatus(status: Task['status']): Promise<number> {
-    const { data, error } = await this.supa.supabase
+    const { data, error } = await this.supa.client
       .from('tasks')
       .select('order')
       .eq('status', status)
@@ -244,7 +244,7 @@ export class TasksDb {
   subscribeToTaskChanges() {
     if (this.channels) return;
 
-    this.channels = this.supa.supabase
+    this.channels = this.supa.client
       .channel('tasks-channel')
       .on(
         'postgres_changes',
@@ -261,7 +261,7 @@ export class TasksDb {
 
   unsubscribeFromTaskChanges() {
     if (this.channels) {
-      this.supa.supabase.removeChannel(this.channels);
+      this.supa.client.removeChannel(this.channels);
       this.channels = null;
     }
   }

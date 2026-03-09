@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { SupabaseClientService } from './supabase.client';
+import { SupabaseService } from '../../services/supabase';
 
 export interface User {
   id: number;
@@ -14,10 +14,10 @@ export class UsersDb {
 
   users = signal<User[]>([]);
 
-  constructor(private supa: SupabaseClientService) { }
+  constructor(private supa: SupabaseService) { }
 
   async getUsers() {
-    const { data: users, error } = await this.supa.supabase
+    const { data: users, error } = await this.supa.client
       .from('users')
       .select('*');
 
@@ -31,7 +31,7 @@ export class UsersDb {
   }
 
   async setUser(user: Omit<User, 'id'>) {
-    const { data, error } = await this.supa.supabase
+    const { data, error } = await this.supa.client
       .from('users')
       .insert([{ ...user }])
       .select();
@@ -43,7 +43,7 @@ export class UsersDb {
   }
 
   async updateUser(id: number, update: Partial<User>) {
-    const { data, error } = await this.supa.supabase
+    const { data, error } = await this.supa.client
       .from('users')
       .update(update)
       .eq('id', id)
@@ -56,7 +56,7 @@ export class UsersDb {
   }
 
   async deleteUser(id: number) {
-    const { error } = await this.supa.supabase
+    const { error } = await this.supa.client
       .from('users')
       .delete()
       .eq('id', id);

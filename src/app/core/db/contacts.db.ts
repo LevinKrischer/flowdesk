@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { SupabaseClientService } from './supabase.client';
+import { SupabaseService } from '../../services/supabase';
 import { RealtimeChannel } from '@supabase/supabase-js';
 
 export interface Contact {
@@ -27,7 +27,7 @@ export class ContactsDb {
   groupedContacts = signal<GroupedContacts[]>([]);
   channels: RealtimeChannel | null = null;
 
-  constructor(private supa: SupabaseClientService) { }
+  constructor(private supa: SupabaseService) { }
 
   /**
    * Loads all contacts from the Supabase `contacts` table.
@@ -35,7 +35,7 @@ export class ContactsDb {
    * Logs an error if the request fails.
    */
   async getContacts() {
-    const { data: contacts, error } = await this.supa.supabase
+    const { data: contacts, error } = await this.supa.client
       .from('contacts')
       .select('*');
 
@@ -57,7 +57,7 @@ export class ContactsDb {
    * @throws If the insert operation fails.
    */
   async setContact(contact: Omit<Contact, 'id'>) {
-    const { data, error } = await this.supa.supabase
+    const { data, error } = await this.supa.client
       .from('contacts')
       .insert([{ ...contact }])
       .select();
@@ -78,7 +78,7 @@ export class ContactsDb {
    * @throws If the update operation fails.
    */
   async updateContact(id: number, update: Partial<Contact>) {
-    const { data, error } = await this.supa.supabase
+    const { data, error } = await this.supa.client
       .from('contacts')
       .update(update)
       .eq('id', id)
@@ -100,7 +100,7 @@ export class ContactsDb {
    */
   async deleteContact(id: number) {
     // Step 1: Delete all associations in tasks_contacts table
-    const { error: assignmentError } = await this.supa.supabase
+    const { error: assignmentError } = await this.supa.client
       .from('tasks_contacts')
       .delete()
       .eq('contact_id', id);
@@ -111,7 +111,7 @@ export class ContactsDb {
     }
 
     // Step 2: Delete the contact itself
-    const { error: contactError } = await this.supa.supabase
+    const { error: contactError } = await this.supa.client
       .from('contacts')
       .delete()
       .eq('id', id);
@@ -135,7 +135,7 @@ export class ContactsDb {
    * Whenever a change occurs, contacts are reloaded.
    */
   subscripeToContactChanges() {
-    this.channels = this.supa.supabase.channel('custom-all-channel')
+    this.channels = this.supa.client.channel('custom-all-channel')
       .on('postgres_changes',
         { event: '*', schema: 'public', table: 'contacts' },
         async () => {
@@ -151,7 +151,7 @@ export class ContactsDb {
    */
   unSubscripeFromContactChanges() {
     if (this.channels) {
-      this.supa.supabase.removeChannel(this.channels);
+      this.supa.client.removeChannel(this.channels);
     }
   }
 }
