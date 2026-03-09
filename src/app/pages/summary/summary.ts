@@ -35,6 +35,20 @@ export class Summary implements OnInit, OnDestroy {
     });
   });
 
+  getGreetingMessage(): string {
+    const hour = new Date().getHours();
+    
+    if (hour >= 0 && hour < 5) {
+      return 'Still Working?';
+    } else if (hour >= 5 && hour < 10) {
+      return 'Guten Morgen';
+    } else if (hour >= 10 && hour < 18) {
+      return 'Guten Tag';
+    } else {
+      return 'Guten Abend';
+    }
+  }
+
   private parseDate(dueDate: string): Date | null {
     if (!dueDate) {
       return null;
