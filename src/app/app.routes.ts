@@ -10,6 +10,7 @@ import { TestComponent } from './pages/test-component/test-component';
 import { Help } from './pages/help/help';
 import { Login } from './pages/login/login';
 import { Signup } from './pages/signup/signup';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -19,13 +20,13 @@ export const routes: Routes = [
       { path: '', redirectTo: 'summary', pathMatch: 'full' },
       { path: 'login', component: Login },
       { path: 'signup', component: Signup },
-      { path: 'summary', component: Summary },
-      { path: 'add-task', component: AddTask },
-      { path: 'board', component: Board },
-      { path: 'contacts', component: Contacts },
+      { path: 'summary', component: Summary, canActivate: [authGuard] },
+      { path: 'add-task', component: AddTask, canActivate: [authGuard] },
+      { path: 'board', component: Board, canActivate: [authGuard] },
+      { path: 'contacts', component: Contacts, canActivate: [authGuard] },
       { path: 'privacy-policy', component: PrivacyPolicy },
       { path: 'legal-notice', component: LegalNotice },
-      { path: 'help', component: Help },
+      { path: 'help', component: Help, canActivate: [authGuard] },
       { path: 'test', component: TestComponent },
     ],
   },

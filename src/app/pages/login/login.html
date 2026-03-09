@@ -1,2 +1,3 @@
-<p>login works!</p>
-<app-login-form></app-login-form>
+<app-login-form [errorMessage]="errorMessage()" (submitted)="onSubmitted($event)"></app-login-form>
+
+<app-user-feedback #feedback />

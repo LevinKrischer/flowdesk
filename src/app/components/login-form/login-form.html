@@ -1,4 +1,4 @@
-<ui-modal-wrapper id="login-form" [contentPadding]="false" modalSize="medium">
+<ui-modal-wrapper id="login-form" [contentPadding]="false" modalSize="medium" [showCloseButton]="false">
   <div class="modal-inner d-flex flex-column h-100 w-100">
     <div class="row g-0 flex-grow-1 h-100">
       <h3 class="mb-3">Log in</h3>
@@ -35,7 +35,10 @@
         />
 
         <div class="d-flex gap-4 mt-2 justify-content-center justify-content-lg-start">
-          <ui-button type="submit" variant="primary" [disabled]="isSaving || !isFormValid()">
+          <ui-button type="submit" variant="primary"
+            [disabled]="!isFormValid()"
+            (click)="submit()"
+            >
             Log in
           </ui-button>
 
@@ -43,14 +46,14 @@
             type="button"
             variant="secondary"
             class="d-none d-lg-inline-flex"
-            (click)="onCancel()"
+            (click)="guestLogin()"
           >
             Guest Log in
           </ui-button>
         </div>
         <div class="text-danger fw-bold mt-2">
-          @if (errorMessage) {
-            {{ errorMessage }}
+          @if (errorMessage()) {
+            {{ errorMessage() }}
           }
         </div>
       </form>

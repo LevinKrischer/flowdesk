@@ -33,6 +33,8 @@ export class ModalWrapper {
    */
   contentPadding = input<boolean>(true);
 
+  showCloseButton = input<boolean>(true);
+
   /**
    * Emitted when the modal requests to be closed.
    * This can be triggered by clicking the close button or the backdrop.

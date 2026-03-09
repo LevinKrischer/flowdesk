@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Router, NavigationEnd, RouterLink, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { SupabaseService } from '../../services/supabase';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ import { filter } from 'rxjs/operators';
 export class Header {
   menuOpen = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private supabaseService: SupabaseService) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -22,6 +23,15 @@ export class Header {
   toggleMenu(event: MouseEvent) {
     event.stopPropagation();
     this.menuOpen = !this.menuOpen;
+  }
+
+  async logout() {
+    try {
+      await this.supabaseService.signOut();
+      this.router.navigate(['/login'], { queryParams: { loggedOut: true } });
+    } catch {
+      this.router.navigate(['/login']);
+    }
   }
 
   @HostListener('document:click', ['$event'])

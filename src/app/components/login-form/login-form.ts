@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Output, inject, ChangeDetectorRef } from '@angular/core';
-import { ContactsDb, Contact } from './../../core/db/contacts.db';
+import { Component, input, output } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import { ModalWrapper } from '../../shared/ui/modal-wrapper/modal-wrapper';
 import { FormsModule } from '@angular/forms';
 import { isValidEmail, isValidPassword } from '../../core/utils/validation';
@@ -13,11 +13,9 @@ import { Button } from '../../shared/ui/button/button';
   styleUrl: './login-form.scss',
 })
 export class LoginForm {
-  @Output() added = new EventEmitter<void>();
-  @Output() closed = new EventEmitter<void>();
+  submitted = output<{ email: string; password: string }>();
 
-  isSaving = false;
-  errorMessage = '';
+  errorMessage = input('');
 
   form = {
     email: '',
@@ -79,18 +77,14 @@ export class LoginForm {
   }
 
   /**
-   * Handles the full submission flow:
-   * - Marks all fields as dirty
-   * - Validates the form
-   * - Saves the contact to the database
-   * - Emits the `added` event on success
-   * - Handles and displays errors
-   * - Manages loading state
-   * @returns {Promise<void>}
+   * Validates the form and emits the submitted event with email and password.
    */
-  async submit() {
+  submit() {
     this.markAllDirty();
     if (!this.isFormValid()) return;
+
+    this.submitted.emit({ email: this.form.email, password: this.form.password });
+
   }
 
   /**
@@ -114,11 +108,9 @@ export class LoginForm {
     );
   }
 
-  /**
-   * Emits the `closed` event to notify the parent component
-   * that the form should be closed without saving.
-   */
-  onCancel() {
-    this.closed.emit();
+  guestLogin() {
+    this.form.email = environment.guestEmail;
+    this.form.password = environment.guestPassword;
+    this.submitted.emit({ email: this.form.email, password: this.form.password });
   }
 }
