@@ -17,6 +17,7 @@ export class Summary implements OnInit, OnDestroy {
   doneCount = computed(() => this.tasks().filter((task) => task.status === 'done').length);
   inProgressCount = computed(() => this.tasks().filter((task) => task.status === 'in-progress').length);
   awaitFeedbackCount = computed(() => this.tasks().filter((task) => task.status === 'await-feedback').length);
+  urgentCount = computed(() => this.tasks().filter((task) => task.priority === 'urgent').length);
   totalTasksCount = computed(() => this.tasks().length);
 
   async ngOnInit() {
