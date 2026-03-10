@@ -18,8 +18,8 @@ export const routes: Routes = [
     component: Layout,
     children: [
       { path: '', redirectTo: 'summary', pathMatch: 'full' },
-      { path: 'login', component: Login },
-      { path: 'signup', component: Signup },
+      // { path: 'login', component: Login },
+      // { path: 'signup', component: Signup },
       { path: 'summary', component: Summary, canActivate: [authGuard] },
       { path: 'add-task', component: AddTask, canActivate: [authGuard] },
       { path: 'board', component: Board, canActivate: [authGuard] },
