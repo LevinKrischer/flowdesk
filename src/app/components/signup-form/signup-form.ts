@@ -17,6 +17,7 @@ export class SignupForm {
   submitted = output<{ name: string; email: string; password: string }>();
 
   errorMessage = input('');
+  isSubmitting = input(false);
 
   form = {
     name: '',
@@ -105,6 +106,8 @@ export class SignupForm {
    * Validates the form and emits the submitted event with email and password.
    */
   submit() {
+    if (this.isSubmitting()) return;
+
     this.markAllDirty();
     if (!this.isFormValid()) return;
 

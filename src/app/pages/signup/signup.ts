@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { SignupForm } from '../../components/signup-form/signup-form';
 import { SupabaseService } from '../../services/supabase';
 import { ContactsDb } from '../../core/db/contacts.db';
-import { ContactAddFormComponent } from '../../components/contact-add-form/contact-add-form';
+import { CONTACT_COLORS } from '../../core/constants/colors';
 import { UserFeedbackComponent } from '../../shared/ui/user-feedback/user-feedback';
 
 @Component({
@@ -15,11 +15,11 @@ import { UserFeedbackComponent } from '../../shared/ui/user-feedback/user-feedba
 export class Signup implements AfterViewInit {
   private supabaseService = inject(SupabaseService);
   private contactsDb = inject(ContactsDb);
-  private contactAddForm = inject(ContactAddFormComponent);
   private router = inject(Router);
   private feedback = viewChild.required<UserFeedbackComponent>('feedback');
 
   errorMessage = signal('');
+  isSubmitting = signal(false);
 
   ngAfterViewInit() {
     /** Datt brauchen wir eigentlich nicht mehr...
@@ -30,26 +30,42 @@ export class Signup implements AfterViewInit {
   }
 
   async onSubmitted(credentials: { name: string; email: string; password: string }) {
+    if (this.isSubmitting()) return;
+
     this.errorMessage.set('');
+    this.isSubmitting.set(true);
 
     try {
-      const { error } = await this.supabaseService.signUp(credentials.email, credentials.password);
-
-      const newContactData  = await this.contactsDb.setContact({
-          name: credentials.name,
-          email: credentials.email,
-          phone: '',
-          color: this.contactAddForm.getRandomColor()
-        });
+      const { data, error } = await this.supabaseService.signUp(credentials.email, credentials.password);
 
       if (error) {
         this.errorMessage.set(error.message);
         return;
       }
+
+      if (!data.user) {
+        this.errorMessage.set('Sign-Up failed. Please try again.');
+        return;
+      }
+
+      await this.contactsDb.setContact({
+        name: credentials.name,
+        email: credentials.email,
+        phone: '',
+        color: this.getRandomColor(),
+      });
+
       this.feedback().show('You signed up successfully! Please check your email to confirm.');
       setTimeout(() => this.router.navigate(['/login']), 1500);
     } catch {
       this.errorMessage.set('Sign-Up failed. Please try again.');
+    } finally {
+      this.isSubmitting.set(false);
     }
+  }
+
+  private getRandomColor() {
+    const index = Math.floor(Math.random() * CONTACT_COLORS.length);
+    return CONTACT_COLORS[index];
   }
 }
