@@ -1,1 +1,6 @@
-<app-signup-form></app-signup-form>
+<app-signup-form
+  [errorMessage]="errorMessage()"
+  (submitted)="onSubmitted($event)"
+></app-signup-form>
+
+<app-user-feedback #feedback />
