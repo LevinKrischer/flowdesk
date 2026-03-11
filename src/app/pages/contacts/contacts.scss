@@ -1,3 +1,5 @@
+@use 'styles/mixins' as *;
+
 .ContactsLayout {
   display: flex;
   height: 100%;
@@ -8,8 +10,7 @@
     padding: 5rem 2rem 2rem 3.375rem;
   }
 
-  @media (max-width: 992px) {
-
+  @include for-size(lg) {
     .left,
     .right {
       padding: 3rem 2rem;
