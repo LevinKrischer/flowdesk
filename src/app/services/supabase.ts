@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { AuthChangeEvent, Session, createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment';
 
@@ -12,11 +12,10 @@ import { environment } from '../../environments/environment';
 export class SupabaseService {
   private supabase: SupabaseClient;
 
+  userName = signal('');
+
   constructor() {
-    this.supabase = createClient(
-      environment.supabaseUrl,
-      environment.supabaseKey
-    );
+    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
   }
 
   /**
@@ -32,11 +31,24 @@ export class SupabaseService {
     return this.supabase.auth.signUp({ email, password });
   }
 
-  signIn(email: string, password: string) {
-    return this.supabase.auth.signInWithPassword({ email, password });
+  async signIn(email: string, password: string) {
+    const res = await this.supabase.auth.signInWithPassword({ email, password });
+
+    if (!res.error && res.data.user) {
+      const { data } = await this.supabase
+        .from('contacts')
+        .select('name')
+        .eq('email', res.data.user.email)
+        .single();
+
+      this.userName.set(data?.name ?? '');
+    }
+
+    return { error: res.error, userName: this.userName() };
   }
 
   signOut() {
+    this.userName.set('');
     return this.supabase.auth.signOut();
   }
 
@@ -44,10 +56,7 @@ export class SupabaseService {
     return this.supabase.auth.getSession();
   }
 
-  onAuthStateChange(
-    callback: (event: AuthChangeEvent, session: Session | null) => void
-  ) {
+  onAuthStateChange(callback: (event: AuthChangeEvent, session: Session | null) => void) {
     return this.supabase.auth.onAuthStateChange(callback);
   }
-
 }

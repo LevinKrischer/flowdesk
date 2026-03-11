@@ -22,7 +22,7 @@
 		max-width: 40.75rem;
 		background: $white;
 		border-radius: $card-border-radius;
-		animation: fadeInFromBottom 0.2s ease-in-out;
+		animation: fadeOut 0.2s ease-in-out;
 		border: none;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
 	}
@@ -58,23 +58,114 @@ h3 {
 	margin: 0 auto;
 }
 
-.logo {
-	width: 4rem;
-	height: auto;
+.logo-intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $blue-dark;
+  z-index: 5000;
+  animation: introBgFade 1.25s ease forwards;
+  animation-delay: 1s;
+  pointer-events: none;
+  opacity: 1;
+  @include for-size(lg) {
+    background: $off-white;
+  }
+}
 
-	@include for-size(lg) {
-		width: 6.25rem;
+.header{
+  position: relative;
+  z-index: 5001;
+
+  .logo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5002;
+
+    &.default{
+      animation: logoDefault-sm 1.25s ease forwards;
+
+      @include for-size(lg) {
+        display: none;
+      }
+    }
+    &.dark{
+      animation: logoDark-sm 1.25s ease forwards;
+
+      @include for-size(lg) {
+        animation: logoDark-lg 1.25s ease forwards;
+      }
+    }
+  }
+}
+/* Keyframes - still need to check again because of responsiveness */
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
 	}
 }
 
-@keyframes fadeInFromBottom {
+@keyframes fadeIn {
 	from {
-		transform: translateY(2rem);
 		opacity: 0;
 	}
-
 	to {
-		transform: translateY(0);
 		opacity: 1;
 	}
+}
+
+@keyframes introBgFade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+@keyframes logoDefault-sm {
+  0%, 50% {
+    top: calc(50vh - 4rem);
+    left: calc(50vw - 4rem);
+    transform: scale(2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.64);
+    opacity: 0;
+  }
+}
+
+@keyframes logoDark-sm {
+  0%, 50% {
+    top: calc(50vh - 4rem);
+    left: calc(50vw - 4rem);
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.64);
+    opacity: 1;
+  }
+}
+
+@keyframes logoDark-lg {
+  0%, 50% {
+    top: calc(50vh - 50%);
+    left: calc(50vw - 50%);
+    transform: scale(3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

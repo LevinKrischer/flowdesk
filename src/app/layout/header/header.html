@@ -21,7 +21,7 @@
         (click)="toggleMenu($event)"
         [class.active]="menuOpen"
       >
-        MM
+        {{ supabaseService.userName() | initials }}
       </button>
       <div class="userMenu" [class.visible]="menuOpen">
         <nav>

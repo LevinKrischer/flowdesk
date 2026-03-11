@@ -20,8 +20,11 @@ export class Login implements AfterViewInit {
   errorMessage = signal('');
 
   ngAfterViewInit() {
-    if (this.route.snapshot.queryParams['loggedOut']) {
-      this.feedback().show('You logged out successfully');
+    const loggedOut = this.route.snapshot.queryParams['loggedOut'];
+    if (loggedOut) {
+      const name = loggedOut !== 'true' ? loggedOut : '';
+      const msg = name ? `You logged out successfully, ${name}!` : 'You logged out successfully';
+      this.feedback().show(msg);
     }
   }
 
@@ -29,18 +32,21 @@ export class Login implements AfterViewInit {
     this.errorMessage.set('');
 
     try {
-      const { error } = await this.supabaseService.signIn(credentials.email, credentials.password);
+      const { error, userName } = await this.supabaseService.signIn(credentials.email, credentials.password);
       if (error) {
         this.errorMessage.set(error.message);
         return;
       }
       sessionStorage.setItem('show-summary-mobile-greeting', '1');
-      this.feedback().show('You logged in successfully');
+      this.feedback().show(`You logged in successfully, ${userName}!`);
       setTimeout(() => this.router.navigate(['/summary']), 1500);
 
     } catch {
       this.errorMessage.set('Log-In failed. Please check your credentials, your connection or sign up');
     }
   }
+
+
+
 
 }
