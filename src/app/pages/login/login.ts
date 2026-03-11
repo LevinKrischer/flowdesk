@@ -34,6 +34,7 @@ export class Login implements AfterViewInit {
         this.errorMessage.set(error.message);
         return;
       }
+      sessionStorage.setItem('show-summary-mobile-greeting', '1');
       this.feedback().show(`You logged in successfully, ${userName}!`);
       setTimeout(() => this.router.navigate(['/summary']), 1500);
 
