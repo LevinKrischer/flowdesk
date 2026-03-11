@@ -32,22 +32,34 @@ export class InputFieldComponent {
   @Output() focus = new EventEmitter<void>();
   @Output() iconClick = new EventEmitter<void>();
 
+  /**
+   * Handles input events, emitting the updated value and the raw event.
+   *
+   * @param event - The native input event.
+   */
   onInput(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.modelChange.emit(value);
     this.inputChange.emit(event);
   }
 
+  /** Emits the iconClick event if the icon is configured as clickable. */
   onIconClick() {
     if (!this.iconClickable) return;
     this.iconClick.emit();
   }
 
+  /**
+   * Prevents default behavior on icon pointer-down to avoid stealing focus from the input.
+   *
+   * @param event - The pointer-down mouse event.
+   */
   onIconPointerDown(event: MouseEvent) {
     if (!this.iconClickable) return;
     event.preventDefault();
   }
 
+  /** Sets the minimum selectable date to today for date-type inputs if not already provided. */
   ngOnInit() {
     if (this.type === 'date' && !this.minDate) {
       const today = new Date();

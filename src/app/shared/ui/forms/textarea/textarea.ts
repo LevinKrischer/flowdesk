@@ -18,6 +18,11 @@ export class Textarea {
   @Input() model: string = '';
   @Output() modelChange = new EventEmitter<string>();
 
+  /**
+   * Handles textarea input events and emits the updated value.
+   *
+   * @param event - The native input event.
+   */
   onInput(event: Event) {
     const value = (event.target as HTMLTextAreaElement).value;
     this.modelChange.emit(value);

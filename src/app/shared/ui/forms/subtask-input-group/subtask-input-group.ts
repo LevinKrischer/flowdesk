@@ -17,6 +17,7 @@ export class SubtaskInputGroup {
   editingSubtaskIndex: number | null = null;
   editingSubtaskTitle = '';
 
+  /** Adds a new subtask from the current input value and emits the updated list. */
   addSubtask() {
     const title = this.newSubtaskTitle.trim();
     if (!title) return;
@@ -25,16 +26,27 @@ export class SubtaskInputGroup {
     this.newSubtaskTitle = '';
   }
 
+  /**
+   * Removes a subtask at the given index and emits the updated list.
+   *
+   * @param index - Position of the subtask to remove.
+   */
   removeSubtask(index: number) {
     const updated = this.subtasks().filter((_, i) => i !== index);
     this.subtasksChange.emit(updated);
   }
 
+  /**
+   * Enters edit mode for the subtask at the given index.
+   *
+   * @param index - Position of the subtask to edit.
+   */
   editSubtask(index: number) {
     this.editingSubtaskIndex = index;
     this.editingSubtaskTitle = this.subtasks()[index].title;
   }
 
+  /** Confirms the current subtask edit, updating or removing it if the title is empty. */
   confirmEditSubtask() {
     const title = this.editingSubtaskTitle.trim();
     if (this.editingSubtaskIndex !== null) {
@@ -50,6 +62,7 @@ export class SubtaskInputGroup {
     this.cancelEditSubtask();
   }
 
+  /** Cancels the current subtask edit and resets the editing state. */
   cancelEditSubtask() {
     this.editingSubtaskIndex = null;
     this.editingSubtaskTitle = '';

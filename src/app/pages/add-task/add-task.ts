@@ -12,6 +12,7 @@ import { TaskAddFormComponent } from '../../components/task-add-form/task-add-fo
 export class AddTask {
   constructor(private router: Router) {}
 
+  /** Navigates to the board page after a task has been created. */
   onTaskCreated() {
     this.router.navigate(['/board']);
   }

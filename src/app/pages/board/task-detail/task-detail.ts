@@ -29,7 +29,11 @@ export class TaskDetailComponent {
   // Boolean signals
   isEditing = signal(false);
 
-  /** returns the appropriate priority icon path for the current task */
+  /**
+   * Returns the appropriate priority icon path for the current task.
+   *
+   * @returns SVG asset path based on the task priority.
+   */
   get priorityIcon(): string {
     const pr = this.task()?.priority?.toLowerCase() || '';
     switch (pr) {
@@ -44,6 +48,11 @@ export class TaskDetailComponent {
     }
   }
 
+  /**
+   * Maps the task category to its display color.
+   *
+   * @returns Hex color string for the current category.
+   */
   get categoryColor(): string {
     const cat = this.task()?.category?.toLowerCase() || '';
     switch (cat) {
@@ -58,6 +67,12 @@ export class TaskDetailComponent {
     }
   }
 
+  /**
+   * Builds up to two uppercase initials from a full name.
+   *
+   * @param name - Full name string to extract initials from.
+   * @returns Uppercase initials (max 2 characters).
+   */
   initials(name: string): string {
     if (!name) return '';
     return name
@@ -68,6 +83,7 @@ export class TaskDetailComponent {
       .toUpperCase();
   }
 
+  /** Deletes the current task, emits deletion/close events, and removes it from the database. */
   async deleteTask() {
     try {
       this.deleted.emit();
@@ -78,18 +94,26 @@ export class TaskDetailComponent {
     }
   }
 
+  /** Switches the detail view into editing mode. */
   updateTask() {
     this.isEditing.set(true);
   }
 
+  /** Exits editing mode after a task has been successfully updated. */
   async onTaskUpdated() {
     this.isEditing.set(false);
   }
 
+  /** Exits editing mode when the user cancels the edit. */
   onEditCancelled() {
     this.isEditing.set(false);
   }
 
+  /**
+   * Toggles a subtask's done state and persists the change.
+   *
+   * @param subtask - The subtask to toggle.
+   */
   async toggleSubtask(subtask: Subtask) {
     try {
       subtask.done = !subtask.done;

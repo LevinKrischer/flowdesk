@@ -17,6 +17,11 @@ export class UserFeedbackComponent {
 
   constructor(private cdr: ChangeDetectorRef) { }
 
+  /**
+   * Displays a feedback message that auto-hides after 3 seconds.
+   *
+   * @param message - The text to display.
+   */
   show(message: string) {
     this.message = message;
     this.visible = true;

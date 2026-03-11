@@ -15,6 +15,7 @@ export class App {
   protected readonly title = signal('join');
 
 
+  /** Checks the current session and redirects to summary or login accordingly. */
   async ngOnInit() {
     const { data } = await this.supabaseService.getSession();
 
