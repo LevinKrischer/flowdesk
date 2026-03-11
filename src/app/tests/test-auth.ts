@@ -14,12 +14,23 @@ const TEST_EMAIL = 'walter.meier@join.de';
 const TEST_PASSWORD = 'waltersPasswort!!';
 const TEST_NAME = 'Walter Meier';
 
+/**
+ * Generates a random hex color string.
+ *
+ * @returns A color in `#rrggbb` format.
+ */
 function randomColor(): string {
   return '#' + Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0');
 }
 
 
-/** Mirrors ContactsDb.setContact() @see src/app/core/db/contacts.db.ts */
+/**
+ * Inserts a contact row into the `contacts` table.
+ * Mirrors {@link ContactsDb.setContact} — see `src/app/core/db/contacts.db.ts`.
+ *
+ * @param contact - The contact data to insert.
+ * @returns The newly created contact record(s).
+ */
 async function setContact(contact: { name: string; email: string; phone?: string; color: string }) {
   const { data, error } = await supabase.from('contacts').insert([{ ...contact }]).select();
   if (error) throw error;
@@ -27,12 +38,22 @@ async function setContact(contact: { name: string; email: string; phone?: string
 }
 
 
+/**
+ * Runs an async test case and logs the result or any thrown error.
+ *
+ * @param label - A short label printed before the result.
+ * @param fn - The async function that returns a status string.
+ */
 async function test(label: string, fn: () => Promise<string>) {
   try { console.log(`${label}: ${await fn()}`); }
   catch (e: any) { console.log(`${label}: ❌ ${e.message}`); }
 }
 
 
+/**
+ * Executes the full auth integration test suite:
+ * signUp → createContact → doubleSignUp → signIn → getSession → signOut.
+ */
 async function run() {
   await test('signUp', async () => {
     const { data, error } = await supabase.auth.signUp({ email: TEST_EMAIL, password: TEST_PASSWORD });

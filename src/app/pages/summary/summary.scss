@@ -131,7 +131,7 @@ h3 {
 }
 
 .user-greet-container {
-  @media (max-width: 1099.98px) {
+  @include for-size(lg) {
     position: fixed;
     inset: 0;
     padding: 1.5rem;
@@ -150,7 +150,7 @@ h3 {
   }
 }
 
-@media (max-width: 1099.98px) {
+@include for-size(lg) {
   .mobile-greeting-preparing {
     visibility: hidden;
   }

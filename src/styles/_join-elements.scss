@@ -16,7 +16,7 @@ div.blue-divider{
   display: block;
 }
 
-@media (max-width: 992px) {
+@include for-size(lg) {
   .noMobile {
     display: none !important;
   }
