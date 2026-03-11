@@ -78,6 +78,7 @@ h3 {
 .header{
   position: relative;
   z-index: 5001;
+  min-height: 7rem;
 
   .logo{
     position: absolute;
@@ -160,7 +161,7 @@ h3 {
 @keyframes logoDark-lg {
   0%, 50% {
     top: calc(50vh - 50%);
-    left: calc(50vw - 50%);
+    left: calc(50%);
     transform: scale(3);
     opacity: 1;
   }

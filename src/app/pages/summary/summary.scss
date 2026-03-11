@@ -177,12 +177,12 @@ h3 {
 
 
 .user-name {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: $blue-light;
   font-weight: 700;
   word-break: break-word;
 
   @include for-size(lg) {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
 }
