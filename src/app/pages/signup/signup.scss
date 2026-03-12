@@ -17,7 +17,7 @@ app-back-button {
   }
 
   @include for-size(lg) {
-    top: 5rem;
+    top: 3.5rem;
   }
 }
 
@@ -26,12 +26,12 @@ app-back-button {
   padding: 2rem 1rem;
 
   @include for-size(sm) {
-    padding: 2rem;
-  }
+      padding: 2rem 2rem 1.5rem 2rem;
+    }
 
-  @include for-size(lg) {
-    padding: 3rem;
-  }
+    @include for-size(lg) {
+      padding: 3rem 3rem 1.5rem 3rem;
+    }
 
   .card {
     width: 100%;
@@ -77,10 +77,6 @@ h3 {
 .logo {
   width: 4rem;
   height: auto;
-
-  @include for-size(lg) {
-    width: 6.25rem;
-  }
 }
 
 @keyframes fadeInFromBottom {
