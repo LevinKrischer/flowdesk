@@ -1,3 +1,5 @@
+@use 'styles/mixins' as *;
+
 ol {
   li {
     counter-increment: my-counter;
@@ -15,5 +17,13 @@ ol {
       top: 0rem;
       left: 0rem;
     }
+  }
+}
+
+div.container{
+  padding-bottom: 5rem;
+
+  @include for-size(lg) {
+    padding-bottom: 2rem;
   }
 }

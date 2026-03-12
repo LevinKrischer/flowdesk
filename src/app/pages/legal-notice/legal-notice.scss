@@ -1,7 +1,17 @@
+@use 'styles/mixins' as *;
+
 h4 {
   margin: 3rem 0 0.5rem 0;
 }
 
 h5 {
   margin: 2rem 0 0.5rem 0;
+}
+
+div.container{
+  padding-bottom: 5rem;
+
+  @include for-size(lg) {
+    padding-bottom: 2rem;
+  }
 }
