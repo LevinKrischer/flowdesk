@@ -29,7 +29,7 @@ export class Login implements AfterViewInit {
     const loggedOut = this.route.snapshot.queryParams['loggedOut'];
     if (loggedOut) {
       const name = loggedOut !== 'true' ? loggedOut : '';
-      const msg = name ? `You logged out successfully, ${name}!` : 'You logged out successfully';
+      const msg = name ? `You logged out successfully` : 'You logged out successfully';
       this.feedback().show(msg);
     }
   }
@@ -69,7 +69,7 @@ export class Login implements AfterViewInit {
    */
   private handleSuccessfulLogin(userName: string) {
     sessionStorage.setItem('show-summary-mobile-greeting', '1');
-    this.feedback().show(`You logged in successfully, ${userName}!`);
+    this.feedback().show(`You logged in successfully`);
     setTimeout(() => this.router.navigate(['/summary']), 1500);
   }
 
