@@ -24,7 +24,11 @@ npm install
 
 # Start development server
 npm start
+
+# Start production server
+ng build --configuration=production && npx http-server dist/join/browser
 ```
+
 
 ### Bootstrap Integration
 
@@ -50,19 +54,54 @@ join/
 │       └── styles/
 ├── src/
 │   ├── app/
-│   │   ├── components/      # Reusable form components (add/edit contact)
-│   │   ├── core/            # Core utilities & services
-│   │   │   ├── constants/   # App-wide constants (colors, etc.)
-│   │   │   ├── db/          # Supabase database services
-│   │   │   └── utils/       # Validation & helper functions
-│   │   ├── interfaces/      # TypeScript interfaces & types
-│   │   ├── layout/          # Layout shell (header, navigation)
-│   │   ├── pages/           # Route-level components
-│   │   ├── services/        # Application-level services
-│   │   └── shared/          # Shared UI components
-│   │       └── ui/          # Button, Card, Input, Modal, Feedback
-│   ├── environments/        # Environment configuration
-│   ├── styles/              # Global style partials
+│   │   ├── components/           # Form components
+│   │   │   ├── contact-add-form/
+│   │   │   ├── contact-edit-form/
+│   │   │   ├── login-form/
+│   │   │   ├── signup-form/
+│   │   │   └── task-add-form/
+│   │   ├── core/                 # Core utilities & services
+│   │   │   ├── constants/        # App-wide constants (colors, etc.)
+│   │   │   ├── db/               # Supabase database services
+│   │   │   ├── guards/           # Route guards (auth)
+│   │   │   └── utils/            # Validation & helper functions
+│   │   ├── interfaces/           # TypeScript interfaces & types
+│   │   ├── layout/               # Layout shell
+│   │   │   ├── header/           # App header with user menu
+│   │   │   └── navi/             # Sidebar navigation
+│   │   ├── pages/                # Route-level components
+│   │   │   ├── add-task/
+│   │   │   ├── board/            # Kanban board
+│   │   │   │   ├── task-board/
+│   │   │   │   ├── task-card/
+│   │   │   │   └── task-detail/
+│   │   │   ├── contacts/         # Contact management
+│   │   │   │   ├── contact-details/
+│   │   │   │   ├── contact-header/
+│   │   │   │   └── contact-list/
+│   │   │   ├── help/
+│   │   │   ├── legal-notice/
+│   │   │   ├── login/
+│   │   │   ├── privacy-policy/
+│   │   │   ├── signup/
+│   │   │   └── summary/
+│   │   ├── services/             # Pipes, directives, Supabase service
+│   │   ├── shared/               # Shared UI components
+│   │   │   └── ui/
+│   │   │       ├── button/
+│   │   │       ├── card/
+│   │   │       ├── forms/        # Reusable form controls
+│   │   │       │   ├── back-button/
+│   │   │       │   ├── contact-picker/
+│   │   │       │   ├── input-field/
+│   │   │       │   ├── select/
+│   │   │       │   ├── subtask-input-group/
+│   │   │       │   └── textarea/
+│   │   │       ├── modal-wrapper/
+│   │   │       └── user-feedback/
+│   │   └── tests/
+│   ├── environments/             # Environment configuration
+│   ├── styles/                   # Global style partials
 │   └── styles.scss
 ```
 
@@ -79,7 +118,7 @@ join/
 - Drag & drop task cards
 - Responsive design (320px – 1440px)
 - Accessible HTML (WCAG compliant)
-- Contact management with form validation
+- All forms with validation
 - Real-time updates via Signals
 
 ## Design
