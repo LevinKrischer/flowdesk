@@ -26,7 +26,7 @@ function randomColor(): string {
 
 /**
  * Inserts a contact row into the `contacts` table.
- * Mirrors {@link ContactsDb.setContact} — see `src/app/core/db/contacts.db.ts`.
+ * Mirrors the ContactsDb.setContact method in contacts.db.ts.
  *
  * @param contact - The contact data to insert.
  * @returns The newly created contact record(s).

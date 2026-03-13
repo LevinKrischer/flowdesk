@@ -3,9 +3,6 @@ import { Directive, HostListener, ElementRef } from '@angular/core';
 /**
  * Directive that converts vertical mouse-wheel scrolling into horizontal scrolling.
  * Active only on viewports narrower than 992 px.
- *
- * @example
- * <div horizontalScroll>…</div>
  */
 @Directive({
   selector: '[horizontalScroll]'

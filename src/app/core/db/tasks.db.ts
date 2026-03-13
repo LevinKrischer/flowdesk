@@ -251,8 +251,7 @@ export class TasksDb {
   }
 
   /**
-   * Deletes a task within Junction tbl tsks_contacts
-   * and cascades it to tbl tasks.
+   * Deletes a task and its assigned contacts via the junction table.
    * @param id Task ID to delete.
    * @returns Promise that resolves after deletion.
    */
@@ -312,10 +311,10 @@ export class TasksDb {
 
   /**
    * Updates only the status of a task (for drag & drop on kanban).
-    * @param id Task ID to update.
-    * @param status New task status.
-    * @returns Promise that resolves after status update.
-    * @throws If the update operation fails.
+   * @param id Task ID to update.
+   * @param status New task status.
+   * @returns Promise that resolves after status update.
+   * @throws If the update operation fails.
    */
   async updateTaskStatus(id: number, status: Task['status']) {
     const { error } = await this.supa.client

@@ -19,7 +19,6 @@ export interface GroupedContacts {
   contacts: ContactWithInitials[];
 }
 
-
 @Injectable({ providedIn: 'root' })
 export class ContactsDb {
 
@@ -87,7 +86,7 @@ export class ContactsDb {
 
   /**
    * Inserts a new contact into the Supabase `contacts` table.
-    * @param contact Contact data without the `id` field.
+   * @param contact Contact data without the `id` field.
    * @returns The inserted contact data returned by Supabase.
    * @throws If the insert operation fails.
    */
@@ -107,8 +106,8 @@ export class ContactsDb {
 
   /**
    * Updates an existing contact in the Supabase `contacts` table.
-    * @param id The ID of the contact to update.
-    * @param update Partial contact data to update.
+   * @param id The ID of the contact to update.
+   * @param update Partial contact data to update.
    * @returns The updated contact data returned by Supabase.
    * @throws If the update operation fails.
    */
@@ -168,7 +167,6 @@ export class ContactsDb {
   }
 
   /**
-   * Angular lifecycle hook.
    * Cleans up the realtime subscription when the service is destroyed.
    * @returns Nothing.
    */

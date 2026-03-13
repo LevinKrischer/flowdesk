@@ -2,13 +2,8 @@ import { Component, Input } from '@angular/core';
 
 /**
  * A flexible container component for grouping related content.
- * Designed to work with `<ng-content>` to wrap any HTML or components.
- * * @example
- * <ui-card variant="dark">
- * <h3>Card Title</h3>
- * <p>This is some content inside a dark-themed card.</p>
- * </ui-card>
- * !!! NOTE: not used yet!!!
+ * Designed to work with ng-content to wrap any content or components.
+ * Note: Currently not used in the application.
  */
 @Component({
   selector: 'ui-card',

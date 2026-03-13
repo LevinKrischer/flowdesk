@@ -40,7 +40,7 @@ export class SupabaseService {
 
   /**
    * Signs in a user and fetches their display name from the `contacts` table.
-   * On success the {@link userName} signal is updated.
+   * On success the userName signal is updated.
    *
    * @param email - The user's email address.
    * @param password - The user's password.
@@ -63,7 +63,7 @@ export class SupabaseService {
   }
 
   /**
-   * Signs out the current user and clears the {@link userName} signal.
+   * Signs out the current user and clears the userName signal.
    */
   signOut() {
     this.userName.set('');
@@ -71,7 +71,7 @@ export class SupabaseService {
   }
 
   /**
-   * Restores the {@link userName} signal from the current session's email.
+   * Restores the userName signal from the current session's email.
    * Should be called on app init when a session already exists (e.g. after page refresh).
    */
   async restoreUserName() {

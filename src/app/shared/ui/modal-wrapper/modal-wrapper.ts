@@ -4,11 +4,6 @@ import { CommonModule } from '@angular/common';
 /**
  * A layout wrapper for modal content.
  * Provides a consistent backdrop and structure for dialogs or overlays.
- * @example
- * <ui-modal-wrapper (close)="isModalOpen = false" [contentPadding]="true">
- * <h2>Settings</h2>
- * <p>Modal content goes here...</p>
- * </ui-modal-wrapper>
  */
 @Component({
   selector: 'ui-modal-wrapper',

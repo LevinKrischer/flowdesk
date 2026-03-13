@@ -2,13 +2,6 @@ import { Component, Input } from '@angular/core';
 
 /**
  * A reusable button component that supports various visual styles and icons.
- * * @example
- * <ui-button
- * variant="secondary"
- * icon="cancel"
- * (click)="onDelete()">
- * Delete Task
- * </ui-button>
  */
 @Component({
   selector: 'ui-button',

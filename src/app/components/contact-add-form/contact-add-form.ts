@@ -125,7 +125,6 @@ export class ContactAddFormComponent {
    * - Emits the `added` event on success
    * - Handles and displays errors
    * - Manages loading state
-   * @returns {Promise<void>}
    */
   async submit() {
     this.markAllDirty();
@@ -164,7 +163,6 @@ export class ContactAddFormComponent {
   /**
    * Persists the contact data to the database.
    * Automatically assigns a random color to the new contact.
-   * @returns {Promise<void>} A promise resolving when the contact is saved.
    */
   private async saveContact() {
     return this.db.setContact({
@@ -177,7 +175,7 @@ export class ContactAddFormComponent {
    * Handles errors that occur during the save operation.
    * Logs the error, displays a user-friendly message,
    * and triggers change detection to update the UI.
-   * @param {unknown} err - The error thrown during saving.
+   * @param err - The error thrown during saving.
    */
   private handleSaveError(err: unknown) {
     console.error('Saving failed:', err);
