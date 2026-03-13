@@ -52,7 +52,7 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Returns the greeting text based on the current local hour.
-   * @ Greeting text for the current time window.
+    * @returns Greeting text for the current time window.
    */
   private getTimeBasedGreeting(): string {
     const hour = new Date().getHours();
@@ -70,7 +70,7 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Loads session context and resolves the user greeting name.
-   * @ Promise that resolves when greeting context initialization is complete.
+    * @returns Promise that resolves when greeting context initialization is complete.
    */
   private async loadCurrentUserGreetingContext() {
     const { data } = await this.supabase.getSession();
@@ -89,8 +89,8 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Normalizes the session email to lowercase.
-   * @ sessionUser Current authenticated session user.
-   * @ Lowercase email string or an empty string.
+    * @param sessionUser Current authenticated session user.
+    * @returns Lowercase email string or an empty string.
    */
   private getSessionEmail(sessionUser: { email?: string | null } | null | undefined): string {
     return sessionUser?.email?.toLowerCase() ?? '';
@@ -106,8 +106,8 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Updates guest-session state and returns whether current user is guest.
-   * @ email Normalized email of the current session user.
-   * @ True if the session belongs to the configured guest account.
+    * @param email Normalized email of the current session user.
+    * @returns True if the session belongs to the configured guest account.
    */
   private setGuestSessionState(email: string): boolean {
     const isGuest = email === environment.guestEmail.toLowerCase();
@@ -117,8 +117,8 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Extracts display name from user metadata.
-   * @ sessionUser Current authenticated session user.
-   * @ Trimmed display name from metadata or an empty string.
+    * @param sessionUser Current authenticated session user.
+    * @returns Trimmed display name from metadata or an empty string.
    */
   private getMetadataName(sessionUser: { user_metadata?: Record<string, unknown> | null } | null | undefined): string {
     return String(sessionUser?.user_metadata?.['full_name'] ?? sessionUser?.user_metadata?.['name'] ?? '').trim();
@@ -126,9 +126,9 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Resolves the best available display name and stores it in state.
-   * @ sessionUser Current authenticated session user.
-   * @ email Normalized email of the current session user.
-   * @ Promise that resolves when the name has been written to state.
+    * @param sessionUser Current authenticated session user.
+    * @param email Normalized email of the current session user.
+    * @returns Promise that resolves when the name has been written to state.
    */
   private async resolveAndSetUserName(sessionUser: { user_metadata?: Record<string, unknown> | null } | null | undefined, email: string) {
     const { data: contact, error } = await this.supabase.client.from('contacts').select('name').eq('email', email).maybeSingle();
@@ -144,8 +144,8 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Builds a display-name fallback from the email local part.
-   * @ email Email address used to derive a fallback name.
-   * @ Human-readable fallback name.
+    * @param email Email address used to derive a fallback name.
+    * @returns Human-readable fallback name.
    */
   private getNameFallbackFromEmail(email: string): string {
     const localPart = email.split('@')[0] ?? '';
@@ -163,8 +163,8 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Parses a due date string to a valid Date instance.
-   * @ dueDate Raw due-date string from task data.
-   * @ Parsed Date or null when the input is invalid.
+    * @param dueDate Raw due-date string from task data.
+    * @returns Parsed Date or null when the input is invalid.
    */
   private parseDate(dueDate: string): Date | null {
     if (!dueDate) {
@@ -230,7 +230,7 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Initializes summary data and optionally starts mobile greeting overlay.
-   * @ Promise that resolves when initialization steps are completed.
+    * @returns Promise that resolves when initialization steps are completed.
    */
   async ngOnInit() {
     const shouldShowMobileGreetingOverlay = this.consumeMobileGreetingTrigger();
@@ -243,7 +243,7 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Flags the mobile greeting as preparing before data load.
-   * @ shouldShowMobileGreetingOverlay Whether the overlay should be shown.
+    * @param shouldShowMobileGreetingOverlay Whether the overlay should be shown.
    */
   private prepareMobileGreetingOverlay(shouldShowMobileGreetingOverlay: boolean) {
     if (shouldShowMobileGreetingOverlay) {
@@ -253,7 +253,7 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Loads tasks and greeting context in parallel.
-   * @ Promise that resolves when both async operations are completed.
+    * @returns Promise that resolves when both async operations are completed.
    */
   private async initializeSummaryData() {
     await Promise.all([
@@ -264,7 +264,7 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Starts the mobile greeting overlay when the trigger is active.
-   * @ shouldShowMobileGreetingOverlay Whether the overlay should be shown.
+    * @param shouldShowMobileGreetingOverlay Whether the overlay should be shown.
    */
   private showMobileGreetingOverlayIfNeeded(shouldShowMobileGreetingOverlay: boolean) {
     if (shouldShowMobileGreetingOverlay) {
@@ -274,7 +274,7 @@ export class Summary implements OnInit, OnDestroy {
 
   /**
    * Consumes and clears the one-time mobile greeting trigger from session storage.
-   * @ True when the greeting overlay should be displayed on mobile.
+    * @returns True when the greeting overlay should be displayed on mobile.
    */
   private consumeMobileGreetingTrigger(): boolean {
     const shouldShow = sessionStorage.getItem(this.mobileGreetingStorageKey) === '1';

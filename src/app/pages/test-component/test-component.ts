@@ -31,7 +31,8 @@ export class TestComponent {
     this.selectedContactIds.set(ids);
   }
 
-  /** * Controls the visibility state of the contact creation modal.
+  /**
+   * Controls the visibility state of the contact creation modal.
    * @default false
    */
   isContactModalOpen = false;
