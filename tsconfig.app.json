@@ -2,6 +2,17 @@
 /* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "extends": "./tsconfig.json",
+  "typedocOptions": {
+    "entryPoints": [
+      "src"
+    ],
+    "entryPointStrategy": "expand",
+    "out": "docs/tsdoc",
+    "exclude": [
+      "**/*.spec.ts",
+      "**/*.test.ts"
+    ]
+  },
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": []
