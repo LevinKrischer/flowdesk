@@ -169,9 +169,7 @@ export class ContactEditFormComponent {
     this.closed.emit();
   }
 
-  // ---------------------------------------------------------
-  // Unterfunktionen (Refactoring)
-  // ---------------------------------------------------------
+  // Helperfunctions
 
   /**
    * Marks all fields as dirty to trigger full validation.

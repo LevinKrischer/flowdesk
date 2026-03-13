@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { isValidEmail, isValidPassword, isValidName } from '../../core/utils/validation';
 import { InputFieldComponent } from '../../shared/ui/forms/input-field/input-field';
 import { Button } from '../../shared/ui/button/button';
-import { RouterLink } from "@angular/router";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup-form',
@@ -67,13 +67,13 @@ export class SignupForm {
   /**
    * Performs validation on a field only if it has already been marked as dirty.
    * Used for live validation while typing.
+   * Re-validate confirmPassword when password changes
    * @param {string} field - The field to validate.
    */
   liveValidate(field: 'name' | 'email' | 'password' | 'confirmPassword') {
     if (this.dirty[field]) {
       this.validateField(field);
     }
-    // Re-validate confirmPassword when password changes
     if (field === 'password' && this.dirty.confirmPassword) {
       this.validateField('confirmPassword');
     }
@@ -107,10 +107,7 @@ export class SignupForm {
         break;
 
       case 'confirmPassword':
-        this.errors.confirmPassword =
-          value === this.form.password
-            ? ''
-            : 'Passwords do not match';
+        this.errors.confirmPassword = value === this.form.password ? '' : 'Passwords do not match';
         break;
     }
   }
@@ -124,7 +121,11 @@ export class SignupForm {
     this.markAllDirty();
     if (!this.isFormValid()) return;
 
-    this.submitted.emit({ name: this.form.name, email: this.form.email, password: this.form.password });
+    this.submitted.emit({
+      name: this.form.name,
+      email: this.form.email,
+      password: this.form.password,
+    });
   }
 
   /**
