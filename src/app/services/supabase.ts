@@ -46,7 +46,7 @@ export class SupabaseService {
         .from('contacts')
         .select('name')
         .eq('email', res.data.user.email)
-        .maybeSingle();
+        .single();
 
       this.userName.set(data?.name ?? '');
     }
@@ -74,7 +74,7 @@ export class SupabaseService {
       .from('contacts')
       .select('name')
       .eq('email', session.user.email)
-      .maybeSingle();
+      .single();
 
     this.userName.set(data?.name ?? '');
   }
