@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './back-button.html',
   styleUrl: './back-button.scss',
 })
+
 export class BackButton {
   private location = inject(Location);
   private router = inject(Router);

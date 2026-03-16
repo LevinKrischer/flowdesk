@@ -9,6 +9,7 @@ import { TaskAddFormComponent } from '../../components/task-add-form/task-add-fo
   templateUrl: './add-task.html',
   styleUrl: './add-task.scss',
 })
+
 export class AddTask {
   constructor(private router: Router) {}
 

@@ -9,10 +9,10 @@ import { Subtask } from '../../../../core/db/tasks.db';
   templateUrl: './subtask-input-group.html',
   styleUrl: './subtask-input-group.scss',
 })
+
 export class SubtaskInputGroup {
   subtasks = input<Subtask[]>([]);
   subtasksChange = output<Subtask[]>();
-
   newSubtaskTitle = '';
   editingSubtaskIndex: number | null = null;
   editingSubtaskTitle = '';

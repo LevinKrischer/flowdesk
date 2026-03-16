@@ -82,7 +82,6 @@ export function isValidDescription(input: string): boolean {
 
 /**
  * Validates the given due date.
- *
  * @param input - The date string to validate (expected format: YYYY-MM-DD).
  * @returns True if the date is valid and not in the past, otherwise false.
  */
@@ -97,7 +96,6 @@ export function isValidDueDate(input: string): boolean {
 
 /**
  * Validates the given category (required field).
- *
  * @param input - The category string to validate.
  * @returns True if a category is selected (non-empty), otherwise false.
  */

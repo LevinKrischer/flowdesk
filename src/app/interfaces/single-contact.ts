@@ -6,11 +6,9 @@ export interface SingleContact {
   color?: string;
 }
 
-
 export interface ContactWithInitials extends SingleContact {
   initials: string;
 }
-
 
 export interface GroupedContacts {
   letter: string;

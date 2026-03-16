@@ -11,12 +11,12 @@ import { TruncatePipe } from '../../../services/truncate.pipe';
   templateUrl: './contact-list.html',
   styleUrl: './contact-list.scss',
 })
+
 export class ContactList {
   @Input() groups: GroupedContacts[] = [];
   @Input() selectedId: number | null = null;
   @Output() select = new EventEmitter<ContactWithInitials>();
   @Output() added = new EventEmitter<void>();
-
   isContactModalOpen = false;
 
   /**

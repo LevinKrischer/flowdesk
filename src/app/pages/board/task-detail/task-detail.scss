@@ -72,7 +72,7 @@ strong {
     display: inline-block;
     width: fit-content;
     padding: 0.35rem 0.75rem;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     color: white;
     font-weight: 600;
   }
@@ -102,15 +102,14 @@ strong {
 
     .priority-text {
       color: #111;
-      letter-spacing: 0.2px;
     }
 
     .priority-icon {
-      width: 25px;
-      height: 25px;
+      width: 1.5rem;
+      height: 1.5rem;
       object-fit: contain;
       display: inline-block;
-      margin-left: -20px;
+      margin-left: -1.25rem;
     }
   }
 
@@ -153,8 +152,8 @@ strong {
       gap: 0.75rem;
 
       .contact-avatar {
-        width: 40px;
-        height: 40px;
+        width: 2.5rem;
+        height: 2.5rem;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -182,8 +181,8 @@ strong {
       gap: 0.5rem;
 
       .subtask-checkbox-icon {
-        width: 18px;
-        height: 18px;
+        width: 1.125rem;
+        height: 1.125rem;
         flex-shrink: 0;
       }
 

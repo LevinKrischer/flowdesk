@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './select.html',
   styleUrl: './select.scss',
 })
+
 export class Select {
   @Input() label: string = '';
   @Input() errorMessage: string = '';

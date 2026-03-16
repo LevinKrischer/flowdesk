@@ -24,10 +24,8 @@ export class InputFieldComponent {
   @Input() displayLabel: boolean = true;
   @Input() reserveErrorSpace: boolean = false;
   @Input() autocomplete: string = 'off';
-
   @Input() model: any;
   @Output() modelChange = new EventEmitter<any>();
-
   @Output() blur = new EventEmitter<void>();
   @Output() inputChange = new EventEmitter<Event>();
   @Output() focus = new EventEmitter<void>();

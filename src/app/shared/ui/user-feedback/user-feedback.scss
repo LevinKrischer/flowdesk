@@ -3,7 +3,7 @@
 .feedback {
   position: fixed;
   right: -100%;
-  bottom: 40px;
+  bottom: 2.5rem;
   background: $blue-dark;
   color: $white;
   display: flex;
@@ -13,7 +13,7 @@
   border-radius: 0.625rem;
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
   transition: right 0.6s ease, opacity 0.6s ease;
-  max-width: 260px;
+  max-width: 16.25rem;
   opacity: 0;
   text-align: center;
   z-index: 2000;

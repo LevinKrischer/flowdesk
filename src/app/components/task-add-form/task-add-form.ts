@@ -1,23 +1,7 @@
-import {
-  Component,
-  viewChild,
-  inject,
-  ChangeDetectorRef,
-  input,
-  output,
-  effect,
-  signal,
-  ElementRef,
-  HostListener,
-} from '@angular/core';
+import { Component, viewChild, inject, ChangeDetectorRef, input, output, effect, signal, ElementRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  isValidTitle,
-  isValidDescription,
-  isValidDueDate,
-  isValidCategory,
-} from '../../core/utils/validation';
+import { isValidTitle, isValidDescription, isValidDueDate, isValidCategory } from '../../core/utils/validation';
 import { TasksDb, Task } from '../../core/db/tasks.db';
 import { ContactsDb } from '../../core/db/contacts.db';
 import { InputFieldComponent } from '../../shared/ui/forms/input-field/input-field';
@@ -31,17 +15,7 @@ import { UserFeedbackComponent } from '../../shared/ui/user-feedback/user-feedba
 @Component({
   selector: 'app-task-add-form',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    InputFieldComponent,
-    ContactPicker,
-    SubtaskInputGroup,
-    Button,
-    ModalWrapper,
-    Textarea,
-    UserFeedbackComponent,
-  ],
+  imports: [CommonModule, FormsModule, InputFieldComponent, ContactPicker, SubtaskInputGroup, Button, ModalWrapper, Textarea, UserFeedbackComponent],
   templateUrl: 'task-add-form.html',
   styleUrls: ['task-add-form.scss'],
 })
@@ -50,31 +24,27 @@ export class TaskAddFormComponent {
   contactsDb = inject(ContactsDb);
   cdr = inject(ChangeDetectorRef);
   elementRef = inject(ElementRef);
-
   feedback = viewChild.required<UserFeedbackComponent>('feedback');
-
   useModal = input(false);
   initialStatus = input<Task['status']>('todo');
   editTask = input<Task | null>(null);
-
   created = output<void>();
   updated = output<void>();
   closed = output<void>();
-
   isSaving = false;
 
   form: Omit<Task, 'id' | 'contacts' | 'created_at' | 'modified_at' | 'order' | 'category'> & {
     category: Task['category'] | '';
   } = {
-    title: '',
-    description: '',
-    due_date: '',
-    priority: 'medium',
-    category: '',
-    subtasks: [],
-    status: 'todo',
-    user: null,
-  };
+      title: '',
+      description: '',
+      due_date: '',
+      priority: 'medium',
+      category: '',
+      subtasks: [],
+      status: 'todo',
+      user: null,
+    };
 
   errors: Record<string, string> = {
     title: '',

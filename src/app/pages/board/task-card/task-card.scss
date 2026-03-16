@@ -15,7 +15,7 @@
   min-height: 17.125rem;
   max-height: 16rem;
   position: relative;
-  margin: 2px;
+  margin: 0.125rem;
 
   @include for-size(lg) {
     max-height: none;
@@ -25,7 +25,6 @@
   &:hover {
     cursor: pointer;
   }
-
 
   .category {
     align-self: flex-start;
@@ -89,7 +88,6 @@
     }
   }
 
-
   .task-description {
     margin: 0;
     color: $grey;
@@ -138,7 +136,6 @@
     flex-direction: column;
     gap: 1.5rem;
     min-height: 4.5rem;
-
 
     .bottom-row {
       display: flex;
@@ -197,7 +194,7 @@
     overflow: hidden;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-10px);
+    transform: translateY(-0.625rem);
     transition: opacity 0.2s ease, transform 0.2s ease;
     padding: 1rem;
     display: flex;

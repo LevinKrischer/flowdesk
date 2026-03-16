@@ -1,39 +1,17 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/**
- * A layout wrapper for modal content.
- * Provides a consistent backdrop and structure for dialogs or overlays.
- */
 @Component({
   selector: 'ui-modal-wrapper',
   imports: [CommonModule],
   templateUrl: './modal-wrapper.html',
   styleUrl: './modal-wrapper.scss',
 })
+
 export class ModalWrapper {
-  /**
-   * Controls the size variant of the modal.
-   * 'normal' - larger modal (default, max-width: 75.75rem)
-   * 'small' - smaller modal (max-width defined in stylesheet)
-   * Default: 'normal'
-   */
   modalSize = input<'normal' | 'medium' | 'small'>('normal');
-
-  /**
-   * Controls whether the modal content should have padding.
-   * When true, standard padding is applied (defined in stylesheet).
-   * When false, no padding is applied.
-   * Default: true
-   */
   contentPadding = input<boolean>(true);
-
   showCloseButton = input<boolean>(true);
-
-  /**
-   * Emitted when the modal requests to be closed.
-   * This can be triggered by clicking the close button or the backdrop.
-   */
   @Output() close = new EventEmitter<void>();
 
   /**

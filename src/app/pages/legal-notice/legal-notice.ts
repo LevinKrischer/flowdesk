@@ -8,6 +8,5 @@ import { BackButton } from '../../shared/ui/forms/back-button/back-button';
   templateUrl: './legal-notice.html',
   styleUrl: './legal-notice.scss',
 })
-export class LegalNotice {
 
-}
+export class LegalNotice {}

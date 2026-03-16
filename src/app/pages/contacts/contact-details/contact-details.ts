@@ -15,15 +15,14 @@ export class ContactDetails {
   @Output() edit = new EventEmitter<ContactWithInitials>();
   @Output() remove = new EventEmitter<ContactWithInitials>();
   @Output() back = new EventEmitter<void>();
-
   isContactModalOpen = false;
   isMobileActionsOpen = false;
+  selectedContact: ContactWithInitials | null = null;
 
   constructor(private elRef: ElementRef) { }
 
   /**
    * Closes the mobile actions menu when the user clicks outside of it.
-   *
    * @param event - The global document click event.
    */
   @HostListener('document:click', ['$event'])
@@ -43,9 +42,6 @@ export class ContactDetails {
     this.isMobileActionsOpen = false;
   }
 
-
-  selectedContact: ContactWithInitials | null = null;
-
   /** Opens the contact edit modal. */
   openModal() {
     this.isContactModalOpen = true;
@@ -58,7 +54,6 @@ export class ContactDetails {
 
   /**
    * Opens the edit modal pre-filled with the given contact's data.
-   *
    * @param contact - The contact to edit.
    */
   openEdit(contact: ContactWithInitials) {
@@ -80,4 +75,3 @@ export class ContactDetails {
     this.closeModal();
   }
 }
-

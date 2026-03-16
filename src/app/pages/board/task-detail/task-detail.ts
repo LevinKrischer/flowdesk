@@ -12,21 +12,17 @@ import { ModalWrapper } from '../../../shared/ui/modal-wrapper/modal-wrapper';
   templateUrl: './task-detail.html',
   styleUrls: ['./task-detail.scss'],
 })
+
 export class TaskDetailComponent {
   private taskDbSingleton = inject(TasksDb);
-
   task = input.required<Task>();
-
   close = output<void>();
   deleted = output<void>();
-
   userFeedback = viewChild.required<UserFeedbackComponent>('feedback');
-
   isEditing = signal(false);
 
   /**
    * Returns the appropriate priority icon path for the current task.
-   *
    * @returns SVG asset path based on the task priority.
    */
   get priorityIcon(): string {
@@ -64,7 +60,6 @@ export class TaskDetailComponent {
 
   /**
    * Builds up to two uppercase initials from a full name.
-   *
    * @param name - Full name string to extract initials from.
    * @returns Uppercase initials (max 2 characters).
    */
@@ -106,7 +101,6 @@ export class TaskDetailComponent {
 
   /**
    * Toggles a subtask's done state and persists the change.
-   *
    * @param subtask - The subtask to toggle.
    */
   async toggleSubtask(subtask: Subtask) {

@@ -7,5 +7,6 @@ import { BackButton } from '../../shared/ui/forms/back-button/back-button';
   templateUrl: './help.html',
   styleUrl: './help.scss',
 })
+
 export class Help {
 }

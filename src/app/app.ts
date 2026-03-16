@@ -6,12 +6,11 @@ import { SupabaseService } from './services/supabase';
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrls: ['./app.scss', '../../public/assets/styles/fonts.scss'],
+  styleUrls: ['./app.scss'],
 })
 export class App {
   private supabaseService = inject(SupabaseService);
   private router = inject(Router);
-
   protected readonly title = signal('join');
 
   /** Checks the current session and redirects to summary or login accordingly. */

@@ -1,11 +1,6 @@
 import { Component, computed, signal, inject, output, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-  DragDropModule,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule } from '@angular/cdk/drag-drop';
 import { TasksDb, Task } from '../../../core/db/tasks.db';
 import { TaskCardComponent } from '../task-card/task-card';
 import { TaskAddFormComponent } from '../../../components/task-add-form/task-add-form';
@@ -14,45 +9,35 @@ import { HorizontalScrollDirective } from '../../../services/horizontal-scroll.d
 @Component({
   selector: 'app-task-board',
   standalone: true,
-  imports: [
-    CommonModule,
-    DragDropModule,
-    TaskCardComponent,
-    TaskAddFormComponent,
-    HorizontalScrollDirective,
-  ],
+  imports: [CommonModule, DragDropModule, TaskCardComponent, TaskAddFormComponent, HorizontalScrollDirective],
   templateUrl: './task-board.html',
   styleUrls: ['./task-board.scss'],
 })
 export class TaskBoard {
   private tasksDb = inject(TasksDb);
-
   open = output<Task>();
-
   isMobile = signal(this.detectTouchDevice());
   dragStartDelay = computed(() => (this.isMobile() ? 500 : 0));
-
   private _tasks = signal<Task[]>([]);
 
   @Input() set tasks(v: Task[] | null | undefined) {
     this._tasks.set(v ?? []);
   }
-
-  /**
-   * Returns the current task list from the internal signal.
-   * @returns Current tasks used by board columns.
-   */
-  get tasks() {
-    return this._tasks();
-  }
-
+  
   showAddTaskForm = signal(false);
   addTaskStatus = signal<Task['status']>('todo');
-
   todoTasks = computed(() => this._tasks().filter((t) => t.status === 'todo'));
   inProgressTasks = computed(() => this._tasks().filter((t) => t.status === 'in-progress'));
   reviewTasks = computed(() => this._tasks().filter((t) => t.status === 'await-feedback'));
   doneTasks = computed(() => this._tasks().filter((t) => t.status === 'done'));
+
+  /**
+ * Returns the current task list from the internal signal.
+ * @returns Current tasks used by board columns.
+ */
+  get tasks() {
+    return this._tasks();
+  }
 
   /**
    * Emits the selected task to open its detail view.

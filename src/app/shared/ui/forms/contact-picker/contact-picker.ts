@@ -1,13 +1,4 @@
-import {
-  Component,
-  input,
-  output,
-  signal,
-  computed,
-  ElementRef,
-  HostListener,
-  effect,
-} from '@angular/core';
+import { Component, input, output, signal, computed, ElementRef, HostListener, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Contact } from '../../../../core/db/contacts.db';
 import { InputFieldComponent } from '../input-field/input-field';
@@ -19,20 +10,17 @@ import { InputFieldComponent } from '../input-field/input-field';
   templateUrl: './contact-picker.html',
   styleUrl: './contact-picker.scss',
 })
+
 export class ContactPicker {
   contacts = input<Contact[]>([]);
   initialSelectedIds = input<number[]>([]);
   selectedIdsChange = output<number[]>();
-
   isOpen = signal(false);
   selectedIds = signal<number[]>([]);
-
-  /** Contacts sorted alphabetically by name. */
+  searchTerm = signal('');
   sortedContacts = computed(() => {
     return [...this.contacts()].sort((a, b) => a.name.localeCompare(b.name));
   });
-
-  /** The full contact objects for all currently selected IDs. */
   selectedContacts = computed(() => {
     const ids = this.selectedIds();
     return this.contacts().filter((c) => ids.includes(c.id));
@@ -61,8 +49,6 @@ export class ContactPicker {
   open() {
     this.isOpen.set(true);
   }
-
-  searchTerm = signal('');
 
   filteredContacts = computed(() => {
     const term = this.searchTerm().toLowerCase();

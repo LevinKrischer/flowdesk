@@ -10,6 +10,7 @@ import { SupabaseService } from '../../services/supabase';
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
+
 export class Header {
   menuOpen = false;
 
