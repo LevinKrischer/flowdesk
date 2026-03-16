@@ -15,7 +15,6 @@
   overflow-x: hidden;
   box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1);
 
-
   @include for-size(lg) {
     max-width: 20rem;
   }
@@ -24,8 +23,6 @@
     padding-bottom: 5rem;
     max-width: 28rem;
   }
-
-
 
   @include for-size(xs) {
     padding: 1rem 0.5rem 5rem;
@@ -49,8 +46,8 @@ ui-button {
   }
 
   img {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
 
@@ -123,7 +120,6 @@ ui-button {
     padding-right: 0;
   }
 
-  /* avatar */
   abbr {
     width: 2.625rem;
     height: 2.625rem;
@@ -162,8 +158,6 @@ ui-button {
     }
   }
 
-
-
   &__name {
     font-size: 1.1rem;
   }
@@ -174,7 +168,6 @@ ui-button {
 
 }
 
-// ── Mobile FABs ──────────────────────────────────────
 .fab-container {
   position: fixed;
   bottom: 6rem;

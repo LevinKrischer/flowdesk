@@ -18,38 +18,47 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, main, menu, nav, section {
 	display: block;
 }
+
 *[hidden] {
     display: none;
 }
+
 body {
 	line-height: 1;
 }
+
 menu, ol, ul {
 	list-style: none;
   padding: 0;
   margin: 0;
 }
+
 blockquote, q {
 	quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-button{
+
+button {
   background: none;
   border:0;
   cursor: pointer;
 }
-a{
+
+a {
   text-decoration: none;
 }

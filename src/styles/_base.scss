@@ -24,7 +24,7 @@ body {
   }
 }
 
-div.container{
+div.container {
   padding: 3rem 2rem;
   max-width: 90rem;
   margin: 0;
@@ -35,14 +35,12 @@ div.container{
 }
 
 .cdk-drag-preview {
-    overflow: visible !important;
-    box-shadow: none !important;
-
+  overflow: visible !important;
+  box-shadow: none !important;
 }
 
-.cdk-drag-preview > div {
+.cdk-drag-preview>div {
   transform: rotate(5deg) scale(1.02) !important;
   transform-origin: center !important;
-  overflow:visible !important;
+  overflow: visible !important;
 }
-

@@ -9,7 +9,6 @@
     margin-top: 3rem;
     height: 100%;
   }
-
 }
 
 .taskboard-inner {
@@ -34,7 +33,7 @@
 .board-column-header {
 
   @include for-size(lg) {
-    height: 60px;
+    height: 3.75rem;
   }
 
   @include for-size(xl) {
@@ -51,7 +50,6 @@
   max-width: 100%;
   width: 100%;
   overflow: auto;
-
 
   @include for-size(lg) {
     overflow-x: hidden;

@@ -2,10 +2,8 @@
 @use 'styles/mixins' as *;
 
 .ContactDetails {
-
-
   >div:nth-child(3) {
-    margin-top: 35px;
+    margin-top: 2rem;
 
     h4 {
       font-size: 1.125rem;

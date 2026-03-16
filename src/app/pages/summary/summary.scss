@@ -34,7 +34,6 @@
 }
 
 h3 {
-
   font-size: 2rem;
 
   @include for-size(sm) {
@@ -44,7 +43,7 @@ h3 {
 
 .divider {
   height: 2.5rem;
-  width: 2px;
+  width: 0.125rem;
   background-color: $grey-light;
 
   @include for-size(sm) {
@@ -53,9 +52,8 @@ h3 {
 }
 
 .blue-divider {
-
   @include for-size(lg) {
-    width: 2px;
+    width: 0.125rem;
     height: 4rem;
   }
 }
@@ -108,9 +106,7 @@ h3 {
 }
 
 .card-icon {
-
   img {
-
     height: 2.5rem;
     width: 2.5rem;
 
@@ -184,8 +180,6 @@ h3 {
     opacity: 0;
   }
 }
-
-
 
 .user-name {
   font-size: 2.5rem;

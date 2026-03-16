@@ -1,10 +1,9 @@
 @use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 
-// Modal size variants
 $modal-max-width-normal: 75.75rem;
-
 $modal-max-width-small: 35rem;
+$modal-max-width-medium: 40.75rem;
 
 div.modal-backdrop {
   position: fixed;
@@ -37,11 +36,11 @@ div.modal-container {
   animation: fadeInFromBottomAnimation 0.2s ease-in-out;
 
   &.size-small {
-    max-width: 33rem;
+    max-width: $modal-max-width-small;
   }
 
   &.size-medium {
-    max-width: 40.75rem;
+    max-width: $modal-max-width-medium;
   }
 }
 
@@ -67,8 +66,6 @@ div.modal-content {
 
   }
 }
-
-
 
 .close-btn {
   position: absolute;

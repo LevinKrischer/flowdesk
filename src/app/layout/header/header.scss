@@ -6,7 +6,7 @@ header {
   background-color: $white;
   width: 100%;
   filter: $sh-header;
-  position: relative; // wichtig für absolute userMenu-Position
+  position: relative;
   z-index: 4;
 
   @include for-size(lg) {
@@ -72,7 +72,7 @@ header {
   }
 
   &.active {
-    background-color: $grey-light; // bleibt wie Hover
+    background-color: $grey-light;
   }
 }
 
@@ -101,8 +101,6 @@ header {
   bottom: -11rem;
   right: $space-lg;
   z-index: 9999;
-
-  // Startzustand: unsichtbar
   opacity: 0;
   pointer-events: none;
   transform: translateY(-10px);
