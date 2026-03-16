@@ -7,6 +7,7 @@ import { ContactWithInitials } from '../../../core/db/contacts.db';
   templateUrl: './contact-header.html',
   styleUrl: './contact-header.scss',
 })
+
 export class ContactHeader {
   @Input() contact: ContactWithInitials | null = null;
   @Output() back = new EventEmitter<void>();

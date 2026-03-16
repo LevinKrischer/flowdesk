@@ -2,16 +2,10 @@ import { Injectable, signal } from '@angular/core';
 import { AuthChangeEvent, Session, createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment';
 
-/**
- * Centralized service responsible for creating and providing a single Supabase client instance.
- * This ensures that the entire application communicates with Supabase through one consistent,
- * preconfigured client, avoiding duplicate connections and simplifying database, auth,
- * and storage interactions across all services and components.
- */
 @Injectable({ providedIn: 'root' })
+
 export class SupabaseService {
   private supabase: SupabaseClient;
-
   userName = signal('');
 
   constructor() {
@@ -29,7 +23,6 @@ export class SupabaseService {
 
   /**
    * Registers a new user with the given email and password.
-   *
    * @param email - The user's email address.
    * @param password - The user's chosen password.
    * @returns The Supabase sign-up response.
@@ -41,7 +34,6 @@ export class SupabaseService {
   /**
    * Signs in a user and fetches their display name from the `contacts` table.
    * On success the userName signal is updated.
-   *
    * @param email - The user's email address.
    * @param password - The user's password.
    * @returns An object containing any auth error and the resolved user name.
@@ -89,7 +81,6 @@ export class SupabaseService {
 
   /**
    * Retrieves the current Supabase auth session.
-   *
    * @returns A promise resolving to the current session data.
    */
   getSession() {
@@ -99,7 +90,6 @@ export class SupabaseService {
   /**
    * Registers a callback that fires whenever the auth state changes
    * (e.g. sign-in, sign-out, token refresh).
-   *
    * @param callback - Handler receiving the auth event and session.
    * @returns A subscription that can be unsubscribed from.
    */

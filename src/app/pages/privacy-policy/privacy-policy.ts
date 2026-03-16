@@ -8,6 +8,7 @@ import { BackButton } from '../../shared/ui/forms/back-button/back-button';
   templateUrl: './privacy-policy.html',
   styleUrl: './privacy-policy.scss',
 })
+
 export class PrivacyPolicy {
 
 }

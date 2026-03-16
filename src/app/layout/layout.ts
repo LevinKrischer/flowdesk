@@ -10,4 +10,5 @@ import { Navi } from './navi/navi';
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })
+
 export class Layout { }

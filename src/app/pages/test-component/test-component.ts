@@ -7,35 +7,32 @@ import { InputFieldComponent } from '../../shared/ui/forms/input-field/input-fie
 import { ContactPicker } from '../../shared/ui/forms/contact-picker/contact-picker';
 import { ContactsDb } from '../../core/db/contacts.db';
 
-/**
- * A testing or demonstration component used to orchestrate UI elements.
- * It manages the visibility of the contact addition flow and integrates
- * shared UI components like buttons and input fields.
- * !!! NOTE: will be deleted after development !!!
- */
 @Component({
   selector: 'app-test-component',
   imports: [ContactAddFormComponent, Button, InputFieldComponent, CommonModule, ContactPicker],
   templateUrl: './test-component.html',
   styleUrl: './test-component.scss',
 })
+
 export class TestComponent {
   contactsDb = inject(ContactsDb);
   selectedContactIds = signal<number[]>([]);
+  isContactModalOpen = false;
 
+  /**
+   * Handles the selection of contacts and manages the state of the contact creation modal.
+   */
   async ngOnInit() {
     await this.contactsDb.getContacts();
   }
 
+  /**
+   * Handles the selection of contacts.
+   * @param ids Array of selected contact IDs.
+   */
   onContactsSelected(ids: number[]) {
     this.selectedContactIds.set(ids);
   }
-
-  /**
-   * Controls the visibility state of the contact creation modal.
-   * @default false
-   */
-  isContactModalOpen = false;
 
   /**
    * Sets the modal state to visible.

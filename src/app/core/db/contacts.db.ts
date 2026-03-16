@@ -26,10 +26,6 @@ export class ContactsDb {
   groupedContacts = signal<GroupedContacts[]>([]);
   channels: RealtimeChannel | null = null;
 
-  /**
-   * Creates the contacts database service.
-   * @param supa Shared Supabase service instance.
-   */
   constructor(private supa: SupabaseService) { }
 
   /**
@@ -45,7 +41,7 @@ export class ContactsDb {
     }
 
     this.applyContactsToState(contacts);
-    this.subscripeToContactChanges();
+    this.SubscribeToContactChanges();
   }
 
   /**
@@ -168,10 +164,10 @@ export class ContactsDb {
 
   /**
    * Cleans up the realtime subscription when the service is destroyed.
-   * @returns Nothing.
+   * @returns nothing.
    */
   ngOnDestroy() {
-    this.unSubscripeFromContactChanges();
+    this.unsubscribeFromContactChanges();
   }
 
   /**
@@ -179,7 +175,7 @@ export class ContactsDb {
    * Whenever a change occurs, contacts are reloaded.
    * @returns Nothing.
    */
-  subscripeToContactChanges() {
+  SubscribeToContactChanges() {
     this.channels = this.supa.client.channel('custom-all-channel')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'contacts' }, async () => {
         await this.getContacts();
@@ -190,9 +186,9 @@ export class ContactsDb {
   /**
    * Unsubscribes from the realtime channel if it exists.
    * Prevents memory leaks and duplicate subscriptions.
-   * @returns Nothing.
+   * @returns nothing.
    */
-  unSubscripeFromContactChanges() {
+  unsubscribeFromContactChanges() {
     if (this.channels) {
       this.supa.client.removeChannel(this.channels);
     }

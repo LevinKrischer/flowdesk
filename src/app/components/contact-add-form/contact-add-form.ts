@@ -14,6 +14,7 @@ import { Button } from '../../shared/ui/button/button';
   templateUrl: './contact-add-form.html',
   styleUrls: ['./contact-add-form.scss'],
 })
+
 export class ContactAddFormComponent {
   db = inject(ContactsDb);
   cdr = inject(ChangeDetectorRef);

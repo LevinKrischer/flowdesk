@@ -15,11 +15,11 @@ interface StatusOption {
   templateUrl: './task-card.html',
   styleUrls: ['./task-card.scss'],
 })
+
 export class TaskCardComponent {
   @Input() task!: Task;
   @Output() openTask = new EventEmitter<Task>();
   @Output() statusChange = new EventEmitter<{ task: Task; newStatus: Task['status'] }>();
-
   showMoveMenu = false;
 
   /**
@@ -112,7 +112,6 @@ export class TaskCardComponent {
     this.openTask.emit(this.task);
   }
 
-
   /**
    * Returns a comma-separated list of assigned contact names.
    * @returns Assigned contact names as text.
@@ -120,7 +119,6 @@ export class TaskCardComponent {
   get assignedNames(): string {
     return this.task?.contacts?.map(c => c.name).join(', ') || '';
   }
-
 
   /**
    * Returns completed subtasks in done/total format.
@@ -135,7 +133,6 @@ export class TaskCardComponent {
     return `${done}/${total} Subtasks`;
   }
 
-
   /**
    * Calculates subtask completion percentage.
    * @returns Rounded progress percentage from 0 to 100.
@@ -148,7 +145,6 @@ export class TaskCardComponent {
     const done = this.task.subtasks.filter(s => s.done).length;
     return Math.round((done / total) * 100);
   }
-
 
   /**
    * Builds initials from a full name.

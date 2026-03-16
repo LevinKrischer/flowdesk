@@ -11,6 +11,7 @@ import { environment } from '../../../environments/environment';
   templateUrl: './summary.html',
   styleUrl: './summary.scss',
 })
+
 export class Summary implements OnInit, OnDestroy {
   private tasksDb = inject(TasksDb);
   private supabase = inject(SupabaseService);
@@ -22,7 +23,6 @@ export class Summary implements OnInit, OnDestroy {
   showMobileGreetingOverlay = signal(false);
   isPreparingMobileGreeting = signal(false);
   hasDisplayName = computed(() => this.userName().trim().length > 0 && !this.isGuestSession());
-
   personalizedGreeting = computed(() => {
     const greeting = this.getTimeBasedGreeting();
 
@@ -32,14 +32,12 @@ export class Summary implements OnInit, OnDestroy {
 
     return `${greeting},`;
   });
-
   todoCount = computed(() => this.tasks().filter((task) => task.status === 'todo').length);
   doneCount = computed(() => this.tasks().filter((task) => task.status === 'done').length);
   inProgressCount = computed(() => this.tasks().filter((task) => task.status === 'in-progress').length);
   awaitFeedbackCount = computed(() => this.tasks().filter((task) => task.status === 'await-feedback').length);
   urgentCount = computed(() => this.tasks().filter((task) => task.priority === 'urgent').length);
   totalTasksCount = computed(() => this.tasks().length);
-
   nextOpenDueDate = computed(() => {
     const upcomingDates = this.getUpcomingOpenTaskDates();
 
@@ -304,6 +302,4 @@ export class Summary implements OnInit, OnDestroy {
     }
     this.tasksDb.unsubscribeFromTaskChanges();
   }
-
 }
-

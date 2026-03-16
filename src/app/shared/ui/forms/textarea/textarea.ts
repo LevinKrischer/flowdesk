@@ -6,6 +6,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: './textarea.html',
   styleUrl: './textarea.scss',
 })
+
 export class Textarea {
   @Input() label: string = '';
   @Input() id: string = '';
@@ -14,13 +15,11 @@ export class Textarea {
   @Input() maxlength: number | null = null;
   @Input() errorMessage: string = '';
   @Input() isRequired: boolean = false;
-
   @Input() model: string = '';
   @Output() modelChange = new EventEmitter<string>();
 
   /**
    * Handles textarea input events and emits the updated value.
-   *
    * @param event - The native input event.
    */
   onInput(event: Event) {

@@ -14,9 +14,9 @@ import { UserFeedbackComponent } from '../../shared/ui/user-feedback/user-feedba
   templateUrl: './contacts.html',
   styleUrl: './contacts.scss',
 })
+
 export class Contacts implements OnInit {
   @ViewChild('feedback') feedback!: UserFeedbackComponent;
-
   searchTerm = signal('');
   selected: ContactWithInitials | null = null;
   isMobileDetailOpen = false;

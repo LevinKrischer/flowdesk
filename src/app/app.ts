@@ -11,7 +11,6 @@ import { SupabaseService } from './services/supabase';
 export class App {
   private supabaseService = inject(SupabaseService);
   private router = inject(Router);
-
   protected readonly title = signal('join');
 
   /** Checks the current session and redirects to summary or login accordingly. */

@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './signup-form.html',
   styleUrl: './signup-form.scss',
 })
+
 export class SignupForm {
   submitted = output<{ name: string; email: string; password: string }>();
 

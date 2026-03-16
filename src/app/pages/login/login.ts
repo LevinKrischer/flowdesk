@@ -11,6 +11,7 @@ import { Button } from '../../shared/ui/button/button';
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
+
 export class Login implements AfterViewInit {
   private supabaseService = inject(SupabaseService);
   private router = inject(Router);
@@ -79,8 +80,4 @@ export class Login implements AfterViewInit {
   private setGenericLoginError() {
     this.errorMessage.set('Log-In failed. Please check your credentials, your connection or sign up');
   }
-
-
-
-
 }

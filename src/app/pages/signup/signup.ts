@@ -13,6 +13,7 @@ import { BackButton } from '../../shared/ui/forms/back-button/back-button';
   templateUrl: './signup.html',
   styleUrl: './signup.scss',
 })
+
 export class Signup {
   private supabaseService = inject(SupabaseService);
   private contactsDb = inject(ContactsDb);
