@@ -106,7 +106,7 @@ export class ContactsDb {
       return;
     }
 
-    this.contacts.set(contacts.filter((c) => c.email !== 'guest@join.de'));
+    this.contacts.set(contacts.filter((c) => c.email !== 'guest@flowdesk.de'));
   }
 
   /**

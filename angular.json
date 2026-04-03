@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "join": {
+    "flowdesk": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -43,8 +43,8 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
-            "baseHref": "/join/",
-            "deployUrl": "/join/",
+            "baseHref": "/flowdesk/",
+            "deployUrl": "/flowdesk/",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -93,10 +93,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "join:build:production"
+              "buildTarget": "flowdesk:build:production"
             },
             "development": {
-              "buildTarget": "join:build:development"
+              "buildTarget": "flowdesk:build:development"
             }
           },
           "defaultConfiguration": "development"

@@ -11,7 +11,7 @@ import { SupabaseService } from './services/supabase';
 export class App {
   private supabaseService = inject(SupabaseService);
   private router = inject(Router);
-  protected readonly title = signal('join');
+  protected readonly title = signal('flowdesk');
 
   async ngOnInit() {
     const { data } = await this.supabaseService.getSession();

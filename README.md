@@ -1,4 +1,4 @@
-# Join – Kanban Board Application
+# Flowdesk – Kanban Board Application
 
 A collaborative task management system built with Angular 21 and Supabase, featuring drag-and-drop functionality and real-time updates.
 
@@ -17,7 +17,7 @@ A collaborative task management system built with Angular 21 and Supabase, featu
 ```bash
 # Clone repository
 git clone <repository-url>
-cd join
+cd flowdesk
 
 # Install dependencies (supabase, bootstrap, ng cdk ..)
 npm install
@@ -26,7 +26,7 @@ npm install
 npm start
 
 # Start production server
-ng build --configuration=production && npx http-server dist/join/browser
+ng build --configuration=production && npx http-server dist/flowdesk/browser
 ```
 
 
@@ -46,7 +46,7 @@ Add to `angular.json`:
 ## Project Architecture
 
 ```
-join/
+flowdesk/
 ├── public/
 │   └── assets/
 │       ├── fonts/

@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment';
 
 const supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-const TEST_EMAIL = 'walter.meier@join.de';
+const TEST_EMAIL = 'walter.meier@flowdesk.de';
 const TEST_PASSWORD = 'waltersPasswort!!';
 const TEST_NAME = 'Walter Meier';
 
