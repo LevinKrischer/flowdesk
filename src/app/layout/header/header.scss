@@ -10,7 +10,7 @@ header {
   z-index: 4;
 
   @include for-size(lg) {
-    height: 6rem;
+    height: 4.5rem;
   }
 }
 
@@ -34,7 +34,7 @@ header {
   }
 
   @include for-size(lg) {
-    padding-left: 6rem;
+    padding-left: 4rem;
   }
 }
 
@@ -55,10 +55,10 @@ header {
 }
 
 .userProfile {
-  height: 3.5rem;
-  width: 3.5rem;
-  border: 2px solid $black;
-  color: $blue-light;
+  height: 2.5rem;
+  width: 2.5rem;
+  border: 1px solid $grey-dark;
+  color: $off-white;
   border-radius: 100%;
   cursor: pointer;
   transition: $trans-default;
@@ -66,13 +66,14 @@ header {
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  background-color: $blue-dark;
 
   &:hover {
-    background-color: $grey-light;
+    background-color: $blue-light;
   }
 
   &.active {
-    background-color: $grey-light;
+    background-color: $blue-light;
   }
 }
 
@@ -81,13 +82,14 @@ header {
     display: flex;
     align-items: center;
 
-    img {
-      transition: $trans-default;
-      width: $space-lg;
-      height: auto;
-    }
+    .bi {
+        font-size: 1.5rem;
+        line-height: 1;
+        color: $grey-dark;
+        transition: $trans-default;
+      }
 
-    &:hover img {
+    &:hover .bi {
       transform: scale(1.2);
       cursor: pointer;
     }

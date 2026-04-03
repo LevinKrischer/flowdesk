@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, output, signal } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SupabaseService } from '../../services/supabase';
@@ -11,7 +11,10 @@ import { Subscription } from '@supabase/supabase-js';
   styleUrl: './navi.scss',
 })
 export class Navi implements OnInit, OnDestroy {
+  private static readonly NAV_COLLAPSE_STORAGE_KEY = 'flowdesk.nav.collapsed';
   isLoggedIn = signal<boolean>(false);
+  isCollapsed = signal<boolean>(false);
+  collapsedChange = output<boolean>();
   private authSubscription?: Subscription;
 
   /**
@@ -25,9 +28,26 @@ export class Navi implements OnInit, OnDestroy {
    * @returns Promise that resolves when initial auth state is applied.
    */
   async ngOnInit() {
+    this.restoreCollapsedState();
     const { data } = await this.supabase.getSession();
     this.isLoggedIn.set(!!data.session);
     this.subscribeToAuthChanges();
+  }
+
+  /**
+   * Restores the saved navigation collapse state from local storage.
+   * @returns Nothing.
+   */
+  private restoreCollapsedState() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const savedValue = window.localStorage.getItem(Navi.NAV_COLLAPSE_STORAGE_KEY);
+    const isCollapsed = savedValue === 'true';
+
+    this.isCollapsed.set(isCollapsed);
+    this.collapsedChange.emit(isCollapsed);
   }
 
   /**
@@ -50,5 +70,20 @@ export class Navi implements OnInit, OnDestroy {
    */
   ngOnDestroy() {
     this.authSubscription?.unsubscribe();
+  }
+
+  /**
+   * Toggles desktop collapse state and notifies layout.
+   * @returns Nothing.
+   */
+  toggleCollapse() {
+    this.isCollapsed.update((value) => !value);
+    const isCollapsed = this.isCollapsed();
+
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(Navi.NAV_COLLAPSE_STORAGE_KEY, String(isCollapsed));
+    }
+
+    this.collapsedChange.emit(isCollapsed);
   }
 }

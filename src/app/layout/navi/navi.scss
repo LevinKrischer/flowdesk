@@ -9,13 +9,50 @@
   position: fixed;
   bottom: 0;
   min-height: 5rem;
-  gap: 7rem;
+  gap: 3rem;
 
   @include for-size(lg) {
     position: relative;
-    width: 14.5rem;
+    width: 100%;
     height: 100vh;
-    padding: 2rem 0 4rem 0;
+    padding: 0.75rem 0 2rem 0;
+    transition: width 0.25s ease;
+  }
+}
+
+.bi {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.collapse-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: $blue-light;
+  color: $off-white;
+  width: 2.125rem;
+  height: 2.125rem;
+  border-radius: 999px;
+  margin: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: $trans-default;
+
+  @include for-size(lg) {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(50%, -50%);
+    z-index: 2;
+  }
+
+  &:hover {
+    background: $blue-dark-hover;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: $white;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $white;
+    outline-offset: 2px;
   }
 }
 
@@ -25,76 +62,13 @@
   padding: 0 1rem;
 }
 
-#main-nav {
-  max-height: 4.75rem;
-  justify-content: center;
+.logo-container {
+  height: 3.75rem;
+  min-height: 3.75rem;
+  width: 100%;
+}
 
-  @include for-size(lg) {
-    max-height: 100%;
-    margin-bottom: auto;
-  }
-
-  img.active {
-    display: none;
-  }
-
-  img.default {
-    display: flex;
-  }
-
-  li {
-    max-width: 6.5rem;
-    flex: 1;
-    border-radius: $navi-border-radius;
-    min-height: 3rem;
-    display:flex;
-    align-items: center;
-    width: 100%;
-
-    &.active {
-      background: $blue-darker;
-      border-radius: $navi-border-radius;
-      font-weight: 700;
-
-      @include for-size(lg) {
-        border-radius: 0;
-      }
-
-      a {
-        color: $white;
-
-        img {
-          width: 1.5rem;
-          height: auto;
-        }
-
-        img.active {
-          display: flex;
-          width: 1.5rem;
-          height: auto;
-        }
-
-        img.default {
-          display: none;
-          width: 1.5rem;
-          height: auto;
-        }
-      }
-    }
-
-    @include for-size(lg) {
-      max-width: 100%;
-    }
-  }
-
-  .navigation {
-    gap: min(0.5em);
-
-    @include for-size(sm) {
-      gap: min(1.5em);
-    }
-  }
-
+.side-nav-section {
   a {
     color: $off-white;
     transition: $trans-default;
@@ -104,20 +78,11 @@
     line-height: 1.2;
     gap: 0.25rem;
     font-size: 0.8rem;
+    width: 100%;
 
     img {
       width: 1.5rem;
       height: auto;
-    }
-
-    &:hover {
-      color: $white;
-
-      @include for-size(lg) {
-        border-radius: 0;
-        background: $blue-dark-hover;
-        font-weight: 700;
-      }
     }
 
     @include for-size(sm) {
@@ -126,31 +91,104 @@
     }
 
     @include for-size(lg) {
-      padding: $space-sm 2.75rem;
+      padding: $space-sm 1.5rem;
+    }
+  }
+
+  img {
+    &.active {
+      display: none;
+    }
+
+    &.default {
+      display: flex;
+    }
+  }
+
+  li {
+    flex: 1;
+    border-radius: $navi-border-radius;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    &.active {
+      background: $blue-darker;
+      font-weight: 700;
+
+      @include for-size(lg) {
+        border-radius: 0;
+      }
+
+      a {
+        color: $white;
+
+        img.active {
+          display: flex;
+        }
+
+        img.default {
+          display: none;
+        }
+      }
+    }
+
+    &:hover {
+      background: $blue-dark-hover;
+      font-weight: 700;
+
+      a {
+        color: $white;
+      }
+
+      @include for-size(lg) {
+        border-radius: 0;
+      }
+    }
+
+    @include for-size(lg) {
+      max-width: 100%;
+    }
+  }
+
+  .side-nav-list {
+    gap: 0.5em;
+
+    @include for-size(sm) {
+      gap: 1.5em;
     }
   }
 }
 
+.side-nav-section--main {
+  max-height: 4.75rem;
 
-#footer-nav {
-  justify-content: flex-end;
-
-  li {
-    padding: $space-sm 0;
+  @include for-size(lg) {
+    max-height: 100%;
+    margin-bottom: auto;
   }
+}
 
-  a {
-    color: $off-white;
-    transition: $trans-default;
-    text-decoration: none;
-    padding-left: 2.75rem;
-  }
+#sideNav.is-collapsed {
+  @include for-size(lg) {
+    .logo {
+      width: 5rem;
+      max-width: 5rem;
+    }
 
-  li.active {
-    background: $blue-darker;
+    .nav-link {
+      justify-content: center;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
 
-    a {
-      color: $white;
+      .nav-label {
+        display: none;
+      }
+    }
+
+    .footer-hidden {
+      display: none !important;
     }
   }
 }

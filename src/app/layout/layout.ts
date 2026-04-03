@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './header/header';
 import { Navi } from './navi/navi';
@@ -10,5 +10,15 @@ import { Navi } from './navi/navi';
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })
+export class Layout {
+  isNavCollapsed = signal<boolean>(false);
 
-export class Layout { }
+  /**
+   * Applies collapse state emitted by the navigation.
+   * @param value Current collapsed state.
+   * @returns Nothing.
+   */
+  onNavCollapsedChange(value: boolean) {
+    this.isNavCollapsed.set(value);
+  }
+}

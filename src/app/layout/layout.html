@@ -1,6 +1,6 @@
-<div id="main-container" class="d-flex vh-100">
+<div id="main-container" class="d-flex vh-100" [class.nav-collapsed]="isNavCollapsed()">
   <div id="navigation">
-    <app-navi></app-navi>
+    <app-navi (collapsedChange)="onNavCollapsedChange($event)"></app-navi>
   </div>
 
   <div id="content" class="d-flex flex-column flex-grow-1 overflow-hidden">

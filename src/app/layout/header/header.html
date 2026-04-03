@@ -12,11 +12,11 @@
       </div>
     </div>
 
-    <div id="header-right" class="d-flex gap-3 align-items-center">
+    <div id="header-right" class="d-flex gap-2 align-items-center">
       @if (supabaseService.userName()) {
         <button class="help d-none d-lg-flex">
           <a routerLinkActive="active" routerLink="/help">
-            <img src="assets/icons/help-big-32px.svg" alt="Help Icon" />
+            <i class="bi bi-question-circle"></i>
           </a>
         </button>
         <button
