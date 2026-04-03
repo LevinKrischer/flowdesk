@@ -133,6 +133,11 @@ export class TaskCardComponent {
     return `${done}/${total} Subtasks`;
   }
 
+  get allSubtasksDone(): boolean {
+    const subtasks = this.task?.subtasks;
+    return subtasks?.length > 0 && subtasks.every(s => s.done);
+  }
+
   /**
    * Calculates subtask completion percentage.
    * @returns Rounded progress percentage from 0 to 100.

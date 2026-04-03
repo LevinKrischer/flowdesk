@@ -1,72 +1,68 @@
 <div class="task-card" (click)="onClick()">
 
   @if (task.category) {
-    <div class="d-flex flex-nowrap align-items-center justify-content-between">
-      <span class="category" [ngClass]="getCategoryClass()">
-        {{ task.category }}
-      </span>
-      <button class="option-btn d-lg-none" (click)="toggleMoveMenu($event)">
-        <svg
-          class="options-arrow bi bi-caret-down-square"
-          xmlns="http://www.w3.org/2000/svg"
-          width="1rem"
-          height="1rem"
-          viewBox="0 0 16 16"
-        >
-          <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-        </svg>
-      </button>
-    </div>
+  <div class="d-flex flex-nowrap align-items-center justify-content-between">
+    <span class="category" [ngClass]="getCategoryClass()">
+      {{ task.category }}
+    </span>
+    <button class="option-btn d-lg-none" (click)="toggleMoveMenu($event)">
+      <i class="bi bi-three-dots-vertical"></i>
+    </button>
+  </div>
 
-    <div class="move-menu" [class.visible]="showMoveMenu" (click)="$event.stopPropagation()">
-      <div class="move-menu-headline"><strong>Move to:</strong></div>
-      @for (status of availableStatuses; track status.value) {
-        <div class="move-option" (click)="moveToStatus(status.value)">
-          {{ status.label }}
-        </div>
-      }
+  <div class="move-menu" [class.visible]="showMoveMenu" (click)="$event.stopPropagation()">
+    <div class="move-menu-headline"><strong>Move to:</strong></div>
+    @for (status of availableStatuses; track status.value) {
+    <div class="move-option" (click)="moveToStatus(status.value)">
+      {{ status.label }}
     </div>
+    }
+  </div>
   }
 
   <div class="task-header d-flex justify-content-between align-items-start">
-    <h5>{{ task.title | truncate:30 }}</h5>
+    <h5 class="mt-2">{{ task.title | truncate:30 }}</h5>
   </div>
 
   <p class="task-description">{{ task.description | truncate:70 }}</p>
 
   <div class="info-row">
-    <div class="progress-container">
-      @if (task.subtasks.length) {
-        <div class="progress-bar">
-          <div class="progress" [style.width.%]="subtaskPercent"></div>
-        </div>
-        <small>{{ completedSubtasks }}</small>
-      }
-    </div>
+    @if (task.subtasks.length) {
+      <div class="progress-container" [class.open]="!allSubtasksDone">
+        <small>
+          <i [class]="allSubtasksDone ? 'bi bi-check-square' : 'bi bi-list-check'"></i>
+          {{ completedSubtasks }}
+        </small>
+      </div>
+    }
+
+    @if (task.subtasks.length === 0) {
+      <div class="progress-container empty"></div>
+    }
 
     <div class="bottom-row">
-      @if (task.contacts.length) {
-        <div class="avatars">
-          @for (contact of task.contacts.slice(0, 3); track contact.id) {
-            <span class="avatar" [style.background]="contact.color">
-              {{ initials(contact.name) }}
-            </span>
-          }
-          @if (task.contacts.length > 3) {
-            <span class="avatar avatar-more">+{{ task.contacts.length - 3 }}</span>
-          }
-        </div>
-      }
+
+      <div class="avatars">
+        @for (contact of task.contacts.slice(0, 3); track contact.id) {
+        <span class="avatar" [style.background]="contact.color">
+          {{ initials(contact.name) }}
+        </span>
+        }
+        @if (task.contacts.length > 3) {
+        <span class="avatar avatar-more">+{{ task.contacts.length - 3 }}</span>
+        }
+      </div>
+
 
       <div class="priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()">
         @if (task.priority.toLowerCase() === 'urgent') {
-          <img src="assets/icons/prio-urgent-red-20px.svg" alt="Urgent Priority" />
+        <img src="assets/icons/prio-urgent-red-20px.svg" alt="Urgent Priority" />
         }
         @if (task.priority.toLowerCase() === 'medium') {
-          <img src="assets/icons/prio-medium-20px.svg" alt="Medium Priority" />
+        <img src="assets/icons/prio-medium-20px.svg" alt="Medium Priority" />
         }
         @if (task.priority.toLowerCase() === 'low') {
-          <img src="assets/icons/prio-low-20px.svg" alt="Low Priority" />
+        <img src="assets/icons/prio-low-20px.svg" alt="Low Priority" />
         }
       </div>
     </div>
