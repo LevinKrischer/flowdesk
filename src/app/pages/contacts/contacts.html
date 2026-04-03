@@ -1,7 +1,6 @@
 <app-user-feedback #feedback></app-user-feedback>
 
 <div class="ContactsLayout">
-
   <aside class="left" [ngClass]="isMobileDetailOpen ? 'd-none d-lg-block' : ''">
     <app-contact-list
       [groups]="filteredContacts()"
@@ -21,5 +20,4 @@
       (back)="backToList()"
     />
   </section>
-
 </div>

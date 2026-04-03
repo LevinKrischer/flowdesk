@@ -3,11 +3,12 @@ import { RouterLink } from '@angular/router';
 import { TasksDb } from '../../core/db/tasks.db';
 import { SupabaseService } from '../../services/supabase';
 import { environment } from '../../../environments/environment';
+import { Main } from '../../shared/ui/main/main';
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, Main],
   templateUrl: './summary.html',
   styleUrl: './summary.scss',
 })

@@ -1,36 +1,13 @@
 @use 'styles/mixins' as *;
 @use 'styles/variables' as *;
 
-.container {
-  padding: 3rem 1rem 6rem 1rem;
+.add-task-page {
   display: flex;
   flex-direction: column;
-  height: calc(100% - 5.5rem);
-  max-width: 90rem;
   overflow-x: hidden;
   margin: 0;
   scrollbar-width: thin;
   scrollbar-color: $grey-light transparent;
-
-
-  @include for-size(sm) {
-    padding: 3rem 3rem 6rem 3rem;
-  }
-
-  @include for-size(md) {
-    padding: 4rem 4rem 6rem 4rem;
-  }
-
-  @include for-size(lg) {
-    padding: 4rem 4rem;
-    overflow: auto;
-    height: 100%;
-    max-height: calc(100dvh - 5rem);
-  }
-
-  @include for-size(xl) {
-    padding: 5rem 5rem;
-  }
 }
 
 .test {

@@ -8,11 +8,12 @@ import { TaskBoard } from './task-board/task-board';
 import { TaskAddFormComponent } from '../../components/task-add-form/task-add-form';
 import { TaskDetailComponent } from './task-detail/task-detail';
 import { UserFeedbackComponent } from '../../shared/ui/user-feedback/user-feedback';
+import { Main } from '../../shared/ui/main/main';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, InputFieldComponent, Button, TaskBoard, TaskAddFormComponent, TaskDetailComponent, UserFeedbackComponent],
+  imports: [CommonModule, InputFieldComponent, Button, TaskBoard, TaskAddFormComponent, TaskDetailComponent, UserFeedbackComponent, Main],
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })

@@ -5,42 +5,6 @@
   transition: $trans-default;
 }
 
-.container {
-  padding: 3rem 1rem 2rem 1rem;
-  display: flex;
-  flex-direction: column;
-  height: calc(100% - 5.5rem);
-  max-width: 90rem;
-  overflow: auto;
-
-  @include for-size(sm) {
-    padding: 3rem 3rem 0rem 3rem;
-  }
-
-  @include for-size(md) {
-    padding: 4rem 4rem 0 4rem;
-  }
-
-  @include for-size(lg) {
-    padding: 3rem 3rem;
-    overflow: auto;
-    height: 100%;
-    max-height: calc(100dvh - 5rem);
-  }
-
-  @include for-size(xl) {
-    padding: 5rem 6rem;
-  }
-}
-
-h3 {
-  font-size: 2rem;
-
-  @include for-size(sm) {
-    font-size: 3rem;
-  }
-}
-
 .divider {
   height: 2.5rem;
   width: 0.125rem;
@@ -76,6 +40,14 @@ h3 {
 
     @include for-size(sm) {
       font-size: 1rem;
+    }
+  }
+
+  h3 {
+    font-size: 2rem;
+
+    @include for-size(sm) {
+      font-size: 3rem;
     }
   }
 

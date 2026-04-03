@@ -6,31 +6,10 @@
 }
 
 .board {
-  padding: 3rem 1rem 0 1rem;
   display: flex;
   flex-direction: column;
-  height: calc(100% - 5.5rem);
-  max-width: 90rem;
+  min-height: 0;
   overflow: auto;
-
-  @include for-size(sm) {
-    padding: 3rem 3rem 0 3rem;
-  }
-
-  @include for-size(md) {
-    padding: 4rem 4rem 0 4rem;
-  }
-
-  @include for-size(lg) {
-    padding: 3rem 3rem;
-    overflow: auto;
-    height: 100%;
-    max-height: calc(100dvh - 5rem);
-  }
-
-  @include for-size(xl) {
-    padding: 5rem 6rem;
-  }
 
   &__header {
     flex-shrink: 0;

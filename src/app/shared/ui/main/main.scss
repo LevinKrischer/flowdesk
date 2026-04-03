@@ -1,0 +1,30 @@
+@use 'styles/mixins' as *;
+
+.fd-main {
+  padding: 3rem 1rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 5.5rem);
+  max-width: 90rem;
+  width: 100%;
+  overflow: auto;
+
+  @include for-size(sm) {
+    padding: 3rem 3rem 2rem 3rem;
+  }
+
+  @include for-size(md) {
+    padding: 4rem 4rem 2rem 4rem;
+  }
+
+  @include for-size(lg) {
+    padding: 3rem 4rem;
+    height: 100%;
+    max-height: calc(100dvh - 5rem);
+  }
+
+}
+
+.fd-main--full-width {
+  max-width: none;
+}

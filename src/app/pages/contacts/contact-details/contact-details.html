@@ -1,21 +1,15 @@
-<!-- contact-details -->
+  <div class="ContactDetails">
 
-<div class="ContactDetails">
+    @if (isContactModalOpen) {
+    <app-contact-edit-form [contact]="selectedContact" (closed)="closeModal()" (saved)="onEditSaved()"
+      (deleted)="onEditDeleted()" />
+    }
 
-  @if (isContactModalOpen) {
-    <app-contact-edit-form
-      [contact]="selectedContact"
-      (closed)="closeModal()"
-      (saved)="onEditSaved()"
-      (deleted)="onEditDeleted()"
-    />
-  }
-
-  @if (!contact) {
+    @if (!contact) {
     <div class="pt-4">Select a contact to view details</div>
-  }
+    }
 
-  @if (contact) {
+    @if (contact) {
     <div class="fadeIn contact-card">
       <div class="contact-avatar" [style.background]="contact.color">
         {{ contact.initials }}
@@ -43,16 +37,16 @@
           </button>
 
           @if (isMobileActionsOpen) {
-            <div class="fadeIn mobile-actions-dropdown">
-              <button aria-label="Edit contact" (click)="openEdit(contact); closeMobileActions()">
-                <img src="assets/icons/edit-dark-24px.svg" alt="Edit" />
-                Edit
-              </button>
-              <button aria-label="Delete contact" (click)="remove.emit(contact); closeMobileActions()">
-                <img src="assets/icons/delete-dark-24px.svg" alt="Delete" />
-                Delete
-              </button>
-            </div>
+          <div class="fadeIn mobile-actions-dropdown">
+            <button aria-label="Edit contact" (click)="openEdit(contact); closeMobileActions()">
+              <img src="assets/icons/edit-dark-24px.svg" alt="Edit" />
+              Edit
+            </button>
+            <button aria-label="Delete contact" (click)="remove.emit(contact); closeMobileActions()">
+              <img src="assets/icons/delete-dark-24px.svg" alt="Delete" />
+              Delete
+            </button>
+          </div>
           }
         </div>
       </div>
@@ -71,10 +65,11 @@
       <div>
         <label>Phone</label>
         <div>
-          <a class="force-wrap-truncate" href="tel:{{ displayPhone(contact.phone) }}">{{ displayPhone(contact.phone) }}</a>
+          <a class="force-wrap-truncate" href="tel:{{ displayPhone(contact.phone) }}">{{ displayPhone(contact.phone)
+            }}</a>
         </div>
       </div>
     </div>
-  }
+    }
 
-</div>
+  </div>
