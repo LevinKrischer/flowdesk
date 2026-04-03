@@ -3,11 +3,10 @@ import { ContactWithInitials } from '../../../core/db/contacts.db';
 import { ContactEditFormComponent } from '../../../components/contact-edit-form/contact-edit-form';
 import { TruncatePipe } from '../../../services/truncate.pipe';
 import { decodeUserContactPhone } from '../../../core/utils/user-contact-marker';
-import { Main } from "../../../shared/ui/main/main";
 
 @Component({
   selector: 'app-contact-details',
-  imports: [ContactEditFormComponent, TruncatePipe, Main],
+  imports: [ContactEditFormComponent, TruncatePipe],
   templateUrl: './contact-details.html',
   styleUrl: './contact-details.scss',
 })

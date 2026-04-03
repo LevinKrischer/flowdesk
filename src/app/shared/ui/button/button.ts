@@ -17,7 +17,7 @@ export class Button {
     | 'low'
     | 'fab-primary'
     | 'fab-secondary' = 'primary';
-  @Input() icon: 'without' | 'add' | 'create' | 'cancel' | 'urgent' | 'medium' | 'low' = 'without';
+  @Input() bootstrapIcon?: string;
   @Input() active = false;
   @Input() disabled = false;
 }

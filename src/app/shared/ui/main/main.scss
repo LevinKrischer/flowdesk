@@ -18,7 +18,7 @@
   }
 
   @include for-size(lg) {
-    padding: 3rem 4rem;
+    padding: 3rem 4rem 1rem 4rem;
     height: 100%;
     max-height: calc(100dvh - 5rem);
   }

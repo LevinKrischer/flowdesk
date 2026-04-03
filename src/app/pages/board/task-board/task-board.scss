@@ -94,17 +94,6 @@
   }
 }
 
-h2 {
-
-  @include for-size(lg) {
-    font-size: 1.1rem;
-  }
-
-  @include for-size(xl) {
-    font-size: 1.25rem;
-  }
-}
-
 .no-tasks-card {
   border: 1px dashed $grey;
   border-radius: 0.625rem;

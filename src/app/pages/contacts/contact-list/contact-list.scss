@@ -37,20 +37,6 @@
   padding-top: 1rem;
 }
 
-ui-button {
-  ::ng-deep .btn {
-    width: 100%;
-    font-size: 1.1rem;
-    font-family: 'Inter-Bold', sans-serif;
-    margin-bottom: 0.8rem;
-  }
-
-  img {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-}
-
 .input-search {
   display: flex;
   align-items: center;

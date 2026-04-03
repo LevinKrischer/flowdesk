@@ -4,10 +4,9 @@
     <app-contact-add-form (added)="onAdded()" (closed)="closeModal()" />
   }
 
-  <header class="sticky-top d-none d-lg-block">
-    <ui-button variant="primary" (click)="openModal()">
+  <header class="sticky-top d-none d-lg-block mb-2">
+    <ui-button variant="primary" (click)="openModal()" bootstrapIcon="bi-person-plus">
       Add new contact
-      <img src="assets/icons/person-add-white-32px.svg" alt="" aria-hidden="true" />
     </ui-button>
   </header>
 

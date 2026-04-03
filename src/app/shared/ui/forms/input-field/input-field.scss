@@ -1,10 +1,6 @@
 @use 'styles/variables' as *;
 @use 'styles/mixins' as mixins;
 
-input {
-  height: 3rem;
-}
-
 .visually-hidden {
   @include mixins.visually-hidden;
 }
