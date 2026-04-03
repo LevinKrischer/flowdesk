@@ -15,8 +15,14 @@
     position: relative;
     width: 14.5rem;
     height: 100vh;
-    padding: 4rem 0;
+    padding: 2rem 0 4rem 0;
   }
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  padding: 0 1rem;
 }
 
 #main-nav {
@@ -40,10 +46,15 @@
     max-width: 6.5rem;
     flex: 1;
     border-radius: $navi-border-radius;
+    min-height: 3rem;
+    display:flex;
+    align-items: center;
+    width: 100%;
 
     &.active {
       background: $blue-darker;
       border-radius: $navi-border-radius;
+      font-weight: 700;
 
       @include for-size(lg) {
         border-radius: 0;
@@ -52,12 +63,21 @@
       a {
         color: $white;
 
+        img {
+          width: 1.5rem;
+          height: auto;
+        }
+
         img.active {
           display: flex;
+          width: 1.5rem;
+          height: auto;
         }
 
         img.default {
           display: none;
+          width: 1.5rem;
+          height: auto;
         }
       }
     }
@@ -76,7 +96,7 @@
   }
 
   a {
-    color: $grey-light2;
+    color: $off-white;
     transition: $trans-default;
     text-decoration: none;
     padding: $space-sm 0.5rem;
@@ -85,12 +105,18 @@
     gap: 0.25rem;
     font-size: 0.8rem;
 
+    img {
+      width: 1.5rem;
+      height: auto;
+    }
+
     &:hover {
       color: $white;
 
       @include for-size(lg) {
         border-radius: 0;
         background: $blue-dark-hover;
+        font-weight: 700;
       }
     }
 
@@ -114,7 +140,7 @@
   }
 
   a {
-    color: $grey;
+    color: $off-white;
     transition: $trans-default;
     text-decoration: none;
     padding-left: 2.75rem;
