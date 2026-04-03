@@ -145,13 +145,23 @@
   }
 
   &__name {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
+
+    @include for-size(sm) {
+      font-size: 1.125rem;
+      font-weight: 500;
   }
+}
 
   &__email {
     color: $blue-link;
-  }
+    font-size: 0.875rem;
 
+    @include for-size(sm) {
+      font-size: 1rem;
+    }
+  }
 }
 
 .fab-container {

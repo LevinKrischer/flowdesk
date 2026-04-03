@@ -22,28 +22,28 @@
 
         <div class="contact-actions d-none d-sm-flex">
           <button (click)="openEdit(contact)" title="Edit contact" aria-label="Edit contact">
-            <img src="assets/icons/edit-dark-24px.svg" alt="Edit" />
+            <i class="bi bi-pencil"></i>
             Edit
           </button>
           <button (click)="remove.emit(contact)" title="Delete contact" aria-label="Delete contact">
-            <img src="assets/icons/delete-dark-24px.svg" alt="Delete" />
+            <i class="bi bi-trash"></i>
             Delete
           </button>
         </div>
 
         <div class="mobile-actions-fab d-sm-none">
           <button class="fab-btn" aria-label="Contact actions" (click)="toggleMobileActions()">
-            <img src="assets/icons/contact_actions.svg" alt="Actions" />
+            <i class="bi bi-three-dots-vertical"></i>
           </button>
 
           @if (isMobileActionsOpen) {
           <div class="fadeIn mobile-actions-dropdown">
             <button aria-label="Edit contact" (click)="openEdit(contact); closeMobileActions()">
-              <img src="assets/icons/edit-dark-24px.svg" alt="Edit" />
+              <i class="bi bi-pencil"></i>
               Edit
             </button>
             <button aria-label="Delete contact" (click)="remove.emit(contact); closeMobileActions()">
-              <img src="assets/icons/delete-dark-24px.svg" alt="Delete" />
+              <i class="bi bi-trash"></i>
               Delete
             </button>
           </div>
