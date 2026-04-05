@@ -3,7 +3,7 @@
 
     <!-- To Do Column -->
     <section id="to-to" class="board-column d-flex flex-column min-h-0">
-      <header class="board-column-header d-flex align-items-center justify-content-between mb-3 mb-lg-0 mb-xl-3 flex-shrink-0">
+      <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
         <h2 class="h5 m-0">To Do <span class="task-count">({{ todoTasks().length }})</span></h2>
         <button
           class="board-list-add-button p-0 d-flex align-items-center justify-content-center border border-black border-1 rounded-3"
@@ -13,7 +13,7 @@
         </button>
       </header>
       <div
-        class="taskboard-scroll d-flex flex-column gap-2"
+        class="taskboard-scroll d-flex flex-column"
         cdkDropList
         [cdkDropListData]="todoTasks()"
         (cdkDropListDropped)="onTaskDrop($event, 'todo')"
@@ -37,7 +37,7 @@
     </section>
 
     <section id="in-progress" class="board-column d-flex flex-column min-h-0">
-      <header class="board-column-header d-flex align-items-center justify-content-between mb-3 mb-lg-0 mb-xl-3 flex-shrink-0">
+      <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
         <h2 class="h5 m-0">In Progress <span class="task-count">({{ inProgressTasks().length }})</span></h2>
         <button
           class="board-list-add-button p-0 d-flex align-items-center justify-content-center border border-black border-1 rounded-3"
@@ -47,7 +47,7 @@
         </button>
       </header>
       <div
-        class="taskboard-scroll d-flex flex-column gap-2"
+        class="taskboard-scroll d-flex flex-column"
 
         cdkDropList
         [cdkDropListData]="inProgressTasks()"
@@ -72,7 +72,7 @@
     </section>
 
     <section id="await-feedback" class="board-column d-flex flex-column min-h-0">
-      <header class="board-column-header d-flex align-items-center justify-content-between mb-3 mb-lg-0 mb-xl-3 flex-shrink-0">
+      <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
         <h2 class="h5 pe-2 m-0">Await Feedback <span class="task-count">({{ reviewTasks().length }})</span></h2>
         <button
           class="board-list-add-button p-0 d-flex align-items-center justify-content-center border border-black border-1 rounded-3"
@@ -82,7 +82,7 @@
         </button>
       </header>
       <div
-        class="taskboard-scroll d-flex flex-column gap-2"
+        class="taskboard-scroll d-flex flex-column"
         cdkDropList
         [cdkDropListData]="reviewTasks()"
         (cdkDropListDropped)="onTaskDrop($event, 'await-feedback')"
@@ -106,11 +106,11 @@
     </section>
 
     <section id="done" class="board-column d-flex flex-column min-h-0">
-      <header class="board-column-header d-flex align-items-center justify-content-between mb-3 mb-lg-0 mb-xl-3 flex-shrink-0">
+      <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
         <h2 class="h5 m-0">Done <span class="task-count">({{ doneTasks().length }})</span></h2>
       </header>
       <div
-        class="taskboard-scroll d-flex flex-column gap-2"
+        class="taskboard-scroll d-flex flex-column"
         cdkDropList
         [cdkDropListData]="doneTasks()"
         (cdkDropListDropped)="onTaskDrop($event, 'done')"

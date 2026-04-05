@@ -6,6 +6,10 @@
   height: 100%;
 }
 
+.h5 {
+  font-size: 1rem;
+}
+
 .task-count {
   font-size: 0.8em;
   font-weight: 400;
@@ -15,47 +19,43 @@
 .taskboard {
   width: 100%;
   height: 100%;
-  margin-top: 1.5rem;
+  padding-top: 1.5rem;
   overflow-x: auto;
   overflow-y: hidden;
 
   @include for-size(lg) {
-    margin-top: 2rem;
+    padding-top: 2rem;
   }
 }
 
 .taskboard-inner {
   min-width: 100%;
-  height: 100%;
+  height: calc(100% - 1rem);
   gap: 1rem;
+  padding: 2px;
 }
 
 .board-column {
   flex: 1 1 0%;
-  min-width: 14rem;
+  min-width: 17rem;
+  border: 1px solid $grey-light3;
+  border-radius: 0.75rem;
+  padding: 0 0.5rem 0rem 0.5rem;
+  background-color: $off-white;
 }
 
 .board-column-header {
-
-  @include for-size(lg) {
-    height: 3.75rem;
-  }
-
-  @include for-size(xl) {
-    height: unset;
-  }
+  padding: 1rem 0.5rem;
 }
 
 .taskboard-scroll {
   flex: 1;
-  gap: 1rem;
   scrollbar-width: none;
   -ms-overflow-style: none;
   min-width: 0;
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  padding-bottom: 2rem;
 }
 
 .task-item {
@@ -66,8 +66,8 @@
 
 .board-list-add-button {
   transition: $trans-default;
-  width: 1.875rem;
-  height: 1.875rem;
+  width: 1.5rem;
+  height: 1.5rem;
 
   img {
     transition: $trans-default;
@@ -88,9 +88,10 @@
 }
 
 .no-tasks-card {
-  border: 1px dashed $grey;
+  border: 0.5px dashed $grey;
   border-radius: 0.5rem;
   background-color: #e7e7e7;
+  font-size: 0.875rem;
 }
 
 .cdk-drag-preview {
