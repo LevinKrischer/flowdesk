@@ -8,4 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class Main {
   @Input() fullWidth = false;
+  @Input() noPaddingX = false;
+  @Input() noPaddingBottom = false;
 }

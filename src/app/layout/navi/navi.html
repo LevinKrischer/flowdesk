@@ -26,7 +26,7 @@
       <ul class="navigation side-nav-list d-flex flex-row gap-lg-0 flex-lg-column justify-content-evenly">
         @if (isLoggedIn()) {
         <li routerLinkActive="active" class="nav-item">
-          <a routerLink="/summary" class="nav-link d-flex gap-lg-3 flex-column flex-lg-row align-items-center"><i class="bi bi-calendar4-week"></i><span class="nav-label">Summary</span></a>
+          <a routerLink="/summary" class="nav-link d-flex gap-lg-3 flex-column flex-lg-row align-items-center"><i class="bi bi-grid-1x2"></i><span class="nav-label">Summary</span></a>
         </li>
         <li routerLinkActive="active">
           <a routerLink="/add-task" class="nav-link d-flex gap-lg-3 flex-column flex-lg-row align-items-center"><i class="bi bi-pencil-square"></i><span class="nav-label">Add Task</span></a>
@@ -37,8 +37,8 @@
         <li routerLinkActive="active">
           <a routerLink="/contacts" class="nav-link d-flex gap-lg-3 flex-column flex-lg-row align-items-center"><i class="bi bi-people"></i><span class="nav-label">Contacts</span></a>
         </li>
-        <li routerLinkActive="active" class="d-none nav-item d-block">
-          <a routerLink="/test">UI & TEST</a>
+        <li routerLinkActive="active" class="nav-item">
+          <a routerLink="/test" class="nav-link d-flex gap-lg-3 flex-column flex-lg-row align-items-center"><i class="bi bi-layout-text-window-reverse"></i><span class="nav-label">Tests</span></a>
         </li>
         } @else {
         <li routerLinkActive="active" class="nav-item">

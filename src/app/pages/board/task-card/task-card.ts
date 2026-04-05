@@ -19,6 +19,7 @@ interface StatusOption {
 
 export class TaskCardComponent {
   @Input() task!: Task;
+  @Input() compact = false;
   @Output() openTask = new EventEmitter<Task>();
   @Output() statusChange = new EventEmitter<{ task: Task; newStatus: Task['status'] }>();
   @Output() doneToggle = new EventEmitter<void>();
@@ -142,6 +143,15 @@ export class TaskCardComponent {
     }
     const done = this.task.subtasks.filter(s => s.done).length;
     return `${done}/${total} Subtasks`;
+  }
+
+  get completedSubtasksShort(): string {
+    const total = this.task?.subtasks?.length || 0;
+    if (total === 0) {
+      return '';
+    }
+    const done = this.task.subtasks.filter(s => s.done).length;
+    return `${done}/${total}`;
   }
 
   get allSubtasksDone(): boolean {

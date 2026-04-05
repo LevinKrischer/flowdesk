@@ -1,74 +1,121 @@
-<div class="task-card" (click)="onClick()">
+<div class="task-card" [class.task-card--compact]="compact" (click)="onClick()">
 
   @if (task.category) {
-  <div class="d-flex flex-nowrap align-items-center justify-content-between">
-    <span class="category py-1 px-2" [ngClass]="getCategoryClass()">
-      {{ task.category }}
-    </span>
-    <button class="option-btn d-lg-none" (click)="toggleMoveMenu($event)">
-      <i class="bi bi-three-dots-vertical"></i>
-    </button>
-  </div>
-
-  <div class="move-menu" [class.visible]="showMoveMenu" (click)="$event.stopPropagation()">
-    <div class="move-menu-headline"><strong>Move to:</strong></div>
-    @for (status of availableStatuses; track status.value) {
-    <div class="move-option" (click)="moveToStatus(status.value)">
-      {{ status.label }}
-    </div>
+    @if (compact) {
+      <div class="d-flex flex-nowrap align-items-center justify-content-between gap-2">
+        <div class="category-bar flex-grow-1" [ngClass]="getCategoryClass()"></div>
+        <button class="option-btn d-lg-none" (click)="toggleMoveMenu($event)">
+          <i class="bi bi-three-dots-vertical"></i>
+        </button>
+      </div>
+    } @else {
+      <div class="d-flex flex-nowrap align-items-center justify-content-between">
+        <span class="category py-1 px-2" [ngClass]="getCategoryClass()">
+          {{ task.category }}
+        </span>
+        <button class="option-btn d-lg-none" (click)="toggleMoveMenu($event)">
+          <i class="bi bi-three-dots-vertical"></i>
+        </button>
+      </div>
     }
-  </div>
+    <div class="move-menu" [class.visible]="showMoveMenu" (click)="$event.stopPropagation()">
+      <div class="move-menu-headline"><strong>Move to:</strong></div>
+      @for (status of availableStatuses; track status.value) {
+        <div class="move-option" (click)="moveToStatus(status.value)">
+          {{ status.label }}
+        </div>
+      }
+    </div>
   }
 
   <div class="task-header d-flex align-items-start gap-2">
-    <button class="done-toggle pt-2" [class.is-done]="task.done" (click)="toggleDone($event)" [title]="task.done ? 'Mark as not done' : 'Mark as done'">
+    <button class="done-toggle" [class.is-done]="task.done" (click)="toggleDone($event)" [title]="task.done ? 'Mark as not done' : 'Mark as done'">
       <i [class]="task.done ? 'bi bi-check-circle-fill' : 'bi bi-circle'"></i>
     </button>
-    <h5 class="pt-2">{{ task.title | truncate:30 }}</h5>
+    <h5 class="">{{ task.title | truncate:30 }}</h5>
   </div>
 
-  <p class="task-description">{{ task.description | truncate:70 }}</p>
+  @if (!compact) {
+    <p class="task-description">{{ task.description | truncate:70 }}</p>
+  }
 
   <div class="info-row">
-    @if (task.subtasks.length) {
-      <div class="progress-container" [class.open]="!allSubtasksDone">
-        <small>
-          <i [class]="allSubtasksDone ? 'bi bi-check-square' : 'bi bi-list-check'"></i>
-          {{ completedSubtasks }}
-        </small>
+    @if (!compact) {
+      @if (task.subtasks.length) {
+        <div class="progress-container" [class.open]="!allSubtasksDone">
+          <small>
+            <i [class]="allSubtasksDone ? 'bi bi-check-square' : 'bi bi-list-check'"></i>
+            {{ completedSubtasks }}
+          </small>
+        </div>
+      }
+      @if (task.subtasks.length === 0) {
+        <div class="progress-container empty"></div>
+      }
+    }
+
+    @if (compact) {
+      <div class="progress-container compact-meta" [class.open]="task.subtasks.length > 0 && !allSubtasksDone">
+        <div class="compact-meta__left">
+          @if (task.subtasks.length) {
+            <small>
+              <i [class]="allSubtasksDone ? 'bi bi-check-square' : 'bi bi-list-check'"></i>
+              {{ completedSubtasksShort }}
+            </small>
+          }
+          <div class="priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()">
+            @if (task.priority.toLowerCase() === 'urgent') {
+              <img src="assets/icons/prio-urgent-red-20px.svg" alt="Urgent Priority" />
+            }
+            @if (task.priority.toLowerCase() === 'medium') {
+              <img src="assets/icons/prio-medium-20px.svg" alt="Medium Priority" />
+            }
+            @if (task.priority.toLowerCase() === 'low') {
+              <img src="assets/icons/prio-low-20px.svg" alt="Low Priority" />
+            }
+          </div>
+        </div>
+        <div class="avatars">
+          @for (contact of task.contacts.slice(0, 3); track contact.id) {
+            <span class="avatar" [style.background]="contact.color">
+              {{ initials(contact.name) }}
+            </span>
+          }
+          @if (task.contacts.length > 3) {
+            <span class="avatar avatar-more">+{{ task.contacts.length - 3 }}</span>
+          }
+        </div>
       </div>
     }
 
-    @if (task.subtasks.length === 0) {
-      <div class="progress-container empty"></div>
-    }
-
+    @if (!compact) {
     <div class="bottom-row">
-
       <div class="avatars">
         @for (contact of task.contacts.slice(0, 3); track contact.id) {
-        <span class="avatar" [style.background]="contact.color">
-          {{ initials(contact.name) }}
-        </span>
+          <span class="avatar" [style.background]="contact.color">
+            {{ initials(contact.name) }}
+          </span>
         }
         @if (task.contacts.length > 3) {
-        <span class="avatar avatar-more">+{{ task.contacts.length - 3 }}</span>
+          <span class="avatar avatar-more">+{{ task.contacts.length - 3 }}</span>
         }
       </div>
 
-
-      <div class="priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()">
-        @if (task.priority.toLowerCase() === 'urgent') {
-        <img src="assets/icons/prio-urgent-red-20px.svg" alt="Urgent Priority" />
-        }
-        @if (task.priority.toLowerCase() === 'medium') {
-        <img src="assets/icons/prio-medium-20px.svg" alt="Medium Priority" />
-        }
-        @if (task.priority.toLowerCase() === 'low') {
-        <img src="assets/icons/prio-low-20px.svg" alt="Low Priority" />
-        }
-      </div>
+      @if (!compact) {
+        <div class="priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()">
+          @if (task.priority.toLowerCase() === 'urgent') {
+            <img src="assets/icons/prio-urgent-red-20px.svg" alt="Urgent Priority" />
+          }
+          @if (task.priority.toLowerCase() === 'medium') {
+            <img src="assets/icons/prio-medium-20px.svg" alt="Medium Priority" />
+          }
+          @if (task.priority.toLowerCase() === 'low') {
+            <img src="assets/icons/prio-low-20px.svg" alt="Low Priority" />
+          }
+        </div>
+      }
     </div>
+    }
   </div>
 
 </div>

@@ -1,54 +1,47 @@
-<ui-main>
-<main class="board">
+<ui-main [noPaddingX]="true" [noPaddingBottom]="true">
+  <main class="board">
 
-  <header class="board__header d-flex flex-column flex-lg-row justify-content-between align-items-lg-center">
-    <div class="header-headline d-flex align-items-center justify-content-between w-100">
-      <h2 class="mb-0">Board</h2>
-      <ui-button
-        class="board-list-add-button p-0 d-flex align-items-center justify-content-center border border-black rounded-3 d-lg-none"
-        variant="primary"
-        (click)="openAdd()"
-        bootstrapIcon="bi-plus-lg"
-      >
-      </ui-button>
-    </div>
+    <header class="board__header d-flex flex-column flex-lg-row justify-content-between align-items-lg-center">
+      <div
+        class="header-headline d-flex align-items-center gap-3 justify-content-between justify-content-lg-start w-100">
+        <div class="d-flex gap-3 align-items-end">
+          <h2 class="mb-0">Board</h2>
+          <ui-button class="board-list-view-button pb-2" variant="icon-sm"
+            [bootstrapIcon]="compactView() ? 'bi-view-list' : 'bi-view-stacked'"
+            [active]="compactView()" (click)="compactView.set(!compactView())"></ui-button>
+        </div>
 
-    <nav class="d-flex justify-content-between align-items-center w-100" aria-label="Board actions">
-      <app-input-field
-        class="w-100 w-lg-auto"
-        type="text"
-        label="Search tasks"
-        placeholder="Title or description"
-        icon="assets/icons/search-32px.svg"
-        [displayLabel]="false"
-        [model]="searchTerm()"
-        (modelChange)="searchTerm.set($event)"
-      />
-      <ui-button
-        class="d-none d-lg-inline-block text-nowrap"
-        type="button"
-        variant="primary"
-        bootstrapIcon="bi-plus-lg"
-        (click)="openAdd()"
-      >
-        Add task
-      </ui-button>
-    </nav>
-  </header>
+        <ui-button
+          class="board-list-add-button p-0 d-flex align-items-center justify-content-center border border-black rounded-3 d-lg-none"
+          variant="primary" (click)="openAdd()" bootstrapIcon="bi-plus-lg">
+        </ui-button>
+      </div>
 
-  <section class="task-board">
-    <app-task-board [tasks]="filteredTasks()" (open)="openDetail($event)" />
-  </section>
 
-  @if (isModalOpen() && modalMode === 'add') {
+      <nav class="d-flex justify-content-between align-items-center w-100" aria-label="Board actions">
+        <app-input-field class="w-100 w-lg-auto" type="text" label="Search tasks" placeholder="Title or description"
+          icon="assets/icons/search-32px.svg" [displayLabel]="false" [model]="searchTerm()"
+          (modelChange)="searchTerm.set($event)" />
+        <ui-button class="d-none d-lg-inline-block text-nowrap" type="button" variant="primary"
+          bootstrapIcon="bi-plus-lg" (click)="openAdd()">
+          Add task
+        </ui-button>
+      </nav>
+    </header>
+
+    <section class="task-board">
+      <app-task-board [tasks]="filteredTasks()" [compact]="compactView()" (open)="openDetail($event)" />
+    </section>
+
+    @if (isModalOpen() && modalMode === 'add') {
     <app-task-add-form [useModal]="true" (closed)="closeModal()" (created)="closeModal()" />
-  }
+    }
 
-  @if (isModalOpen() && modalMode === 'detail') {
+    @if (isModalOpen() && modalMode === 'detail') {
     <app-task-detail [task]="selectedTask()!" (close)="closeModal()" (deleted)="onTaskDeleted()" />
-  }
+    }
 
-  <app-user-feedback #feedback animation="slide-up" />
+    <app-user-feedback #feedback animation="slide-up" />
 
-</main>
+  </main>
 </ui-main>

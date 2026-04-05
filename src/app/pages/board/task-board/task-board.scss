@@ -20,7 +20,7 @@
   width: 100%;
   height: 100%;
   padding-top: 1.5rem;
-  overflow-x: auto;
+  overflow-x: visible;
   overflow-y: hidden;
 
   @include for-size(lg) {
@@ -32,7 +32,40 @@
   min-width: 100%;
   height: calc(100% - 1rem);
   gap: 1rem;
-  padding: 2px;
+  padding: 2px 1rem;
+
+  @include for-size(sm) {
+    padding: 2px 1.5rem;
+  }
+
+  @include for-size(md) {
+    padding: 2px 2rem;
+  }
+
+  @include for-size(lg) {
+    padding: 2px 4rem;
+  }
+}
+
+.taskboard-end-spacer {
+  flex-shrink: 0;
+  width: 0.5rem;
+
+  @include for-size(sm) {
+    width: 1rem;
+  }
+
+  @include for-size(md) {
+    width: 1.5rem;
+  }
+
+  @include for-size(lg) {
+    width: 3.5rem;
+  }
+
+  @media (min-width: 1312px) {
+    display: none;
+  }
 }
 
 .board-column {
@@ -68,16 +101,25 @@
   transition: $trans-default;
   width: 1.5rem;
   height: 1.5rem;
+  border: $grey-dark 1px solid!important;
 
   img {
     transition: $trans-default;
   }
 
+  i {
+    transition: $trans-default;
+  }
+
   &:hover {
-    border-color: var(--bs-primary, #007bff) !important;
+    background-color: $blue-light;
 
     img {
       filter: invert(66%) sepia(55%) saturate(3372%) hue-rotate(165deg) brightness(95%) contrast(86%);
+    }
+
+    i {
+      color: $off-white;
     }
   }
 
@@ -102,7 +144,7 @@
 .task-item.cdk-drag-placeholder {
   opacity: 0.5;
   border: 2px dotted var(--bs-primary, #007bff);
-  border-radius: 1.5rem;
+  border-radius: 0.75rem;
   background-color: rgba(0, 123, 255, 0.05);
   transition: all 250ms ease;
 }

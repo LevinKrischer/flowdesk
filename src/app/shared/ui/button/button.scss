@@ -2,7 +2,7 @@
 @use 'styles/mixins' as *;
 
 .btn {
-  border-radius: $base-border-radius;
+  border-radius: 0.5rem;
   cursor: pointer;
   font-size: 1rem;
   line-height: 1;
@@ -111,6 +111,32 @@
       img {
         filter: invert(56%) sepia(81%) saturate(560%) hue-rotate(161deg) brightness(93%) contrast(90%);
       }
+    }
+  }
+
+  &--icon-sm {
+    padding: 0.25rem;
+    width: auto;
+    background-color: $grey-light3;
+    border: 1px solid $grey;
+    border-radius: 0.25rem;
+    color: $black;
+
+    &:hover {
+      background-color: $grey-light2;
+      filter: none;
+    }
+
+    &:active,
+    &.active {
+      background-color: $grey-dark;
+      color: $white;
+      border-color: $grey-dark;
+      filter: none;
+    }
+
+    .btn__bootstrap-icon {
+      font-size: 0.875rem!important;
     }
   }
 

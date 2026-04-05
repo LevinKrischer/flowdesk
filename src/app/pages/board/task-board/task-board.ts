@@ -1,15 +1,14 @@
-import { Component, computed, signal, inject, output, Input, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, computed, signal, inject, output, input, Input, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule } from '@angular/cdk/drag-drop';
 import { TasksDb, Task } from '../../../core/db/tasks.db';
 import { TaskCardComponent } from '../task-card/task-card';
 import { TaskAddFormComponent } from '../../../components/task-add-form/task-add-form';
-import { HorizontalScrollDirective } from '../../../services/horizontal-scroll.directive';
 
 @Component({
   selector: 'app-task-board',
   standalone: true,
-  imports: [ CommonModule, DragDropModule, TaskCardComponent, TaskAddFormComponent, HorizontalScrollDirective],
+  imports: [ CommonModule, DragDropModule, TaskCardComponent, TaskAddFormComponent],
   templateUrl: './task-board.html',
   styleUrls: ['./task-board.scss'],
 })
@@ -18,6 +17,7 @@ export class TaskBoard implements AfterViewInit, OnDestroy {
   private el = inject(ElementRef);
   private wheelListeners: Array<{ el: Element; fn: (e: Event) => void }> = [];
   open = output<Task>();
+  compact = input(false);
   isMobile = signal(this.detectTouchDevice());
   dragStartDelay = computed(() => (this.isMobile() ? 500 : 0));
   private _tasks = signal<Task[]>([]);

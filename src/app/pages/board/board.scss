@@ -23,7 +23,21 @@ ui-main {
 
   &__header {
     flex-shrink: 0;
-    gap: 2.5rem;
+    gap: 1rem;
+    padding: 0 1rem;
+
+    @include for-size(sm) {
+      padding: 0 1.5rem;
+    }
+
+    @include for-size(md) {
+      padding: 0 2rem;
+    }
+
+    @include for-size(lg) {
+      padding: 0 4rem;
+      gap: 2.5rem;
+    }
 
     nav {
       gap: 1rem;
@@ -34,6 +48,10 @@ ui-main {
 .board-list-add-button {
   background-color: $blue-dark;
 }
+
+// .board-list-view-button {
+//   background-color: $grey-dark;
+// }
 
 .task-board {
   display: flex;

@@ -47,11 +47,19 @@ header {
 }
 
 #header-right {
-  padding-right: $space-md;
+    padding-right: 1rem;
 
-  @include for-size(sm) {
-    padding-right: 1.5rem;
-  }
+      @include for-size(sm) {
+        padding-right: 1.5rem;
+      }
+
+      @include for-size(md) {
+        padding-right: 2rem;
+      }
+
+      @include for-size(lg) {
+        padding-right: 4rem;
+      }
 }
 
 .userProfile {
@@ -141,6 +149,6 @@ header {
   }
 
   @include for-size(lg) {
-    bottom: -9rem;
+    bottom: -7.7rem;
   }
 }

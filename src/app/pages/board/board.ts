@@ -30,6 +30,7 @@ export class Board implements OnInit, OnDestroy {
   modalMode: 'add' | 'detail' = 'add';
   selectedTaskId = signal<number | null>(null);
   selectedTask = computed(() => this.tasks().find((t) => t.id === this.selectedTaskId()) ?? null);
+  compactView = signal(localStorage.getItem('board.compactView') === 'true');
 
   /**
    * Opens the modal in add mode and clears any selected task.
@@ -64,6 +65,9 @@ export class Board implements OnInit, OnDestroy {
    * Reacts to route fragments and scrolls the matching element into view.
    */
   constructor() {
+    effect(() => {
+      localStorage.setItem('board.compactView', String(this.compactView()));
+    });
     effect(() => {
       const fragment = this.route.snapshot.fragment;
       if (fragment) {

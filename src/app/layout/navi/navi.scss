@@ -170,20 +170,43 @@
   }
 }
 
+.nav-label {
+  white-space: nowrap;
+
+  @include for-size(lg) {
+    opacity: 1;
+    overflow: hidden;
+    transition:
+      opacity 0.2s ease 0.1s,
+      width 0.2s ease;
+      margin-right: 0rem;
+  }
+}
+
+.nav-link {
+  justify-content: flex-start;
+}
+
 #sideNav.is-collapsed {
   @include for-size(lg) {
     .logo {
+      padding-top: 0.5rem;
       width: 5rem;
       max-width: 5rem;
     }
 
     .nav-link {
-      justify-content: center;
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
+      justify-content: start;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
 
       .nav-label {
-        display: none;
+        opacity: 0;
+        width: 0;
+        transition:
+          opacity 0.1s ease,
+          width 0.2s ease;
+          margin-right: -1rem;
       }
     }
 
