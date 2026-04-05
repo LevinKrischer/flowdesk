@@ -43,6 +43,7 @@ export class TaskAddFormComponent {
       category: '',
       subtasks: [],
       status: 'todo',
+      done: false,
       user: null,
     };
 
@@ -280,6 +281,7 @@ export class TaskAddFormComponent {
       category: '',
       subtasks: [],
       status: 'todo',
+      done: false,
       user: null,
     };
     this.selectedContactIds = [];

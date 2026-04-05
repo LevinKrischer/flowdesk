@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, ElementRef, HostListener } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '../../../core/db/tasks.db';
+import { TasksDb } from '../../../core/db/tasks.db';
 import { TruncatePipe } from '../../../services/truncate.pipe';
 
 interface StatusOption {
@@ -20,7 +21,10 @@ export class TaskCardComponent {
   @Input() task!: Task;
   @Output() openTask = new EventEmitter<Task>();
   @Output() statusChange = new EventEmitter<{ task: Task; newStatus: Task['status'] }>();
+  @Output() doneToggle = new EventEmitter<void>();
   showMoveMenu = false;
+
+  private readonly tasksDb = inject(TasksDb);
 
   /**
    * Creates the task-card component instance.
@@ -110,6 +114,13 @@ export class TaskCardComponent {
    */
   onClick() {
     this.openTask.emit(this.task);
+  }
+
+  toggleDone(event: Event): void {
+    event.stopPropagation();
+    this.tasksDb.updateTask(this.task.id, { done: !this.task.done }).then(() => {
+      this.doneToggle.emit();
+    });
   }
 
   /**

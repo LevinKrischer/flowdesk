@@ -9,7 +9,7 @@ import { HorizontalScrollDirective } from '../../../services/horizontal-scroll.d
 @Component({
   selector: 'app-task-board',
   standalone: true,
-  imports: [CommonModule, DragDropModule, TaskCardComponent, TaskAddFormComponent, HorizontalScrollDirective],
+  imports: [ CommonModule, DragDropModule, TaskCardComponent, TaskAddFormComponent, HorizontalScrollDirective],
   templateUrl: './task-board.html',
   styleUrls: ['./task-board.scss'],
 })
@@ -23,7 +23,7 @@ export class TaskBoard {
   @Input() set tasks(v: Task[] | null | undefined) {
     this._tasks.set(v ?? []);
   }
-  
+
   showAddTaskForm = signal(false);
   addTaskStatus = signal<Task['status']>('todo');
   todoTasks = computed(() => this._tasks().filter((t) => t.status === 'todo'));
@@ -130,7 +130,7 @@ export class TaskBoard {
    * Reloads tasks from persistence.
    * @returns Promise that resolves when tasks are loaded.
    */
-  private async refreshTasks() {
+  async refreshTasks() {
     await this.tasksDb.getTasks();
   }
 

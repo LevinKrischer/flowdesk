@@ -2,7 +2,7 @@
 
   @if (task.category) {
   <div class="d-flex flex-nowrap align-items-center justify-content-between">
-    <span class="category" [ngClass]="getCategoryClass()">
+    <span class="category py-1 px-2" [ngClass]="getCategoryClass()">
       {{ task.category }}
     </span>
     <button class="option-btn d-lg-none" (click)="toggleMoveMenu($event)">
@@ -20,8 +20,11 @@
   </div>
   }
 
-  <div class="task-header d-flex justify-content-between align-items-start">
-    <h5 class="mt-2">{{ task.title | truncate:30 }}</h5>
+  <div class="task-header d-flex align-items-start gap-2">
+    <button class="done-toggle pt-2" [class.is-done]="task.done" (click)="toggleDone($event)" [title]="task.done ? 'Mark as not done' : 'Mark as done'">
+      <i [class]="task.done ? 'bi bi-check-circle-fill' : 'bi bi-circle'"></i>
+    </button>
+    <h5 class="pt-2">{{ task.title | truncate:30 }}</h5>
   </div>
 
   <p class="task-description">{{ task.description | truncate:70 }}</p>

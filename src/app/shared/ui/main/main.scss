@@ -1,7 +1,7 @@
 @use 'styles/mixins' as *;
 
 .fd-main {
-  padding: 3rem 1rem 2rem 1rem;
+  padding: 2rem 1rem 2rem 1rem;
   display: flex;
   flex-direction: column;
   height: calc(100% - 5.5rem);
@@ -10,11 +10,11 @@
   overflow: auto;
 
   @include for-size(sm) {
-    padding: 3rem 3rem 2rem 3rem;
+    padding: 2rem 1.5rem 1rem 1.5rem;
   }
 
   @include for-size(md) {
-    padding: 4rem 4rem 2rem 4rem;
+    padding: 3rem 2rem 1rem 2rem;
   }
 
   @include for-size(lg) {

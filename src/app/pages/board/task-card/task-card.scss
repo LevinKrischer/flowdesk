@@ -3,7 +3,7 @@
 
 .task-card {
   background: #fff;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   overflow: visible;
   padding: 1rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -24,6 +24,49 @@
 
   &:hover {
     cursor: pointer;
+
+    .done-toggle {
+      opacity: 1;
+      width: 1.3rem;
+      margin-right: 0.35rem;
+    }
+  }
+
+  h5 {
+    margin-left: -0.5rem;
+  }
+
+  .done-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+    flex-shrink: 0;
+    cursor: pointer;
+    color: $blue-dark;
+    font-size: 1.1rem;
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    margin-right: 0;
+    transition:
+      opacity 0.2s ease,
+      width 0.2s ease,
+      margin-right 0.2s ease;
+
+    &.is-done {
+      opacity: 1;
+      width: 1.3rem;
+      margin-right: 0.35rem;
+    }
+
+    &:hover {
+      color: $blue-dark-hover;
+    }
+
+    .bi-check-circle-fill {
+      color: $green;
+    }
   }
 
   .category {
@@ -52,11 +95,10 @@
   }
 
   .task-header {
-    min-height: 2.4375rem;
-    height: 2.4375rem;
 
     h5 {
       margin: 0;
+      margin-left: -0.5rem;
       font-size: 1rem;
       overflow-wrap: break-word;
       word-break: break-word;
@@ -95,7 +137,6 @@
     color: $grey;
     overflow: hidden;
     line-height: 1.25rem;
-    min-height: 2.5rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -160,8 +201,9 @@
         align-items: center;
 
         .avatar {
-          width: 2rem;
-          height: 2rem;
+          width: 1.75rem;
+          height: 1.75rem;
+          font-size: 0.8rem;
           border-radius: 50%;
           display: flex;
           align-items: center;
