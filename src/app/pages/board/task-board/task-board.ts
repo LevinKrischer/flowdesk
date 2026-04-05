@@ -1,4 +1,4 @@
-import { Component, computed, signal, inject, output, Input } from '@angular/core';
+import { Component, computed, signal, inject, output, Input, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule } from '@angular/cdk/drag-drop';
 import { TasksDb, Task } from '../../../core/db/tasks.db';
@@ -13,8 +13,10 @@ import { HorizontalScrollDirective } from '../../../services/horizontal-scroll.d
   templateUrl: './task-board.html',
   styleUrls: ['./task-board.scss'],
 })
-export class TaskBoard {
+export class TaskBoard implements AfterViewInit, OnDestroy {
   private tasksDb = inject(TasksDb);
+  private el = inject(ElementRef);
+  private wheelListeners: Array<{ el: Element; fn: (e: Event) => void }> = [];
   open = output<Task>();
   isMobile = signal(this.detectTouchDevice());
   dragStartDelay = computed(() => (this.isMobile() ? 500 : 0));
@@ -37,6 +39,26 @@ export class TaskBoard {
  */
   get tasks() {
     return this._tasks();
+  }
+
+  ngAfterViewInit(): void {
+    const scrollEls = this.el.nativeElement.querySelectorAll('.taskboard-scroll');
+    scrollEls.forEach((el: Element) => {
+      const fn = (e: Event) => {
+        const we = e as WheelEvent;
+        if (Math.abs(we.deltaY) > Math.abs(we.deltaX)) {
+          e.preventDefault();
+          (el as HTMLElement).scrollTop += we.deltaY;
+        }
+      };
+      el.addEventListener('wheel', fn, { passive: false });
+      this.wheelListeners.push({ el, fn });
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.wheelListeners.forEach(({ el, fn }) => el.removeEventListener('wheel', fn));
+    this.wheelListeners = [];
   }
 
   /**

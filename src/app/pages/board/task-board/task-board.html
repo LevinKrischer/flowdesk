@@ -14,7 +14,6 @@
       </header>
       <div
         class="taskboard-scroll d-flex flex-column gap-2"
-        horizontalScroll
         cdkDropList
         [cdkDropListData]="todoTasks()"
         (cdkDropListDropped)="onTaskDrop($event, 'todo')"

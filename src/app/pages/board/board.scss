@@ -5,6 +5,16 @@
   transition: padding 0.125s ease;
 }
 
+:host {
+  display: block;
+  height: 100%;
+}
+
+ui-main {
+  display: block;
+  height: 100%;
+}
+
 .board {
   display: flex;
   flex-direction: column;
@@ -26,6 +36,8 @@
 }
 
 .task-board {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   min-height: 0;
   width: 100%;
