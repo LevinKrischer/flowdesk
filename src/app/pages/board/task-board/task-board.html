@@ -90,7 +90,7 @@
       <div class="taskboard-scroll d-flex flex-column" cdkDropList [cdkDropListData]="doneTasks()"
         (cdkDropListDropped)="onTaskDrop($event, 'done')">
         @for (task of doneTasks(); track task.id; let last = $last) {
-        <app-task-card class="task-item" [class.pb-2]="!last" [task]="task" [compact]="compact()" [cdkDragData]="task"
+        <app-task-card class="task-item pb-2" [task]="task" [compact]="compact()" [cdkDragData]="task"
           [cdkDragStartDelay]="dragStartDelay()" cdkDrag cdkDragPreviewClass="custom-drag-preview"
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />

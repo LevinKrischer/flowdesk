@@ -145,7 +145,7 @@
           <span class="text-danger">*</span> This field is required
         </span>
         @if (!editTask()) {
-          <ui-button type="button" variant="secondary" (click)="onCancel()">Clear</ui-button>
+          <ui-button type="button" variant="secondary" (click)="useModal() ? resetForm() : onCancel()">Clear</ui-button>
         }
         <ui-button type="submit" variant="primary" [disabled]="isSaving" bootstrapIcon="bi-check-lg">
           {{ editTask() ? 'Ok' : 'Create Task' }}

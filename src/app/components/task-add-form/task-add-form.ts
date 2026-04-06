@@ -277,7 +277,7 @@ export class TaskAddFormComponent {
   }
 
   /** Resets all form fields, selected contacts, dirty flags, and error messages to their defaults. */
-  private resetForm() {
+  resetForm() {
     this.form = {
       title: '',
       description: '',
