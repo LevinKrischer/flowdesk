@@ -5,25 +5,27 @@
   background-color: $grey-light;
 }
 
-.priority-picker {
-  ::ng-deep ui-button .btn {
-    font-size: 0.875rem !important;
-    padding: 0.5rem !important;
-    height: auto !important;
+// .priority-picker {
+//   ::ng-deep ui-button .btn {
+//     font-size: 0.875rem !important;
 
-    @include mixins.for-size(sm) {
-      font-size: 1rem !important;
-      padding: 1rem !important;
-    }
+//     @include mixins.for-size(sm) {
+//       font-size: 1rem !important;
+//       padding: 1rem !important;
+//     }
 
-    @include mixins.for-size(lg) {
-      padding: 1rem 0.5rem !important;
-    }
+//     @include mixins.for-size(lg) {
+//       padding: 1rem 0.5rem !important;
+//     }
 
-    @include mixins.for-size(xl) {
-      padding: 1rem 1rem !important;
-    }
-  }
+//     @include mixins.for-size(xl) {
+//       padding: 1rem 1rem !important;
+//     }
+//   }
+// }
+
+.priority-section {
+  margin-bottom: 1.825rem;
 }
 
 .me-auto {
@@ -89,17 +91,12 @@
 
   &:hover {
     cursor: pointer;
-
-    &:before {
-      background: $off-white;
-      display: block;
-    }
   }
 
   &__dropdown {
     position: absolute;
     z-index: 10;
-    top: 3rem;
+    top: 2.2rem;
     left: 0;
     right: 0;
     max-height: 15rem;
@@ -133,6 +130,11 @@
       color: $white;
     }
   }
+}
+
+.required-tip {
+  color: $grey;
+  font-size: 0.875rem;
 }
 
 .button-area {

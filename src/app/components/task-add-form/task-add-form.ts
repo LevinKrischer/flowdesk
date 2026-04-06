@@ -67,6 +67,8 @@ export class TaskAddFormComponent {
   categoryOptions: { value: Task['category']; label: string }[] = [
     { value: 'Technical Task', label: 'Technical Task' },
     { value: 'User Story', label: 'User Story' },
+    { value: 'Bug', label: 'Bug' },
+    { value: 'Feature', label: 'Feature' },
   ];
 
   constructor() {
@@ -161,6 +163,9 @@ export class TaskAddFormComponent {
     const target = event.target as HTMLElement;
     const categoryWrapper = this.elementRef.nativeElement.querySelector('.category-picker');
     if (categoryWrapper && !categoryWrapper.contains(target)) {
+      if (this.isCategoryOpen()) {
+        this.markDirty('category');
+      }
       this.isCategoryOpen.set(false);
     }
   }

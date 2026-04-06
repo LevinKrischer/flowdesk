@@ -14,10 +14,10 @@
   [disabled]="disabled"
 >
   @if (bootstrapIcon && variant === 'link') {
-    <i [class]="'btn__bootstrap-icon bi ' + bootstrapIcon" aria-hidden="true"></i>
+    <i [class]="'btn__bootstrap-icon bi ' + bootstrapIcon" [style.font-size]="iconSize" aria-hidden="true"></i>
   }
   <ng-content></ng-content>
   @if (bootstrapIcon && variant !== 'link') {
-    <i [class]="'btn__bootstrap-icon bi ' + bootstrapIcon" aria-hidden="true"></i>
+    <i [class]="'btn__bootstrap-icon bi ' + bootstrapIcon" [style.font-size]="iconSize" aria-hidden="true"></i>
   }
 </button>

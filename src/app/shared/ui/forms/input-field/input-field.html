@@ -10,6 +10,9 @@
   }
 
   <div class="inputWrapper" [class.hasError]="error">
+    @if (bootstrapIconStart) {
+      <i [class]="'inputBootstrapIcon bi ' + bootstrapIconStart" aria-hidden="true"></i>
+    }
     <input
       [id]="label"
       class="form-control"
@@ -42,6 +45,9 @@
       } @else {
         <img class="inputIcon" [src]="icon" width="24" height="24" aria-hidden="true" />
       }
+    }
+    @if (bootstrapIconEnd) {
+      <i [class]="'inputBootstrapIcon bi ' + bootstrapIconEnd" aria-hidden="true"></i>
     }
   </div>
 

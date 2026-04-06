@@ -60,13 +60,13 @@
       }
 
       <div [class]="editTask() ? 'col-12' : 'col-12 col-lg-6'">
-        <div class="my-3">
+        <div class="mt-3 priority-section">
           <label class="form-label d-block">Priority</label>
           <div class="d-flex justify-content-center justify-content-lg-start gap-2 priority-picker">
             <ui-button
               type="button"
               variant="urgent"
-              bootstrapIcon="bi-circle"
+              [bootstrapIcon]="form.priority === 'urgent' ? 'bi-exclamation-triangle-fill' : 'bi-exclamation-triangle'"
               [active]="form.priority === 'urgent'"
               (click)="onPrioritySelected('urgent')"
             >
@@ -75,7 +75,7 @@
             <ui-button
               type="button"
               variant="medium"
-              bootstrapIcon="bi-circle"
+              [bootstrapIcon]="form.priority === 'medium' ? 'bi-dash-circle-fill' : 'bi-dash-circle'"
               [active]="form.priority === 'medium'"
               (click)="onPrioritySelected('medium')"
             >
@@ -84,7 +84,7 @@
             <ui-button
               type="button"
               variant="low"
-              bootstrapIcon="bi-circle"
+              [bootstrapIcon]="form.priority === 'low' ? 'bi-arrow-down-circle-fill' : 'bi-arrow-down-circle'"
               [active]="form.priority === 'low'"
               (click)="onPrioritySelected('low')"
             >
@@ -101,7 +101,7 @@
           />
         </div>
 
-        <div class="mb-lg-2">
+        <div>
           <label for="Category" class="form-label">
             Category <span class="text-danger">*</span>
           </label>
@@ -114,6 +114,7 @@
               [error]="errors['category']"
               [isRequired]="true"
               [reserveErrorSpace]="true"
+              bootstrapIconEnd="bi-caret-down-fill"
             />
             @if (isCategoryOpen()) {
               <ul class="category-picker__dropdown">
@@ -140,13 +141,13 @@
 
     <div class="row mt-4 button-area" [class.in-modal]="useModal() || !!editTask()">
       <div class="button-area-inner col-12 d-flex justify-content-center justify-content-lg-end align-items-center gap-3 pb-0">
-        <span class="me-auto d-none d-lg-inline-block">
+        <span class="me-auto d-none d-lg-inline-block required-tip">
           <span class="text-danger">*</span> This field is required
         </span>
         @if (!editTask()) {
           <ui-button type="button" variant="secondary" (click)="onCancel()">Clear</ui-button>
         }
-        <ui-button type="submit" variant="primary" [disabled]="isSaving" bootstrapIcon="bi-circle">
+        <ui-button type="submit" variant="primary" [disabled]="isSaving" bootstrapIcon="bi-check-lg">
           {{ editTask() ? 'Ok' : 'Create Task' }}
         </ui-button>
       </div>

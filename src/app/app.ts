@@ -18,7 +18,10 @@ export class App {
 
     if (data.session) {
       await this.supabaseService.restoreUserName();
-      this.router.navigate(['/summary']);
+      const hash = window.location.hash;
+      if (!hash || hash === '#' || hash === '#/') {
+        this.router.navigate(['/summary']);
+      }
     } else {
       this.router.navigate(['/login']);
     }

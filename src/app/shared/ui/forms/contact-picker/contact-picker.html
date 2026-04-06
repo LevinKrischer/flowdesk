@@ -9,6 +9,7 @@
     (modelChange)="searchTerm.set($event)"
     (focus)="open()"
     (input)="open()"
+    bootstrapIconEnd="bi-caret-down-fill"
   />
 
   @if (isOpen()) {
@@ -43,6 +44,9 @@
           {{ getInitials(c.name) }}
         </abbr>
       </li>
+    }
+    @if (selectedContacts().length == 0) {
+      <li class="contact-picker__chip-empty">No contacts assigned</li>
     }
     @if (selectedContacts().length > 5) {
       <li class="contact-picker__chip-more d-flex justify-content-center align-items-center">

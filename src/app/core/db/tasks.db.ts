@@ -21,7 +21,7 @@ export interface Task {
   description: string;
   due_date: string;
   priority: 'urgent' | 'medium' | 'low';
-  category: 'Technical Task' | 'User Story';
+  category: 'Technical Task' | 'User Story' | 'Bug' | 'Feature';
   subtasks: Subtask[];
   status: 'todo' | 'in-progress' | 'await-feedback' | 'done';
   done: boolean;

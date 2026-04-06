@@ -65,16 +65,8 @@
               {{ completedSubtasksShort }}
             </small>
           }
-          <div class="priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()">
-            @if (task.priority.toLowerCase() === 'urgent') {
-              <img src="assets/icons/prio-urgent-red-20px.svg" alt="Urgent Priority" />
-            }
-            @if (task.priority.toLowerCase() === 'medium') {
-              <img src="assets/icons/prio-medium-20px.svg" alt="Medium Priority" />
-            }
-            @if (task.priority.toLowerCase() === 'low') {
-              <img src="assets/icons/prio-low-20px.svg" alt="Low Priority" />
-            }
+          <div class="priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()" [title]="'Priority: ' + task.priority">
+            <i [class]="priorityIcon" aria-hidden="true"></i>
           </div>
         </div>
         <div class="avatars">
@@ -104,16 +96,8 @@
       </div>
 
       @if (!compact) {
-        <div class="priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()">
-          @if (task.priority.toLowerCase() === 'urgent') {
-            <img src="assets/icons/prio-urgent-red-20px.svg" alt="Urgent Priority" />
-          }
-          @if (task.priority.toLowerCase() === 'medium') {
-            <img src="assets/icons/prio-medium-20px.svg" alt="Medium Priority" />
-          }
-          @if (task.priority.toLowerCase() === 'low') {
-            <img src="assets/icons/prio-low-20px.svg" alt="Low Priority" />
-          }
+        <div class="priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()" [title]="'Priority: ' + task.priority">
+          <i [class]="priorityIcon" aria-hidden="true"></i>
         </div>
       }
     </div>

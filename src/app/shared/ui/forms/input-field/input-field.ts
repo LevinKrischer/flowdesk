@@ -17,6 +17,8 @@ export class InputFieldComponent {
   @Input() icon: string | null = null;
   @Input() iconAlt = '';
   @Input() iconClickable = false;
+  @Input() bootstrapIconStart?: string;
+  @Input() bootstrapIconEnd?: string;
   @Input() error: string | null = null;
   @Input() maxlength: number | null = null;
   @Input() minDate: string | null = null;

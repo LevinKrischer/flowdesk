@@ -48,6 +48,13 @@ export class TaskCardComponent {
     return this.statusOptions.filter(option => option.value !== this.task.status);
   }
 
+  get priorityIcon(): string {
+    const p = this.task.priority.toLowerCase();
+    if (p === 'urgent') return 'bi bi-exclamation-triangle-fill';
+    if (p === 'medium') return 'bi bi-dash-circle-fill';
+    return 'bi bi-arrow-down-circle-fill';
+  }
+
   /**
    * Toggles the move-menu visibility and prevents parent click handlers.
    * @param event Click event from the menu toggle button.

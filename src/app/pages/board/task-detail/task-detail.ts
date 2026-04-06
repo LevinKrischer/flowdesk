@@ -4,11 +4,12 @@ import { TasksDb, Task, Subtask } from '../../../core/db/tasks.db';
 import { TaskAddFormComponent } from '../../../components/task-add-form/task-add-form';
 import { UserFeedbackComponent } from '../../../shared/ui/user-feedback/user-feedback';
 import { ModalWrapper } from '../../../shared/ui/modal-wrapper/modal-wrapper';
+import { Button } from '../../../shared/ui/button/button';
 
 @Component({
   selector: 'app-task-detail',
   standalone: true,
-  imports: [CommonModule, TaskAddFormComponent, UserFeedbackComponent, ModalWrapper],
+  imports: [CommonModule, TaskAddFormComponent, UserFeedbackComponent, ModalWrapper, Button],
   templateUrl: './task-detail.html',
   styleUrls: ['./task-detail.scss'],
 })
@@ -27,16 +28,9 @@ export class TaskDetailComponent {
    */
   get priorityIcon(): string {
     const pr = this.task()?.priority?.toLowerCase() || '';
-    switch (pr) {
-      case 'low':
-        return 'assets/icons/prio-low-small-task-32px.svg';
-      case 'medium':
-        return 'assets/icons/prio-medium-small-task-32px.svg';
-      case 'urgent':
-        return 'assets/icons/prio-urgent-small-task-32px.svg';
-      default:
-        return '';
-    }
+    if (pr === 'urgent') return 'bi bi-exclamation-triangle-fill';
+    if (pr === 'medium') return 'bi bi-dash-circle-fill';
+    return 'bi bi-arrow-down-circle-fill';
   }
 
   /**
@@ -44,18 +38,9 @@ export class TaskDetailComponent {
    *
    * @returns Hex color string for the current category.
    */
-  get categoryColor(): string {
-    const cat = this.task()?.category?.toLowerCase() || '';
-    switch (cat) {
-      case 'user story':
-        return '#3f51b5';
-      case 'technical task':
-        return '#009688';
-      case 'bug':
-        return '#e91e63';
-      default:
-        return '#607d8b';
-    }
+  getCategoryClass(): string {
+    if (!this.task()?.category) return '';
+    return this.task()!.category.toLowerCase().replace(/\s+/g, '-');
   }
 
   /**

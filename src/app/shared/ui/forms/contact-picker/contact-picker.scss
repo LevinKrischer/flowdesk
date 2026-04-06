@@ -33,17 +33,12 @@
 
   &:hover {
     cursor: pointer;
-
-    &:before {
-      background: $off-white;
-      display: block;
-    }
   }
 
   &__dropdown {
     position: absolute;
     z-index: 10;
-    top: 5rem;
+    top: 4.2rem;
     left: 0;
     right: 0;
     max-height: 15rem;
@@ -125,9 +120,9 @@
   &__chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
     align-items: center;
-    min-height: 2.5rem;
+    min-height: 1.825rem;
+    padding-left: 0.75rem;
   }
 
   &__chip {
@@ -143,6 +138,7 @@
     color: $white;
     border: 0.125rem solid $white;
     font-size: 0.7rem;
+    margin: 0.5rem 0 0.75rem 0;
   }
 
   &__chip-more {
@@ -154,4 +150,15 @@
     margin-left: 0.5rem;
     font-weight: bold;
   }
+
+  &__chip-empty {
+    font-size: 0.75rem;
+    color: $grey;
+    margin: 0.5rem 0 0.75rem 0;
+    height: 2rem;
+  }
 }
+
+    .form-control {
+      cursor: pointer;
+    }

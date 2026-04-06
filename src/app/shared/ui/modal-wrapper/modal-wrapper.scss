@@ -61,7 +61,7 @@ div.modal-content {
     }
 
     @include for-size(lg) {
-      padding: 3rem 2.5rem 2.5rem 2.5rem;
+      padding: 2rem;
     }
 
   }
@@ -69,7 +69,7 @@ div.modal-content {
 
 .close-btn {
   position: absolute;
-  top: 2rem;
+  top: 1rem;
   right: 1rem;
   background-color: transparent;
   z-index: 1060;
@@ -80,8 +80,8 @@ div.modal-content {
   transition: $trans-default;
 
   @include for-size(sm) {
-    top: 2.5rem;
-    right: 2.5rem;
+    top: 1.5rem;
+    right: 1.5rem;
   }
 
   &:hover {

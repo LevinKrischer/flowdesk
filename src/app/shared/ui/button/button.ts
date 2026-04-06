@@ -20,6 +20,7 @@ export class Button {
     | 'icon-sm'
     | 'link' = 'primary';
   @Input() bootstrapIcon?: string;
+  @Input() iconSize?: string;
   @Input() active = false;
   @Input() disabled = false;
 }
