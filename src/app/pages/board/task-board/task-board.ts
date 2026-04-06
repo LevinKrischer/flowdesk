@@ -4,11 +4,12 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule } from 
 import { TasksDb, Task } from '../../../core/db/tasks.db';
 import { TaskCardComponent } from '../task-card/task-card';
 import { TaskAddFormComponent } from '../../../components/task-add-form/task-add-form';
+import { Button } from '../../../shared/ui/button/button';
 
 @Component({
   selector: 'app-task-board',
   standalone: true,
-  imports: [ CommonModule, DragDropModule, TaskCardComponent, TaskAddFormComponent],
+  imports: [ CommonModule, DragDropModule, TaskCardComponent, TaskAddFormComponent, Button],
   templateUrl: './task-board.html',
   styleUrls: ['./task-board.scss'],
 })
@@ -16,6 +17,7 @@ export class TaskBoard implements AfterViewInit, OnDestroy {
   private tasksDb = inject(TasksDb);
   private el = inject(ElementRef);
   private wheelListeners: Array<{ el: Element; fn: (e: Event) => void }> = [];
+  private dragScrollListeners: Array<{ target: EventTarget; type: string; fn: EventListener }> = [];
   open = output<Task>();
   compact = input(false);
   isMobile = signal(this.detectTouchDevice());
@@ -54,11 +56,14 @@ export class TaskBoard implements AfterViewInit, OnDestroy {
       el.addEventListener('wheel', fn, { passive: false });
       this.wheelListeners.push({ el, fn });
     });
+    this.initDragScroll();
   }
 
   ngOnDestroy(): void {
     this.wheelListeners.forEach(({ el, fn }) => el.removeEventListener('wheel', fn));
     this.wheelListeners = [];
+    this.dragScrollListeners.forEach(({ target, type, fn }) => target.removeEventListener(type, fn));
+    this.dragScrollListeners = [];
   }
 
   /**
@@ -160,6 +165,57 @@ export class TaskBoard implements AfterViewInit, OnDestroy {
    * Detects if the device supports touch events (mobile/tablet).
    * @returns True if touch events are supported.
    */
+  private initDragScroll(): void {
+    const el = this.el.nativeElement.querySelector('.taskboard') as HTMLElement;
+    if (!el) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    const isInteractive = (target: EventTarget | null): boolean => {
+      let node = target as HTMLElement | null;
+      while (node && node !== el) {
+        if (['BUTTON', 'A', 'INPUT', 'SELECT', 'TEXTAREA'].includes(node.tagName)) return true;
+        if (node.classList.contains('task-card') || node.classList.contains('cdk-drag')) return true;
+        node = node.parentElement;
+      }
+      return false;
+    };
+
+    const onMouseDown = (e: MouseEvent) => {
+      if (e.button !== 0 || isInteractive(e.target)) return;
+      isDown = true;
+      startX = e.pageX - el.getBoundingClientRect().left + el.scrollLeft;
+      scrollLeft = el.scrollLeft;
+      el.classList.add('is-grabbing');
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - el.getBoundingClientRect().left + el.scrollLeft;
+      el.scrollLeft = scrollLeft - (x - startX);
+    };
+
+    const onStop = () => {
+      isDown = false;
+      el.classList.remove('is-grabbing');
+    };
+
+    el.addEventListener('mousedown', onMouseDown);
+    el.addEventListener('mousemove', onMouseMove);
+    el.addEventListener('mouseup', onStop);
+    el.addEventListener('mouseleave', onStop);
+
+    this.dragScrollListeners = [
+      { target: el, type: 'mousedown', fn: onMouseDown as EventListener },
+      { target: el, type: 'mousemove', fn: onMouseMove as EventListener },
+      { target: el, type: 'mouseup', fn: onStop },
+      { target: el, type: 'mouseleave', fn: onStop },
+    ];
+  }
+
   private detectTouchDevice(): boolean {
     return (
       window.matchMedia('(hover: none) and (pointer: coarse)').matches ||

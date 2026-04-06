@@ -9,11 +9,15 @@
   [class.btn--fab-primary]="variant === 'fab-primary'"
   [class.btn--fab-secondary]="variant === 'fab-secondary'"
   [class.btn--icon-sm]="variant === 'icon-sm'"
+  [class.btn--link]="variant === 'link'"
   [class.active]="active"
   [disabled]="disabled"
 >
+  @if (bootstrapIcon && variant === 'link') {
+    <i [class]="'btn__bootstrap-icon bi ' + bootstrapIcon" aria-hidden="true"></i>
+  }
   <ng-content></ng-content>
-  @if (bootstrapIcon) {
+  @if (bootstrapIcon && variant !== 'link') {
     <i [class]="'btn__bootstrap-icon bi ' + bootstrapIcon" aria-hidden="true"></i>
   }
 </button>

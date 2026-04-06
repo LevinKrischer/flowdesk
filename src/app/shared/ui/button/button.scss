@@ -140,6 +140,25 @@
     }
   }
 
+  &--link {
+    background: none;
+    border: none;
+    padding: 0;
+    width: auto;
+    font-weight: inherit;
+    color: inherit;
+    gap: 0.25rem;
+
+    &:hover {
+      filter: none;
+      color: $blue-light;
+    }
+
+    &:active {
+      filter: none;
+    }
+  }
+
   .btn__bootstrap-icon {
     font-size: 1.25rem;
     line-height: 1;

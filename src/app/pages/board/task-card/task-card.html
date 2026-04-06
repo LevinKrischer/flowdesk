@@ -18,14 +18,16 @@
         </button>
       </div>
     }
-    <div class="move-menu" [class.visible]="showMoveMenu" (click)="$event.stopPropagation()">
-      <div class="move-menu-headline"><strong>Move to:</strong></div>
-      @for (status of availableStatuses; track status.value) {
-        <div class="move-option" (click)="moveToStatus(status.value)">
-          {{ status.label }}
-        </div>
-      }
-    </div>
+    @if (showMoveMenu) {
+      <div class="move-menu visible" (click)="$event.stopPropagation()">
+        <div class="move-menu-headline"><strong>Move to:</strong></div>
+        @for (status of availableStatuses; track status.value) {
+          <div class="move-option" (click)="moveToStatus(status.value)">
+            {{ status.label }}
+          </div>
+        }
+      </div>
+    }
   }
 
   <div class="task-header d-flex align-items-start gap-2">
