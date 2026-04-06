@@ -92,12 +92,7 @@
   }
 
   .category {
-    align-self: flex-start;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.5rem;
     font-size: 0.875rem;
-    color: #FFFFFF;
-    display: inline-block;
 
     &.user-story {
       background: #5e6bff;
@@ -167,7 +162,6 @@
   }
 
   .task-description {
-    margin: 0;
     color: $grey;
     overflow: hidden;
     line-height: 1.25rem;
@@ -243,7 +237,6 @@
 
   .avatars {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
 
     .avatar {
@@ -271,19 +264,6 @@
         margin-left: 0.5rem;
         font-weight: bold;
       }
-    }
-  }
-
-  .info-row {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    .bottom-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
     }
   }
 

@@ -10,7 +10,7 @@
       </div>
     } @else {
       <div class="d-flex flex-nowrap align-items-center justify-content-between">
-        <span class="category py-1 px-2" [ngClass]="getCategoryClass()">
+        <span class="category py-1 px-2 text-white rounded-3 d-inline-block align-self-start" [ngClass]="getCategoryClass()">
           {{ task.category }}
         </span>
         <button class="option-btn d-lg-none" (click)="toggleMoveMenu($event)">
@@ -38,10 +38,10 @@
   </div>
 
   @if (!compact) {
-    <p class="task-description">{{ task.description | truncate:70 }}</p>
+    <p class="task-description m-0">{{ task.description | truncate:70 }}</p>
   }
 
-  <div class="info-row">
+  <div class="info-row d-flex flex-column gap-3">
     @if (!compact) {
       @if (task.subtasks.length) {
         <div class="progress-container" [class.open]="!allSubtasksDone">
@@ -91,7 +91,7 @@
     }
 
     @if (!compact) {
-    <div class="bottom-row">
+    <div class="bottom-row d-flex align-items-center justify-content-between">
       <div class="avatars">
         @for (contact of task.contacts.slice(0, 3); track contact.id) {
           <span class="avatar" [style.background]="contact.color">

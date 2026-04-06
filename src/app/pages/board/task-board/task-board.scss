@@ -134,16 +134,10 @@
       color: $off-white;
     }
   }
-
-  @include for-size(lg) {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
 }
 
 .no-tasks-card {
   border: 0.5px dashed $grey;
-  border-radius: 0.5rem;
   background-color: #e7e7e7;
   font-size: 0.875rem;
 }

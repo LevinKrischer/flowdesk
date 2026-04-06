@@ -1,12 +1,12 @@
 <section class="taskboard">
-  <div class="taskboard-inner d-flex flex-row gap-2 align-items-start" cdkDropListGroup>
+  <div class="taskboard-inner d-flex flex-row align-items-start" cdkDropListGroup>
 
     <!-- To Do Column -->
     <section id="to-to" class="board-column d-flex flex-column min-h-0">
       <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
         <h2 class="h5 m-0">To Do <span class="task-count">({{ todoTasks().length }})</span></h2>
         <button
-          class="board-list-add-button p-0 d-flex align-items-center justify-content-center border border-black border-1 rounded-3"
+          class="board-list-add-button p-0 d-flex align-items-center justify-content-center rounded-3"
           (click)="openAddTask('todo')">
           <i class="bi bi-plus-lg"></i>
         </button>
@@ -19,7 +19,7 @@
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />
         } @empty {
-        <div class="no-tasks-card px-3 py-2 text-center text-muted">No tasks to do</div>
+        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">No tasks to do</div>
         }
       </div>
       <section class="board-column-footer">
@@ -33,7 +33,7 @@
       <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
         <h2 class="h5 m-0">In Progress <span class="task-count">({{ inProgressTasks().length }})</span></h2>
         <button
-          class="board-list-add-button p-0 d-flex align-items-center justify-content-center border border-black border-1 rounded-3"
+          class="board-list-add-button p-0 d-flex align-items-center justify-content-center rounded-3"
           (click)="openAddTask('in-progress')">
           <i class="bi bi-plus-lg"></i>
         </button>
@@ -46,7 +46,7 @@
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />
         } @empty {
-        <div class="no-tasks-card px-3 py-2 text-center text-muted">No tasks in progress</div>
+        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">No tasks in progress</div>
         }
       </div>
       <section class="board-column-footer">
@@ -60,7 +60,7 @@
       <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
         <h2 class="h5 pe-2 m-0">Await Feedback <span class="task-count">({{ reviewTasks().length }})</span></h2>
         <button
-          class="board-list-add-button p-0 d-flex align-items-center justify-content-center border border-black border-1 rounded-3"
+          class="board-list-add-button p-0 d-flex align-items-center justify-content-center rounded-3"
           (click)="openAddTask('await-feedback')">
           <i class="bi bi-plus-lg"></i>
         </button>
@@ -73,7 +73,7 @@
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />
         } @empty {
-        <div class="no-tasks-card px-3 py-2 text-center text-muted">No tasks awaiting feedback</div>
+        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">No tasks awaiting feedback</div>
         }
       </div>
       <section class="board-column-footer">
@@ -95,7 +95,7 @@
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />
         } @empty {
-        <div class="no-tasks-card px-3 py-2 text-center text-muted">No tasks done</div>
+        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">No tasks done</div>
         }
       </div>
     </section>

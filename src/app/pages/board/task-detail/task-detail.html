@@ -6,17 +6,17 @@
 
   @if (task()) {
     @if (!isEditing()) {
-      <div class="task-detail">
+      <div class="task-detail d-flex flex-column gap-3">
 
         @if (task().category || task()) {
-          <div class="badge-row">
-            <div class="category-badge" [style.background]="categoryColor">
+          <div class="badge-row d-flex justify-content-between align-items-center">
+            <div class="category-badge d-inline-block rounded-3 text-white fw-semibold" [style.background]="categoryColor">
               {{ task().category }}
             </div>
           </div>
         }
 
-        <section class="scrollable-content">
+        <section class="scrollable-content d-flex flex-column gap-3">
           <header class="modal-header">
             <h2 class="mb-0">{{ task().title }}</h2>
           </header>
@@ -25,9 +25,9 @@
             {{ task().description }}
           }
 
-          <div class="detail-meta">
-            <div class="meta-item due-date"><strong>Due date:</strong> {{ task().due_date }}</div>
-            <div class="meta-item priority">
+          <div class="detail-meta d-flex flex-column align-items-start gap-3">
+            <div class="meta-item due-date d-flex align-items-center gap-2"><strong>Due date:</strong> {{ task().due_date }}</div>
+            <div class="meta-item priority d-flex align-items-center gap-2">
               <strong>Priority:</strong>
               <span class="priority-text">{{ task().priority | titlecase }}</span>
               <img class="priority-icon" [src]="priorityIcon" [alt]="task().priority" />
@@ -38,10 +38,10 @@
             <div class="detail-section">
               <div class="mb-2"><strong>Assigned To:</strong></div>
               <div class="details-scroll-section">
-                <div class="contacts-list">
+                <div class="contacts-list d-flex flex-column ps-3">
                   @for (contact of task().contacts; track contact.name) {
-                    <div class="contact-item">
-                      <span class="contact-avatar" [style.background]="contact.color">
+                    <div class="contact-item d-flex align-items-center">
+                      <span class="contact-avatar d-flex align-items-center justify-content-center rounded-circle text-white fw-bold flex-shrink-0" [style.background]="contact.color">
                         {{ initials(contact.name) }}
                       </span>
                       <span class="contact-name">{{ contact.name }}</span>
@@ -56,9 +56,9 @@
             <div class="detail-section">
               <div class="mb-2"><strong>Subtasks:</strong></div>
               <div class="subtasks-scroll-section">
-                <div class="subtasks-list">
+                <div class="subtasks-list d-flex flex-column gap-2 ps-3">
                   @for (subtask of task().subtasks; track subtask.title) {
-                    <div class="subtask-item" (click)="toggleSubtask(subtask)">
+                    <div class="subtask-item d-flex align-items-center gap-2" (click)="toggleSubtask(subtask)">
                       <img
                         [src]="subtask.done ? 'assets/icons/checkbox-checked-default-24px.svg' : 'assets/icons/checkbox-default-24px.svg'"
                         [alt]="subtask.done ? 'Completed' : 'Not completed'"
@@ -74,12 +74,12 @@
             </div>
           }
 
-          <div class="detail-actions">
-            <button class="action-btn delete" title="Delete task" aria-label="Delete task" (click)="deleteTask()">
+          <div class="detail-actions d-flex justify-content-end align-items-center gap-3">
+            <button class="action-btn delete d-flex align-items-center bg-transparent border-0" title="Delete task" aria-label="Delete task" (click)="deleteTask()">
               <img src="assets/icons/delete-dark-24px.svg" width="18" height="18" alt="Delete" />
               Delete
             </button>
-            <button class="action-btn edit" title="Edit task" aria-label="Edit task" (click)="updateTask()">
+            <button class="action-btn edit d-flex align-items-center bg-transparent border-0" title="Edit task" aria-label="Edit task" (click)="updateTask()">
               <img src="assets/icons/edit-dark-24px.svg" width="18" height="18" alt="Edit" />
               Edit
             </button>
@@ -88,7 +88,7 @@
 
       </div>
     } @else {
-      <header class="edit-header">
+      <header class="edit-header d-flex justify-content-between align-items-center mb-3">
         <h4>Edit Task</h4>
       </header>
       <app-task-add-form [editTask]="task()" (updated)="onTaskUpdated()" (closed)="onEditCancelled()" />
