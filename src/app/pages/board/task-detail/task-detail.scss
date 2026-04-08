@@ -27,7 +27,9 @@ strong {
 .subtask-title {
   word-break: break-word;
 
-  &.done { color: $grey; }
+  &.done {
+    color: $grey;
+  }
 }
 
 .badge-row {
@@ -148,7 +150,10 @@ strong {
 
         &.bi-check-square {
           color: $grey;
-          &::before { color: $grey; }
+
+          &::before {
+            color: $grey;
+          }
         }
       }
 

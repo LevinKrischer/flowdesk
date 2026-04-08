@@ -4,13 +4,14 @@ import { ContactsDb, Contact, ContactWithInitials, isContactDeleteBlockedByUserE
 import { decodeUserContactPhone, encodeUserContactPhone, isUserContactPhone } from '../../core/utils/user-contact-marker';
 import { isValidName, isValidEmail, isValidPhone } from '../../core/utils/validation';
 import { InputFieldComponent } from '../../shared/ui/forms/input-field/input-field';
+import { Textarea } from '../../shared/ui/forms/textarea/textarea';
 import { ModalWrapper } from '../../shared/ui/modal-wrapper/modal-wrapper';
 import { Button } from '../../shared/ui/button/button';
 
 @Component({
   selector: 'app-contact-edit-form',
   standalone: true,
-  imports: [FormsModule, InputFieldComponent, ModalWrapper, Button],
+  imports: [FormsModule, InputFieldComponent, Textarea, ModalWrapper, Button],
   templateUrl: './contact-edit-form.html',
   styleUrls: ['./contact-edit-form.scss'],
 })
@@ -32,6 +33,7 @@ export class ContactEditFormComponent {
     name: '',
     email: '',
     phone: '',
+    notes: '',
   };
 
   errors = {
@@ -57,6 +59,7 @@ export class ContactEditFormComponent {
       name: this.contact.name,
       email: this.contact.email,
       phone: decodeUserContactPhone(this.contact.phone),
+      notes: this.contact.notes ?? '',
     };
   }
 
@@ -97,13 +100,13 @@ export class ContactEditFormComponent {
         break;
 
       case 'email':
-        this.errors.email = isValidEmail(value)
+        this.errors.email = value.trim() === '' || isValidEmail(value)
           ? ''
           : 'Please enter a valid email address with maximum 35 characters';
         break;
 
       case 'phone':
-        this.errors.phone = isValidPhone(value)
+        this.errors.phone = value.trim() === '' || isValidPhone(value)
           ? ''
           : 'Please enter 10 to 15 digits using numbers only (a leading + is allowed)';
         break;
@@ -117,8 +120,6 @@ export class ContactEditFormComponent {
   isFormValid() {
     return (
       String(this.form.name ?? '').trim() !== '' &&
-      String(this.form.email ?? '').trim() !== '' &&
-      String(this.form.phone ?? '').trim() !== '' &&
       !this.errors.name &&
       !this.errors.email &&
       !this.errors.phone
@@ -201,6 +202,7 @@ export class ContactEditFormComponent {
       name: String(this.form.name),
       email: String(this.form.email),
       phone: persistedPhone,
+      notes: String(this.form.notes ?? ''),
     });
   }
 

@@ -15,8 +15,8 @@ export class Textarea {
   @Input() maxlength: number | null = null;
   @Input() errorMessage: string = '';
   @Input() isRequired: boolean = false;
-  @Input() model: string = '';
-  @Output() modelChange = new EventEmitter<string>();
+  @Input() model: any;
+  @Output() modelChange = new EventEmitter<any>();
 
   /**
    * Handles textarea input events and emits the updated value.

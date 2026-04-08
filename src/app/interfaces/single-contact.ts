@@ -4,6 +4,7 @@ export interface SingleContact {
   email: string;
   phone: string;
   color?: string;
+  notes: string;
 }
 
 export interface ContactWithInitials extends SingleContact {

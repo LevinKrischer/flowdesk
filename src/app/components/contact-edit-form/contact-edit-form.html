@@ -8,7 +8,7 @@
 
       <div class="col-12 col-lg-5 d-flex flex-column justify-content-center align-items-start modal-title-area gap-0">
         <img src="assets/icons/logo-flowdesk-default-100px.svg" alt="Flowdesk Logo" class="logo d-none d-lg-block" />
-        <h2 class="mt-4 mb-1 mb-lg-3">Edit contact</h2>
+        <h2 class="mb-1 mb-lg-3 mt-lg-4">Edit contact</h2>
         <div class="blue-divider mt-0 mt-lg-1"></div>
       </div>
 
@@ -69,11 +69,19 @@
             (input)="liveValidate('phone')"
           />
 
+          <ui-textarea
+            placeholder="Notes"
+            [(model)]="form.notes!"
+            [maxlength]="500"
+            [rows]="3"
+          />
+
           <div class="d-flex gap-4 mt-2 justify-content-center justify-content-lg-start">
             <ui-button
               type="button"
               variant="secondary"
-              bootstrapIcon="bi-x-lg"
+              bootstrapIcon="bi-trash3"
+              [iconSize]="'0.875rem'"
               class="d-none d-lg-inline-flex"
               [disabled]="isSaving || isDeleting"
               (click)="delete()"

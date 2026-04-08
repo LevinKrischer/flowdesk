@@ -47,7 +47,7 @@ export class Contacts implements OnInit {
    */
   filteredContacts = computed(() => {
     const term = this.searchTerm().toLowerCase();
-    if (term.length < 3) return this.groupedContacts();
+    if (term.length < 1) return this.groupedContacts();
 
     return this.groupedContacts()
       .map((group) => ({
@@ -56,7 +56,8 @@ export class Contacts implements OnInit {
           (c) =>
             c.name.toLowerCase().includes(term) ||
             c.email.toLowerCase().includes(term) ||
-            c.phone.includes(term),
+            c.phone.includes(term) ||
+            (c.notes ?? '').toLowerCase().includes(term),
         ),
       }))
       .filter((group) => group.contacts.length > 0);
@@ -96,9 +97,8 @@ export class Contacts implements OnInit {
   /**
    * Handles the search input event and updates the search term signal.
    */
-  onSearch(event: Event) {
-    const value = (event.target as HTMLInputElement).value;
-    this.searchTerm.set(value);
+  onSearch(term: string) {
+    this.searchTerm.set(term);
   }
 
   /**

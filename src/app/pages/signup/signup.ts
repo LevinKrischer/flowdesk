@@ -90,6 +90,7 @@ export class Signup {
       email: credentials.email,
       phone: encodeUserContactPhone(''),
       color: this.getRandomColor(),
+      notes: '',
     });
   }
 

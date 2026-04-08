@@ -15,7 +15,7 @@
     [attr.placeholder]="placeholder"
     [attr.rows]="rows"
     [attr.maxlength]="maxlength"
-    [value]="model"
+    [value]="model ?? ''"
     (input)="onInput($event)"
   ></textarea>
 

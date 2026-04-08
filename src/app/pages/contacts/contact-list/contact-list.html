@@ -1,17 +1,27 @@
-<main class="contact-list px-3">
+<main class="contact-list">
 
   @if (isContactModalOpen) {
     <app-contact-add-form (added)="onAdded()" (closed)="closeModal()" />
   }
 
-  <header class="sticky-top d-none d-lg-block mb-2">
-    <ui-button variant="primary" (click)="openModal()" bootstrapIcon="bi-person-plus">
+  <header class="sticky-top d-flex py-lg-3 flex-column gap-2">
+    <ui-button class="d-none d-lg-block" variant="primary" (click)="openModal()" bootstrapIcon="bi-person-plus">
       Add new contact
     </ui-button>
+    <app-input-field
+      type="text"
+      label="Search contacts"
+      placeholder="Search by name, email, phone or note"
+      icon="assets/icons/search-32px.svg"
+      [displayLabel]="false"
+      (modelChange)="search.emit($event)"
+      class="py-3 py-lg-0"
+
+    />
   </header>
 
   @for (group of groups; track group.letter) {
-    <section class="contacts">
+    <section class="contacts mb-3">
       <header>
         <abbr class="letter">{{ group.letter }}</abbr>
       </header>
@@ -40,7 +50,7 @@
 
   <aside class="fab-container d-lg-none" aria-label="Quick actions">
     <ui-button variant="fab-primary" (click)="openModal()">
-      <img src="assets/icons/person-add-white-32px.svg" alt="" aria-hidden="true" />
+      <i class="bi bi-person-plus fs-4"></i>
     </ui-button>
   </aside>
 

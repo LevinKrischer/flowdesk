@@ -5,12 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { isValidName, isValidEmail, isValidPhone } from '../../core/utils/validation';
 import { ModalWrapper } from '../../shared/ui/modal-wrapper/modal-wrapper';
 import { InputFieldComponent } from '../../shared/ui/forms/input-field/input-field';
+import { Textarea } from '../../shared/ui/forms/textarea/textarea';
 import { Button } from '../../shared/ui/button/button';
 
 @Component({
   selector: 'app-contact-add-form',
   standalone: true,
-  imports: [FormsModule, ModalWrapper, InputFieldComponent, Button],
+  imports: [FormsModule, ModalWrapper, InputFieldComponent, Textarea, Button],
   templateUrl: './contact-add-form.html',
   styleUrls: ['./contact-add-form.scss'],
 })
@@ -29,6 +30,7 @@ export class ContactAddFormComponent {
     name: '',
     email: '',
     phone: '',
+    notes: '',
   };
 
   errors = {
@@ -42,6 +44,7 @@ export class ContactAddFormComponent {
     email: false,
     phone: false,
   };
+
 
   /**
    * Selects a random color from the predefined CONTACT_COLORS list.
@@ -90,13 +93,13 @@ export class ContactAddFormComponent {
         break;
 
       case 'email':
-        this.errors.email = isValidEmail(value)
+        this.errors.email = value.trim() === '' || isValidEmail(value)
           ? ''
           : 'Please enter a valid email address with maximum 35 characters';
         break;
 
       case 'phone':
-        this.errors.phone = isValidPhone(value)
+        this.errors.phone = value.trim() === '' || isValidPhone(value)
           ? ''
           : 'Please enter 10 to 15 digits using numbers only (a leading + is allowed)';
         break;
@@ -110,8 +113,6 @@ export class ContactAddFormComponent {
   isFormValid() {
     return (
       this.form.name.trim() !== '' &&
-      this.form.email.trim() !== '' &&
-      this.form.phone.trim() !== '' &&
       !this.errors.name &&
       !this.errors.email &&
       !this.errors.phone
@@ -151,6 +152,7 @@ export class ContactAddFormComponent {
     this.markDirty('email');
     this.markDirty('phone');
   }
+
 
   /**
    * Initializes the saving state by enabling the loading indicator

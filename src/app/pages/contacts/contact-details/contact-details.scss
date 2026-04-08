@@ -1,7 +1,9 @@
 @use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 
-.ContactDetails {
+.contactDetails {
+  padding-top: 2rem;
+
   >div:nth-child(3) {
     margin-top: 2rem;
 
@@ -50,7 +52,6 @@
     align-items: center;
     gap: 2.5rem;
     transition: $trans-default;
-    padding-top: 2.25rem;
 
     @include for-size(xs) {
       gap: 1rem;
@@ -63,8 +64,8 @@
   }
 
   .contact-avatar {
-    width: 5.625rem;
-    height: 5.625rem;
+    width: 4rem;
+    height: 4rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -87,11 +88,16 @@
     font-weight: 700;
   }
 
+  .select-contact-message {
+    border: 0.5px dashed $grey;
+    background-color: #e7e7e7;
+    font-size: 0.875rem;
+  }
+
   .contact-name {
     font-size: 1.875rem;
     font-weight: 700;
     color: #141517;
-
 
     @include for-size(xs) {
       line-height: 2rem;
@@ -133,30 +139,14 @@
 
   .mobile-actions-fab {
     position: fixed;
-    right: 1.5rem;
-    bottom: 5.5rem;
+    bottom: 6rem;
+    right: 1.5em;
     z-index: 10;
-
-    .fab-btn {
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-
-      img {
-        width: 3.5rem;
-        height: 3.5rem;
-      }
-
-      &:active {
-        filter: invert(69%) sepia(69%) saturate(3474%) hue-rotate(165deg) brightness(94%) contrast(87%);
-      }
-    }
 
     .mobile-actions-dropdown {
       position: absolute;
-      bottom: 0.4rem;
-      right: -0.8rem;
+      top: -5.5rem;
+      right: 0;
       background: #FFFFFF;
       border-radius: 1.625rem 1.625rem 0 1.625rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -217,4 +207,34 @@
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+.description-row {
+
+  i::before {
+    font-size: 1.25rem;
+    color: $grey-dark;
+  }
+
+  i.priority-icon {
+    &.priority-urgent::before {
+      color: $red;
+    }
+
+    &.priority-medium::before {
+      color: $orange;
+    }
+
+    &.priority-low::before {
+      color: $green;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.contact-information {
+  padding-top: 2rem;
 }

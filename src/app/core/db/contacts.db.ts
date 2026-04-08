@@ -37,6 +37,7 @@ export interface Contact {
   email: string;
   phone: string;
   color: string;
+  notes: string;
 }
 
 export interface ContactWithInitials extends Contact {

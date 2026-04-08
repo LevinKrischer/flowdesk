@@ -1,12 +1,16 @@
 @use 'styles/variables' as *;
-@use 'styles/mixins' as mixins;
+@use 'styles/mixins' as *;
 
 textarea {
   flex: 1;
   padding-right: 0;
   border: 1px solid $grey-light;
   border-radius: $base-border-radius;
-  margin-bottom: 1.825rem;
+  margin-bottom: 1rem;
+
+  @include for-size(lg) {
+    margin-bottom: 1.825rem;
+  }
 
   &:focus {
     box-shadow: none;

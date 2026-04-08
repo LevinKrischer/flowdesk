@@ -1,75 +1,73 @@
-  <div class="ContactDetails">
+<div class="contactDetails d-flex flex-column ">
 
-    @if (isContactModalOpen) {
-    <app-contact-edit-form [contact]="selectedContact" (closed)="closeModal()" (saved)="onEditSaved()"
-      (deleted)="onEditDeleted()" />
-    }
+  @if (isContactModalOpen) {
+  <app-contact-edit-form [contact]="selectedContact" (closed)="closeModal()" (saved)="onEditSaved()"
+    (deleted)="onEditDeleted()" />
+  }
 
-    @if (!contact) {
-    <div class="pt-4">Select a contact to view details</div>
-    }
+  @if (!contact) {
+  <div class="select-contact-message rounded-3 px-3 py-2 text-center text-muted align-self-start">Select a contact to
+    view details</div>
+  }
 
-    @if (contact) {
-    <div class="fadeIn contact-card">
-      <div class="contact-avatar" [style.background]="contact.color">
-        {{ contact.initials }}
-      </div>
-
-      <div class="contact-info">
-        <div class="contact-name force-wrap-truncate">
-          {{ contact.name | truncate }}
-        </div>
-
-        <div class="contact-actions d-none d-sm-flex">
-          <button (click)="openEdit(contact)" title="Edit contact" aria-label="Edit contact">
-            <i class="bi bi-pencil"></i>
-            Edit
-          </button>
-          <button (click)="remove.emit(contact)" title="Delete contact" aria-label="Delete contact">
-            <i class="bi bi-trash"></i>
-            Delete
-          </button>
-        </div>
-
-        <div class="mobile-actions-fab d-sm-none">
-          <button class="fab-btn" aria-label="Contact actions" (click)="toggleMobileActions()">
-            <i class="bi bi-three-dots-vertical"></i>
-          </button>
-
-          @if (isMobileActionsOpen) {
-          <div class="fadeIn mobile-actions-dropdown">
-            <button aria-label="Edit contact" (click)="openEdit(contact); closeMobileActions()">
-              <i class="bi bi-pencil"></i>
-              Edit
-            </button>
-            <button aria-label="Delete contact" (click)="remove.emit(contact); closeMobileActions()">
-              <i class="bi bi-trash"></i>
-              Delete
-            </button>
-          </div>
-          }
-        </div>
-      </div>
+  @if (contact) {
+  <div class="fadeIn contact-card">
+    <div class="contact-avatar" [style.background]="contact.color">
+      {{ contact.initials }}
     </div>
 
-    <div class="fadeIn d-flex flex-column gap-3">
-      <h5 class="pt-4">Contact Information</h5>
+    <div class="contact-info">
+      <h3 class="contact-name force-wrap-truncate mb-sm-2">
+        {{ contact.name | truncate }}
+      </h3>
 
-      <div>
-        <label>Email</label>
-        <div>
-          <a class="force-wrap-truncate" href="mailto:{{ contact.email }}">{{ contact.email | truncate }}</a>
-        </div>
+      <div class="contact-actions d-none d-sm-flex">
+        <ui-button variant="link" bootstrapIcon="bi-pencil" iconSize="0.875rem" (click)="openEdit(contact)"
+          title="Edit contact" aria-label="Edit contact">Edit</ui-button>
+        <ui-button variant="link" bootstrapIcon="bi-trash" iconSize="0.875rem" (click)="remove.emit(contact)"
+          title="Delete contact" aria-label="Delete contact">Delete</ui-button>
       </div>
 
-      <div>
-        <label>Phone</label>
-        <div>
-          <a class="force-wrap-truncate" href="tel:{{ displayPhone(contact.phone) }}">{{ displayPhone(contact.phone)
-            }}</a>
+      <div class="mobile-actions-fab d-sm-none">
+        <ui-button variant="fab-primary" (click)="toggleMobileActions()">
+          <i class="bi bi-three-dots-vertical"></i>
+        </ui-button>
+
+        @if (isMobileActionsOpen) {
+        <div class="fadeIn mobile-actions-dropdown d-flex flex-column gap-2 p-3">
+          <ui-button variant="link" bootstrapIcon="bi-pencil" iconSize="0.875rem" aria-label="Edit contact"
+            (click)="openEdit(contact); closeMobileActions()">Edit</ui-button>
+          <ui-button variant="link" bootstrapIcon="bi-trash" iconSize="0.875rem" aria-label="Delete contact"
+            (click)="remove.emit(contact); closeMobileActions()">Delete</ui-button>
         </div>
+        }
       </div>
     </div>
-    }
-
   </div>
+
+  <div class="fadeIn d-flex flex-column gap-4 contact-information">
+    <h5>Contact Information</h5>
+
+    @if (contact.email) {
+    <div class="d-flex gap-3 align-items-center description-row">
+      <i class="bi bi-envelope-at"></i>
+      <p><a class="force-wrap-truncate" href="mailto:{{ contact.email }}">{{ contact.email | truncate }}</a></p>
+    </div>
+    }
+
+    @if (contact.phone !== null) {
+    <div class="d-flex gap-3 align-items-center description-row">
+      <i class="bi bi-telephone"></i>
+      <p><a class="force-wrap-truncate" href="tel:{{ displayPhone(contact.phone) }}">{{ displayPhone(contact.phone)
+          }}</a></p>
+    </div>
+    }
+
+    <div class="d-flex gap-3 align-items-start description-row">
+      <i class="bi bi-sticky"></i>
+      <p class="fst-italic"> {{ contact.notes }}</p>
+    </div>
+  </div>
+  }
+
+</div>

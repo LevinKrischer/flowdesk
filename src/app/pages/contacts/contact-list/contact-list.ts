@@ -4,10 +4,11 @@ import { GroupedContacts, ContactWithInitials } from '../../../core/db/contacts.
 import { ContactAddFormComponent } from '../../../components/contact-add-form/contact-add-form';
 import { Button } from '../../../shared/ui/button/button';
 import { TruncatePipe } from '../../../services/truncate.pipe';
+import { InputFieldComponent } from '../../../shared/ui/forms/input-field/input-field';
 
 @Component({
   selector: 'app-contact-list',
-  imports: [ContactAddFormComponent, CommonModule, Button, TruncatePipe],
+  imports: [ContactAddFormComponent, CommonModule, Button, TruncatePipe, InputFieldComponent],
   templateUrl: './contact-list.html',
   styleUrl: './contact-list.scss',
 })
@@ -17,6 +18,7 @@ export class ContactList {
   @Input() selectedId: number | null = null;
   @Output() select = new EventEmitter<ContactWithInitials>();
   @Output() added = new EventEmitter<void>();
+  @Output() search = new EventEmitter<string>();
   isContactModalOpen = false;
 
   /**
