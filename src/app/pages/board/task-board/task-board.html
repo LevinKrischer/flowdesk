@@ -1,122 +1,122 @@
-<section class="taskboard">
-  <div class="taskboard-inner d-flex flex-row align-items-start" cdkDropListGroup>
+<section class="task-board">
+  <div class="task-board__inner d-flex flex-row align-items-start" cdkDropListGroup>
 
     <!-- To Do Column -->
-    <section id="to-to" class="board-column d-flex flex-column min-h-0">
-      <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
+    <section id="to-to" class="task-board__column d-flex flex-column min-h-0">
+      <header class="task-board__column-header d-flex align-items-center justify-content-between flex-shrink-0">
         <div class="d-flex align-items-center gap-2">
-          <h2 class="h5 m-0">To Do <span class="task-count">({{ todoTasks().length }})</span></h2>
+          <h2 class="h5 m-0">To Do <span class="task-board__count">({{ todoTasks().length }})</span></h2>
           @if (overdueInTodo() > 0) {
-          <span class="overdue-badge">{{ overdueInTodo() }} overdue</span>
+          <span class="task-board__overdue-badge">{{ overdueInTodo() }} overdue</span>
           }
         </div>
         <button
-          class="board-list-add-button p-0 d-flex align-items-center justify-content-center rounded-3"
+          class="task-board__add-btn"
           (click)="openAddTask('todo')">
           <i class="bi bi-plus-lg"></i>
         </button>
       </header>
-      <div class="taskboard-scroll d-flex flex-column" cdkDropList [cdkDropListData]="todoTasks()"
+      <div class="task-board__scroll d-flex flex-column" cdkDropList [cdkDropListData]="todoTasks()"
         (cdkDropListDropped)="onTaskDrop($event, 'todo')">
         @for (task of todoTasks(); track task.id; let last = $last) {
-        <app-task-card class="task-item" [class.pb-2]="!last" [task]="task" [compact]="compact()" [cdkDragData]="task"
+        <app-task-card class="task-board__item" [class.pb-2]="!last" [task]="task" [compact]="compact()" [cdkDragData]="task"
           [cdkDragStartDelay]="dragStartDelay()" cdkDrag cdkDragPreviewClass="custom-drag-preview"
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />
         } @empty {
-        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">
+        <div class="task-board__empty rounded-3 px-3 py-2 text-center text-muted">
           <i class="bi bi-pencil-square d-block mb-1" aria-hidden="true"></i>No tasks to do
         </div>
         }
       </div>
-      <section class="board-column-footer">
+      <section class="task-board__column-footer">
         <ui-button variant="link" bootstrapIcon="bi-plus" class="pb-3" (click)="openAddTask('todo')">
           Add task
         </ui-button>
       </section>
     </section>
 
-    <section id="in-progress" class="board-column d-flex flex-column min-h-0">
-      <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
+    <section id="in-progress" class="task-board__column d-flex flex-column min-h-0">
+      <header class="task-board__column-header d-flex align-items-center justify-content-between flex-shrink-0">
         <div class="d-flex align-items-center gap-2">
-          <h2 class="h5 m-0">In Progress <span class="task-count">({{ inProgressTasks().length }})</span></h2>
+          <h2 class="h5 m-0">In Progress <span class="task-board__count">({{ inProgressTasks().length }})</span></h2>
           @if (overdueInProgress() > 0) {
-          <span class="overdue-badge">{{ overdueInProgress() }} overdue</span>
+          <span class="task-board__overdue-badge">{{ overdueInProgress() }} overdue</span>
           }
         </div>
         <button
-          class="board-list-add-button p-0 d-flex align-items-center justify-content-center rounded-3"
+          class="task-board__add-btn"
           (click)="openAddTask('in-progress')">
           <i class="bi bi-plus-lg"></i>
         </button>
       </header>
-      <div class="taskboard-scroll d-flex flex-column" cdkDropList [cdkDropListData]="inProgressTasks()"
+      <div class="task-board__scroll d-flex flex-column" cdkDropList [cdkDropListData]="inProgressTasks()"
         (cdkDropListDropped)="onTaskDrop($event, 'in-progress')">
         @for (task of inProgressTasks(); track task.id; let last = $last) {
-        <app-task-card class="task-item" [class.pb-2]="!last" [task]="task" [compact]="compact()" [cdkDragData]="task"
+        <app-task-card class="task-board__item" [class.pb-2]="!last" [task]="task" [compact]="compact()" [cdkDragData]="task"
           [cdkDragStartDelay]="dragStartDelay()" cdkDrag cdkDragPreviewClass="custom-drag-preview"
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />
         } @empty {
-        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">
+        <div class="task-board__empty rounded-3 px-3 py-2 text-center text-muted">
           <i class="bi bi-arrow-right-circle d-block mb-1" aria-hidden="true"></i>No tasks in progress
         </div>
         }
       </div>
-      <section class="board-column-footer">
+      <section class="task-board__column-footer">
         <ui-button variant="link" bootstrapIcon="bi-plus" class="pb-3" (click)="openAddTask('in-progress')">
           Add task
         </ui-button>
       </section>
     </section>
 
-    <section id="await-feedback" class="board-column d-flex flex-column min-h-0">
-      <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
+    <section id="await-feedback" class="task-board__column d-flex flex-column min-h-0">
+      <header class="task-board__column-header d-flex align-items-center justify-content-between flex-shrink-0">
         <div class="d-flex align-items-center gap-2">
-          <h2 class="h5 pe-2 m-0">Await Feedback <span class="task-count">({{ reviewTasks().length }})</span></h2>
+          <h2 class="h5 pe-2 m-0">Await Feedback <span class="task-board__count">({{ reviewTasks().length }})</span></h2>
           @if (overdueInReview() > 0) {
-          <span class="overdue-badge">{{ overdueInReview() }} overdue</span>
+          <span class="task-board__overdue-badge">{{ overdueInReview() }} overdue</span>
           }
         </div>
         <button
-          class="board-list-add-button p-0 d-flex align-items-center justify-content-center rounded-3"
+          class="task-board__add-btn"
           (click)="openAddTask('await-feedback')">
           <i class="bi bi-plus-lg"></i>
         </button>
       </header>
-      <div class="taskboard-scroll d-flex flex-column" cdkDropList [cdkDropListData]="reviewTasks()"
+      <div class="task-board__scroll d-flex flex-column" cdkDropList [cdkDropListData]="reviewTasks()"
         (cdkDropListDropped)="onTaskDrop($event, 'await-feedback')">
         @for (task of reviewTasks(); track task.id; let last = $last) {
-        <app-task-card class="task-item" [class.pb-2]="!last" [task]="task" [compact]="compact()" [cdkDragData]="task"
+        <app-task-card class="task-board__item" [class.pb-2]="!last" [task]="task" [compact]="compact()" [cdkDragData]="task"
           [cdkDragStartDelay]="dragStartDelay()" cdkDrag cdkDragPreviewClass="custom-drag-preview"
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />
         } @empty {
-        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">
+        <div class="task-board__empty rounded-3 px-3 py-2 text-center text-muted">
           <i class="bi bi-chat-dots d-block mb-1" aria-hidden="true"></i>No tasks awaiting feedback
         </div>
         }
       </div>
-      <section class="board-column-footer">
+      <section class="task-board__column-footer">
         <ui-button variant="link" bootstrapIcon="bi-plus" class="pb-3" (click)="openAddTask('await-feedback')">
           Add task
         </ui-button>
       </section>
     </section>
 
-    <section id="done" class="board-column d-flex flex-column min-h-0">
-      <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
-        <h2 class="h5 m-0">Done <span class="task-count">({{ doneTasks().length }})</span></h2>
+    <section id="done" class="task-board__column d-flex flex-column min-h-0">
+      <header class="task-board__column-header d-flex align-items-center justify-content-between flex-shrink-0">
+        <h2 class="h5 m-0">Done <span class="task-board__count">({{ doneTasks().length }})</span></h2>
       </header>
-      <div class="taskboard-scroll d-flex flex-column" cdkDropList [cdkDropListData]="doneTasks()"
+      <div class="task-board__scroll d-flex flex-column" cdkDropList [cdkDropListData]="doneTasks()"
         (cdkDropListDropped)="onTaskDrop($event, 'done')">
         @for (task of doneTasks(); track task.id; let last = $last) {
-        <app-task-card class="task-item pb-2" [task]="task" [compact]="compact()" [cdkDragData]="task"
+        <app-task-card class="task-board__item pb-2" [task]="task" [compact]="compact()" [cdkDragData]="task"
           [cdkDragStartDelay]="dragStartDelay()" cdkDrag cdkDragPreviewClass="custom-drag-preview"
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />
         } @empty {
-        <div class="no-tasks-card rounded-3 px-3 py-2 mb-2 text-center text-muted">
+        <div class="task-board__empty rounded-3 px-3 py-2 mb-2 text-center text-muted">
           <i class="bi bi-check-circle d-block mb-1" aria-hidden="true"></i>No tasks done
         </div>
         }

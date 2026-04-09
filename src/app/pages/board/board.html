@@ -3,15 +3,15 @@
 
     <header class="board__header d-flex flex-column flex-lg-row justify-content-between align-items-lg-center">
       <div
-        class="header-headline d-flex align-items-center gap-3 justify-content-between justify-content-lg-start w-100">
+        class="board__title-group d-flex align-items-center gap-3 justify-content-between justify-content-lg-start w-100">
         <div class="d-flex gap-3 align-items-end">
           <h2 class="mb-0">Board</h2>
-          <ui-button class="board-list-view-button pb-2" variant="icon-sm"
+          <ui-button class="board__view-toggle pb-2" variant="icon-sm"
             [bootstrapIcon]="compactView() ? 'bi-view-list' : 'bi-view-stacked'" [active]="compactView()"
             (click)="compactView.set(!compactView())"></ui-button>
         </div>
 
-        <ui-button class="board-list-add-button p-0 d-flex align-items-center justify-content-center d-lg-none"
+        <ui-button class="board__add-btn d-lg-none"
           variant="primary" (click)="openAdd()" bootstrapIcon="bi-plus-lg" iconSize="0.875rem">
         </ui-button>
       </div>
@@ -33,24 +33,24 @@
       </nav>
     </header>
 
-    <section class="filter-section" [class.filter-section--open]="showFilters()">
-      <div class="board-filters d-flex flex-wrap align-items-center gap-2" aria-label="Filter tasks">
+    <section class="board__filter-section" [class.board__filter-section--open]="showFilters()">
+      <div class="board__filter-bar d-flex flex-wrap align-items-center gap-2" aria-label="Filter tasks">
         <h6>Filter:</h6>
         @for (p of priorities; track p) {
-        <button class="filter-chip filter-chip--priority filter-chip--{{ p }}" [class.active]="priorityFilter() === p"
+        <button class="board__chip board__chip--priority board__chip--{{ p }}" [class.active]="priorityFilter() === p"
           (click)="togglePriorityFilter(p)" type="button">
           {{ p }}
         </button>
         }
-        <span class="filter-divider" aria-hidden="true"></span>
+        <span class="board__chip-divider" aria-hidden="true"></span>
         @for (c of categories; track c) {
-        <button class="filter-chip filter-chip--category" [class.active]="categoryFilter() === c"
+        <button class="board__chip board__chip--category" [class.active]="categoryFilter() === c"
           [attr.data-category]="c.toLowerCase().replace(' ', '-')" (click)="toggleCategoryFilter(c)" type="button">
           {{ c }}
         </button>
         }
         @if (priorityFilter() || categoryFilter()) {
-        <button class="filter-chip filter-chip--reset" (click)="priorityFilter.set(null); categoryFilter.set(null)"
+        <button class="board__chip board__chip--reset" (click)="priorityFilter.set(null); categoryFilter.set(null)"
           type="button">
           <i class="bi bi-x-lg" aria-hidden="true"></i> Clear
         </button>
@@ -58,7 +58,7 @@
       </div>
     </section>
 
-    <section class="task-board">
+    <section class="board__task-section">
       <app-task-board [tasks]="filteredTasks()" [compact]="compactView()" (open)="openDetail($event)" />
     </section>
 

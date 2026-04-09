@@ -24,195 +24,54 @@ strong {
   }
 }
 
-.subtask-title {
-  word-break: break-word;
-
-  &.done {
-    color: $grey;
-  }
-}
-
-.badge-row {
-  padding-top: 0;
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 5;
-  box-shadow: 0 -4px 8px rgba(255, 255, 255, 0.9);
-}
-
-.edit-header {
-  word-break: break-word;
-}
-
-.scrollable-content {
-  flex: 1;
-}
-
 .task-detail {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
 
-  .task-detail::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
 
-  .category-badge {
+  &__header {
+    font-size: 0.875rem;
+  }
+
+  &__badge-row {
+    padding-top: 0;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 5;
+    box-shadow: 0 -4px 8px rgba(255, 255, 255, 0.9);
+  }
+
+  &__category-badge {
     width: fit-content;
     padding: 0.35rem 0.75rem;
     font-size: 0.875rem;
 
-    &.user-story {
-      background: $cat-user-story;
-    }
-
-    &.technical-task {
-      background: $cat-technical-task;
-    }
-
-    &.bug {
-      background: $cat-bug;
-    }
-
-    &.feature {
-      background: $cat-feature;
-    }
+    &.user-story      { background: $cat-user-story; }
+    &.technical-task  { background: $cat-technical-task; }
+    &.bug             { background: $cat-bug; }
+    &.feature         { background: $cat-feature; }
   }
 
-  .detail-meta {
-    .meta-item {
-      &.priority {
-        flex: none;
-        gap: 1.5rem;
-      }
-
-      &.due-date {
-        flex: 1;
-      }
-    }
-
-    .priority-text {
-      color: #111;
-    }
+  &__divider {
+    color: $grey-light;
   }
 
-  .detail-section {
-    overflow: hidden;
-
-    .details-scroll-section {
-      max-height: 11rem;
-      overflow-y: auto;
-      padding-right: 0.5rem;
-      scrollbar-width: thin;
-      scrollbar-color: $grey-light transparent;
-    }
-
-    .subtasks-scroll-section {
-      max-height: 5.8rem;
-      overflow-y: auto;
-      padding-right: 0.5rem;
-      scrollbar-width: thin;
-      scrollbar-color: $grey-light transparent;
-    }
-
-    h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #333;
-    }
-
-    .contacts-list {
-      gap: 0.75rem;
-    }
-
-    .contact-item {
-      gap: 0.5rem;
-
-      .contact-avatar {
-        width: 1.5rem;
-        height: 1.5rem;
-        font-size: 0.75rem;
-      }
-
-      .contact-name {
-        color: #333;
-      }
-    }
-
-    .subtask-item {
-      .subtask-checkbox-icon {
-        font-size: 0.875rem;
-        flex-shrink: 0;
-        color: $grey-dark;
-
-        &.bi-check-square {
-          color: $grey;
-
-          &::before {
-            color: $grey;
-          }
-        }
-      }
-
-      &:hover {
-        background-color: #f0f2f5;
-        border-radius: 0.75rem;
-        cursor: pointer;
-        padding-left: 0.05rem;
-      }
-    }
-  }
-
-  .detail-actions {
-    position: sticky;
-    bottom: 0;
-    background: white;
-    z-index: 5;
-    width: 100%;
-    box-shadow: 0px -4px 8px rgba(255, 255, 255, 1), 0px 4px 4px rgba(255, 255, 255, 1);
-
-    .action-btn {
-      gap: 0.4rem;
-      cursor: pointer;
-      transition: color 0.2s;
-
-      img {
-        display: block;
-        transition: filter 0.2s;
-      }
-
-      &:hover {
-        color: #2a6fd6;
-      }
-
-      &:hover img {
-        filter: brightness(0) saturate(100%) invert(37%) sepia(78%) saturate(1331%) hue-rotate(199deg) brightness(93%) contrast(94%);
-      }
-    }
-  }
-
-  .description-row {
-
+  &__meta-row {
     i::before {
       font-size: 1.25rem;
       color: $grey-dark;
     }
 
-    i.priority-icon {
-      &.priority-urgent::before {
-        color: $red;
-      }
-
-      &.priority-medium::before {
-        color: $orange;
-      }
-
-      &.priority-low::before {
-        color: $green;
-      }
+    i.task-detail__priority-icon {
+      &.priority-urgent::before { color: $red; }
+      &.priority-medium::before { color: $orange; }
+      &.priority-low::before    { color: $green; }
     }
 
     p {
@@ -220,13 +79,99 @@ strong {
     }
   }
 
-  .divider {
-    color: $grey-light;
+  &__priority-label {
+    color: #111;
   }
-}
 
-.details-header {
-  font-size: 0.875rem;
+  &__body {
+    flex: 1;
+  }
+
+  &__edit-header {
+    word-break: break-word;
+  }
+
+  &__section {
+    overflow: hidden;
+  }
+
+  &__contacts-scroll {
+    max-height: 11rem;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: $grey-light transparent;
+  }
+
+  &__subtasks-scroll {
+    max-height: 5.8rem;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: $grey-light transparent;
+  }
+
+  &__contacts {
+    gap: 0.75rem;
+  }
+
+  &__contact {
+    gap: 0.5rem;
+  }
+
+  &__contact-avatar {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.75rem;
+  }
+
+  &__contact-name {
+    color: #333;
+  }
+
+  &__subtasks {
+    // gap handled by Bootstrap gap-2
+  }
+
+  &__subtask {
+    &:hover {
+      background-color: #f0f2f5;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      padding-left: 0.05rem;
+    }
+  }
+
+  &__subtask-icon {
+    font-size: 0.875rem;
+    flex-shrink: 0;
+    color: $grey-dark;
+
+    &.bi-check-square {
+      color: $grey;
+
+      &::before {
+        color: $grey;
+      }
+    }
+  }
+
+  &__subtask-title {
+    word-break: break-word;
+
+    &--done {
+      color: $grey;
+    }
+  }
+
+  &__actions {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    z-index: 5;
+    width: 100%;
+    box-shadow: 0px -4px 8px rgba(255, 255, 255, 1), 0px 4px 4px rgba(255, 255, 255, 1);
+  }
 }
 
 ui-button {

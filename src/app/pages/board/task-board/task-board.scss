@@ -10,13 +10,7 @@
   font-size: 1rem;
 }
 
-.task-count {
-  font-size: 0.8em;
-  font-weight: 400;
-  color: $grey;
-}
-
-.taskboard {
+.task-board {
   width: 100%;
   height: 100%;
   overflow-x: visible;
@@ -28,142 +22,124 @@
     cursor: grabbing;
   }
 
-}
+  &__inner {
+    min-width: 100%;
+    height: calc(100% - 1rem);
+    gap: 1rem;
+    padding: 2px 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
 
-.taskboard-inner {
-  min-width: 100%;
-  height: calc(100% - 1rem);
-  gap: 1rem;
-  padding: 2px 1rem;
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  @include for-size(sm) {
-    padding: 2px 1.5rem;
-    padding-right: 0;
-  }
-
-  @include for-size(md) {
-    padding: 2px 2rem;
-    padding-right: 0;
-  }
-
-  @include for-size(lg) {
-    padding: 2px 4rem;
-  }
-}
-
-// .taskboard-end-spacer {
-//   flex-shrink: 0;
-//   width: 0.5rem;
-
-//   @include for-size(sm) {
-//     width: 1rem;
-//   }
-
-//   @include for-size(md) {
-//     width: 1.5rem;
-//   }
-
-//   @include for-size(lg) {
-//     width: 3.5rem;
-//   }
-
-//   @media (min-width: 1312px) {
-//     display: none;
-//   }
-// }
-
-.board-column {
-  flex: 1 1 0%;
-  min-width: 17rem;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.08);
-  border: 1px solid $grey-light3;
-  border-radius: 0.75rem;
-  padding: 0 0.5rem 0rem 0.5rem;
-  background-color: $off-white;
-  max-height: 100%;
-  cursor: default;
-}
-
-.board-column-header {
-  padding: 1rem 0.5rem;
-}
-
-.overdue-badge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: $red;
-  background: rgba($red, 0.1);
-  border-radius: 2rem;
-  padding: 0.1rem 0.5rem;
-  white-space: nowrap;
-}
-
-.board-column-footer {
-  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-}
-
-.taskboard-scroll {
-  flex: 1;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  min-width: 0;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.task-item {
-  width: 100%;
-  flex-shrink: 0;
-  border-radius: 1.5em;
-}
-
-.board-list-add-button {
-  transition: $trans-default;
-  width: 1.5rem;
-  height: 1.5rem;
-  border: $grey-dark 1px solid!important;
-
-  img {
-    transition: $trans-default;
-  }
-
-  i {
-    transition: $trans-default;
-  }
-
-  &:hover {
-    background-color: $blue-light;
-
-    img {
-      filter: invert(66%) sepia(55%) saturate(3372%) hue-rotate(165deg) brightness(95%) contrast(86%);
+    @include for-size(sm) {
+      padding: 2px 1.5rem;
+      padding-right: 0;
     }
+
+    @include for-size(md) {
+      padding: 2px 2rem;
+      padding-right: 0;
+    }
+
+    @include for-size(lg) {
+      padding: 2px 4rem;
+    }
+  }
+
+  &__column {
+    flex: 1 1 0%;
+    min-width: 17rem;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.08);
+    border: 1px solid $grey-light3;
+    border-radius: 0.75rem;
+    padding: 0 0.5rem;
+    background-color: $off-white;
+    max-height: 100%;
+    cursor: default;
+  }
+
+  &__column-header {
+    padding: 1rem 0.5rem;
+  }
+
+  &__column-footer {
+    padding: 0.5rem;
+  }
+
+  &__add-btn {
+    transition: $trans-default;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    border: $grey-dark 1px solid;
+    background: none;
 
     i {
-      color: $off-white;
+      transition: $trans-default;
+    }
+
+    &:hover {
+      background-color: $blue-light;
+
+      i {
+        color: $off-white;
+      }
     }
   }
-}
 
-.no-tasks-card {
-  border: 0.5px dashed $grey;
-  background-color: #e7e7e7;
-  font-size: 0.875rem;
+  &__count {
+    font-size: 0.8em;
+    font-weight: 400;
+    color: $grey;
+  }
+
+  &__overdue-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: $red;
+    background: rgba($red, 0.1);
+    border-radius: 2rem;
+    padding: 0.1rem 0.5rem;
+    white-space: nowrap;
+  }
+
+  &__scroll {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  &__item {
+    width: 100%;
+    flex-shrink: 0;
+    border-radius: 1.5em;
+
+    &.cdk-drag-placeholder {
+      opacity: 0.5;
+      border: 2px dotted var(--bs-primary, #007bff);
+      border-radius: 0.75rem;
+      background-color: rgba(0, 123, 255, 0.05);
+      transition: all 250ms ease;
+    }
+  }
+
+  &__empty {
+    border: 0.5px dashed $grey;
+    background-color: #e7e7e7;
+    font-size: 0.875rem;
+  }
 }
 
 .cdk-drag-preview {
   opacity: 1 !important;
   pointer-events: none !important;
-}
-
-.task-item.cdk-drag-placeholder {
-  opacity: 0.5;
-  border: 2px dotted var(--bs-primary, #007bff);
-  border-radius: 0.75rem;
-  background-color: rgba(0, 123, 255, 0.05);
-  transition: all 250ms ease;
 }
 
 ui-button {

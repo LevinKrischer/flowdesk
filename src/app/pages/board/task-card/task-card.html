@@ -3,48 +3,48 @@
   @if (task.category) {
     @if (compact) {
       <div class="d-flex flex-nowrap align-items-center justify-content-between gap-2">
-        <div class="category-bar flex-grow-1" [ngClass]="getCategoryClass()"></div>
+        <div class="task-card__category-bar flex-grow-1" [ngClass]="getCategoryClass()"></div>
 
         @if (isOverdue) {
           <div>
-            <p class="mb-0 overdue-message text-error">overdue</p>
+            <p class="mb-0 task-card__overdue-label">overdue</p>
           </div>
         }
         @if (dueSoonLabel) {
           <div>
-            <p class="mb-0 text-due-soon">{{ dueSoonLabel }}</p>
+            <p class="mb-0 task-card__due-soon-label">{{ dueSoonLabel }}</p>
           </div>
         }
-        <button class="option-btn d-lg-none" (click)="toggleMoveMenu($event)">
+        <button class="task-card__menu-btn d-lg-none" (click)="toggleMoveMenu($event)">
           <i class="bi bi-three-dots-vertical"></i>
         </button>
 
       </div>
     } @else {
       <div class="d-flex flex-nowrap align-items-center justify-content-between">
-        <span class="category py-1 px-2 text-white rounded-3 d-inline-block align-self-start" [ngClass]="getCategoryClass()">
+        <span class="task-card__category-badge py-1 px-2 text-white rounded-3 d-inline-block align-self-start" [ngClass]="getCategoryClass()">
           {{ task.category }}
         </span>
         @if (isOverdue) {
           <div>
-            <p class="mb-0 overdue-message text-error">overdue</p>
+            <p class="mb-0 task-card__overdue-label">overdue</p>
           </div>
         }
         @if (dueSoonLabel) {
           <div>
-            <p class="mb-0 text-due-soon">{{ dueSoonLabel }}</p>
+            <p class="mb-0 task-card__due-soon-label">{{ dueSoonLabel }}</p>
           </div>
         }
-        <button class="option-btn d-lg-none" (click)="toggleMoveMenu($event)">
+        <button class="task-card__menu-btn d-lg-none" (click)="toggleMoveMenu($event)">
           <i class="bi bi-three-dots-vertical"></i>
         </button>
       </div>
     }
     @if (showMoveMenu) {
-      <div class="move-menu visible" (click)="$event.stopPropagation()">
-        <div class="move-menu-headline"><strong>Move to:</strong></div>
+      <div class="task-card__move-menu" (click)="$event.stopPropagation()">
+        <div class="task-card__move-menu-title"><strong>Move to:</strong></div>
         @for (status of availableStatuses; track status.value) {
-          <div class="move-option" (click)="moveToStatus(status.value)">
+          <div class="task-card__move-option" (click)="moveToStatus(status.value)">
             {{ status.label }}
           </div>
         }
@@ -52,23 +52,23 @@
     }
   }
 
-  <div class="task-header d-flex align-items-start gap-2">
-    <button class="done-toggle" [class.is-done]="task.done" (click)="toggleDone($event)" [title]="task.done ? 'Mark as not done' : 'Mark as done'">
+  <div class="task-card__header d-flex align-items-start gap-2">
+    <button class="task-card__done-btn" [class.task-card__done-btn--done]="task.done" (click)="toggleDone($event)" [title]="task.done ? 'Mark as not done' : 'Mark as done'">
       <i [class]="task.done ? 'bi bi-check-circle-fill' : 'bi bi-circle'"></i>
     </button>
     <h5 class="">{{ task.title | truncate:30 }}</h5>
   </div>
 
   @if (!compact) {
-    <p class="task-description m-0">{{ task.description | truncate:70 }}</p>
+    <p class="task-card__description m-0">{{ task.description | truncate:70 }}</p>
   }
 
-  <div class="info-row d-flex flex-column gap-3">
+  <div class="task-card__info d-flex flex-column gap-3">
     @if (!compact) {
       @if (task.subtasks.length) {
-        <div class="progress-container" [class.open]="!allSubtasksDone">
-          <div class="subtask-progress-bar-track">
-            <div class="subtask-progress-bar-fill" [style.width.%]="subtaskPercent"></div>
+        <div class="task-card__progress" [class.task-card__progress--open]="!allSubtasksDone">
+          <div class="task-card__progress-track">
+            <div class="task-card__progress-fill" [style.width.%]="subtaskPercent"></div>
           </div>
           <small>
             <i [class]="allSubtasksDone ? 'bi bi-check-square' : 'bi bi-list-check'"></i>
@@ -77,51 +77,51 @@
         </div>
       }
       @if (task.subtasks.length === 0) {
-        <div class="progress-container empty"></div>
+        <div class="task-card__progress task-card__progress--empty"></div>
       }
     }
 
     @if (compact) {
-      <div class="progress-container compact-meta" [class.open]="task.subtasks.length > 0 && !allSubtasksDone">
-        <div class="compact-meta__left">
+      <div class="task-card__progress task-card__progress--compact" [class.task-card__progress--open]="task.subtasks.length > 0 && !allSubtasksDone">
+        <div class="task-card__progress-left">
           @if (task.subtasks.length) {
             <small>
               <i [class]="allSubtasksDone ? 'bi bi-check-square' : 'bi bi-list-check'"></i>
               {{ completedSubtasksShort }}
             </small>
           }
-          <div class="priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()" [title]="'Priority: ' + task.priority">
+          <div class="task-card__priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()" [title]="'Priority: ' + task.priority">
             <i [class]="priorityIcon" aria-hidden="true"></i>
           </div>
         </div>
-        <div class="avatars">
+        <div class="task-card__avatars">
           @for (contact of task.contacts.slice(0, 3); track contact.id) {
-            <span class="avatar" [style.background]="contact.color">
+            <span class="task-card__avatar" [style.background]="contact.color">
               {{ initials(contact.name) }}
             </span>
           }
           @if (task.contacts.length > 3) {
-            <span class="avatar avatar-more">+{{ task.contacts.length - 3 }}</span>
+            <span class="task-card__avatar task-card__avatar--more">+{{ task.contacts.length - 3 }}</span>
           }
         </div>
       </div>
     }
 
     @if (!compact) {
-    <div class="bottom-row d-flex align-items-center justify-content-between">
-      <div class="avatars">
+    <div class="task-card__bottom d-flex align-items-center justify-content-between">
+      <div class="task-card__avatars">
         @for (contact of task.contacts.slice(0, 3); track contact.id) {
-          <span class="avatar" [style.background]="contact.color">
+          <span class="task-card__avatar" [style.background]="contact.color">
             {{ initials(contact.name) }}
           </span>
         }
         @if (task.contacts.length > 3) {
-          <span class="avatar avatar-more">+{{ task.contacts.length - 3 }}</span>
+          <span class="task-card__avatar task-card__avatar--more">+{{ task.contacts.length - 3 }}</span>
         }
       </div>
 
       @if (!compact) {
-        <div class="priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()" [title]="'Priority: ' + task.priority">
+        <div class="task-card__priority-icon" [ngClass]="'priority-' + task.priority.toLowerCase()" [title]="'Priority: ' + task.priority">
           <i [class]="priorityIcon" aria-hidden="true"></i>
         </div>
       }

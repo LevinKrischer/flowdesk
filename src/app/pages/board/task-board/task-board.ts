@@ -51,7 +51,7 @@ export class TaskBoard implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    const scrollEls = this.el.nativeElement.querySelectorAll('.taskboard-scroll');
+    const scrollEls = this.el.nativeElement.querySelectorAll('.task-board__scroll');
     scrollEls.forEach((el: Element) => {
       const fn = (e: Event) => {
         const we = e as WheelEvent;
@@ -173,7 +173,7 @@ export class TaskBoard implements AfterViewInit, OnDestroy {
    * @returns True if touch events are supported.
    */
   private initDragScroll(): void {
-    const el = this.el.nativeElement.querySelector('.taskboard') as HTMLElement;
+    const el = this.el.nativeElement.querySelector('.task-board') as HTMLElement;
     if (!el) return;
 
     let isDown = false;
