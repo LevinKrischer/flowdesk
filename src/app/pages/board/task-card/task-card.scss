@@ -2,7 +2,7 @@
 @use 'styles/mixins' as *;
 
 .task-card {
-  background: #fff;
+  background: $white;
   border-radius: 0.5rem;
   overflow: visible;
   padding: 0.75rem;
@@ -103,7 +103,7 @@
   .category-bar {
     height: 6px;
     border-radius: 4px;
-    max-width: 75%;
+    max-width: 50%;
 
     &.user-story     { background: $cat-user-story; }
     &.technical-task { background: $cat-technical-task; }
@@ -157,10 +157,7 @@
     justify-content: space-between;
     gap: min(0.75rem);
     min-height: 1rem;
-    background-color: #94c748;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    align-self: flex-start;
+    align-self: stretch;
     line-height: 1rem;
 
     small {
@@ -171,11 +168,29 @@
       display: flex;
       align-items: center;
       gap: 0.25rem;
+      background-color: #94c748;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.25rem;
 
       i {
         display: inline-flex;
         align-items: center;
         line-height: 1;
+      }
+    }
+
+    .subtask-progress-bar-track {
+      flex: 1;
+      height: 6px;
+      background-color: $grey-light;
+      border-radius: 3px;
+      overflow: hidden;
+
+      .subtask-progress-bar-fill {
+        height: 100%;
+        background-color: $blue-light;
+        border-radius: 3px;
+        transition: width 0.3s ease;
       }
     }
 
@@ -186,9 +201,10 @@
     }
 
     &.open {
-      background-color: transparent;
-      padding-left: 0;
-      padding-right: 0;
+      small {
+        background-color: transparent;
+        padding: 0;
+      }
     }
 
     &.compact-meta {
@@ -282,6 +298,23 @@
       }
     }
   }
+}
+
+.task-card--overdue {
+  border: 2px solid #e53935;
+  background-color: rgba(229, 57, 53, 0.06);
+}
+
+.text-error {
+  color: $red;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.text-due-soon {
+  color: $orange;
+  font-size: 0.75rem;
+  font-weight: bold;
 }
 
 .option-btn {

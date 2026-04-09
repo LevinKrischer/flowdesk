@@ -1,18 +1,40 @@
-<div class="task-card" [class.task-card--compact]="compact" (click)="onClick()">
+<div class="task-card" [class.task-card--compact]="compact" [class.task-card--overdue]="isOverdue" (click)="onClick()" (keydown.enter)="onClick()" tabindex="0" role="button" [attr.aria-label]="task.title">
 
   @if (task.category) {
     @if (compact) {
       <div class="d-flex flex-nowrap align-items-center justify-content-between gap-2">
         <div class="category-bar flex-grow-1" [ngClass]="getCategoryClass()"></div>
+
+        @if (isOverdue) {
+          <div>
+            <p class="mb-0 overdue-message text-error">overdue</p>
+          </div>
+        }
+        @if (dueSoonLabel) {
+          <div>
+            <p class="mb-0 text-due-soon">{{ dueSoonLabel }}</p>
+          </div>
+        }
         <button class="option-btn d-lg-none" (click)="toggleMoveMenu($event)">
           <i class="bi bi-three-dots-vertical"></i>
         </button>
+
       </div>
     } @else {
       <div class="d-flex flex-nowrap align-items-center justify-content-between">
         <span class="category py-1 px-2 text-white rounded-3 d-inline-block align-self-start" [ngClass]="getCategoryClass()">
           {{ task.category }}
         </span>
+        @if (isOverdue) {
+          <div>
+            <p class="mb-0 overdue-message text-error">overdue</p>
+          </div>
+        }
+        @if (dueSoonLabel) {
+          <div>
+            <p class="mb-0 text-due-soon">{{ dueSoonLabel }}</p>
+          </div>
+        }
         <button class="option-btn d-lg-none" (click)="toggleMoveMenu($event)">
           <i class="bi bi-three-dots-vertical"></i>
         </button>
@@ -45,6 +67,9 @@
     @if (!compact) {
       @if (task.subtasks.length) {
         <div class="progress-container" [class.open]="!allSubtasksDone">
+          <div class="subtask-progress-bar-track">
+            <div class="subtask-progress-bar-fill" [style.width.%]="subtaskPercent"></div>
+          </div>
           <small>
             <i [class]="allSubtasksDone ? 'bi bi-check-square' : 'bi bi-list-check'"></i>
             {{ completedSubtasks }}

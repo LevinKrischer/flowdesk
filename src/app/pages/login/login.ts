@@ -68,9 +68,9 @@ export class Login implements AfterViewInit {
    * @returns Nothing.
    */
   private handleSuccessfulLogin(userName: string) {
-    sessionStorage.setItem('show-summary-mobile-greeting', '1');
+    sessionStorage.setItem('show-dashboard-mobile-greeting', '1');
     this.feedback().show(`You logged in successfully`);
-    setTimeout(() => this.router.navigate(['/summary']), 1500);
+    setTimeout(() => this.router.navigate(['/dashboard']), 1500);
   }
 
   /**

@@ -1,23 +1,26 @@
 ﻿import { Component, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { TasksDb } from '../../core/db/tasks.db';
+import { Router, RouterLink } from '@angular/router';
+import { Task, TasksDb } from '../../core/db/tasks.db';
 import { SupabaseService } from '../../services/supabase';
 import { environment } from '../../../environments/environment';
 import { Main } from '../../shared/ui/main/main';
+import { Button } from '../../shared/ui/button/button';
+import { TruncatePipe } from '../../services/truncate.pipe';
 
 @Component({
-  selector: 'app-summary',
+  selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterLink, Main],
-  templateUrl: './summary.html',
-  styleUrl: './summary.scss',
+  imports: [RouterLink, Main, Button, TruncatePipe],
+  templateUrl: './dashboard.html',
+  styleUrl: './dashboard.scss',
 })
 
-export class Summary implements OnInit, OnDestroy {
+export class dashboard implements OnInit, OnDestroy {
   private tasksDb = inject(TasksDb);
   private supabase = inject(SupabaseService);
+  private router = inject(Router);
   private mobileGreetingTimeout: ReturnType<typeof setTimeout> | null = null;
-  private readonly mobileGreetingStorageKey = 'show-summary-mobile-greeting';
+  private readonly mobileGreetingStorageKey = 'show-dashboard-mobile-greeting';
   tasks = this.tasksDb.tasks;
   userName = signal('');
   isGuestSession = signal(false);
@@ -48,6 +51,48 @@ export class Summary implements OnInit, OnDestroy {
 
     return this.formatDueDate(upcomingDates[0]);
   });
+  completionRate = computed(() => {
+    const total = this.totalTasksCount();
+    if (total === 0) return 0;
+    return Math.round((this.doneCount() / total) * 100);
+  });
+  overdueCount = computed(() => {
+    const today = new Date(new Date().toDateString());
+    return this.tasks().filter(t =>
+      !t.done && t.status !== 'done' && !!t.due_date && new Date(t.due_date) < today
+    ).length;
+  });
+  dueSoonTasks = computed(() => {
+    const today = new Date(new Date().toDateString());
+    const sevenDaysAhead = new Date(today);
+    sevenDaysAhead.setDate(sevenDaysAhead.getDate() + 7);
+    return this.tasks()
+      .filter(t => !t.done && t.status !== 'done' && !!t.due_date && new Date(t.due_date) >= today && new Date(t.due_date) <= sevenDaysAhead)
+      .sort((a, b) => new Date(a.due_date).getTime() - new Date(b.due_date).getTime())
+      .slice(0, 5);
+  });
+  overdueTasks = computed(() => {
+    const today = new Date(new Date().toDateString());
+    return this.tasks()
+      .filter(t => !t.done && t.status !== 'done' && !!t.due_date && new Date(t.due_date) < today)
+      .sort((a, b) => new Date(a.due_date).getTime() - new Date(b.due_date).getTime())
+      .slice(0, 5);
+  });
+  todayFormatted = computed(() =>
+    new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }));
+
+  isTaskOverdue(task: Task): boolean {
+    if (!task.due_date || task.done || task.status === 'done') return false;
+    return new Date(task.due_date) < new Date(new Date().toDateString());
+  }
+
+  formatTaskDueDate(dateStr: string): string {
+    return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  navigateToTask(task: Task): void {
+    this.router.navigate(['/board'], { queryParams: { task: task.id } });
+  }
 
   /**
    * Returns the greeting text based on the current local hour.
@@ -215,9 +260,9 @@ export class Summary implements OnInit, OnDestroy {
   }
 
   /**
-   * Formats a due date for summary display.
+   * Formats a due date for dashboard display.
    * @param dueDate Due date to format.
-   * @returns Localized date label for the summary card.
+   * @returns Localized date label for the dashboard card.
    */
   private formatDueDate(dueDate: Date): string {
     return dueDate.toLocaleDateString('en-US', {
@@ -228,14 +273,14 @@ export class Summary implements OnInit, OnDestroy {
   }
 
   /**
-   * Initializes summary data and optionally starts mobile greeting overlay.
+   * Initializes dashboard data and optionally starts mobile greeting overlay.
     * @returns Promise that resolves when initialization steps are completed.
    */
   async ngOnInit() {
     const shouldShowMobileGreetingOverlay = this.consumeMobileGreetingTrigger();
 
     this.prepareMobileGreetingOverlay(shouldShowMobileGreetingOverlay);
-    await this.initializeSummaryData();
+    await this.initializedashboardData();
     this.showMobileGreetingOverlayIfNeeded(shouldShowMobileGreetingOverlay);
     this.tasksDb.subscribeToTaskChanges();
   }
@@ -254,7 +299,7 @@ export class Summary implements OnInit, OnDestroy {
    * Loads tasks and greeting context in parallel.
     * @returns Promise that resolves when both async operations are completed.
    */
-  private async initializeSummaryData() {
+  private async initializedashboardData() {
     await Promise.all([
       this.tasksDb.getTasks(),
       this.loadCurrentUserGreetingContext(),

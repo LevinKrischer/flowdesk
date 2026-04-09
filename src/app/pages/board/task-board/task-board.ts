@@ -35,6 +35,13 @@ export class TaskBoard implements AfterViewInit, OnDestroy {
   reviewTasks = computed(() => this._tasks().filter((t) => t.status === 'await-feedback'));
   doneTasks = computed(() => this._tasks().filter((t) => t.status === 'done'));
 
+  private isOverdue = (t: Task) =>
+    !t.done && t.status !== 'done' && !!t.due_date && new Date(t.due_date) < new Date(new Date().toDateString());
+
+  overdueInTodo = computed(() => this.todoTasks().filter(this.isOverdue).length);
+  overdueInProgress = computed(() => this.inProgressTasks().filter(this.isOverdue).length);
+  overdueInReview = computed(() => this.reviewTasks().filter(this.isOverdue).length);
+
   /**
  * Returns the current task list from the internal signal.
  * @returns Current tasks used by board columns.

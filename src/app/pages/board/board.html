@@ -7,27 +7,56 @@
         <div class="d-flex gap-3 align-items-end">
           <h2 class="mb-0">Board</h2>
           <ui-button class="board-list-view-button pb-2" variant="icon-sm"
-            [bootstrapIcon]="compactView() ? 'bi-view-list' : 'bi-view-stacked'"
-            [active]="compactView()" (click)="compactView.set(!compactView())"></ui-button>
+            [bootstrapIcon]="compactView() ? 'bi-view-list' : 'bi-view-stacked'" [active]="compactView()"
+            (click)="compactView.set(!compactView())"></ui-button>
         </div>
 
-        <ui-button
-          class="board-list-add-button p-0 d-flex align-items-center justify-content-center d-lg-none"
+        <ui-button class="board-list-add-button p-0 d-flex align-items-center justify-content-center d-lg-none"
           variant="primary" (click)="openAdd()" bootstrapIcon="bi-plus-lg" iconSize="0.875rem">
         </ui-button>
       </div>
 
-
       <nav class="d-flex justify-content-between align-items-center w-100" aria-label="Board actions">
-        <app-input-field class="w-100 w-lg-auto" type="text" label="Search tasks" placeholder="Search title or description"
-          icon="assets/icons/search-32px.svg" [displayLabel]="false" [model]="searchTerm()"
-          (modelChange)="searchTerm.set($event)" />
+        <app-input-field class="w-100 w-lg-auto" type="text" label="Search tasks"
+          placeholder="Search title or description" icon="assets/icons/search-32px.svg" [displayLabel]="false"
+          [model]="searchTerm()" (modelChange)="searchTerm.set($event)" />
+        <ui-button class="d-inline-flex d-md-none flex-shrink-0" variant="link"
+          [bootstrapIcon]="(priorityFilter() || categoryFilter()) ? 'bi-filter-fill' : 'bi-filter'"
+          iconSize="1.5rem"
+          [active]="showFilters()" [attr.aria-expanded]="showFilters()" aria-label="Toggle filters"
+          (click)="showFilters.set(!showFilters())">
+        </ui-button>
         <ui-button class="d-none d-lg-inline-block text-nowrap" type="button" variant="primary"
           bootstrapIcon="bi-plus-lg" (click)="openAdd()">
           Add task
         </ui-button>
       </nav>
     </header>
+
+    <section class="filter-section" [class.filter-section--open]="showFilters()">
+      <div class="board-filters d-flex flex-wrap align-items-center gap-2" aria-label="Filter tasks">
+        <h6>Filter:</h6>
+        @for (p of priorities; track p) {
+        <button class="filter-chip filter-chip--priority filter-chip--{{ p }}" [class.active]="priorityFilter() === p"
+          (click)="togglePriorityFilter(p)" type="button">
+          {{ p }}
+        </button>
+        }
+        <span class="filter-divider" aria-hidden="true"></span>
+        @for (c of categories; track c) {
+        <button class="filter-chip filter-chip--category" [class.active]="categoryFilter() === c"
+          [attr.data-category]="c.toLowerCase().replace(' ', '-')" (click)="toggleCategoryFilter(c)" type="button">
+          {{ c }}
+        </button>
+        }
+        @if (priorityFilter() || categoryFilter()) {
+        <button class="filter-chip filter-chip--reset" (click)="priorityFilter.set(null); categoryFilter.set(null)"
+          type="button">
+          <i class="bi bi-x-lg" aria-hidden="true"></i> Clear
+        </button>
+        }
+      </div>
+    </section>
 
     <section class="task-board">
       <app-task-board [tasks]="filteredTasks()" [compact]="compactView()" (open)="openDetail($event)" />

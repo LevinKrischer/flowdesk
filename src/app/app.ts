@@ -20,7 +20,7 @@ export class App {
       await this.supabaseService.restoreUserName();
       const hash = window.location.hash;
       if (!hash || hash === '#' || hash === '#/') {
-        this.router.navigate(['/summary']);
+        this.router.navigate(['/dashboard']);
       }
     } else {
       this.router.navigate(['/login']);

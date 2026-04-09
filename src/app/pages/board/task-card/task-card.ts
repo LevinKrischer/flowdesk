@@ -161,6 +161,26 @@ export class TaskCardComponent {
     return `${done}/${total}`;
   }
 
+  get isOverdue(): boolean {
+    if (!this.task?.due_date || this.task.done || this.task.status === 'done') {
+      return false;
+    }
+    return new Date(this.task.due_date) < new Date(new Date().toDateString());
+  }
+
+  /** Returns a warning label when the task is due today or within the next 3 days. */
+  get dueSoonLabel(): string | null {
+    if (!this.task?.due_date || this.task.done || this.task.status === 'done' || this.isOverdue) {
+      return null;
+    }
+    const today = new Date(new Date().toDateString());
+    const due = new Date(this.task.due_date);
+    const diffDays = Math.round((due.getTime() - today.getTime()) / 86_400_000);
+    if (diffDays === 0) return 'due today';
+    if (diffDays <= 3) return `due in ${diffDays} day${diffDays > 1 ? 's' : ''}`;
+    return null;
+  }
+
   get allSubtasksDone(): boolean {
     const subtasks = this.task?.subtasks;
     return subtasks?.length > 0 && subtasks.every(s => s.done);

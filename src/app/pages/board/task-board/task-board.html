@@ -4,7 +4,12 @@
     <!-- To Do Column -->
     <section id="to-to" class="board-column d-flex flex-column min-h-0">
       <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
-        <h2 class="h5 m-0">To Do <span class="task-count">({{ todoTasks().length }})</span></h2>
+        <div class="d-flex align-items-center gap-2">
+          <h2 class="h5 m-0">To Do <span class="task-count">({{ todoTasks().length }})</span></h2>
+          @if (overdueInTodo() > 0) {
+          <span class="overdue-badge">{{ overdueInTodo() }} overdue</span>
+          }
+        </div>
         <button
           class="board-list-add-button p-0 d-flex align-items-center justify-content-center rounded-3"
           (click)="openAddTask('todo')">
@@ -19,7 +24,9 @@
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />
         } @empty {
-        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">No tasks to do</div>
+        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">
+          <i class="bi bi-pencil-square d-block mb-1" aria-hidden="true"></i>No tasks to do
+        </div>
         }
       </div>
       <section class="board-column-footer">
@@ -31,7 +38,12 @@
 
     <section id="in-progress" class="board-column d-flex flex-column min-h-0">
       <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
-        <h2 class="h5 m-0">In Progress <span class="task-count">({{ inProgressTasks().length }})</span></h2>
+        <div class="d-flex align-items-center gap-2">
+          <h2 class="h5 m-0">In Progress <span class="task-count">({{ inProgressTasks().length }})</span></h2>
+          @if (overdueInProgress() > 0) {
+          <span class="overdue-badge">{{ overdueInProgress() }} overdue</span>
+          }
+        </div>
         <button
           class="board-list-add-button p-0 d-flex align-items-center justify-content-center rounded-3"
           (click)="openAddTask('in-progress')">
@@ -46,7 +58,9 @@
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />
         } @empty {
-        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">No tasks in progress</div>
+        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">
+          <i class="bi bi-arrow-right-circle d-block mb-1" aria-hidden="true"></i>No tasks in progress
+        </div>
         }
       </div>
       <section class="board-column-footer">
@@ -58,7 +72,12 @@
 
     <section id="await-feedback" class="board-column d-flex flex-column min-h-0">
       <header class="board-column-header d-flex align-items-center justify-content-between flex-shrink-0">
-        <h2 class="h5 pe-2 m-0">Await Feedback <span class="task-count">({{ reviewTasks().length }})</span></h2>
+        <div class="d-flex align-items-center gap-2">
+          <h2 class="h5 pe-2 m-0">Await Feedback <span class="task-count">({{ reviewTasks().length }})</span></h2>
+          @if (overdueInReview() > 0) {
+          <span class="overdue-badge">{{ overdueInReview() }} overdue</span>
+          }
+        </div>
         <button
           class="board-list-add-button p-0 d-flex align-items-center justify-content-center rounded-3"
           (click)="openAddTask('await-feedback')">
@@ -73,7 +92,9 @@
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />
         } @empty {
-        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">No tasks awaiting feedback</div>
+        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">
+          <i class="bi bi-chat-dots d-block mb-1" aria-hidden="true"></i>No tasks awaiting feedback
+        </div>
         }
       </div>
       <section class="board-column-footer">
@@ -95,13 +116,12 @@
           (openTask)="openTaskDetail($event)" (statusChange)="onCardStatusChange($event)"
           (doneToggle)="refreshTasks()" />
         } @empty {
-        <div class="no-tasks-card rounded-3 px-3 py-2 text-center text-muted">No tasks done</div>
+        <div class="no-tasks-card rounded-3 px-3 py-2 mb-2 text-center text-muted">
+          <i class="bi bi-check-circle d-block mb-1" aria-hidden="true"></i>No tasks done
+        </div>
         }
       </div>
     </section>
-
-    <div class="taskboard-end-spacer" aria-hidden="true"></div>
-
   </div>
 </section>
 

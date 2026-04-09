@@ -124,7 +124,7 @@ export class TaskAddFormComponent {
 
     switch (field) {
       case 'title':
-        this.errors['title'] = isValidTitle(value) ? '' : 'Please enter title with max. 30 letters';
+        this.errors['title'] = isValidTitle(value) ? '' : 'Please enter title with max. 50 letters';
         break;
 
       case 'description':
@@ -132,7 +132,7 @@ export class TaskAddFormComponent {
         break;
 
       case 'due_date':
-        this.errors['due_date'] = isValidDueDate(value) ? '' : 'Please enter a due date in future';
+        this.errors['due_date'] = isValidDueDate(value, this.editTask() !== null) ? '' : 'Please enter a due date in future';
         break;
 
       case 'category':

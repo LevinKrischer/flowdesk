@@ -1,0 +1,133 @@
+<ui-main>
+
+  @if (showMobileGreetingOverlay()) {
+  <section class="user-greet-container d-flex flex-column align-items-center">
+    <p class="user-greet mb-0 w-100">{{ personalizedGreeting() }}</p>
+    @if (hasDisplayName()) {
+    <p class="user-name w-100">{{ userName() }}</p>
+    }
+  </section>
+  }
+
+  <main class="dashboard" [class.mobile-greeting-preparing]="isPreparingMobileGreeting()">
+
+    <header class="dashboard__header d-flex flex-column flex-lg-row justify-content-between align-items-lg-center">
+      <h2 class="mb-0">Dashboard</h2>
+      <div class="dashboard__header-actions d-none d-lg-flex align-items-center justify-content-end gap-4">
+        <ui-button class="dashboard__header-button__add-task" variant="link" routerLink="/add-task">
+          + add new task
+        </ui-button>
+        <ui-button variant="primary" bootstrapIcon="bi-kanban" routerLink="/board">
+          Go to board
+        </ui-button>
+      </div>
+    </header>
+
+    <div class="dashboard__body">
+      <section class="dashboard__hero">
+        <div class="hero__greeting">
+          <p class="greeting-text mb-1">{{ personalizedGreeting() }}</p>
+          @if (hasDisplayName()) {
+          <p class="user-name mb-1">{{ userName() }}</p>
+          }
+          <p class="today-date mb-0">{{ todayFormatted() }}</p>
+        </div>
+        <div class="hero__progress">
+          <div class="d-flex justify-content-between align-items-baseline mb-1">
+            <span class="progress-label">Overall progress</span>
+            <span class="progress-fraction">{{ doneCount() }} / {{ totalTasksCount() }}</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" [style.width.%]="completionRate()"></div>
+          </div>
+          <p class="progress-rate mb-0">{{ completionRate() }}% complete</p>
+        </div>
+      </section>
+
+      <section class="dashboard__stats">
+        <div class="stat-card" routerLink="/board" [fragment]="'todo'">
+          <i class="bi bi-pencil-square stat-icon" aria-hidden="true"></i>
+          <span class="stat-number">{{ todoCount() }}</span>
+          <span class="stat-label">To-do</span>
+        </div>
+        <div class="stat-card" routerLink="/board" [fragment]="'in-progress'">
+          <i class="bi bi-arrow-right-circle stat-icon" aria-hidden="true"></i>
+          <span class="stat-number">{{ inProgressCount() }}</span>
+          <span class="stat-label">In Progress</span>
+        </div>
+        <div class="stat-card" routerLink="/board" [fragment]="'await-feedback'">
+          <i class="bi bi-chat-dots stat-icon" aria-hidden="true"></i>
+          <span class="stat-number">{{ awaitFeedbackCount() }}</span>
+          <span class="stat-label">Await Feedback</span>
+        </div>
+        <div class="stat-card stat-card--done" routerLink="/board" [fragment]="'done'">
+          <i class="bi bi-check-circle stat-icon" aria-hidden="true"></i>
+          <span class="stat-number">{{ doneCount() }}</span>
+          <span class="stat-label">Done</span>
+        </div>
+        <div class="stat-card stat-card--urgent" routerLink="/board" [fragment]="'urgent'">
+          <i class="bi bi-exclamation-triangle stat-icon" aria-hidden="true"></i>
+          <span class="stat-number">{{ urgentCount() }}</span>
+          <span class="stat-label">Urgent</span>
+        </div>
+        <div class="stat-card stat-card--overdue" routerLink="/board" [fragment]="'overdue'">
+          <i class="bi bi-clock stat-icon" aria-hidden="true"></i>
+          <span class="stat-number">{{ overdueCount() }}</span>
+          <span class="stat-label">Overdue</span>
+        </div>
+        <div class="stat-card" routerLink="/board">
+          <i class="bi bi-kanban stat-icon" aria-hidden="true"></i>
+          <span class="stat-number">{{ totalTasksCount() }}</span>
+          <span class="stat-label">Total tasks</span>
+        </div>
+        <div class="stat-card stat-card--deadline" routerLink="/board">
+          <i class="bi bi-calendar-event stat-icon" aria-hidden="true"></i>
+          <span class="stat-number stat-number--date">{{ nextOpenDueDate() }}</span>
+          <span class="stat-label">Upcoming deadline</span>
+        </div>
+      </section>
+
+
+      <div class="dashboard__due-row">
+        <section class="dashboard__due-soon">
+          <h3 class="section-title">Due soon</h3>
+          @if (dueSoonTasks().length) {
+          <ul class="due-list">
+            @for (task of dueSoonTasks(); track task.id) {
+            <li class="due-item" (click)="navigateToTask(task)">
+              <div class="due-item__priority-bar priority-{{ task.priority }}"></div>
+              <span class="due-item__title">{{ task.title | truncate:40 }}</span>
+              <span class="due-item__date">{{ formatTaskDueDate(task.due_date) }}</span>
+              <i class="bi bi-chevron-right due-item__arrow" aria-hidden="true"></i>
+            </li>
+            }
+          </ul>
+          } @else {
+          <p class="no-due-tasks">No tasks due soon. Great job!</p>
+          }
+        </section>
+
+        <section class="dashboard__due-soon">
+          <h3 class="section-title section-title--overdue">Overdue</h3>
+          @if (overdueTasks().length) {
+          <ul class="due-list">
+            @for (task of overdueTasks(); track task.id) {
+            <li class="due-item" (click)="navigateToTask(task)">
+              <div class="due-item__priority-bar priority-{{ task.priority }}"></div>
+              <span class="due-item__title">{{ task.title | truncate:40 }}</span>
+              <span class="due-item__date due-item__date--overdue">{{ formatTaskDueDate(task.due_date) }}</span>
+              <i class="bi bi-chevron-right due-item__arrow" aria-hidden="true"></i>
+            </li>
+            }
+          </ul>
+          } @else {
+          <p class="no-due-tasks">No overdue tasks. Fantastic!</p>
+          }
+        </section>
+      </div>
+
+    </div>
+
+  </main>
+
+</ui-main>

@@ -13,13 +13,13 @@ export class BackButton {
   private location = inject(Location);
   private router = inject(Router);
 
-  /** Navigates to the previous page, or falls back to the summary page if there is no history. */
+  /** Navigates to the previous page, or falls back to the dashboard page if there is no history. */
   goBack(): void {
     if (window.history.length > 1) {
       this.location.back();
       return;
     }
 
-    void this.router.navigateByUrl('/summary');
+    void this.router.navigateByUrl('/dashboard');
   }
 }

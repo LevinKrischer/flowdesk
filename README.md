@@ -84,7 +84,7 @@ flowdesk/
 │   │   │   ├── login/
 │   │   │   ├── privacy-policy/
 │   │   │   ├── signup/
-│   │   │   └── summary/
+│   │   │   └── dashboard/
 │   │   ├── services/             # Pipes, directives, Supabase service
 │   │   ├── shared/               # Shared UI components
 │   │   │   └── ui/

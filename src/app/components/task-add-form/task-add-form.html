@@ -14,7 +14,7 @@
     <div class="row">
 
       <div [class]="editTask() ? 'col-12' : 'col-12 col-lg-5'">
-        <div class="mt-3">
+        <div class="">
           <app-input-field
             type="text"
             label="Title"
@@ -22,7 +22,7 @@
             placeholder="Enter title"
             [(model)]="form.title"
             [error]="errors['title']"
-            [maxlength]="30"
+            [maxlength]="50"
             [isRequired]="true"
             [reserveErrorSpace]="true"
             (blur)="markDirty('title')"
@@ -60,7 +60,7 @@
       }
 
       <div [class]="editTask() ? 'col-12' : 'col-12 col-lg-6'">
-        <div class="mt-3 priority-section">
+        <div class="priority-section">
           <label class="form-label d-block">Priority</label>
           <div class="d-flex justify-content-center justify-content-lg-start gap-2 priority-picker">
             <ui-button

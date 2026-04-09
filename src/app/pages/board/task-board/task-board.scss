@@ -19,7 +19,6 @@
 .taskboard {
   width: 100%;
   height: 100%;
-  padding-top: 1.5rem;
   overflow-x: visible;
   overflow-y: hidden;
   scrollbar-color: $grey-light2 transparent;
@@ -29,9 +28,6 @@
     cursor: grabbing;
   }
 
-  @include for-size(lg) {
-    padding-top: 2rem;
-  }
 }
 
 .taskboard-inner {
@@ -39,13 +35,17 @@
   height: calc(100% - 1rem);
   gap: 1rem;
   padding: 2px 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
 
   @include for-size(sm) {
     padding: 2px 1.5rem;
+    padding-right: 0;
   }
 
   @include for-size(md) {
     padding: 2px 2rem;
+    padding-right: 0;
   }
 
   @include for-size(lg) {
@@ -53,30 +53,31 @@
   }
 }
 
-.taskboard-end-spacer {
-  flex-shrink: 0;
-  width: 0.5rem;
+// .taskboard-end-spacer {
+//   flex-shrink: 0;
+//   width: 0.5rem;
 
-  @include for-size(sm) {
-    width: 1rem;
-  }
+//   @include for-size(sm) {
+//     width: 1rem;
+//   }
 
-  @include for-size(md) {
-    width: 1.5rem;
-  }
+//   @include for-size(md) {
+//     width: 1.5rem;
+//   }
 
-  @include for-size(lg) {
-    width: 3.5rem;
-  }
+//   @include for-size(lg) {
+//     width: 3.5rem;
+//   }
 
-  @media (min-width: 1312px) {
-    display: none;
-  }
-}
+//   @media (min-width: 1312px) {
+//     display: none;
+//   }
+// }
 
 .board-column {
   flex: 1 1 0%;
   min-width: 17rem;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.08);
   border: 1px solid $grey-light3;
   border-radius: 0.75rem;
   padding: 0 0.5rem 0rem 0.5rem;
@@ -87,6 +88,16 @@
 
 .board-column-header {
   padding: 1rem 0.5rem;
+}
+
+.overdue-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: $red;
+  background: rgba($red, 0.1);
+  border-radius: 2rem;
+  padding: 0.1rem 0.5rem;
+  white-space: nowrap;
 }
 
 .board-column-footer {

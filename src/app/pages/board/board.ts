@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, computed, inject, signal, viewChild, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TasksDb, Task } from '../../core/db/tasks.db';
 import { Button } from '../../shared/ui/button/button';
 import { InputFieldComponent } from '../../shared/ui/forms/input-field/input-field';
@@ -21,6 +21,7 @@ import { Main } from '../../shared/ui/main/main';
 export class Board implements OnInit, OnDestroy {
   private tasksDb = inject(TasksDb);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   tasks = this.tasksDb.tasks;
   todoTasks = computed(() => this.tasks().filter((t) => t.status === 'todo'));
   inProgressTasks = computed(() => this.tasks().filter((t) => t.status === 'in-progress'));
@@ -31,6 +32,21 @@ export class Board implements OnInit, OnDestroy {
   selectedTaskId = signal<number | null>(null);
   selectedTask = computed(() => this.tasks().find((t) => t.id === this.selectedTaskId()) ?? null);
   compactView = signal(localStorage.getItem('board.compactView') === 'true');
+
+  priorityFilter = signal<Task['priority'] | null>(null);
+  categoryFilter = signal<Task['category'] | null>(null);
+  showFilters = signal(false);
+
+  readonly priorities: Task['priority'][] = ['urgent', 'medium', 'low'];
+  readonly categories: Task['category'][] = ['Technical Task', 'User Story', 'Bug', 'Feature'];
+
+  togglePriorityFilter(p: Task['priority']): void {
+    this.priorityFilter.set(this.priorityFilter() === p ? null : p);
+  }
+
+  toggleCategoryFilter(c: Task['category']): void {
+    this.categoryFilter.set(this.categoryFilter() === c ? null : c);
+  }
 
   /**
    * Opens the modal in add mode and clears any selected task.
@@ -51,6 +67,7 @@ export class Board implements OnInit, OnDestroy {
     this.modalMode = 'detail';
     this.selectedTaskId.set(task.id);
     this.isModalOpen.set(true);
+    this.router.navigate([], { queryParams: { task: task.id }, queryParamsHandling: 'merge' });
   }
 
   /**
@@ -59,6 +76,7 @@ export class Board implements OnInit, OnDestroy {
    */
   closeModal() {
     this.isModalOpen.set(false);
+    this.router.navigate([], { queryParams: { task: null }, queryParamsHandling: 'merge' });
   }
 
   /**
@@ -89,6 +107,13 @@ export class Board implements OnInit, OnDestroy {
   async ngOnInit() {
     await this.tasksDb.getTasks();
     this.tasksDb.subscribeToTaskChanges();
+    const taskParam = this.route.snapshot.queryParamMap.get('task');
+    if (taskParam) {
+      const task = this.tasks().find((t) => t.id === Number(taskParam));
+      if (task) {
+        this.openDetail(task);
+      }
+    }
   }
 
   /**
@@ -114,11 +139,13 @@ export class Board implements OnInit, OnDestroy {
 
   filteredTasks = computed(() => {
     const term = this.searchTerm().toLowerCase();
+    const prio = this.priorityFilter();
+    const cat = this.categoryFilter();
     return this.tasks().filter(
       (t) =>
-        term === '' ||
-        t.title.toLowerCase().includes(term) ||
-        t.description.toLowerCase().includes(term),
+        (term === '' || t.title.toLowerCase().includes(term) || t.description.toLowerCase().includes(term)) &&
+        (prio === null || t.priority === prio) &&
+        (cat === null || t.category === cat),
     );
   });
 }

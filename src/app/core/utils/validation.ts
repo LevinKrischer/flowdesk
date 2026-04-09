@@ -60,13 +60,13 @@ export function isValidPassword(input: string): boolean {
 /**
  * Validates the given title
  *
- * @param input - The full name string to validate.
- * @returns True if the name contains at least two valid alphabetic words, otherwise false.
+ * @param input - The title string to validate.
+ * @returns True if the title is valid, otherwise false.
  */
 export function isValidTitle(input: string): boolean {
   if (!input) return false;
   const trimmed = input.trim();
-  return trimmed.length <= 40;
+  return trimmed.length <= 50;
 }
 
 /**
@@ -85,10 +85,11 @@ export function isValidDescription(input: string): boolean {
  * @param input - The date string to validate (expected format: YYYY-MM-DD).
  * @returns True if the date is valid and not in the past, otherwise false.
  */
-export function isValidDueDate(input: string): boolean {
+export function isValidDueDate(input: string, allowPast = false): boolean {
   if (!input) return false;
   const date = new Date(input + 'T00:00:00');
   if (isNaN(date.getTime())) return false;
+  if (allowPast) return true;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   return date >= today;

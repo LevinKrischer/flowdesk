@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { Layout } from './layout/layout';
 import { PrivacyPolicy } from './pages/privacy-policy/privacy-policy';
 import { LegalNotice } from './pages/legal-notice/legal-notice';
-import { Summary } from './pages/summary/summary';
+import { dashboard } from './pages/dashboard/dashboard';
 import { AddTask } from './pages/add-task/add-task';
 import { Board } from './pages/board/board';
 import { Contacts } from './pages/contacts/contacts';
@@ -19,8 +19,8 @@ export const routes: Routes = [
     path: '',
     component: Layout,
     children: [
-      { path: '', redirectTo: 'summary', pathMatch: 'full' },
-      { path: 'summary', component: Summary, canActivate: [authGuard] },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: dashboard, canActivate: [authGuard] },
       { path: 'add-task', component: AddTask, canActivate: [authGuard] },
       { path: 'board', component: Board, canActivate: [authGuard] },
       { path: 'contacts', component: Contacts, canActivate: [authGuard] },
@@ -30,5 +30,5 @@ export const routes: Routes = [
       { path: 'test', component: TestComponent },
     ],
   },
-  { path: '**', redirectTo: 'summary' },
+  { path: '**', redirectTo: 'dashboard' },
 ];
