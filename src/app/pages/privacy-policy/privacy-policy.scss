@@ -1,17 +1,37 @@
+@use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 
-h4 {
-  margin: 3rem 0 0.5rem 0;
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
-h5 {
-  margin: 2rem 0 0.5rem 0;
+ui-main {
+  display: block;
+  height: 100%;
 }
 
-div.container{
-  padding-bottom: 5rem;
+.privacy-policy {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
-  @include for-size(lg) {
-    padding-bottom: 2rem;
+  &__header {
+    flex-shrink: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  &__body {
+    flex: 1;
+    overflow-y: auto;
+
+    h4 {
+      margin: 2rem 0 0.5rem 0;
+    }
+
+    h5 {
+      margin: 1.5rem 0 0.5rem 0;
+    }
   }
 }
