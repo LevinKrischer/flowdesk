@@ -6,8 +6,7 @@
   flex-direction: column;
   overflow-x: hidden;
   margin: 0;
-  scrollbar-width: thin;
-  scrollbar-color: $grey-light transparent;
+  scrollbar-width: none;
 }
 
 .test {
@@ -18,10 +17,12 @@
 }
 
 .content-inner {
-  padding-top: 1.5rem;
+
+  @include for-size(md) {
+    padding-top: 1.5rem;
+  }
 
   @include for-size(lg) {
     padding-top: 2rem;
   }
 }
-

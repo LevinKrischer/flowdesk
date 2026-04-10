@@ -6,10 +6,10 @@
   </section>
   }
 
-  <main class="dashboard" [class.mobile-greeting-preparing]="isPreparingMobileGreeting()">
+  <main class="dashboard" class="pb-3 pb-md-0" [class.mobile-greeting-preparing]="isPreparingMobileGreeting()">
 
     <header class="dashboard__header d-flex flex-column flex-lg-row justify-content-between align-items-lg-center">
-      <h2 class="mb-0">Dashboard</h2>
+      <h2 class="mb-0 d-none d-md-block">Dashboard</h2>
       <div class="dashboard__header-actions d-none d-lg-flex align-items-center justify-content-end gap-4">
         <ui-button class="dashboard__header-button__add-task" variant="link" routerLink="/add-task">
           + add new task

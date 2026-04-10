@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 import { Router, NavigationEnd, RouterLink, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { InitialsPipe } from './../../services/initials.pipe';
@@ -13,18 +13,31 @@ import { SupabaseService } from '../../services/supabase';
 
 export class Header {
   menuOpen = false;
+  pageTitle = signal('');
 
-  /**
-   * Creates the header component and closes the user menu on route changes.
-   * @param router Angular router instance.
-   * @param supabaseService Supabase service used for auth/user state.
-   */
+  private readonly pageTitles: Record<string, string> = {
+    '/dashboard': 'Dashboard',
+    '/add-task': 'Add Task',
+    '/board': 'Board',
+    '/contacts': 'Contacts',
+    '/help': 'Help',
+    '/privacy-policy': 'Privacy Policy',
+    '/legal-notice': 'Legal Notice',
+  };
+
   constructor(private router: Router, public supabaseService: SupabaseService) {
+    this.updatePageTitle(this.router.url);
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
+      .subscribe((event: NavigationEnd) => {
         this.menuOpen = false;
+        this.updatePageTitle(event.urlAfterRedirects);
       });
+  }
+
+  private updatePageTitle(url: string): void {
+    const path = url.split('?')[0].split('#').pop() ?? '';
+    this.pageTitle.set(this.pageTitles[path] ?? '');
   }
 
   /**

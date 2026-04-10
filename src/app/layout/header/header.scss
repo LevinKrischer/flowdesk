@@ -2,12 +2,16 @@
 @use 'styles/mixins' as *;
 
 header {
-  height: 5rem;
+  height: 3rem;
   background-color: $white;
   width: 100%;
   filter: $sh-header;
   position: relative;
   z-index: 4;
+
+  @include for-size(sm) {
+    height: 4rem;
+  }
 
   @include for-size(lg) {
     height: 4.5rem;
@@ -16,6 +20,14 @@ header {
 
 .header-container {
   max-width: 90rem;
+}
+
+#header-center {
+  h5 {
+    color: $blue-dark;
+    font-family: 'Inter-SemiBold', sans-serif;
+    pointer-events: none;
+  }
 }
 
 #logo {
@@ -47,24 +59,24 @@ header {
 }
 
 #header-right {
-    padding-right: 1rem;
+  padding-right: 1rem;
 
-      @include for-size(sm) {
-        padding-right: 1.5rem;
-      }
+  @include for-size(sm) {
+    padding-right: 1.5rem;
+  }
 
-      @include for-size(md) {
-        padding-right: 2rem;
-      }
+  @include for-size(md) {
+    padding-right: 2rem;
+  }
 
-      @include for-size(lg) {
-        padding-right: 4rem;
-      }
+  @include for-size(lg) {
+    padding-right: 4rem;
+  }
 }
 
 .userProfile {
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 2rem;
+  width: 2rem;
   border: 1px solid $grey-dark;
   color: $off-white;
   border-radius: 100%;
@@ -75,6 +87,13 @@ header {
   justify-content: center;
   font-weight: bold;
   background-color: $blue-dark;
+  font-size: 0.75rem;
+
+  @include for-size(md) {
+    height: 2.5rem;
+    width: 2.5rem;
+    font-size: 1rem;
+  }
 
   &:hover {
     background-color: $blue-light;
@@ -91,11 +110,11 @@ header {
     align-items: center;
 
     .bi {
-        font-size: 1.5rem;
-        line-height: 1;
-        color: $grey-dark;
-        transition: $trans-default;
-      }
+      font-size: 1.5rem;
+      line-height: 1;
+      color: $grey-dark;
+      transition: $trans-default;
+    }
 
     &:hover .bi {
       transform: scale(1.2);

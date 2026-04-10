@@ -12,6 +12,12 @@
       </div>
     </div>
 
+    @if (pageTitle()) {
+      <div id="header-center" class="position-absolute start-50 translate-middle-x d-md-none">
+        <h5 class="mb-0">{{ pageTitle() }}</h5>
+      </div>
+    }
+
     <div id="header-right" class="d-flex gap-2 align-items-center">
       @if (supabaseService.userName()) {
         <button class="help d-none d-lg-flex">

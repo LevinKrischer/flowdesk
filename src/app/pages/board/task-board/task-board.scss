@@ -24,11 +24,12 @@
 
   &__inner {
     min-width: 100%;
-    height: calc(100% - 1rem);
+    height: calc(100%);
     gap: 1rem;
-    padding: 2px 1rem;
+    padding: 2px 1rem 0 1rem;
     overflow-x: auto;
     overflow-y: hidden;
+    scrollbar-width: none;
 
     @include for-size(sm) {
       padding: 2px 1.5rem;
@@ -51,10 +52,14 @@
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.08);
     border: 1px solid $grey-light3;
     border-radius: 0.75rem;
-    padding: 0 0.5rem;
+    padding: 0 0.5rem 0.5rem 0.5rem;
     background-color: $off-white;
     max-height: 100%;
     cursor: default;
+
+    @include for-size(sm) {
+      padding: 0 0.5rem;
+    }
   }
 
   &__column-header {

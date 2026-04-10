@@ -120,14 +120,8 @@
 }
 
 .button-area {
-  position: fixed;
-  bottom: 5rem;
-  background-color: $off-white;
   padding: 1rem;
   width: 100%;
-  z-index: 10;
-  left: 0;
-  right: 0;
 
   .button-area-inner {
     justify-content: center !important;
