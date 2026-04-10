@@ -10,4 +10,5 @@ export class Main {
   @Input() fullWidth = false;
   @Input() noPaddingX = false;
   @Input() noPaddingBottom = false;
+  @Input() noPaddingTop = false;
 }

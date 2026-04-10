@@ -63,10 +63,12 @@
     </div>
     }
 
+    @if (contact.notes) {
     <div class="d-flex gap-3 align-items-start description-row">
       <i class="bi bi-sticky"></i>
       <p class="fst-italic"> {{ contact.notes }}</p>
     </div>
+    }
   </div>
   }
 

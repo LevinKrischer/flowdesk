@@ -3,75 +3,8 @@
 
 .contact-header {
   font-size: 1rem;
-  color: #141517;
+  color: $black;
   padding: 0;
   display: flex;
   align-items: center;
-
-  .header-title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-
-    @include for-size(xs) {
-      flex-wrap: wrap;
-      gap: 0;
-
-      .separator {
-        margin-top: 0.5rem;
-        width: 50%;
-        height: 2px;
-        order: 3;
-      }
-
-      .subline {
-        width: 100%;
-        order: 2;
-      }
-    }
-  }
-
-  .subline {
-    font-size: 1.5rem;
-    font-weight: 100;
-    margin: 0;
-  }
-
-  .separator {
-    width: 2px;
-    height: 3rem;
-    background: #29abe2;
-  }
-
-  .back-btn {
-    border: none;
-    background: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1rem;
-    padding: 0.5rem 0;
-    margin-left: auto;
-    margin-bottom: auto;
-
-    img {
-      width: 2rem;
-      height: 2rem;
-
-      &.active {
-        display: none;
-      }
-    }
-
-    &:active {
-      img.default {
-        display: none;
-      }
-
-      img.active {
-        display: block;
-      }
-    }
-  }
 }

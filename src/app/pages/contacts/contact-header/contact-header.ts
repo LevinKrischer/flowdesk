@@ -1,14 +1,13 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ContactWithInitials } from '../../../core/db/contacts.db';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { Button } from '../../../shared/ui/button/button';
 
 @Component({
   selector: 'app-contact-header',
-  imports: [],
+  imports: [Button],
   templateUrl: './contact-header.html',
   styleUrl: './contact-header.scss',
 })
 
 export class ContactHeader {
-  @Input() contact: ContactWithInitials | null = null;
   @Output() back = new EventEmitter<void>();
 }

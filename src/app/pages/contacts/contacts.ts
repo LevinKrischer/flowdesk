@@ -6,11 +6,13 @@ import { ContactDetails } from './contact-details/contact-details';
 import { ContactList } from './contact-list/contact-list';
 import { ContactHeader } from './contact-header/contact-header';
 import { UserFeedbackComponent } from '../../shared/ui/user-feedback/user-feedback';
+import { InitialsPipe } from '../../services/initials.pipe';
+import { Main } from '../../shared/ui/main/main';
 
 @Component({
   selector: 'app-contacts',
   standalone: true,
-  imports: [CommonModule, ContactDetails, ContactList, ContactHeader, UserFeedbackComponent],
+  imports: [CommonModule, ContactDetails, ContactList, ContactHeader, UserFeedbackComponent, Main],
   templateUrl: './contacts.html',
   styleUrl: './contacts.scss',
 })
@@ -18,8 +20,9 @@ import { UserFeedbackComponent } from '../../shared/ui/user-feedback/user-feedba
 export class Contacts implements OnInit {
   @ViewChild('feedback') feedback!: UserFeedbackComponent;
   searchTerm = signal('');
-  selected: ContactWithInitials | null = null;
-  isMobileDetailOpen = false;
+  selected = signal<ContactWithInitials | null>(null);
+  isMobileDetailOpen = signal(false);
+  private initials = new InitialsPipe();
 
   constructor(private contactsDb: ContactsDb) { }
 
@@ -64,15 +67,6 @@ export class Contacts implements OnInit {
   });
 
   /**
-   * Extracts initials from a full name (first and last name characters).
-   */
-  private getInitials(name: string): string {
-    const parts = name.split(' ');
-    const [first, last] = [parts[0], parts.at(-1)];
-    return (first?.[0] ?? '') + (last?.[0] ?? '');
-  }
-
-  /**
    * Sorts contacts alphabetically by name and groups them by their first letter.
    * Each contact is enriched with computed initials.
    */
@@ -82,7 +76,7 @@ export class Contacts implements OnInit {
 
     for (const contact of sorted) {
       const letter = contact.name[0].toUpperCase();
-      const initials = this.getInitials(contact.name);
+      const initials = this.initials.transform(contact.name);
       let group = groups.find((g) => g.letter === letter);
       if (!group) {
         group = { letter, contacts: [] };
@@ -105,16 +99,16 @@ export class Contacts implements OnInit {
    * Selects a contact and opens the mobile detail view.
    */
   selectContact(c: ContactWithInitials) {
-    this.selected = c;
-    this.isMobileDetailOpen = true;
+    this.selected.set(c);
+    this.isMobileDetailOpen.set(true);
   }
 
   /**
    * Closes the mobile detail view and clears the selection.
    */
   backToList() {
-    this.isMobileDetailOpen = false;
-    this.selected = null;
+    this.isMobileDetailOpen.set(false);
+    this.selected.set(null);
   }
 
   /**
@@ -122,16 +116,16 @@ export class Contacts implements OnInit {
    * The groupedContacts signal updates automatically.
    */
   async editSelected() {
-    if (!this.selected) return;
+    if (!this.selected()) return;
 
     await this.contactsDb.getContacts();
 
-    const updated = this.contactsDb.contacts().find(c => c.id === this.selected!.id);
+    const updated = this.contactsDb.contacts().find(c => c.id === this.selected()!.id);
     if (updated) {
-      this.selected = { ...updated, initials: this.getInitials(updated.name) };
+      this.selected.set({ ...updated, initials: this.initials.transform(updated.name) });
     }
 
-    this.feedback.show(`Contact '${this.selected?.name}' has been updated!`);
+    this.feedback.show(`Contact '${this.selected()?.name}' has been updated!`);
   }
 
   /**
@@ -149,15 +143,15 @@ export class Contacts implements OnInit {
    * The groupedContacts signal updates automatically.
    */
   async deleteSelected() {
-    if (!this.selected) return;
+    if (!this.selected()) return;
 
-    const deletedName = this.selected.name;
+    const deletedName = this.selected()!.name;
 
     try {
-      await this.contactsDb.deleteContact(this.selected.id);
+      await this.contactsDb.deleteContact(this.selected()!.id);
 
-      this.selected = null;
-      this.isMobileDetailOpen = false;
+      this.selected.set(null);
+      this.isMobileDetailOpen.set(false);
 
       this.feedback.show(`Contact '${deletedName}' has been deleted!`);
     } catch (err) {

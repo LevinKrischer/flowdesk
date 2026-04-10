@@ -10,7 +10,7 @@
     h4 {
       font-size: 1.125rem;
       font-weight: 700;
-      color: #000000;
+      color: $black;
       display: flex;
       align-items: center;
       gap: 1.25rem;
@@ -26,17 +26,17 @@
       label {
         display: block;
         font-weight: 700;
-        color: #000000;
+        color: $black;
         margin-bottom: 0.5rem;
         font-size: 0.875rem;
       }
 
       div {
         font-size: 1rem;
-        color: #595959;
+        color: $grey-dark;
 
         a {
-          color: #2a6fd6;
+          color: $blue-link;
           text-decoration: none;
 
           &:hover {
@@ -70,7 +70,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
+    color: $white;
     font-weight: 700;
     font-size: 2rem;
     text-align: center;
@@ -90,14 +90,14 @@
 
   .select-contact-message {
     border: 0.5px dashed $grey;
-    background-color: #e7e7e7;
+    background-color: $grey-light3;
     font-size: 0.875rem;
   }
 
   .contact-name {
     font-size: 1.875rem;
     font-weight: 700;
-    color: #141517;
+    color: $black;
 
     @include for-size(xs) {
       line-height: 2rem;
@@ -117,7 +117,7 @@
       border: none;
       cursor: pointer;
       font-size: 0.875rem;
-      color: #141517;
+      color: $black;
       transition: $trans-default;
 
       img {
@@ -147,7 +147,7 @@
       position: absolute;
       top: -5.5rem;
       right: 0;
-      background: #FFFFFF;
+      background: $white;
       border-radius: 1.625rem 1.625rem 0 1.625rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       padding: 0.5rem 0;
@@ -163,7 +163,7 @@
         background: none;
         cursor: pointer;
         font-size: 0.875rem;
-        color: #141517;
+      color: $black;
         transition: $trans-default;
 
         img {
