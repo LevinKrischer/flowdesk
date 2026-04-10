@@ -6,17 +6,17 @@
   <div class="modal-inner d-flex flex-column h-100 w-100">
     <div class="row g-0 flex-grow-1 h-100">
 
-      <div class="col-12 col-lg-5 d-flex flex-column justify-content-center align-items-start modal-title-area gap-0">
+      <div class="col-12 col-lg-5 d-flex flex-column justify-content-center align-items-start contact-form__title-area gap-0">
         <img src="assets/icons/logo-flowdesk-default-100px.svg" alt="Flowdesk Logo" class="logo d-none d-lg-block" />
         <h2 class="mb-1 mb-lg-3 mt-lg-4">Edit contact</h2>
         <div class="blue-divider mt-0 mt-lg-1"></div>
       </div>
 
-      <div class="main-area col-12 col-lg-7 d-flex flex-row align-items-start align-items-lg-center justify-content-lg-evenly gap-lg-4 position-relative">
+      <div class="contact-form__body col-12 col-lg-7 d-flex flex-row align-items-start align-items-lg-center justify-content-lg-evenly gap-lg-4 position-relative">
 
         <div class="d-flex flex-column align-items-center px-lg-2 px-xl-4">
           <div
-            class="d-flex align-items-center justify-content-center contact-avatar"
+            class="d-flex align-items-center justify-content-center contact-form__avatar"
             [style.background]="contact?.color"
           >
             {{ contact?.initials }}
@@ -25,13 +25,13 @@
 
         <form
           (ngSubmit)="save()"
-          class="d-flex flex-column gap-0 px-lg-2 gap-lg-2 modal-content-area w-100 w-lg-75"
+          class="d-flex flex-column gap-0 px-lg-2 gap-lg-2 contact-form__fields w-100 w-lg-75"
         >
           <app-input-field
             type="text"
             label="Name"
             placeholder="Name"
-            icon="assets/icons/form-person-24px.svg"
+            bootstrapIconStart="bi-person"
             [(model)]="form.name"
             [error]="errors.name"
             [maxlength]="30"
@@ -45,7 +45,7 @@
             type="email"
             label="Email"
             placeholder="Email"
-            icon="assets/icons/form-mail-24px.svg"
+            bootstrapIconStart="bi-envelope-at"
             [(model)]="form.email"
             [error]="errors.email"
             [maxlength]="35"
@@ -59,7 +59,7 @@
             type="tel"
             label="Phone"
             placeholder="Phone"
-            icon="assets/icons/form-phone-24px.svg"
+            bootstrapIconStart="bi-telephone"
             [(model)]="form.phone"
             [error]="errors.phone"
             [maxlength]="15"

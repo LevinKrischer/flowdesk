@@ -4,7 +4,7 @@
     type="text"
     label="Name"
     placeholder="Name"
-    icon="assets/icons/form-person-24px.svg"
+    bootstrapIconStart="bi-person"
     autocomplete="name"
     [(model)]="form.name"
     [error]="errors.name"
@@ -19,7 +19,7 @@
     type="email"
     label="Email"
     placeholder="Email"
-    icon="assets/icons/form-mail-24px.svg"
+    bootstrapIconStart="bi-envelope-at"
     autocomplete="email"
     [(model)]="form.email"
     [error]="errors.email"
@@ -34,9 +34,10 @@
     [type]="getPasswordFieldType('password')"
     label="Password"
     placeholder="Password"
-    [icon]="getPasswordFieldIcon('password')"
-    [iconAlt]="getPasswordIconAlt('password')"
-    [iconClickable]="isPasswordToggleVisible('password')"
+    bootstrapIconStart="bi-lock"
+    [bootstrapIconEnd]="getPasswordFieldIcon('password')"
+    [bootstrapIconEndClickable]="isPasswordToggleVisible('password')"
+    [bootstrapIconEndLabel]="getPasswordIconAlt('password')"
     autocomplete="new-password"
     [(model)]="form.password"
     [error]="errors.password"
@@ -52,9 +53,10 @@
     [type]="getPasswordFieldType('confirmPassword')"
     label="Confirm Password"
     placeholder="Confirm Password"
-    [icon]="getPasswordFieldIcon('confirmPassword')"
-    [iconAlt]="getPasswordIconAlt('confirmPassword')"
-    [iconClickable]="isPasswordToggleVisible('confirmPassword')"
+    bootstrapIconStart="bi-lock"
+    [bootstrapIconEnd]="getPasswordFieldIcon('confirmPassword')"
+    [bootstrapIconEndClickable]="isPasswordToggleVisible('confirmPassword')"
+    [bootstrapIconEndLabel]="getPasswordIconAlt('confirmPassword')"
     autocomplete="new-password"
     [(model)]="form.confirmPassword"
     [error]="errors.confirmPassword"
@@ -67,14 +69,15 @@
   />
 
   <div
-    class="mb-3 d-flex justify-content-center align-items-center gap-2 privacy-checkbox"
+    class="mb-3 d-flex justify-content-center align-items-center gap-2 signup-form__privacy"
     (click)="form.acceptedPrivacy = !form.acceptedPrivacy"
   >
-    <img
-      [src]="form.acceptedPrivacy ? 'assets/icons/checkbox-checked-default-24px.svg' : 'assets/icons/checkbox-default-24px.svg'"
-      [alt]="form.acceptedPrivacy ? 'Accepted' : 'Not accepted'"
-      class="checkbox-icon"
-    />
+    <i
+      class="bi fs-5"
+      [class.bi-check-square-fill]="form.acceptedPrivacy"
+      [class.bi-square]="!form.acceptedPrivacy"
+      [attr.aria-label]="form.acceptedPrivacy ? 'Accepted' : 'Not accepted'"
+    ></i>
     <label class="mb-0 user-select-none" for="acceptPrivacy">
       I accept the
       <a routerLink="/privacy-policy" target="_blank" class="text-primary" (click)="$event.stopPropagation()">

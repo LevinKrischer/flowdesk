@@ -47,7 +47,20 @@
       }
     }
     @if (bootstrapIconEnd) {
-      <i [class]="'inputBootstrapIcon bi ' + bootstrapIconEnd" aria-hidden="true"></i>
+      @if (bootstrapIconEndClickable) {
+        <button
+          type="button"
+          class="iconButton"
+          [attr.aria-label]="bootstrapIconEndLabel || 'Toggle input'"
+          (mousedown)="onIconPointerDown($event)"
+          (pointerdown)="onIconPointerDown($event)"
+          (click)="onIconClick()"
+        >
+          <i [class]="'inputBootstrapIcon bi ' + bootstrapIconEnd" aria-hidden="true"></i>
+        </button>
+      } @else {
+        <i [class]="'inputBootstrapIcon bi ' + bootstrapIconEnd" aria-hidden="true"></i>
+      }
     }
   </div>
 

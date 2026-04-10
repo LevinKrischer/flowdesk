@@ -19,6 +19,8 @@ export class InputFieldComponent {
   @Input() iconClickable = false;
   @Input() bootstrapIconStart?: string;
   @Input() bootstrapIconEnd?: string;
+  @Input() bootstrapIconEndClickable = false;
+  @Input() bootstrapIconEndLabel = '';
   @Input() error: string | null = null;
   @Input() maxlength: number | null = null;
   @Input() minDate: string | null = null;
@@ -49,7 +51,7 @@ export class InputFieldComponent {
    * @returns Nothing.
    */
   onIconClick() {
-    if (!this.iconClickable) return;
+    if (!this.iconClickable && !this.bootstrapIconEndClickable) return;
     this.iconClick.emit();
   }
 
@@ -59,7 +61,7 @@ export class InputFieldComponent {
    * @returns Nothing.
    */
   onIconPointerDown(event: MouseEvent) {
-    if (!this.iconClickable) return;
+    if (!this.iconClickable && !this.bootstrapIconEndClickable) return;
     event.preventDefault();
   }
 

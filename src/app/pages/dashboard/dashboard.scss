@@ -130,6 +130,11 @@ ui-main {
   }
 }
 
+.text-blue-name {
+  color: $blue-light;
+  font-weight: 700;
+}
+
 .user-name {
   font-size: 2rem;
   font-weight: 700;
@@ -137,7 +142,7 @@ ui-main {
   word-break: break-word;
 
   @include for-size(lg) {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
 
@@ -403,8 +408,12 @@ ui-main {
   background-color: $off-white;
   animation: mobileGreetingFade 3s ease-in-out forwards;
 
+  .user-greet {
+    font-size: 2rem;
+  }
+
   .user-name {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: $blue-light;
     font-weight: 700;
   }
@@ -419,10 +428,6 @@ ui-main {
     opacity: 0;
     pointer-events: none;
   }
-}
-
-.user-greet {
-  font-size: 2rem;
 }
 
 .mobile-greeting-preparing {
@@ -556,79 +561,5 @@ ui-main {
       height: unset;
       aspect-ratio: 1 / 1;
     }
-  }
-}
-
-.user-greet {
-  font-size: 2.5rem;
-
-  @include for-size(lg) {
-    font-size: 3rem;
-  }
-}
-
-.user-greet-container {
-  position: fixed;
-  inset: 0;
-  padding: 1.5rem;
-  justify-content: center;
-  text-align: center;
-  background-color: $off-white;
-  animation: mobileGreetingFade 3s ease-in-out forwards;
-
-  .user-greet {
-    font-size: 2rem;
-  }
-
-  .user-name {
-    font-size: 2.5rem;
-  }
-
-  @include for-size(lg) {
-    position: static;
-    inset: auto;
-    padding: 0;
-    background-color: transparent;
-    animation: none;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-  }
-}
-
-.mobile-greeting-preparing {
-  visibility: hidden;
-
-  @include for-size(lg) {
-    visibility: visible;
-  }
-}
-
-@keyframes mobileGreetingFade {
-  0% {
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 1;
-  }
-
-  80% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-.user-name {
-  font-size: 2.5rem;
-  color: $blue-light;
-  font-weight: 700;
-  word-break: break-word;
-
-  @include for-size(lg) {
-    font-size: 3.5rem;
   }
 }

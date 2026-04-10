@@ -27,14 +27,10 @@ export class dashboard implements OnInit, OnDestroy {
   showMobileGreetingOverlay = signal(false);
   isPreparingMobileGreeting = signal(false);
   hasDisplayName = computed(() => this.userName().trim().length > 0 && !this.isGuestSession());
-  personalizedGreeting = computed(() => {
+  firstName = computed(() => this.userName().trim().split(' ')[0]);
+  greetingPrefix = computed(() => {
     const greeting = this.getTimeBasedGreeting();
-
-    if (!this.hasDisplayName()) {
-      return `${greeting}!`;
-    }
-
-    return `${greeting},`;
+    return this.hasDisplayName() ? `${greeting}, ` : `${greeting}!`;
   });
   todoCount = computed(() => this.tasks().filter((task) => task.status === 'todo').length);
   doneCount = computed(() => this.tasks().filter((task) => task.status === 'done').length);

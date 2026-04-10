@@ -205,26 +205,13 @@ export class SignupForm {
    */
   getPasswordFieldIcon(field: 'password' | 'confirmPassword') {
     if (field === 'password') {
-      if (this.passwordVisible()) {
-        return 'assets/icons/form-visibility-off-24px.svg';
-      }
-
-      if (this.passwordToggleReady()) {
-        return 'assets/icons/form-visibility-on-24px.svg';
-      }
-
-      return 'assets/icons/form-lock-24px.svg';
+      if (this.passwordVisible()) return 'bi-eye-slash';
+      if (this.passwordToggleReady()) return 'bi-eye';
+      return '';
     }
-
-    if (this.confirmPasswordVisible()) {
-      return 'assets/icons/form-visibility-off-24px.svg';
-    }
-
-    if (this.confirmPasswordToggleReady()) {
-      return 'assets/icons/form-visibility-on-24px.svg';
-    }
-
-    return 'assets/icons/form-lock-24px.svg';
+    if (this.confirmPasswordVisible()) return 'bi-eye-slash';
+    if (this.confirmPasswordToggleReady()) return 'bi-eye';
+    return '';
   }
 
   /**
@@ -233,27 +220,11 @@ export class SignupForm {
    * @returns The descriptive alt text string.
    */
   getPasswordIconAlt(field: 'password' | 'confirmPassword') {
-    if (field === 'password') {
-      if (this.passwordVisible()) {
-        return 'Hide password';
-      }
-
-      if (this.passwordToggleReady()) {
-        return 'Show password';
-      }
-
-      return 'Password locked';
-    }
-
-    if (this.confirmPasswordVisible()) {
-      return 'Hide confirm password';
-    }
-
-    if (this.confirmPasswordToggleReady()) {
-      return 'Show confirm password';
-    }
-
-    return 'Confirm password locked';
+    const visible = field === 'password' ? this.passwordVisible() : this.confirmPasswordVisible();
+    const ready = field === 'password' ? this.passwordToggleReady() : this.confirmPasswordToggleReady();
+    if (visible) return 'Hide password';
+    if (ready) return 'Show password';
+    return 'Password locked';
   }
 
   /**

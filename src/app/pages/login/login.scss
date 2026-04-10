@@ -22,7 +22,7 @@
     max-width: 40.75rem;
     background: $white;
     border-radius: $card-border-radius;
-    animation: fadeOut 0.2s ease-in-out;
+    animation: fadeInFromBottom 0.2s ease-in-out;
     border: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
   }
@@ -51,11 +51,22 @@ h3 {
 }
 
 .blue-divider {
-  height: 3px;
-  width: minmax(30%, 9.375rem);
-  background: $blue-light;
   display: block;
   margin: 0 auto;
+}
+
+app-login-form {
+  ui-button {
+    width: 11.25rem;
+
+    button {
+      width: 100%;
+    }
+
+    @include for-size(md) {
+      width: auto;
+    }
+  }
 }
 
 .logo-intro {
@@ -108,6 +119,18 @@ h3 {
 @include for-size(lg) {
   .header.intro-enabled .logo.dark {
     animation: logoDark-lg 1.25s ease forwards;
+  }
+}
+
+@keyframes fadeInFromBottom {
+  from {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 

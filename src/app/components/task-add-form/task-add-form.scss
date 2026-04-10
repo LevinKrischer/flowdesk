@@ -5,24 +5,6 @@
   background-color: $grey-light;
 }
 
-// .priority-picker {
-//   ::ng-deep ui-button .btn {
-//     font-size: 0.875rem !important;
-
-//     @include mixins.for-size(sm) {
-//       font-size: 1rem !important;
-//       padding: 1rem !important;
-//     }
-
-//     @include mixins.for-size(lg) {
-//       padding: 1rem 0.5rem !important;
-//     }
-
-//     @include mixins.for-size(xl) {
-//       padding: 1rem 1rem !important;
-//     }
-//   }
-// }
 
 .priority-section {
   margin-bottom: 1.825rem;
@@ -186,22 +168,6 @@
   }
 }
 
-
-.button-area-inner {
-  padding: 0rem 1rem;
-
-  @include mixins.for-size(sm) {
-    padding: 0rem 5rem;
-  }
-
-  @include mixins.for-size(md) {
-    padding: 0rem 7rem;
-  }
-
-  @include mixins.for-size(lg) {
-    padding: 0 0.75rem;
-  }
-}
 
 #subtasks {
   padding-bottom: 0;

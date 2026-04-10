@@ -150,15 +150,9 @@ export class LoginForm {
    * @returns The asset path to the appropriate icon.
    */
   getPasswordFieldIcon() {
-    if (this.passwordVisible()) {
-      return 'assets/icons/form-visibility-off-24px.svg';
-    }
-
-    if (this.passwordToggleReady()) {
-      return 'assets/icons/form-visibility-on-24px.svg';
-    }
-
-    return 'assets/icons/form-lock-24px.svg';
+    if (this.passwordVisible()) return 'bi-eye-slash';
+    if (this.passwordToggleReady()) return 'bi-eye';
+    return '';
   }
 
   /**
@@ -166,14 +160,8 @@ export class LoginForm {
    * @returns The descriptive alt text string.
    */
   getPasswordIconAlt() {
-    if (this.passwordVisible()) {
-      return 'Hide password';
-    }
-
-    if (this.passwordToggleReady()) {
-      return 'Show password';
-    }
-
+    if (this.passwordVisible()) return 'Hide password';
+    if (this.passwordToggleReady()) return 'Show password';
     return 'Password locked';
   }
 

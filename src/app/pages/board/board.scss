@@ -76,52 +76,11 @@ ui-main {
     }
   }
 
-  &__chip {
-    border: none;
-    border-radius: 2rem;
-    padding: 0.2rem 0.75rem;
+  &__filter-label {
     font-size: 0.75rem;
     font-weight: 600;
-    cursor: pointer;
-    transition: $trans-default;
-    background: $grey-light;
     color: $grey-dark;
-    text-transform: capitalize;
-
-    &:hover {
-      background: $blue-dark;
-      color: $white;
-    }
-
-    &.active {
-      color: $white;
-    }
-
-    &--urgent.active  { background: $red; }
-    &--medium.active  { background: $orange; }
-    &--low.active     { background: $green; }
-    &--category.active { background: $blue-dark; }
-
-    &--reset {
-      background: transparent;
-      color: $grey;
-      padding: 0.2rem 0.5rem;
-
-      &:hover {
-        background: transparent;
-        color: $red;
-      }
-    }
   }
-
-  &__chip-divider {
-    width: 1px;
-    height: 1.25rem;
-    background: $grey-light;
-    align-self: center;
-  }
-
-  // ─── Task board section ────────────────────────────────────────────────────
 
   &__task-section {
     display: flex;
@@ -134,5 +93,193 @@ ui-main {
     @include for-size(md) {
       margin-top: 0;
     }
+  }
+}
+
+// ─── Filter dropdowns ─────────────────────────────────────────────────────────────────
+
+.fd-dropdown {
+  position: relative;
+
+  &__trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid $grey-light;
+    border-radius: 2rem;
+    background: $white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: $grey-dark;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: $trans-default;
+    text-transform: capitalize;
+
+    &:hover {
+      border-color: $blue-light;
+      color: $blue-dark;
+    }
+
+    &--active {
+      background: $blue-dark;
+      border-color: $blue-dark;
+      color: $white;
+    }
+  }
+
+  &__chevron {
+    font-size: 0.625rem;
+    transition: transform 0.15s ease;
+  }
+
+  &--open .fd-dropdown__chevron {
+    transform: rotate(180deg);
+  }
+
+  &__panel {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    z-index: 200;
+    min-width: 10rem;
+    background: $white;
+    border: 1px solid $grey-light;
+    border-radius: $base-border-radius;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    padding: 0.25rem 0;
+    list-style: none;
+    margin: 0;
+    display: none;
+
+    &--wide {
+      min-width: 14rem;
+    }
+  }
+
+  &--open &__panel {
+    display: block;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.85rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: $grey-dark;
+    transition: $trans-default;
+    text-transform: capitalize;
+    user-select: none;
+
+    &:hover {
+      background: color-mix(in srgb, #{$blue-light} 10%, transparent);
+      color: $blue-dark;
+    }
+
+    &--selected {
+      color: $blue-dark;
+      font-weight: 600;
+    }
+
+    &--empty {
+      color: $grey;
+      font-style: italic;
+      cursor: default;
+      text-transform: none;
+
+      &:hover {
+        background: none;
+        color: $grey;
+      }
+    }
+  }
+
+  &__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    &--urgent { background: $red; }
+    &--medium { background: $orange; }
+    &--low    { background: $green; }
+
+    &--cat-technical-task { background: $cat-technical-task; border-radius: 2px; }
+    &--cat-user-story     { background: $cat-user-story;     border-radius: 2px; }
+    &--cat-bug            { background: $cat-bug;            border-radius: 2px; }
+    &--cat-feature        { background: $cat-feature;        border-radius: 2px; }
+  }
+
+  &__avatar {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: $white;
+    flex-shrink: 0;
+    text-transform: uppercase;
+  }
+
+  &__contact-name {
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 9rem;
+    text-transform: none;
+  }
+}
+
+.fd-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid $grey-light;
+  border-radius: 2rem;
+  background: $white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $grey-dark;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: $trans-default;
+
+  &:hover {
+    border-color: $blue-light;
+    color: $blue-dark;
+  }
+
+  &.active {
+    background: $blue-dark;
+    border-color: $blue-dark;
+    color: $white;
+  }
+}
+
+.fd-filter-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  border: none;
+  border-radius: 2rem;
+  background: transparent;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $grey;
+  cursor: pointer;
+  transition: $trans-default;
+
+  &:hover {
+    color: $red;
+    background: color-mix(in srgb, #{$red} 8%, transparent);
   }
 }

@@ -2,10 +2,7 @@
 
   @if (showMobileGreetingOverlay()) {
   <section class="user-greet-container d-flex flex-column align-items-center">
-    <p class="user-greet mb-0 w-100">{{ personalizedGreeting() }}</p>
-    @if (hasDisplayName()) {
-    <p class="user-name w-100">{{ userName() }}</p>
-    }
+    <p class="user-greet mb-0 w-100">{{ greetingPrefix() }}@if (hasDisplayName()) {<span class="text-blue-name">{{ firstName() }}</span>!}</p>
   </section>
   }
 
@@ -26,10 +23,7 @@
     <div class="dashboard__body">
       <section class="dashboard__hero">
         <div class="hero__greeting">
-          <p class="greeting-text mb-1">{{ personalizedGreeting() }}</p>
-          @if (hasDisplayName()) {
-          <p class="user-name mb-1">{{ userName() }}</p>
-          }
+          <p class="greeting-text mb-1">{{ greetingPrefix() }}@if (hasDisplayName()) {<span class="text-blue-name">{{ firstName() }}</span>!}</p>
           <p class="today-date mb-0">{{ todayFormatted() }}</p>
         </div>
         <div class="hero__progress">

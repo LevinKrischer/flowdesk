@@ -12,43 +12,11 @@ form {
   }
 }
 
-.privacy-checkbox {
+.signup-form__privacy {
   cursor: pointer;
   user-select: none;
 
-  .checkbox-toggle {
-    border: none;
-    background: transparent;
-    padding: 0;
-    margin: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .checkbox-icon {
-    width: 1.125rem;
-    height: 1.125rem;
-    flex-shrink: 0;
-  }
-
   label {
     cursor: pointer;
-  }
-
-  &:hover .checkbox-icon {
-    opacity: 0.8;
-  }
-}
-
-ui-button {
-  width: 11.25rem;
-  button{
-    width: 100%;
-  }
-
-  @include for-size(md) {
-    width: auto;
   }
 }

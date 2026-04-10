@@ -4,7 +4,7 @@
     type="email"
     label="Email"
     placeholder="Email"
-    icon="assets/icons/form-mail-24px.svg"
+    bootstrapIconStart="bi-envelope-at"
     autocomplete="email"
     [(model)]="form.email"
     [error]="errors.email"
@@ -19,9 +19,10 @@
     [type]="getPasswordFieldType()"
     label="Password"
     placeholder="Password"
-    [icon]="getPasswordFieldIcon()"
-    [iconAlt]="getPasswordIconAlt()"
-    [iconClickable]="isPasswordToggleVisible()"
+    bootstrapIconStart="bi-lock"
+    [bootstrapIconEnd]="getPasswordFieldIcon()"
+    [bootstrapIconEndClickable]="isPasswordToggleVisible()"
+    [bootstrapIconEndLabel]="getPasswordIconAlt()"
     autocomplete="current-password"
     [(model)]="form.password"
     [error]="errorMessage() || errors.password"
@@ -34,10 +35,18 @@
   />
 
   <div class="d-flex flex-column flex-sm-row gap-2 gap-lg-4 mt-sm-2 align-items-center justify-content-center justify-content-lg-center w-100">
-    <ui-button type="submit" variant="primary" [disabled]="!isFormValid()" (click)="submit()">
+    <ui-button type="submit" variant="primary" [disabled]="!isFormValid()">
       Log in
     </ui-button>
-    <ui-button type="button" variant="secondary" (click)="guestLogin()">Guest Log in</ui-button>
+    <ui-button type="button" variant="secondary" (click)="guestLogin()">Login as guest</ui-button>
   </div>
 
 </form>
+
+<div class="demo-notice d-flex gap-2 mt-3 p-3">
+  <i class="bi bi-info-circle-fill demo-notice__icon flex-shrink-0 mt-1" aria-hidden="true"></i>
+  <p class="mb-0">
+    <strong>Portfolio Demo</strong> &mdash;
+    This is a demonstration version of Flowdesk. Use the <strong>'Login as guest'</strong> button to explore all features without creating an account. The <strong>'Sign Up'</strong> function is optional but working.
+  </p>
+</div>

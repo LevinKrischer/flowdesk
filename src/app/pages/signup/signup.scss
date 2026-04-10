@@ -5,6 +5,19 @@
   transition: $trans-default;
 }
 
+app-signup-form {
+  ui-button {
+    width: 11.25rem;
+    button {
+      width: 100%;
+    }
+
+    @include for-size(md) {
+      width: auto;
+    }
+  }
+}
+
 app-back-button {
   position: absolute;
   top: 2rem;
@@ -67,9 +80,6 @@ h3 {
 }
 
 .blue-divider {
-  height: 3px;
-  width: minmax(30%, 9.375rem);
-  background: $blue-light;
   display: block;
   margin: 0 auto;
 }
