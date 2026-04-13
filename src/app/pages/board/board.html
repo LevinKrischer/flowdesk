@@ -43,7 +43,6 @@
       <div class="board__filter-bar d-flex flex-wrap align-items-center gap-2" aria-label="Filter tasks">
         <span class="board__filter-label">Filter:</span>
 
-        <!-- Priority -->
         <div class="fd-dropdown" [class.fd-dropdown--open]="activeDropdown() === 'priority'" (click)="$event.stopPropagation()">
           <button class="fd-dropdown__trigger" type="button"
             [class.fd-dropdown__trigger--active]="priorityFilter() !== null"
@@ -66,7 +65,6 @@
           </ul>
         </div>
 
-        <!-- Category -->
         <div class="fd-dropdown" [class.fd-dropdown--open]="activeDropdown() === 'category'" (click)="$event.stopPropagation()">
           <button class="fd-dropdown__trigger" type="button"
             [class.fd-dropdown__trigger--active]="categoryFilter() !== null"
@@ -89,7 +87,6 @@
           </ul>
         </div>
 
-        <!-- Due date -->
         <div class="fd-dropdown" [class.fd-dropdown--open]="activeDropdown() === 'due'" (click)="$event.stopPropagation()">
           <button class="fd-dropdown__trigger" type="button"
             [class.fd-dropdown__trigger--active]="dueFilter() !== null"
@@ -112,7 +109,6 @@
           </ul>
         </div>
 
-        <!-- Assignees -->
         <div class="fd-dropdown" [class.fd-dropdown--open]="activeDropdown() === 'assignees'" (click)="$event.stopPropagation()">
           <button class="fd-dropdown__trigger" type="button"
             [class.fd-dropdown__trigger--active]="assignedContactIds().length > 0"
@@ -145,7 +141,6 @@
           </ul>
         </div>
 
-        <!-- Assigned to me -->
         @if (!isGuestSession() && currentUserContactId() !== null) {
         <button class="fd-filter-btn" type="button" [class.active]="assignedToMe()"
           (click)="assignedToMe.set(!assignedToMe()); $event.stopPropagation()">
@@ -154,7 +149,6 @@
         </button>
         }
 
-        <!-- Clear all -->
         @if (hasActiveFilters()) {
         <button class="fd-filter-clear" type="button"
           (click)="clearAllFilters(); $event.stopPropagation()">

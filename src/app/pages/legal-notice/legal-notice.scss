@@ -16,6 +16,7 @@ ui-main {
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
 
   &__header {
     flex-shrink: 0;
@@ -25,13 +26,55 @@ ui-main {
   &__body {
     flex: 1;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include for-size(md) {
+      gap: 1.25rem;
+    }
+
+    .policy-section {
+      background: $off-white;
+      border: 1px solid $grey-light3;
+      border-radius: $base-border-radius;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      padding: 1rem;
+
+      @include for-size(md) {
+        padding: 1.25rem 1.5rem;
+      }
+    }
+
+    p {
+      color: $grey-dark;
+      line-height: 1.5;
+      margin-bottom: 0.875rem;
+    }
 
     h4 {
-      margin: 2rem 0 0.5rem 0;
+      color: $blue-dark;
+      font-weight: 700;
+      margin: 0 0 0.5rem 0;
     }
 
     h5 {
+      color: $blue-link;
+      font-weight: 700;
       margin: 1.5rem 0 0.5rem 0;
+    }
+
+    a {
+      color: $blue-link;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: $trans-default;
+
+      &:hover,
+      &:focus-visible {
+        color: $blue-dark;
+        outline: none;
+      }
     }
   }
 }

@@ -1,61 +1,130 @@
-<div class="container">
-  <div class="headline d-flex justify-content-between align-items-center">
+<div class="container help-page">
+  <div class="headline d-flex justify-content-between align-items-center mb-3">
     <h2 class="d-none d-md-block">Help</h2>
     <app-back-button></app-back-button>
   </div>
   <p>
-    Welcome to the help page for Flowdesk, your guide to using our kanban project management tool. Here,
-    we'll provide an overview of what Flowdesk is, how it can benefit you, and how to use it.
-  </p>
-  <h4>What is Flowdesk?</h4>
-  <p>
-    Flowdesk is a kanban-based project management tool designed and built by a group of dedicated
-    students as part of their web development bootcamp at the Developer Akademie.
-  </p>
-  <p>
-    Kanban, a Japanese term meaning "billboard", is a highly effective method to visualize work,
-    limit work-in-progress, and maximize efficiency (or flow). Flowdesk leverages the principles of
-    kanban to help users manage their tasks and projects in an intuitive, visual interface.
-  </p>
-  <p>
-    It is important to note that Flowdesk is designed as an educational exercise and is not intended for
-    extensive business usage. While we strive to ensure the best possible user experience, we cannot
-    guarantee consistent availability, reliability, accuracy, or other aspects of quality regarding
-    Flowdesk.
+    Welcome to Flowdesk Help. This page gives you a complete overview of all available features,
+    how the different areas work together, and the fastest way to manage daily project work.
   </p>
 
-  <h4>How to use it</h4>
-  <p>Here is a step-by-step guide on how to use Flowdesk:</p>
-  <ol>
-    <li>
-      <h5>Exploring the Board</h5>
-      <p>
-        When you log in to Flowdesk, you'll find a default board. This board represents your project and
-        contains four default lists: "To Do", "In Progress", “Await feedback” and "Done".
-      </p>
-    </li>
-    <li>
-      <h5>Creating Contacts</h5>
-      <p>
-        In Flowdesk, you can add contacts to collaborate on your projects. Go to the "Contacts" section,
-        click on "New contact", and fill in the required information. Once added, these contacts can
-        be assigned tasks and they can interact with the tasks on the board.
-      </p>
-    </li>
-    <li>
-      <h5>Adding Cards</h5>
-      <p>
-        Now that you've added your contacts, you can start adding cards. Cards represent individual
-        tasks. Click the "+" button under the appropriate list to create a new card. Fill in the
-        task details in the card, like task name, description, due date, assignees, etc.
-      </p>
-    </li>
-    <li>
-      <h5>Moving Cards</h5>
-      <p>
-        As the task moves from one stage to another, you can reflect that on the board by dragging
-        and dropping the card from one list to another.
-      </p>
-    </li>
-  </ol>
+  <section id="top" class="mb-4 help-section help-section--toc" aria-label="Table of contents">
+    <h4>Table of Contents</h4>
+    <ul class="toc-list">
+      <li><a class="toc-link" href="#what-is-flowdesk">What is Flowdesk?</a></li>
+      <li><a class="toc-link" href="#account-and-access">Account and Access</a></li>
+      <li><a class="toc-link" href="#navigation-overview">Navigation Overview</a></li>
+      <li><a class="toc-link" href="#dashboard-features">Dashboard Features</a></li>
+      <li><a class="toc-link" href="#board-features">Board Features</a></li>
+      <li><a class="toc-link" href="#task-management">Task Management</a></li>
+      <li><a class="toc-link" href="#contacts-management">Contacts Management</a></li>
+      <li><a class="toc-link" href="#legal-information-pages">Legal and Information Pages</a></li>
+      <li><a class="toc-link" href="#recommended-workflow">Recommended Workflow</a></li>
+    </ul>
+  </section>
+
+  <section id="what-is-flowdesk" class="mb-4 help-section">
+    <h4>What is Flowdesk?</h4>
+    <p>
+      Flowdesk is a Kanban-based project management tool. Tasks move through four workflow states:
+      <strong>To Do</strong>, <strong>In Progress</strong>, <strong>Await Feedback</strong>, and <strong>Done</strong>.
+      This structure helps teams keep work visible, track progress, and focus on priorities.
+    </p>
+    <p class="mb-0"><a class="back-top-link" href="#top">Back to top</a></p>
+  </section>
+
+  <section id="account-and-access" class="mb-4 help-section">
+    <h4>Account and Access</h4>
+    <ul>
+      <li><strong>Sign Up:</strong> Create a new user account from the signup page.</li>
+      <li><strong>Log In:</strong> Access your workspace from the login page.</li>
+      <li><strong>Protected Pages:</strong> Board, Dashboard, Add Task, Contacts, and Help require authentication.</li>
+      <li><strong>User Menu:</strong> Open the profile button in the header to access Help, Legal Notice, Privacy Policy, and Logout.</li>
+    </ul>
+    <p class="mb-0"><a class="back-top-link" href="#top">Back to top</a></p>
+  </section>
+
+  <section id="navigation-overview" class="mb-4 help-section">
+    <h4>Navigation Overview</h4>
+    <ul>
+      <li><strong>Dashboard:</strong> Quick status view, progress, due soon, and overdue tasks.</li>
+      <li><strong>Add Task:</strong> Create a new task in a dedicated form.</li>
+      <li><strong>Board:</strong> Search, filter, open, move, and update tasks.</li>
+      <li><strong>Contacts:</strong> Manage your contact list and open detailed contact cards.</li>
+      <li><strong>Responsive Layout:</strong> On mobile, navigation and detail areas are optimized for smaller screens.</li>
+    </ul>
+    <p class="mb-0"><a class="back-top-link" href="#top">Back to top</a></p>
+  </section>
+
+  <section id="dashboard-features" class="mb-4 help-section">
+    <h4>Dashboard Features</h4>
+    <ul>
+      <li><strong>Greeting and Date:</strong> Personalized welcome with current day context.</li>
+      <li><strong>Progress Tracking:</strong> Completion bar and ratio of finished versus total tasks.</li>
+      <li><strong>KPI Cards:</strong> Direct entry points to To Do, In Progress, Await Feedback, Done, Urgent, Overdue, and total tasks.</li>
+      <li><strong>Due Soon and Overdue Lists:</strong> Prioritized task lists that can open the related task quickly.</li>
+    </ul>
+    <p class="mb-0"><a class="back-top-link" href="#top">Back to top</a></p>
+  </section>
+
+  <section id="board-features" class="mb-4 help-section">
+    <h4>Board Features</h4>
+    <ul>
+      <li><strong>Task Search:</strong> Find tasks by title or description.</li>
+      <li><strong>Compact View:</strong> Toggle between display densities for better overview.</li>
+      <li><strong>Advanced Filters:</strong> Filter by priority, category, due date, assignees, and "Assigned to me".</li>
+      <li><strong>Quick Reset:</strong> Clear all active filters with one click.</li>
+      <li><strong>Board Columns:</strong> Tasks are grouped by workflow status and can be moved between columns.</li>
+      <li><strong>Add Task Modal:</strong> Create tasks directly from the board.</li>
+      <li><strong>Task Detail Modal:</strong> Open a full task view without leaving the board.</li>
+    </ul>
+    <p class="mb-0"><a class="back-top-link" href="#top">Back to top</a></p>
+  </section>
+
+  <section id="task-management" class="mb-4 help-section">
+    <h4>Task Management</h4>
+    <ul>
+      <li><strong>Create Tasks:</strong> Enter title, description, category, priority, due date, assignees, and subtasks.</li>
+      <li><strong>Edit Tasks:</strong> Update existing task data from the detail view.</li>
+      <li><strong>Delete Tasks:</strong> Remove tasks from the project when no longer needed.</li>
+      <li><strong>Subtask Progress:</strong> Mark subtasks as done directly in the task detail panel.</li>
+      <li><strong>Visual Priorities:</strong> Priority indicators help identify urgent work quickly.</li>
+    </ul>
+    <p class="mb-0"><a class="back-top-link" href="#top">Back to top</a></p>
+  </section>
+
+  <section id="contacts-management" class="mb-4 help-section">
+    <h4>Contacts Management</h4>
+    <ul>
+      <li><strong>Contact List:</strong> Browse and search all available contacts.</li>
+      <li><strong>Contact Details:</strong> Open detailed information in a dedicated detail panel.</li>
+      <li><strong>Add and Edit:</strong> Create new contacts and update existing entries.</li>
+      <li><strong>Delete Contacts:</strong> Remove obsolete contacts from your project workspace.</li>
+      <li><strong>Task Assignment:</strong> Assign contacts to tasks for clear responsibility.</li>
+    </ul>
+    <p class="mb-0"><a class="back-top-link" href="#top">Back to top</a></p>
+  </section>
+
+  <section id="legal-information-pages" class="mb-4 help-section">
+    <h4>Legal and Information Pages</h4>
+    <ul>
+      <li><strong>Help:</strong> Feature explanations and usage guidance.</li>
+      <li><strong>Privacy Policy:</strong> Information about data handling.</li>
+      <li><strong>Legal Notice:</strong> Legal information for the project.</li>
+    </ul>
+    <p class="mb-0"><a class="back-top-link" href="#top">Back to top</a></p>
+  </section>
+
+  <section id="recommended-workflow" class="help-section">
+    <h4>Recommended Workflow</h4>
+    <ol>
+      <li>Create your account or log in.</li>
+      <li>Add contacts first so tasks can be assigned immediately.</li>
+      <li>Create tasks via Add Task or directly from the Board.</li>
+      <li>Use Dashboard insights to prioritize urgent and overdue work.</li>
+      <li>Use Board filters and search to focus on specific task groups.</li>
+      <li>Update subtasks and move cards regularly to keep progress transparent.</li>
+    </ol>
+    <p class="mb-0"><a class="back-top-link" href="#top">Back to top</a></p>
+  </section>
 </div>

@@ -45,8 +45,6 @@ ui-main {
     }
   }
 
-  // ─── Filter ───────────────────────────────────────────────────────────────
-
   &__filter-section {
     flex-shrink: 0;
     display: none;
@@ -95,8 +93,6 @@ ui-main {
     }
   }
 }
-
-// ─── Filter dropdowns ─────────────────────────────────────────────────────────────────
 
 .fd-dropdown {
   position: relative;

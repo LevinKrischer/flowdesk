@@ -36,8 +36,6 @@ export class Board implements OnInit, OnDestroy {
   selectedTaskId = signal<number | null>(null);
   selectedTask = computed(() => this.tasks().find((t) => t.id === this.selectedTaskId()) ?? null);
   compactView = signal(localStorage.getItem('board.compactView') === 'true');
-
-  // ─── Filter signals ──────────────────────────────────────────────────────
   priorityFilter = signal<Task['priority'] | null>(null);
   categoryFilter = signal<Task['category'] | null>(null);
   dueFilter = signal<'soon' | 'overdue' | null>(null);
