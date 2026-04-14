@@ -1,4 +1,4 @@
-@use 'styles/variables' as *;
+﻿@use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 
 .contactDetails {
@@ -28,7 +28,7 @@
         font-weight: 700;
         color: $black;
         margin-bottom: 0.5rem;
-        font-size: 0.875rem;
+        font-size: 1rem;
       }
 
       div {
@@ -91,7 +91,7 @@
   .select-contact-message {
     border: 0.5px dashed $grey;
     background-color: $grey-light3;
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 
   .contact-name {
@@ -116,7 +116,7 @@
       padding: 0;
       border: none;
       cursor: pointer;
-      font-size: 0.875rem;
+      font-size: 1rem;
       color: $black;
       transition: $trans-default;
 
@@ -162,7 +162,7 @@
         border: none;
         background: none;
         cursor: pointer;
-        font-size: 0.875rem;
+        font-size: 1rem;
       color: $black;
         transition: $trans-default;
 

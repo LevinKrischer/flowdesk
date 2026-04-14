@@ -1,0 +1,40 @@
+﻿@use 'bootstrap/scss/bootstrap' as * with ($grid-breakpoints: (xs: 0,
+    sm: 36rem,
+    md: 48rem,
+    lg: 68.75rem,
+    xl: 75rem,
+    xxl: 87.5rem,
+  ),
+
+  $container-max-widths: (sm: 36rem,
+    md: 48rem,
+    lg: 68.75rem,
+    xl: 75rem,
+    xxl: 87.5rem,
+  ));
+
+@use './styles/reset';
+@use './styles/mixins';
+@use './styles/variables';
+@use './styles/fonts';
+@use './styles/typography';
+@use './styles/base';
+@use './styles/flowdesk-elements';
+
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+@keyframes logoDark-lg {
+
+  0%,
+  50% {
+    top: calc(50vh - 50%);
+    left: calc(50%);
+    transform: scale(3);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

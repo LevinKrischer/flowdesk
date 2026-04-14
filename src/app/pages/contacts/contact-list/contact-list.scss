@@ -1,4 +1,4 @@
-/* contact-list.scss */
+﻿/* contact-list.scss */
 
 @use 'styles/variables' as *;
 @use 'styles/mixins' as *;
@@ -100,7 +100,7 @@
 
   &__email {
     color: $blue-link;
-    font-size: 0.875rem;
+    font-size: 1rem;
 
     @include for-size(sm) {
       font-size: 1rem;

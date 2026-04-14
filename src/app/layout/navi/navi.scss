@@ -1,4 +1,4 @@
-@use 'styles/variables' as *;
+﻿@use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 
 #sideNav {
@@ -81,7 +81,7 @@
     text-align: center;
     line-height: 1.2;
     gap: 0.25rem;
-    font-size: 0.8rem;
+    font-size: 1rem;
     width: 100%;
 
     img {
@@ -176,14 +176,15 @@
 
 .nav-label {
   white-space: nowrap;
+  font-size: 1rem;
 
   @include for-size(lg) {
     opacity: 1;
     overflow: hidden;
     transition:
-      opacity 0.2s ease 0.1s,
-      width 0.2s ease;
-      margin-right: 0rem;
+    opacity 0.2s ease 0.1s,
+    width 0.2s ease;
+    margin-right: 0rem;
   }
 }
 
@@ -208,9 +209,9 @@
         opacity: 0;
         width: 0;
         transition:
-          opacity 0.1s ease,
-          width 0.2s ease;
-          margin-right: -1rem;
+        opacity 0.1s ease,
+        width 0.2s ease;
+        margin-right: -1rem;
       }
     }
 

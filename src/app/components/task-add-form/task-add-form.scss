@@ -1,4 +1,4 @@
-@use 'styles/variables' as *;
+﻿@use 'styles/variables' as *;
 @use 'styles/mixins' as mixins;
 
 .vr {
@@ -11,7 +11,7 @@
 }
 
 .me-auto {
-  font-size: 0.875rem;
+  font-size: 1rem;
 
   @include mixins.for-size(sm) {
     font-size: 1rem;
@@ -116,7 +116,7 @@
 
 .required-tip {
   color: $grey;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .button-area {

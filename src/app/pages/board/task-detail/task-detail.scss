@@ -1,4 +1,4 @@
-@use 'styles/mixins' as *;
+﻿@use 'styles/mixins' as *;
 @use 'styles/variables' as *;
 
 * {
@@ -35,7 +35,7 @@ strong {
   }
 
   &__header {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 
   &__badge-row {
@@ -50,7 +50,7 @@ strong {
   &__category-badge {
     width: fit-content;
     padding: 0.35rem 0.75rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
 
     &.user-story      { background: $cat-user-story; }
     &.technical-task  { background: $cat-technical-task; }
@@ -122,7 +122,7 @@ strong {
   &__contact-avatar {
     width: 1.5rem;
     height: 1.5rem;
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
 
   &__contact-name {
@@ -143,7 +143,7 @@ strong {
   }
 
   &__subtask-icon {
-    font-size: 0.875rem;
+    font-size: 1rem;
     flex-shrink: 0;
     color: $grey-dark;
 

@@ -1,4 +1,11 @@
 <div class="contact-header">
   <h2>Contacts</h2>
-  <ui-button variant="icon-sm" bootstrapIcon="bi-arrow-left" class="d-lg-none ms-auto" aria-label="Back to list" (click)="back.emit()"></ui-button>
+  <button
+    type="button"
+    class="contact-back-btn d-lg-none ms-auto d-flex align-items-center justify-content-center"
+    aria-label="Back to list"
+    (click)="back.emit()"
+  >
+    <i class="bi bi-arrow-left" aria-hidden="true"></i>
+  </button>
 </div>

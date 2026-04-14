@@ -1,8 +1,11 @@
-@use 'styles/variables' as *;
+﻿@use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 
 header {
-  height: 3rem;
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  height: calc(3rem + var(--safe-area-top));
+  padding-top: var(--safe-area-top);
+  box-sizing: border-box;
   background-color: $white;
   width: 100%;
   filter: $sh-header;
@@ -10,11 +13,11 @@ header {
   z-index: 4;
 
   @include for-size(sm) {
-    height: 4rem;
+    height: calc(4rem + var(--safe-area-top));
   }
 
   @include for-size(lg) {
-    height: 4.5rem;
+    height: calc(4.5rem + var(--safe-area-top));
   }
 }
 
@@ -87,7 +90,7 @@ header {
   justify-content: center;
   font-weight: bold;
   background-color: $blue-dark;
-  font-size: 0.75rem;
+  font-size: 1rem;
 
   @include for-size(md) {
     height: 2.5rem;
@@ -127,8 +130,8 @@ header {
   position: absolute;
   background: $blue-dark;
   border-radius: 1.5em 0em 1.5em 1.5em;
-  bottom: -11rem;
-  right: $space-lg;
+  bottom: -9rem;
+  right: 1rem;
   z-index: 9999;
   opacity: 0;
   pointer-events: none;

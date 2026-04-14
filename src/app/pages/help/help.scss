@@ -1,27 +1,50 @@
-@use 'styles/mixins' as *;
+﻿@use 'styles/mixins' as *;
 @use 'styles/variables' as *;
 
 :host {
   display: block;
+  height: 100%;
   width: 100%;
 }
 
+ui-main {
+  display: block;
+  height: 100%;
+}
+
 .help-page {
-  padding-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 
-  @include for-size(lg) {
-    padding-bottom: 2rem;
+  &__header {
+    flex-shrink: 0;
+    margin-bottom: 1.5rem;
   }
 
-  p {
-    color: $grey-dark;
-    line-height: 1.5;
-  }
+  &__body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-bottom: 5rem;
 
-  h4 {
-    color: $blue-dark;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
+    @include for-size(lg) {
+      padding-bottom: 2rem;
+    }
+
+    p {
+      color: $grey-dark;
+      line-height: 1.5;
+    }
+
+    h4 {
+      color: $blue-dark;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
   }
 }
 
@@ -96,7 +119,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
   color: $blue-link;
@@ -107,7 +130,7 @@
 
   &::before {
     content: '\2191';
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   &:hover,

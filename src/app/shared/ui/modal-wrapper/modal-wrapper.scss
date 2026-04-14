@@ -1,4 +1,4 @@
-@use 'styles/variables' as *;
+﻿@use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 
 $modal-max-width-normal: 75.75rem;
@@ -73,7 +73,7 @@ div.modal-content {
   right: 1rem;
   background-color: transparent;
   z-index: 1060;
-  font-size: 0.75rem;
+  font-size: 1rem;
   border-radius: 50%;
   width: 1.5rem;
   height: 1.5rem;

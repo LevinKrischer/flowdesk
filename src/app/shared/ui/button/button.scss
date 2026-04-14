@@ -1,4 +1,4 @@
-@use 'styles/variables' as *;
+﻿@use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 
 .btn {
@@ -166,7 +166,7 @@
     }
 
     .btn__bootstrap-icon {
-      font-size: 0.875rem!important;
+      font-size: 1rem!important;
     }
   }
 
