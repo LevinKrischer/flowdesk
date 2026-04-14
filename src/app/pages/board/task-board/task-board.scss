@@ -109,6 +109,10 @@
     border-radius: 2rem;
     padding: 0.1rem 0.5rem;
     white-space: nowrap;
+
+    @include for-size(md) {
+      font-size: 0.875rem;
+    }
   }
 
   &__scroll {

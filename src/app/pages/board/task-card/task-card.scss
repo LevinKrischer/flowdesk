@@ -76,12 +76,20 @@
     color: $red;
     font-size: 1rem;
     font-weight: bold;
+
+    @include for-size(md) {
+      font-size: 0.875rem;
+    }
   }
 
   &__due-soon-label {
     color: $orange;
     font-size: 1rem;
     font-weight: bold;
+
+    @include for-size(md) {
+      font-size: 0.875rem;
+    }
   }
 
   &__menu-btn {

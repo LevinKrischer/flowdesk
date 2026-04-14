@@ -11,14 +11,6 @@ header {
   filter: $sh-header;
   position: relative;
   z-index: 4;
-
-  @include for-size(sm) {
-    height: calc(4rem + var(--safe-area-top));
-  }
-
-  @include for-size(lg) {
-    height: calc(4.5rem + var(--safe-area-top));
-  }
 }
 
 .header-container {
@@ -93,8 +85,6 @@ header {
   font-size: 1rem;
 
   @include for-size(md) {
-    height: 2.5rem;
-    width: 2.5rem;
     font-size: 1rem;
   }
 
