@@ -46,8 +46,10 @@
           placeholder="Enter due date"
           [(model)]="form.due_date"
           [error]="errors['due_date']"
+          [warning]="warnings['due_date']"
           [isRequired]="true"
           [reserveErrorSpace]="true"
+          [autoMinDate]="false"
           (blur)="markDirty('due_date')"
           (inputChange)="liveValidate('due_date')"
         />

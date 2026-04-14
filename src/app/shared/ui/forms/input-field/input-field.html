@@ -9,7 +9,7 @@
     </label>
   }
 
-  <div class="inputWrapper" [class.hasError]="error">
+  <div class="inputWrapper" [class.hasError]="error" [class.hasWarning]="hasWarningOnly">
     @if (bootstrapIconStart) {
       <i [class]="'inputBootstrapIcon bi ' + bootstrapIconStart" aria-hidden="true"></i>
     }
@@ -22,12 +22,12 @@
       [attr.maxlength]="maxlength"
       [attr.min]="minDate"
       [attr.aria-required]="isRequired"
-      [attr.aria-describedby]="error ? label + 'Error' : null"
+      [attr.aria-describedby]="describedById"
       [autocomplete]="autocomplete"
-      aria-invalid="{{ !!error }}"
+      [attr.aria-invalid]="!!error"
       (input)="onInput($event)"
       (blur)="blur.emit()"
-      (focus)="focus.emit()"
+      (focus)="onFocus($event)"
     />
 
     @if (icon) {
@@ -64,15 +64,17 @@
     }
   </div>
 
-  @if (reserveErrorSpace || error) {
+  @if (reserveErrorSpace || hasMessage) {
     <div
-      class="text-danger small ps-2 errorMessage"
+      class="small ps-2 errorMessage"
+      [class.text-danger]="!!error"
+      [class.warningMessage]="hasWarningOnly"
       [class.no-space]="!reserveErrorSpace"
       [id]="label + 'Error'"
       role="alert"
     >
-      @if (error) {
-        {{ error }}
+      @if (message) {
+        {{ message }}
       }
     </div>
   }

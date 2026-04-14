@@ -22,8 +22,10 @@ export class InputFieldComponent {
   @Input() bootstrapIconEndClickable = false;
   @Input() bootstrapIconEndLabel = '';
   @Input() error: string | null = null;
+  @Input() warning: string | null = null;
   @Input() maxlength: number | null = null;
   @Input() minDate: string | null = null;
+  @Input() autoMinDate = true;
   @Input() isRequired: boolean = false;
   @Input() displayLabel: boolean = true;
   @Input() reserveErrorSpace: boolean = false;
@@ -35,6 +37,23 @@ export class InputFieldComponent {
   @Output() focus = new EventEmitter<void>();
   @Output() iconClick = new EventEmitter<void>();
 
+  get describedById(): string | null {
+    if (!this.label) return null;
+    return (this.error || this.warning) ? this.label + 'Error' : null;
+  }
+
+  get hasMessage(): boolean {
+    return !!(this.error || this.warning);
+  }
+
+  get message(): string | null {
+    return this.error || this.warning;
+  }
+
+  get hasWarningOnly(): boolean {
+    return !this.error && !!this.warning;
+  }
+
   /**
    * Emits the updated input value and original input event.
    * @param event Native input event from the field.
@@ -44,6 +63,20 @@ export class InputFieldComponent {
     const value = (event.target as HTMLInputElement).value;
     this.modelChange.emit(value);
     this.inputChange.emit(event);
+  }
+
+  /**
+   * Emits focus and opens the native picker for date inputs when supported.
+   * @param event Native focus event from the input field.
+   */
+  onFocus(event: FocusEvent) {
+    this.focus.emit();
+
+    if (this.type !== 'date') return;
+    const input = event.target as HTMLInputElement;
+    if (typeof input.showPicker === 'function') {
+      input.showPicker();
+    }
   }
 
   /**
@@ -70,7 +103,7 @@ export class InputFieldComponent {
    * @returns Nothing.
    */
   ngOnInit() {
-    if (this.type === 'date' && !this.minDate) {
+    if (this.type === 'date' && this.autoMinDate && !this.minDate) {
       const today = new Date();
       const yyyy = today.getFullYear();
       const mm = String(today.getMonth() + 1).padStart(2, '0');

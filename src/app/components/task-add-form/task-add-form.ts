@@ -1,7 +1,7 @@
 import { Component, viewChild, inject, ChangeDetectorRef, input, output, effect, signal, ElementRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { isValidTitle, isValidDescription, isValidDueDate, isValidCategory } from '../../core/utils/validation';
+import { isValidTitle, isValidDescription, isValidDueDate, isValidCategory, isPastDate } from '../../core/utils/validation';
 import { TasksDb, Task } from '../../core/db/tasks.db';
 import { ContactsDb } from '../../core/db/contacts.db';
 import { InputFieldComponent } from '../../shared/ui/forms/input-field/input-field';
@@ -48,6 +48,13 @@ export class TaskAddFormComponent {
     };
 
   errors: Record<string, string> = {
+    title: '',
+    description: '',
+    due_date: '',
+    category: '',
+  };
+
+  warnings: Record<string, string> = {
     title: '',
     description: '',
     due_date: '',
@@ -132,7 +139,10 @@ export class TaskAddFormComponent {
         break;
 
       case 'due_date':
-        this.errors['due_date'] = isValidDueDate(value, this.editTask() !== null) ? '' : 'Please enter a due date in future';
+        this.errors['due_date'] = isValidDueDate(value, true) ? '' : 'Please enter a valid due date';
+        this.warnings['due_date'] = !this.editTask() && isPastDate(value)
+          ? 'This due date lies in the past'
+          : '';
         break;
 
       case 'category':
@@ -293,6 +303,7 @@ export class TaskAddFormComponent {
     for (const key of Object.keys(this.dirty)) {
       this.dirty[key] = false;
       this.errors[key] = '';
+      this.warnings[key] = '';
     }
   }
 }

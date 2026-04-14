@@ -74,6 +74,19 @@
     }
   }
 
+  &.hasWarning {
+    border-color: $orange;
+
+    .inputIcon {
+      opacity: 1;
+      filter: brightness(0) saturate(100%) invert(67%) sepia(88%) saturate(1248%) hue-rotate(1deg) brightness(101%) contrast(103%);
+    }
+
+    .inputBootstrapIcon {
+      color: $orange;
+    }
+  }
+
   .inputBootstrapIcon {
     flex-shrink: 0;
     color: $grey;
@@ -90,6 +103,10 @@
   &.no-space {
     min-height: auto;
   }
+}
+
+.warningMessage {
+  color: $orange;
 }
 
 .iconWrapper {

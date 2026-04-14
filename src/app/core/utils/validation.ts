@@ -96,6 +96,21 @@ export function isValidDueDate(input: string, allowPast = false): boolean {
 }
 
 /**
+ * Checks if a valid date lies before today.
+ * @param input - The date string to evaluate (expected format: YYYY-MM-DD).
+ * @returns True when the date is valid and in the past, otherwise false.
+ */
+export function isPastDate(input: string): boolean {
+  if (!input) return false;
+  const date = new Date(input + 'T00:00:00');
+  if (isNaN(date.getTime())) return false;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return date < today;
+}
+
+/**
  * Validates the given category (required field).
  * @param input - The category string to validate.
  * @returns True if a category is selected (non-empty), otherwise false.
