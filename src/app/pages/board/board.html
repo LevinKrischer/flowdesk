@@ -20,10 +20,12 @@
         <app-input-field class="w-100 w-lg-auto" type="text" label="Search tasks"
           placeholder="Search title or description" icon="assets/icons/search-32px.svg" [displayLabel]="false"
           [model]="searchTerm()" (modelChange)="searchTerm.set($event)" />
-        <ui-button class="d-inline-flex d-md-none flex-shrink-0" variant="link"
-          [bootstrapIcon]="hasActiveFilters() ? 'bi-filter-fill' : 'bi-filter'"
+        <ui-button class="board__mobile-filter-toggle d-inline-flex d-md-none flex-shrink-0"
+          [class.board__mobile-filter-toggle--filtered]="hasActiveFilters()"
+          variant="link"
+          bootstrapIcon="bi-filter"
           iconSize="1.5rem"
-          [active]="showFilters()" [attr.aria-expanded]="showFilters()" aria-label="Toggle filters"
+          [active]="hasActiveFilters() || showFilters()" [attr.aria-expanded]="showFilters()" aria-label="Toggle filters"
           (click)="showFilters.set(!showFilters())">
         </ui-button>
         <ui-button class="d-inline-flex d-md-none flex-shrink-0" variant="link"

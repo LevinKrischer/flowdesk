@@ -74,22 +74,14 @@
 
   &__overdue-label {
     color: $red;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: bold;
-
-    @include for-size(md) {
-      font-size: 0.875rem;
-    }
   }
 
   &__due-soon-label {
     color: $orange;
     font-size: 1rem;
     font-weight: bold;
-
-    @include for-size(md) {
-      font-size: 0.875rem;
-    }
   }
 
   &__menu-btn {
@@ -231,7 +223,7 @@
     small {
       color: #555;
       white-space: nowrap;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: bold;
       display: flex;
       align-items: center;
@@ -304,7 +296,7 @@
   &__avatar {
     width: 1.75rem;
     height: 1.75rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
     border-radius: 50%;
     display: flex;
     align-items: center;

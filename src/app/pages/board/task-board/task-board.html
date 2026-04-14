@@ -1,7 +1,7 @@
 <section class="task-board">
   <div class="task-board__inner d-flex flex-row align-items-start" cdkDropListGroup>
 
-    <section id="to-to" class="task-board__column d-flex flex-column min-h-0">
+    <section id="todo" class="task-board__column d-flex flex-column min-h-0">
       <header class="task-board__column-header d-flex align-items-center justify-content-between flex-shrink-0">
         <div class="d-flex align-items-center gap-2">
           <h2 class="h5 m-0">To Do <span class="task-board__count">({{ todoTasks().length }})</span></h2>
@@ -24,7 +24,7 @@
           (doneToggle)="refreshTasks()" />
         } @empty {
         <div class="task-board__empty rounded-3 px-3 py-2 text-center text-muted">
-          <i class="bi bi-pencil-square d-block mb-1" aria-hidden="true"></i>No tasks to do
+          No tasks to do
         </div>
         }
       </div>
@@ -58,7 +58,7 @@
           (doneToggle)="refreshTasks()" />
         } @empty {
         <div class="task-board__empty rounded-3 px-3 py-2 text-center text-muted">
-          <i class="bi bi-arrow-right-circle d-block mb-1" aria-hidden="true"></i>No tasks in progress
+          No tasks in progress
         </div>
         }
       </div>
@@ -92,7 +92,7 @@
           (doneToggle)="refreshTasks()" />
         } @empty {
         <div class="task-board__empty rounded-3 px-3 py-2 text-center text-muted">
-          <i class="bi bi-chat-dots d-block mb-1" aria-hidden="true"></i>No tasks awaiting feedback
+          No tasks awaiting feedback
         </div>
         }
       </div>
@@ -116,7 +116,7 @@
           (doneToggle)="refreshTasks()" />
         } @empty {
         <div class="task-board__empty rounded-3 px-3 py-2 mb-2 text-center text-muted">
-          <i class="bi bi-check-circle d-block mb-1" aria-hidden="true"></i>No tasks done
+          No tasks done
         </div>
         }
       </div>

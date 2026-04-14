@@ -176,7 +176,11 @@
 
 .nav-label {
   white-space: nowrap;
-  font-size: 1rem;
+  font-size: 0.9rem;
+
+  @include for-size(md) {
+    font-size: 1rem;
+  }
 
   @include for-size(lg) {
     opacity: 1;

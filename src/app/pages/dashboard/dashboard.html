@@ -59,12 +59,12 @@
           <span class="stat-number">{{ doneCount() }}</span>
           <span class="stat-label">Done</span>
         </div>
-        <div class="stat-card stat-card--urgent" routerLink="/board" [fragment]="'urgent'">
+        <div class="stat-card stat-card--urgent" routerLink="/board" [queryParams]="{ priority: 'urgent' }">
           <i class="bi bi-exclamation-triangle stat-icon" aria-hidden="true"></i>
           <span class="stat-number">{{ urgentCount() }}</span>
           <span class="stat-label">Urgent</span>
         </div>
-        <div class="stat-card stat-card--overdue" routerLink="/board" [fragment]="'overdue'">
+        <div class="stat-card stat-card--overdue" routerLink="/board" [queryParams]="{ due: 'overdue' }">
           <i class="bi bi-clock stat-icon" aria-hidden="true"></i>
           <span class="stat-number">{{ overdueCount() }}</span>
           <span class="stat-label">Overdue</span>
@@ -74,7 +74,7 @@
           <span class="stat-number">{{ totalTasksCount() }}</span>
           <span class="stat-label">Total tasks</span>
         </div>
-        <div class="stat-card stat-card--deadline" routerLink="/board">
+        <div class="stat-card stat-card--deadline" routerLink="/board" [queryParams]="{ due: 'soon' }">
           <i class="bi bi-calendar-event stat-icon" aria-hidden="true"></i>
           <span class="stat-number stat-number--date">{{ nextOpenDueDate() }}</span>
           <span class="stat-label">Upcoming deadline</span>

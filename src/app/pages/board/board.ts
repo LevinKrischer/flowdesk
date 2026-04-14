@@ -189,6 +189,7 @@ export class Board implements OnInit, OnDestroy {
   async ngOnInit() {
     await this.tasksDb.getTasks();
     this.tasksDb.subscribeToTaskChanges();
+    this.applyInitialFiltersFromQueryParams();
     const taskParam = this.route.snapshot.queryParamMap.get('task');
     if (taskParam) {
       const task = this.tasks().find((t) => t.id === Number(taskParam));
@@ -207,6 +208,36 @@ export class Board implements OnInit, OnDestroy {
         .maybeSingle();
       if (data) this.currentUserContactId.set(data.id);
     }
+  }
+
+  /**
+   * Applies supported board filters from route query params.
+   * @returns Nothing.
+   */
+  private applyInitialFiltersFromQueryParams(): void {
+    const query = this.route.snapshot.queryParamMap;
+    const priority = query.get('priority');
+    if (priority && this.priorities.includes(priority as Task['priority'])) {
+      this.priorityFilter.set(priority as Task['priority']);
+    }
+
+    const due = query.get('due');
+    if (due === 'soon' || due === 'overdue') {
+      this.dueFilter.set(due);
+    }
+
+    if (this.shouldOpenFiltersOnMobile()) {
+      this.showFilters.set(true);
+    }
+  }
+
+  /**
+   * Opens the filter area on mobile when active filters are present in the URL.
+   * @returns True if the filter section should be expanded.
+   */
+  private shouldOpenFiltersOnMobile(): boolean {
+    const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+    return isMobile && this.hasActiveFilters();
   }
 
   /**

@@ -64,7 +64,7 @@ strong {
 
   &__meta-row {
     i::before {
-      font-size: 1.25rem;
+      font-size: 1rem;
       color: $grey-dark;
     }
 
@@ -120,17 +120,13 @@ strong {
   }
 
   &__contact-avatar {
-    width: 1.5rem;
-    height: 1.5rem;
-    font-size: 1rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.9rem;
   }
 
   &__contact-name {
     color: #333;
-  }
-
-  &__subtasks {
-    // gap handled by Bootstrap gap-2
   }
 
   &__subtask {

@@ -11,10 +11,6 @@ html {
   width: 100%;
   font-size: 87.5%;
   scroll-behavior: smooth;
-
-  @include for-size(md) {
-    font-size: 100%;
-  }
 }
 
 body {
